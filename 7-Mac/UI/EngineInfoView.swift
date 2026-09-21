@@ -1,9 +1,12 @@
 //
-//  ContentView.swift
+//  EngineInfoView.swift
 //  7-Mac
 //
-//  M0 smoke screen: prove the embedded engine loads and answers.
-//  M2 replaces this with the real app.
+//  What the embedded engine can actually do, straight from the engine.
+//
+//  This began as M0's smoke screen and has earned a permanent place: the
+//  table is the answer to "can it open this?", and it is generated rather
+//  than written down, so it cannot drift from the build.
 //
 
 import SwiftUI
@@ -38,7 +41,7 @@ private nonisolated struct FormatRow: Identifiable {
     }
 }
 
-struct ContentView: View {
+struct EngineInfoView: View {
     @State private var query = ""
     @State private var writableOnly = false
 
@@ -94,5 +97,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    EngineInfoView()
 }

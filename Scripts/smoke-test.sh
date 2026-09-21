@@ -116,6 +116,51 @@ check "zstd is read-only"           "0"     "$(sed -n 5p "$WORK/probe.out")"
 check "the embedded copy is the one that loads" \
       "$FRAMEWORKS/SevenZipKit.framework" "$(sed -n 6p "$WORK/probe.out")"
 
+printf '\nfinder integration\n'
+# M2 puts the app in front of the Finder: double-clicking an archive and the
+# two Services entries. All three live in Info.plist, which is generated at
+# build time from 7-Mac/Info.plist plus the INFOPLIST_KEY_* settings -- so
+# checking the built bundle is the only check worth making.
+plist="$APP/Contents/Info.plist"
+handler() {  # handler <uti> -> the rank we claim for it, or "none"
+    /usr/libexec/PlistBuddy -c 'Print :CFBundleDocumentTypes' "$plist" 2>/dev/null \
+        | awk -v uti="$1" '
+            /^ *Dict \{/ { rank = ""; found = 0 }
+            $1 == "LSHandlerRank" { rank = $3 }
+            $1 == uti { found = 1 }
+            /^ *\}/ && found && rank { print rank; exit }
+          ' | head -1
+}
+check "we own .7z"                 "Owner"     "$(handler org.7-zip.7-zip-archive)"
+check "we own .rar"                "Owner"     "$(handler com.rarlab.rar-archive)"
+# Archive Utility already opens .zip; taking it over is the user's decision,
+# not ours to make at install time.
+check "we are only an alternative for .zip" \
+                                   "Alternate" "$(handler public.zip-archive)"
+check "the imported types are declared" \
+      "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleDocumentTypes' "$plist" | grep -c 'LSHandlerRank = Owner')" \
+      "$(/usr/libexec/PlistBuddy -c 'Print :UTImportedTypeDeclarations' "$plist" | grep -c 'UTTypeIdentifier')"
+check "both services are declared" "extractArchives compressItems" \
+      "$(/usr/libexec/PlistBuddy -c 'Print :NSServices' "$plist" | awk '$1 == "NSMessage" { printf "%s ", $3 }' | sed 's/ $//')"
+
+printf '\nsandbox\n'
+# Roadmap risk 6, restated for M2: extracting means writing, so the app now
+# asks for read-write and for app-scoped bookmarks. Those two and no more --
+# in particular no disable-library-validation, which embedding the engine has
+# never needed.
+# get-task-allow is added by local development signing, not by us, and is
+# absent from a Developer ID build; it says nothing about what we asked for.
+entitlements=$(codesign -d --entitlements - --xml "$APP" 2>/dev/null \
+               | plutil -convert json -o - - \
+               | python3 -c 'import json, sys
+keys = sorted(k for k in json.load(sys.stdin) if k != "com.apple.security.get-task-allow")
+print(" ".join(keys))')
+check "exactly the entitlements we mean to ship" \
+      "com.apple.security.app-sandbox com.apple.security.files.bookmarks.app-scope com.apple.security.files.downloads.read-write com.apple.security.files.user-selected.read-write" \
+      "$entitlements"
+check "Info.plist is not also copied in as a resource" \
+      "" "$(find "$APP/Contents/Resources" -name 'Info.plist' -o -name '*.entitlements' 2>/dev/null | tr '\n' ' ' | sed 's/ $//')"
+
 printf '\nunit tests\n'
 # The checks above say the package is put together correctly. These say the
 # engine behaves: round trips through every writable format, encrypted and

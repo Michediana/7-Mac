@@ -2,7 +2,7 @@
 
 GUI nativa macOS per 7-Zip, con il motore 7-Zip **incorporato nell'app** come framework.
 
-- **Stato:** M0 e M1 completi e verificati; M2 da iniziare
+- **Stato:** M0, M1 e M2 completi e verificati; M3 da iniziare
 - **Ultimo aggiornamento:** 2026-09-21
 - **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.03 (2026-09-03)
 
@@ -215,18 +215,105 @@ framework l'avrebbe resa LGPL senza alcun motivo.
    `argv[0]`, che un framework non ha. La forniamo via `dladdr`; serve solo al percorso SFX,
    fuori scope su macOS.
 
-### M2 — App minima utile  ⏱ 1–2 settimane  ← prossimo
+### M2 — App minima utile  ✅ fatto
 
-- [ ] Drag & drop: estrai in cartella accanto all'archivio
-- [ ] Comprimi la selezione in 7z/zip con preset Veloce / Normale / Massima
-- [ ] Finestra progresso con byte, ETA, annulla; coda di più operazioni
-- [ ] Prompt password + salvataggio opzionale in Keychain; cifratura header 7z
-- [ ] Registrazione handler dei tipi file (doppio clic su `.7z`, `.rar`, …)
-- [ ] Quick Action / servizio Finder
+- [x] Drag & drop: estrai in cartella accanto all'archivio
+- [x] Comprimi la selezione in 7z/zip con preset Veloce / Normale / Massima
+- [x] Finestra progresso con byte, ETA, annulla; coda di più operazioni
+- [x] Prompt password + salvataggio opzionale in Keychain; cifratura header 7z
+- [x] Registrazione handler dei tipi file (doppio clic su `.7z`, `.rar`, …)
+- [x] Quick Action / servizio Finder
 
-**Criterio di uscita:** prima build usabile quotidianamente.
+**Criterio di uscita: raggiunto.** L'app si usa. `Scripts/smoke-test.sh` verifica
+**22 asserzioni** — le 14 di M0 più cinque sull'integrazione col Finder e tre sul
+sandbox — ed esegue **71 test** unitari, tutti verdi: le 28 di M1 sul motore, più la
+coda (estrazione, compressione, password giusta e sbagliata, rifiuto, annullamento,
+ordine dei job), la denominazione delle destinazioni, la decodifica di un drop, la
+stima di throughput e il Keychain — quest'ultimo dentro l'app host, quindi firmato e
+sandboxato come in produzione.
 
-### M3 — Browser dell'archivio  ⏱ 2 settimane
+Verificato anche sul campo, non solo in test: `open -a 7-Mac sample.zip` da
+`~/Downloads` estrae senza chiedere nulla e senza doppia cartella; se il nome è già
+occupato ne crea una intitolata all'archivio; `sample.tar.gz` scarta un livello per
+volta come fa 7-Zip; `pbs -dump_pboard` elenca entrambi i servizi;
+`NSWorkspace.urlsForApplications(toOpen:)` ci elenca per `.7z`, `.xz` e `.zst`.
+
+Struttura aggiunta:
+
+```
+7-Mac/App/AppDelegate.swift                apertura dal Finder e provider dei servizi
+7-Mac/Model/AppModel.swift                 coordinatore: preferenze, coda, le due domande
+7-Mac/Model/Job.swift                      un'operazione e il suo stato osservabile
+7-Mac/Model/JobQueue.swift                 la coda e il lavoro vero
+7-Mac/Model/ArchiveNaming.swift            dove atterra un'estrazione, come si chiama un archivio
+7-Mac/Model/FolderAccess.swift             permessi di scrittura sotto App Sandbox
+7-Mac/Model/PasswordStore.swift            Keychain, opt-in
+7-Mac/Model/Preferences.swift              preferenze + preset
+7-Mac/Support/{Display,RateEstimate}.swift formattazione e stima del tempo residuo
+7-Mac/UI/                                  finestra, riga di coda, fogli, impostazioni
+7-Mac/Info.plist                           tipi documento, UTI importate, NSServices
+7-Mac/7-Mac.entitlements                   il sandbox, adesso esplicito
+```
+
+### Il problema vero di M2 non era la UI
+
+**Sotto App Sandbox, un file trascinato concede l'accesso al file, non alla cartella
+che lo contiene.** "Estrai accanto all'archivio" quindi non è gratis: è esattamente
+l'operazione che il sandbox nega. Tre mosse, in quest'ordine:
+
+1. `com.apple.security.files.downloads.read-write`, perché il caso di gran lunga più
+   comune — uno zip appena scaricato — cade tutto lì dentro e deve funzionare senza
+   chiedere niente.
+2. Altrove: **un pannello, una volta per cartella**, e poi un bookmark app-scoped
+   (`FolderAccess`) che sopravvive ai riavvii. Il job si mette in pausa con la nota
+   "Waiting for a destination" invece di fallire.
+3. Il pannello di salvataggio del foglio di compressione *è* già una concessione:
+   la cartella scelta lì viene registrata come le altre.
+
+Gli entitlement passano quindi da due a quattro. Restano tutti letti e scritti di
+file: **nessun `disable-library-validation`**, che incorporare il motore non ha mai
+richiesto. Il test di fumo li confronta uno per uno.
+
+### Cinque cose emerse implementando
+
+1. **`Settings` è il nome di una scena SwiftUI.** Un modello chiamato `Settings`
+   rompe il `SceneBuilder` con un errore che parla di conformanza a `Scene` e non
+   nomina il conflitto. Si chiama `Preferences`.
+2. **La password si chiede *prima* della corsa, non dentro il callback.** Il
+   `SZKPasswordProvider` è sincrono e gira sul thread del motore: chiedere lì
+   significherebbe bloccarlo su un semaforo in attesa di un foglio. Invece si guarda
+   `hasEncryptedHeader` e `entry.isEncrypted`, si chiede, e solo poi si parte — così
+   una password sbagliata non lascia mezzo albero estratto. Il *ritentativo* passa a
+   `SZKOverwritePolicyOverwrite`, altrimenti la politica normale ("tieni entrambi")
+   lascerebbe una copia fantasma di ogni file scritto prima dell'errore.
+3. **`LSHandlerRank = Owner` non ti rende il predefinito.** Su macOS 26 Archive
+   Utility rivendica già `org.7-zip.7-zip-archive`. Ci registriamo come candidati —
+   `NSWorkspace.urlsForApplications(toOpen:)` ci elenca — e il predefinito resta una
+   scelta dell'utente. Per `.rar` e `.zst`, che nessun altro rivendica, siamo noi.
+4. **Per decidere cosa fa un drop non si può chiedere al motore.** Il motore apre
+   davvero `.exe`, `.swf`, `.dat` e `.bin`: chiederglielo significa proporre di
+   scompattare un eseguibile trascinato per comprimerlo. Il gesto usa una lista
+   ristretta e dichiarata (`droppedArchiveExtensions`); il comando Extract no — lì
+   decide il motore.
+5. **`INFOPLIST_FILE` e `GENERATE_INFOPLIST_FILE` convivono**, e Xcode fonde le
+   chiavi generate dentro il file. Ma la cartella sincronizzata copierebbe anche
+   `Info.plist` e `.entitlements` in `Resources/`: serve un
+   `PBXFileSystemSynchronizedBuildFileExceptionSet`. Il test di fumo controlla che
+   non siano finiti lì.
+
+### Due decisioni prese qui
+
+**La coda esegue un job alla volta.** La compressione già satura tutti i core, e due
+estrazioni che si contendono lo stesso disco finiscono più tardi delle stesse due in
+sequenza. Una coda è il modello onesto, non un limite da aggirare.
+
+**Non c'è la politica "chiedi" sulle collisioni.** Un modale per file in mezzo a un
+archivio da quarantamila voci non è una funzione. Le tre offerte sono "tieni entrambi"
+(predefinita, l'unica che non può perdere dati), "salta" e "sostituisci"; il callback
+`SZKOverwriteHandler` resta nel framework per quando M3 avrà una vista da cui
+rispondere sensatamente.
+
+### M3 — Browser dell'archivio  ⏱ 2 settimane  ← prossimo
 
 Qui l'app smette di essere un wrapper.
 
@@ -266,10 +353,12 @@ Il differenziatore vero: Keka non lo fa.
 | 1 | `ENABLE_USER_SCRIPT_SANDBOXING = YES` è attivo nel progetto e **blocca le Run Script phase** che leggono o scrivono fuori dai path dichiarati | Build rotta a M0 | ✅ **chiuso.** `SevenZipEngine` è l'unico target con la sandbox disattivata; la copia delle licenze resta sandboxata dichiarando input e output |
 | 1b | Xcode valida gli input del linker **in fase di pianificazione**: `-force_load` su un file non ancora prodotto fa fallire il link prima che l'aggregate target giri | Build rotta a M0, e in modo ingannevole — passa se un build precedente ha già lasciato il `.a` sul disco | ✅ **chiuso.** La script phase dichiara `lib7zip.a` come output, così Xcode ne conosce il produttore |
 | 2 | `install_name` della dylib nasce come `b/m_arm64/7z.so` | L'app non carica | ✅ **chiuso.** `DYLIB_INSTALL_NAME_BASE = @rpath`; verificato dal test di fumo |
-| 3 | App Sandbox attivo: i percorsi vanno da security-scoped bookmark | Accesso file | Mitigato dall'architettura: la libreria apre **stream**, non percorsi passati a un figlio |
+| 3 | App Sandbox attivo: i percorsi vanno da security-scoped bookmark | Accesso file | ✅ **chiuso a M2.** In lettura non è mai stato un problema — la libreria apre **stream**, non percorsi passati a un figlio. In scrittura sì: un file trascinato concede il file, non la cartella. `FolderAccess` chiede un pannello una volta per cartella e tiene un bookmark app-scoped; `~/Downloads` ha il suo entitlement e non chiede mai |
 | 4 | Un bug su archivio malformato fa crashare l'app, non un sottoprocesso | Stabilità | Se emerge, isolare il motore in un **XPC service**; l'API Swift resta identica |
 | 5 | Tempo di build del motore in CI | Attrito | Mitigato: lo script salta tutto tramite uno stamp su hash + archi + deployment target. Da freddo sono ~8 s per arch, ~16 s per l'universale |
-| 6 | Il binario prebuilt `7zz` upstream **non è firmato** | — | ✅ **confermato sul campo.** L'app parte con App Sandbox e Hardened Runtime attivi e i soli entitlement `app-sandbox` + `files.user-selected.read-only`: nessun `disable-library-validation` |
+| 6 | Il binario prebuilt `7zz` upstream **non è firmato** | — | ✅ **confermato sul campo.** L'app parte con App Sandbox e Hardened Runtime attivi: nessun `disable-library-validation`. Gli entitlement a M2 sono quattro, tutti sui file — `app-sandbox`, `files.user-selected.read-write`, `files.downloads.read-write`, `files.bookmarks.app-scope` — e il test di fumo li confronta uno per uno |
+| 7 | Su macOS 26 **Archive Utility rivendica già** `org.7-zip.7-zip-archive`, quindi `LSHandlerRank = Owner` non ci rende il predefinito per `.7z` | Il doppio clic può non arrivare a noi | Accettato: ci registriamo come candidati e il predefinito resta una scelta dell'utente. Per `.rar`, `.zst` e gli altri che nessun altro rivendica siamo noi. Da rivedere solo se M5 vuole proporre il cambio in modo esplicito |
+| 8 | La password salvata in Keychain è **indicizzata dal percorso** dell'archivio | Spostare o rinominare il file la perde | Accettato, ed è il compromesso giusto: un inode sopravviverebbe allo spostamento e poi consegnerebbe la password a qualunque file lo riusi |
 
 ---
 
