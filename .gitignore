@@ -1,1 +1,11 @@
 .DS_Store
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+
+# Engine build output, should it ever be pointed at the source tree
+Vendor/7zip/src/

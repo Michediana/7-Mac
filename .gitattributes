@@ -1,2 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# The vendored upstream tarball is byte-exact: its SHA-256 is verified on every
+# build. Any normalisation would break the pin.
+*.tar.xz binary
+*.tar.gz binary
+*.zip    binary
+*.7z     binary

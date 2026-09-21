@@ -1,0 +1,17 @@
+7-Zip source, vendored as the pinned release tarball (not a submodule:
+ip7z/7zip on GitHub mirrors releases, it is not the development repository).
+
+    version:  26.03  (2026-09-03)
+    file:     7z2603-src.tar.xz
+    origin:   https://7-zip.org/a/7z2603-src.tar.xz
+    sha256:   9cbde5099c6deb73691b0579063da5827522ccbbcba3f0020fd04e8c8c16c0d4
+
+The hash is re-verified on every build by Scripts/build-7zip-engine.sh against
+the pin in Scripts/upstream-pin.sh. Bumping the upstream must be an explicit,
+reviewed change to those two files -- never a silent one.
+
+LICENSE
+    7-Zip is licensed under the GNU LGPL, with the unRAR code carrying an
+    additional restriction. Everything compiled from this tarball lands in
+    SevenZipKit.framework, which is therefore LGPL in its entirety and is
+    linked dynamically so it stays replaceable. See ../../SevenZipKit/README.md.
