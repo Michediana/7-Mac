@@ -133,7 +133,7 @@ final class JobQueueTests: XCTestCase {
         let request = CompressionRequest(sources: [fixtures.tree],
                                          output: output,
                                          formatName: "7z",
-                                         preset: .fast,
+                                         profile: .fast,
                                          password: nil,
                                          encryptsHeader: false)
 
@@ -157,7 +157,7 @@ final class JobQueueTests: XCTestCase {
         let request = CompressionRequest(sources: [fixtures.tree],
                                          output: output,
                                          formatName: "7z",
-                                         preset: .fast,
+                                         profile: .fast,
                                          password: nil,
                                          encryptsHeader: false)
 

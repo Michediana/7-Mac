@@ -38,6 +38,8 @@
     self = [super init];
     if (self) {
         _level = SZKCompressionLevelNormal;
+        _storesSymbolicLinks = YES;
+        _storesHardLinks = YES;
     }
     return self;
 }
@@ -51,6 +53,9 @@
     copy.encryptsHeader = _encryptsHeader;
     copy.volumeSize = _volumeSize;
     copy.methodProperties = _methodProperties;
+    copy.excludedNamePatterns = _excludedNamePatterns;
+    copy.storesSymbolicLinks = _storesSymbolicLinks;
+    copy.storesHardLinks = _storesHardLinks;
     return copy;
 }
 

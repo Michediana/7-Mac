@@ -1,7 +1,7 @@
 #!/bin/sh
 #
-# M0 exit criterion, as a check rather than a claim: build the app and verify
-# that the engine it carries actually works.
+# The exit criteria of every milestone so far, as checks rather than claims:
+# build the app and verify that the engine it carries actually works.
 #
 #     Scripts/smoke-test.sh [Debug|Release]
 #
@@ -160,6 +160,27 @@ check "exactly the entitlements we mean to ship" \
       "$entitlements"
 check "Info.plist is not also copied in as a resource" \
       "" "$(find "$APP/Contents/Resources" -name 'Info.plist' -o -name '*.entitlements' 2>/dev/null | tr '\n' ' ' | sed 's/ $//')"
+
+printf '\nquick look\n'
+# M5: the archive previews and thumbnails the Finder shows, from extensions
+# that link the same embedded framework rather than carrying their own.
+plugins="$APP/Contents/PlugIns"
+extension_point() {  # extension_point <appex> -> its NSExtensionPointIdentifier
+    /usr/libexec/PlistBuddy -c 'Print :NSExtension:NSExtensionPointIdentifier' \
+        "$plugins/$1.appex/Contents/Info.plist" 2>/dev/null
+}
+check "the preview extension is embedded"   "com.apple.quicklook.preview"   "$(extension_point 7-MacPreview)"
+check "the thumbnail extension is embedded" "com.apple.quicklook.thumbnail" "$(extension_point 7-MacThumbnail)"
+check "both extensions are signed and sandboxed" "2" "$(for x in 7-MacPreview 7-MacThumbnail; do
+        codesign -d --entitlements - --xml "$plugins/$x.appex" 2>/dev/null \
+            | plutil -convert json -o - - \
+            | python3 -c 'import json, sys; print(json.load(sys.stdin).get("com.apple.security.app-sandbox"))'
+    done | grep -c True)"
+check "the extensions use the app's framework, not a copy" "" \
+      "$(find "$plugins" -name 'SevenZipKit.framework' | tr '\n' ' ' | sed 's/ $//')"
+
+printf '\nlocalization\n'
+check "Italian ships" "yes" "$([ -f "$APP/Contents/Resources/it.lproj/Localizable.strings" ] && echo yes || echo no)"
 
 printf '\nunit tests\n'
 # The checks above say the package is put together correctly. These say the

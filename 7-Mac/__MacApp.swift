@@ -30,6 +30,14 @@ struct __MacApp: App {
         // sandbox access to. Better to come back without it.
         .restorationBehavior(.disabled)
 
+        WindowGroup("Checksums", id: WindowID.checksums, for: ChecksumTarget.self) { $target in
+            if let target {
+                ChecksumWindow(target: target)
+            }
+        }
+        .defaultSize(width: 820, height: 420)
+        .restorationBehavior(.disabled)
+
         Window("7-Zip Engine", id: WindowID.engine) {
             EngineInfoView()
         }
@@ -45,6 +53,7 @@ struct __MacApp: App {
 enum WindowID {
     static let engine = "engine"
     static let browser = "browser"
+    static let checksums = "checksums"
 }
 
 struct SevenMacCommands: Commands {
@@ -59,6 +68,11 @@ struct SevenMacCommands: Commands {
                 .keyboardShortcut("e")
             Button("Compress…") { model.chooseItemsToCompress() }
                 .keyboardShortcut("n")
+            Divider()
+            Button("Test Archive…") { model.chooseArchivesToTest() }
+                .keyboardShortcut("t")
+            Button("Checksums…") { model.chooseItemsForChecksums() }
+                .keyboardShortcut("c", modifiers: [.command, .shift])
         }
         CommandGroup(after: .newItem) {
             Divider()

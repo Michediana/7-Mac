@@ -8,6 +8,7 @@
 #import <SevenZipKit/SZKOptions.h>
 
 @class SZKArchiveEntry;
+@class SZKHashReport;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -81,6 +82,15 @@ NS_ASSUME_NONNULL_BEGIN
       overwriteHandler:(nullable SZKOverwriteHandler)overwriteHandler
                outcome:(SZKOutcome *_Nullable *_Nullable)outcome
                  error:(NSError **)error;
+
+/// Decodes `indexes` (everything when `nil`) and checksums each entry as it
+/// goes, writing nothing: a test that also says what it saw. The report is
+/// returned even when some entries failed; they are in its `failures`.
+- (nullable SZKHashReport *)hashIndexes:(nullable NSIndexSet *)indexes
+                                methods:(NSArray<NSString *> *)methods
+                               progress:(nullable SZKProgressHandler)progress
+                       passwordProvider:(nullable SZKPasswordProvider)passwordProvider
+                                  error:(NSError **)error;
 
 /// Decodes and verifies without writing anything.
 - (BOOL)testIndexes:(nullable NSIndexSet *)indexes

@@ -154,14 +154,14 @@ nonisolated enum EntryFilter: String, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .everything: "Everything"
-        case .images:     "Images"
-        case .movies:     "Movies"
-        case .audio:      "Audio"
-        case .documents:  "Documents"
-        case .sourceCode: "Source Code"
-        case .archives:   "Archives"
-        case .encrypted:  "Encrypted"
+        case .everything: String(localized: "Everything")
+        case .images:     String(localized: "Images")
+        case .movies:     String(localized: "Movies")
+        case .audio:      String(localized: "Audio")
+        case .documents:  String(localized: "Documents")
+        case .sourceCode: String(localized: "Source Code")
+        case .archives:   String(localized: "Archives")
+        case .encrypted:  String(localized: "Encrypted")
         }
     }
 
@@ -254,7 +254,7 @@ nonisolated struct ArchiveTree: Sendable {
             if components.isEmpty {
                 // A gzip with no stored name, say. It still has contents.
                 guard !record.isDirectory else { continue }
-                components = ["(unnamed)"]
+                components = [String(localized: "(unnamed)")]
             }
             let path = components.joined(separator: "/")
             let parent = folder(at: components.dropLast())

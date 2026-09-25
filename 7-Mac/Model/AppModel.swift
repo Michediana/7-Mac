@@ -37,6 +37,10 @@ final class AppModel: JobInteraction {
         didSet { drainPendingBrowsers() }
     }
     private var pendingBrowsers: [URL] = []
+    /// Same arrangement, for checksum windows.
+    var checksumOpener: ((ChecksumTarget) -> Void)?
+    /// Non-nil while a test report sheet is up in the main window.
+    var shownTestReport: TestReport?
 
     init() {
         queue = JobQueue(preferences: preferences)
@@ -94,7 +98,7 @@ final class AppModel: JobInteraction {
     }
 
     func startCompression(_ draft: CompressionDraft) {
-        preferences.preset = draft.preset
+        preferences.profileID = draft.profileID
         preferences.defaultFormat = draft.formatName
         queue.enqueue([.compress(draft.request)])
         compressionDraft = nil
@@ -107,8 +111,8 @@ final class AppModel: JobInteraction {
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
         panel.allowsMultipleSelection = true
-        panel.message = "Choose archives to extract."
-        panel.prompt = "Extract"
+        panel.message = String(localized: "Choose archives to extract.")
+        panel.prompt = String(localized: "Extract")
         guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
         // Explicit choice, so no extension filter: if the engine can open it,
         // it gets extracted.
@@ -120,10 +124,36 @@ final class AppModel: JobInteraction {
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
         panel.allowsMultipleSelection = true
-        panel.message = "Choose archives to look inside."
-        panel.prompt = "Open"
+        panel.message = String(localized: "Choose archives to look inside.")
+        panel.prompt = String(localized: "Open")
         guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
         browse(panel.urls)
+    }
+
+    func chooseArchivesToTest() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = true
+        panel.message = String(localized: "Choose archives to test. Nothing is written: every entry is decoded and checked.")
+        panel.prompt = String(localized: "Test")
+        guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
+        test(panel.urls)
+    }
+
+    func test(_ urls: [URL]) {
+        queue.enqueue(urls.map { .test(archive: $0) })
+    }
+
+    func chooseItemsForChecksums() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = true
+        panel.message = String(localized: "Choose files or folders to checksum.")
+        panel.prompt = String(localized: "Checksum")
+        guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
+        checksumOpener?(ChecksumTarget(urls: panel.urls))
     }
 
     func chooseItemsToCompress() {
@@ -131,8 +161,8 @@ final class AppModel: JobInteraction {
         panel.canChooseFiles = true
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = true
-        panel.message = "Choose files and folders to compress."
-        panel.prompt = "Choose"
+        panel.message = String(localized: "Choose files and folders to compress.")
+        panel.prompt = String(localized: "Choose")
         guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
         beginCompression(of: panel.urls)
     }
@@ -157,7 +187,7 @@ final class AppModel: JobInteraction {
         panel.canCreateDirectories = true
         panel.allowsMultipleSelection = false
         panel.message = message
-        panel.prompt = "Use This Folder"
+        panel.prompt = String(localized: "Use This Folder")
         if let suggesting { panel.directoryURL = suggesting }
 
         guard panel.runModal() == .OK, let chosen = panel.url else { return nil }
@@ -209,15 +239,26 @@ final class CompressionDraft: Identifiable {
     let id = UUID()
     let sources: [URL]
 
-    var formatName: String
-    var preset: CompressionPreset
+    var formatName: String {
+        didSet { profile.format = formatName }
+    }
+    /// The profile the settings came from, and the settings themselves —
+    /// which the Advanced section may have moved away from it.
+    private(set) var profileID: UUID
+    var profile: CompressionProfile
     var output: URL
     var password = ""
     var encryptsHeader = false
+    /// Bytes per volume; 0 for one file.
+    var volumeSize: UInt64 = 0
+
+    let preferences: Preferences
 
     init(sources: [URL], preferences: Preferences) {
         self.sources = sources
-        self.preset = preferences.preset
+        self.preferences = preferences
+        var profile = preferences.profile(withID: preferences.profileID)
+        profileID = profile.id
 
         let folder = ArchiveNaming.commonParent(of: sources)
             ?? URL.downloadsDirectory
@@ -227,9 +268,46 @@ final class CompressionDraft: Identifiable {
             ? preferences.defaultFormat
             : (candidates.first ?? "7z")
         formatName = chosen
+        profile.format = chosen
+        self.profile = profile
         output = ArchiveNaming.unique(
             folder.appending(component: "\(name).\(Self.fileExtension(for: chosen))"))
     }
+
+    // MARK: Profiles
+
+    /// Starts over from `id`'s settings. A saved profile carries its own
+    /// format, which then becomes the draft's — when this selection can
+    /// take it.
+    func choose(_ id: UUID) {
+        let chosen = preferences.profile(withID: id)
+        profileID = chosen.id
+        let format = chosen.isBuiltIn ? formatName : chosen.format
+        profile = chosen
+        if availableFormats.contains(format), format != formatName {
+            formatName = format
+            formatChanged()
+        }
+        profile.format = formatName
+    }
+
+    /// Whether the settings still match the profile they started from.
+    var isModified: Bool {
+        var base = preferences.profile(withID: profileID)
+        base.format = formatName
+        return base != profile
+    }
+
+    func saveProfile(named name: String) {
+        let saved = preferences.save(profile, as: name)
+        profileID = saved.id
+        profile = saved
+    }
+
+    var memory: MemoryEstimate? { MemoryEstimate(profile) }
+
+    /// Methods this format can use; empty when it has only one.
+    var availableMethods: [CompressionMethod] { CompressionMethod.offered(for: formatName) }
 
     /// The writable formats that make sense for this selection.
     ///
@@ -268,6 +346,13 @@ final class CompressionDraft: Identifiable {
                 .appending(component: "\(stem).\(Self.fileExtension(for: formatName))"))
         if !supportsPassword { password = "" }
         if !supportsHeaderEncryption { encryptsHeader = false }
+        // A method one format has and the next does not falls back to the
+        // new format's default, as does its dictionary.
+        if let method = profile.method, !availableMethods.contains(method) {
+            profile.method = nil
+            profile.dictionary = nil
+        }
+        if formatName != "7z" { profile.solid = .automatic }
     }
 
     func chooseOutput() {
@@ -275,7 +360,7 @@ final class CompressionDraft: Identifiable {
         panel.nameFieldStringValue = output.lastPathComponent
         panel.directoryURL = output.deletingLastPathComponent()
         panel.canCreateDirectories = true
-        panel.message = "Where should the archive go?"
+        panel.message = String(localized: "Where should the archive go?")
         guard panel.runModal() == .OK, let chosen = panel.url else { return }
         // A save panel is also a grant: remember it so the job does not have
         // to ask again for the same folder.
@@ -293,8 +378,12 @@ final class CompressionDraft: Identifiable {
         CompressionRequest(sources: sources,
                            output: output,
                            formatName: formatName,
-                           preset: preset,
+                           profile: profile,
                            password: password.isEmpty ? nil : password,
-                           encryptsHeader: encryptsHeader && supportsHeaderEncryption)
+                           encryptsHeader: encryptsHeader && supportsHeaderEncryption,
+                           volumeSize: volumeSize,
+                           excludedNames: preferences.creationExclusions,
+                           storesSymbolicLinks: preferences.storesSymbolicLinks,
+                           storesHardLinks: preferences.storesHardLinks)
     }
 }

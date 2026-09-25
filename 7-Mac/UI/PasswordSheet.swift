@@ -19,7 +19,7 @@ struct PasswordSheet: View {
                     .font(.system(size: 28))
                     .foregroundStyle(.secondary)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(prompt.incorrect ? "That password did not work" : "This archive is encrypted")
+                    (prompt.incorrect ? Text("That password did not work") : Text("This archive is encrypted"))
                         .font(.headline)
                     Text(prompt.archiveName)
                         .font(.callout)

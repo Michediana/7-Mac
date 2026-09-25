@@ -57,6 +57,16 @@ struct CreateOptions {
     /// Raw `-m` properties for anything the fields above do not cover, e.g.
     /// {"m", "PPMd"} or {"s", "off"}. Applied after the fields, so these win.
     std::vector<std::pair<std::string, std::string>> methodProperties;
+
+    /// Names left out wherever they occur, with `*` and `?` wildcards:
+    /// ".DS_Store", "._*". Matched against each name, not the whole path.
+    std::vector<std::string> excludedNames;
+
+    /// Store a symbolic link as a link (the default), or follow it and store
+    /// what it points to.
+    bool storesSymbolicLinks = true;
+    /// Store a second hard link to a file as a link rather than a copy.
+    bool storesHardLinks = true;
 };
 
 struct CreateOutcome {

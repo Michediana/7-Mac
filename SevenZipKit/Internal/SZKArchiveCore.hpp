@@ -173,6 +173,17 @@ struct ExtractOptions {
     /// in, rather than with their full archive path: picking `a/b/c.txt`
     /// writes `c.txt`, not `a/b/c.txt`. Only meaningful with `fullPaths`.
     bool relativeToCommonParent = false;
+    /// Hash every entry as it decodes, with these engine method names. Used
+    /// with `testOnly` by HashEntries; empty for no hashing.
+    std::vector<std::string> hashMethods;
+};
+
+/// One entry's checksums; see SZKHashCore.hpp for how digests are written.
+struct HashedItem {
+    Text path;
+    bool isDirectory = false;
+    std::uint64_t size = 0;
+    std::vector<std::string> digests;
 };
 
 struct ExtractOutcome {
@@ -186,6 +197,11 @@ struct ExtractOutcome {
     /// This is the figure progress reporting counts against.
     std::uint64_t bytesProcessed = 0;
     std::vector<EntryFailure> failures;
+    /// With `hashMethods`: the methods as the engine names them, each
+    /// entry's digests, and the sum over all of them.
+    std::vector<std::string> hashMethods;
+    std::vector<HashedItem> hashes;
+    std::vector<std::string> hashSums;
 };
 
 /// An open archive. Non-copyable, and not safe to use from two threads at once

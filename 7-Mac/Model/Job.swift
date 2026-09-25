@@ -13,9 +13,14 @@ nonisolated struct CompressionRequest: Sendable {
     var sources: [URL]
     var output: URL
     var formatName: String
-    var preset: CompressionPreset
+    var profile: CompressionProfile
     var password: String?
     var encryptsHeader: Bool
+    /// Split into volumes of this many bytes; 0 for one file.
+    var volumeSize: UInt64 = 0
+    var excludedNames: [String] = []
+    var storesSymbolicLinks = true
+    var storesHardLinks = true
 }
 
 /// Entries picked in a browser window, out of an archive it already has
@@ -38,6 +43,8 @@ nonisolated enum JobRequest: Sendable {
     case extract(archive: URL)
     case extractEntries(EntrySelection)
     case compress(CompressionRequest)
+    /// Decode everything, write nothing, report what was found.
+    case test(archive: URL)
 }
 
 @MainActor @Observable
@@ -81,18 +88,32 @@ final class Job: Identifiable {
             title = selection.title
         case .compress(let compression):
             title = compression.output.lastPathComponent
+        case .test(let archive):
+            title = archive.lastPathComponent
         }
     }
 
     var isExtraction: Bool {
-        if case .compress = request { return false }
-        return true
+        switch request {
+        case .extract, .extractEntries: true
+        case .compress, .test:          false
+        }
     }
+
+    var isTest: Bool {
+        if case .test = request { return true }
+        return false
+    }
+
+    /// Set when a test finishes, healthy or not.
+    var testReport: TestReport?
 
     /// The archive file a browser can open for this job, if there is one.
     var browsableArchive: URL? {
-        if case .extract(let archive) = request { return archive }
-        return nil
+        switch request {
+        case .extract(let archive), .test(let archive): archive
+        default:                                         nil
+        }
     }
 
     var isFinished: Bool {
@@ -172,12 +193,12 @@ final class Job: Identifiable {
     var statusLine: String {
         switch state {
         case .waiting:
-            return note ?? "Waiting"
+            return note ?? String(localized: "Waiting")
         case .running:
             if let note { return note }
             var parts: [String] = []
             if totalBytes > 0 {
-                parts.append("\(Display.bytes(completedBytes)) of \(Display.bytes(totalBytes))")
+                parts.append(String(localized: "\(Display.bytes(completedBytes)) of \(Display.bytes(totalBytes))"))
             } else if completedBytes > 0 {
                 parts.append(Display.bytes(completedBytes))
             }
@@ -187,10 +208,13 @@ final class Job: Identifiable {
             if let secondsRemaining {
                 parts.append(Display.remaining(secondsRemaining))
             }
-            if parts.isEmpty { parts.append(isExtraction ? "Reading the archive" : "Scanning") }
+            if parts.isEmpty {
+                parts.append(isExtraction || isTest ? String(localized: "Reading the archive") : String(localized: "Scanning"))
+            }
             return parts.joined(separator: " · ")
         case .finished:
-            guard let outcome else { return "Done" }
+            if let testReport { return testReport.summary }
+            guard let outcome else { return String(localized: "Done") }
             var parts = [Display.count(outcome.files, "file", "files")]
             if outcome.folders > 0 {
                 parts.append(Display.count(outcome.folders, "folder", "folders"))
@@ -201,13 +225,13 @@ final class Job: Identifiable {
                 parts.append(Display.bytes(outcome.archiveSize))
             }
             if !outcome.entryErrors.isEmpty {
-                parts.append("\(outcome.entryErrors.count) skipped")
+                parts.append(String(localized: "\(outcome.entryErrors.count) skipped"))
             }
             return parts.joined(separator: " · ")
         case .failed:
-            return failure?.archiveDescription ?? "Failed"
+            return failure?.archiveDescription ?? String(localized: "Failed")
         case .cancelled:
-            return "Cancelled"
+            return String(localized: "Cancelled")
         }
     }
 }

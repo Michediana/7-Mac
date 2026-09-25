@@ -2,7 +2,7 @@
 
 GUI nativa macOS per 7-Zip, con il motore 7-Zip **incorporato nell'app** come framework.
 
-- **Stato:** M0–M4 completi e verificati; M5 da iniziare
+- **Stato:** M0–M5 completi e verificati, tranne la notarizzazione (rinviata)
 - **Ultimo aggiornamento:** 2026-09-25
 - **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.03 (2026-09-03)
 
@@ -474,17 +474,100 @@ fallita o annullata semplicemente non è successa. Undo è lo stesso scambio al 
   una `Table` SwiftUI non dice su quale riga è caduto il drop senza perdere l'estensione
   sandbox del Finder.
 
-### M5 — Rifinitura  ⏱ a seguire
+### M5 — Rifinitura  ✅ fatto (notarizzazione rinviata)
 
-- [ ] Preset salvabili: formato, livello, dizionario, metodo (LZMA2/PPMd/BZip2), solid block, thread, con **stima memoria**
-- [ ] Archivi multi-volume in creazione
-- [ ] Pannello hash (SHA-256/512/3, MD5, BLAKE2sp, CRC32/64, xxh64) con confronto checksum
-- [ ] Test integrità con report
-- [ ] Esclusioni predefinite (`.DS_Store`), gestione symlink e hard link
-- [ ] **Estensione Quick Look**: anteprima e thumbnail degli archivi — possibile solo grazie
-      alla scelta del framework, un appex non può lanciare sottoprocessi comodamente
-- [ ] Localizzazione, accessibilità, dark mode
-- [ ] Notarizzazione e distribuzione
+- [x] Preset salvabili: formato, livello, dizionario, metodo (LZMA2/PPMd/BZip2…), solid block, thread, con **stima memoria**
+- [x] Archivi multi-volume in creazione
+- [x] Pannello hash (SHA-256/512/3, MD5, BLAKE2sp, CRC32/64, xxh64) con confronto checksum
+- [x] Test integrità con report
+- [x] Esclusioni predefinite (`.DS_Store`), gestione symlink e hard link
+- [x] **Estensione Quick Look**: anteprima e thumbnail degli archivi
+- [x] Localizzazione (italiano), accessibilità, dark mode
+- [ ] Notarizzazione e distribuzione — rinviata per scelta
+
+**Criterio di uscita: raggiunto.** `Scripts/smoke-test.sh` verifica ora **27 asserzioni**
+(le 22 di M4 più quattro sulle estensioni Quick Look e una sull'italiano) ed esegue
+**137 test**, tutti verdi: i 106 di M4 più 31 nuovi.
+- **Motore (11):** gli hash coincidono con zlib, `shasum` e CryptoKit; un metodo sconosciuto
+  viene rifiutato; gli hash delle voci coincidono con quelli dei file; un archivio cifrato
+  li dà solo con la password; un archivio danneggiato produce comunque un report; e metodo,
+  dizionario, solid, esclusioni e link arrivano davvero nell'archivio, non vengono solo
+  accettati.
+- **Profili (15):** proprietà passate al motore, dizionari predefiniti uguali a quelli di
+  `LzmaEnc.c`, la formula della memoria di 7-Zip rifatta a mano, la riduzione automatica
+  dei thread, salvataggio e migrazione del vecchio preset, un job con PPMd, volumi ed
+  esclusioni.
+- **Integrità (5):** un archivio sano, uno danneggiato, il test di una selezione nel
+  browser, il confronto di un checksum incollato con le sue decorazioni, l'export nel
+  formato di `shasum`.
+
+I test girano in inglese: lo schema imposta `language = "en"` per la sola azione Test,
+così il sistema in italiano non cambia i testi che i test confrontano.
+
+Struttura aggiunta:
+
+```
+SevenZipKit/SZKHash.{h,mm}                     API hash: metodi, file, voci d'archivio
+SevenZipKit/Internal/SZKHashCore.{hpp,cpp}     HashCalc upstream per i file su disco
+SevenZipKit/Internal/SZKHashInternal.hpp       CHashBundle che ricorda il digest di ogni voce
+7-Mac/Model/CompressionProfile.swift           profili, metodi, solid, stima memoria
+7-Mac/Model/Checksums.swift                    pannello checksum, confronto, report di test
+7-Mac/UI/ChecksumView.swift                    una colonna per metodo; report di integrità
+7-Mac/Localizable.xcstrings                    309 stringhe, tutte in italiano
+7-MacPreview/, 7-MacThumbnail/                 le due estensioni Quick Look
+```
+
+### Sei cose emerse implementando
+
+1. **`HashCalc` vuole un censor già risolto.** `UpdateArchive` chiama da sé
+   `AddPathsToCensor`; `HashCalc` lo lascia al chiamante, e senza non trova nulla — il
+   report torna vuoto, senza un errore.
+2. **Il digest di ogni file dura un istante.** `CHashBundle::Final` lo scrive nello slot 0
+   e riavvia l'hasher; il file successivo lo sovrascrive. Per i file su disco lo si legge
+   in `SetOperationResult`, che upstream chiama subito dopo; per le voci d'archivio serve
+   un `IHashCalc` che avvolge il bundle e lo copia in `Final`. L'hash delle voci viaggia sul
+   flusso di hash che `CArchiveExtractCallback` ha già (`SetHashMethods`): è un test che in
+   più dice cosa ha visto.
+3. **"Automatico" non vuol dire "tutti i core".** Con i thread lasciati al motore, 7z toglie
+   thread LZMA2 finché la stima sta nell'80% della RAM (`7zHandlerOut.cpp`). La prima stima
+   diceva 12 GB per Ultra; quella che fa lo stesso conto del motore dice 6,2 GB con 4
+   thread. L'avviso scatta solo oltre quell'80%, cioè quando dizionario o thread li ha
+   forzati la persona.
+4. **7-Zip riduce il dizionario alla dimensione dei dati.** Un dizionario da 1 MB su 300 KB
+   diventa `LZMA2:384k`: la stima è quella di 7-Zip, un tetto e non una misura.
+5. **`-exportLocalizations` non compila il motore.** Non esegue lo script dell'aggregate
+   target, quindi il C++ del framework non trova gli header. Il catalogo si aggiorna invece
+   dagli `.stringsdata` che il build normale produce, con `xcstringstool sync`. Le frasi
+   che arrivano dal motore a runtime ("this format cannot be written") sono chiavi
+   `manual`, tradotte e cercate per valore.
+6. **Quick Look non si prova da riga di comando se un'altra app rivendica gli stessi tipi.**
+   `qlmanage` non lascia scegliere l'estensione, e su questo Mac BetterZip rivendica gli
+   stessi UTI. Il codice delle estensioni è verificato da un eseguibile che chiama le stesse
+   funzioni (HTML e PNG controllati a vista); la scelta tra le due estensioni la fa l'utente
+   in Impostazioni di Sistema › Estensioni › Quick Look.
+
+### Tre decisioni prese qui
+
+**I profili sostituiscono i preset di M2, senza perderli.** Veloce, Normale e Massima sono
+profili con il solo livello impostato: tutto il resto resta ai default del motore, che sono
+buoni. Il vecchio valore salvato viene migrato al profilo corrispondente.
+
+**Esclusioni e link sono preferenze globali, non del profilo.** "Non mettere `.DS_Store`
+negli archivi" è un'abitudine di chi usa il Mac, non una proprietà di un tipo di archivio.
+
+**Il report di test è un risultato, non un errore.** Un archivio danneggiato fa finire il
+job come *finito*, con icona arancione e il report: la verifica è riuscita, è l'archivio
+che non lo è. Fa eccezione la password sbagliata, che si presenta come "tutte le voci
+cifrate falliscono" e viene chiesta di nuovo.
+
+### Limiti accettati
+
+- Accessibilità: etichette su tutti i controlli solo-icona, VoiceOver sulle righe e sulle
+  barre di avanzamento, "Riduci movimento" rispettato. Non è stato fatto un giro completo
+  con VoiceOver acceso.
+- Nella UI solo l'italiano oltre all'inglese. Aggiungere una lingua è aggiungere una colonna
+  al catalogo.
+- Il trascinamento di voci verso il Finder (limite di M3) resta da fare.
 
 ---
 

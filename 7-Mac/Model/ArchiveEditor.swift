@@ -26,7 +26,7 @@ nonisolated enum ArchiveEditError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .folderNotWritable(let folder):
-            "7-Mac is not allowed to write into “\(folder.lastPathComponent)”."
+            String(localized: "7-Mac is not allowed to write into “\(folder.lastPathComponent)”.")
         }
     }
 }

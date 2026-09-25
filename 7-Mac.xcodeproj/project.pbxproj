@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A1B2C3D400000000BBBB0148 /* SZKHash.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000BBBB0147 /* SZKHash.mm */; };
+		A1B2C3D400000000BBBB0146 /* SZKHash.h in Headers */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000BBBB0145 /* SZKHash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1B2C3D400000000AAAA0030 /* SevenZipKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000AAAA0020 /* SevenZipKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1B2C3D400000000AAAA0031 /* SZKEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000AAAA0021 /* SZKEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1B2C3D400000000AAAA0032 /* SZKFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000AAAA0023 /* SZKFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,7 +41,12 @@
 		A1B2C3D400000000BBBB0119 /* SZKOptions.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000BBBB0108 /* SZKOptions.mm */; };
 		A1B2C3D400000000BBBB011A /* SZKArchiveCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000BBBB010A /* SZKArchiveCore.cpp */; };
 		A1B2C3D400000000BBBB011B /* SZKUpdateCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000BBBB010C /* SZKUpdateCore.cpp */; };
+		A1B2C3D400000000BBBB0144 /* SZKHashCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000BBBB0142 /* SZKHashCore.cpp */; };
 		A1B2C3D400000000BBBB011C /* SZKBridging.mm in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000BBBB0110 /* SZKBridging.mm */; };
+		A1B2C3D400000000EEEE0004 /* SevenZipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000AAAA0011 /* SevenZipKit.framework */; };
+		A1B2C3D400000000EEEE0005 /* 7-MacPreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000EEEE0001 /* 7-MacPreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A1B2C3D400000000FFFF0004 /* SevenZipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000AAAA0011 /* SevenZipKit.framework */; };
+		A1B2C3D400000000FFFF0005 /* 7-MacThumbnail.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000FFFF0001 /* 7-MacThumbnail.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +71,34 @@
 			remoteGlobalIDString = F502B1B830612D0F008EBD0E;
 			remoteInfo = "7-Mac";
 		};
+		A1B2C3D400000000EEEE000E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F502B1B130612D0F008EBD0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D400000000AAAA0010;
+			remoteInfo = SevenZipKit;
+		};
+		A1B2C3D400000000EEEE0010 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F502B1B130612D0F008EBD0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D400000000EEEE0009;
+			remoteInfo = "7-MacPreview";
+		};
+		A1B2C3D400000000FFFF000E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F502B1B130612D0F008EBD0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D400000000AAAA0010;
+			remoteInfo = SevenZipKit;
+		};
+		A1B2C3D400000000FFFF0010 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F502B1B130612D0F008EBD0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D400000000FFFF0009;
+			remoteInfo = "7-MacThumbnail";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,9 +113,24 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1B2C3D400000000EEEE0100 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A1B2C3D400000000EEEE0005 /* 7-MacPreview.appex in Embed Foundation Extensions */,
+				A1B2C3D400000000FFFF0005 /* 7-MacThumbnail.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A1B2C3D400000000BBBB0149 /* SZKHash+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SZKHash+Private.h"; sourceTree = "<group>"; };
+		A1B2C3D400000000BBBB0147 /* SZKHash.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SZKHash.mm; sourceTree = "<group>"; };
+		A1B2C3D400000000BBBB0145 /* SZKHash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZKHash.h; sourceTree = "<group>"; };
 		A1B2C3D400000000AAAA0011 /* SevenZipKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SevenZipKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B2C3D400000000AAAA0020 /* SevenZipKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SevenZipKit.h; sourceTree = "<group>"; };
 		A1B2C3D400000000AAAA0021 /* SZKEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZKEngine.h; sourceTree = "<group>"; };
@@ -105,6 +155,9 @@
 		A1B2C3D400000000BBBB0107 /* SZKArchiveEntry.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SZKArchiveEntry.mm; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB0108 /* SZKOptions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SZKOptions.mm; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB0109 /* SZKArchiveCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKArchiveCore.hpp; sourceTree = "<group>"; };
+		A1B2C3D400000000BBBB0141 /* SZKHashCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKHashCore.hpp; sourceTree = "<group>"; };
+		A1B2C3D400000000BBBB0142 /* SZKHashCore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SZKHashCore.cpp; sourceTree = "<group>"; };
+		A1B2C3D400000000BBBB0143 /* SZKHashInternal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKHashInternal.hpp; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB010A /* SZKArchiveCore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SZKArchiveCore.cpp; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB010B /* SZKUpdateCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKUpdateCore.hpp; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB010C /* SZKUpdateCore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SZKUpdateCore.cpp; sourceTree = "<group>"; };
@@ -116,6 +169,8 @@
 		A1B2C3D400000000BBBB0140 /* SZKArchiveImpl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKArchiveImpl.hpp; sourceTree = "<group>"; };
 		A1B2C3D400000000CCCC0001 /* 7-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "7-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F502B1B930612D0F008EBD0E /* 7-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D400000000EEEE0001 /* 7-MacPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "7-MacPreview.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D400000000FFFF0001 /* 7-MacThumbnail.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "7-MacThumbnail.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -125,6 +180,20 @@
 				Info.plist,
 			);
 			target = F502B1B830612D0F008EBD0E /* 7-Mac */;
+		};
+		A1B2C3D400000000EEEE0003 /* Exceptions for "7-MacPreview" folder in "7-MacPreview" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A1B2C3D400000000EEEE0009 /* 7-MacPreview */;
+		};
+		A1B2C3D400000000FFFF0003 /* Exceptions for "7-MacThumbnail" folder in "7-MacThumbnail" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A1B2C3D400000000FFFF0009 /* 7-MacThumbnail */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -140,6 +209,22 @@
 				A1B2C3D400000000DDDD0001 /* Exceptions for "7-Mac" folder in "7-Mac" target */,
 			);
 			path = "7-Mac";
+			sourceTree = "<group>";
+		};
+		A1B2C3D400000000EEEE0002 /* 7-MacPreview */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A1B2C3D400000000EEEE0003 /* Exceptions for "7-MacPreview" folder in "7-MacPreview" target */,
+			);
+			path = "7-MacPreview";
+			sourceTree = "<group>";
+		};
+		A1B2C3D400000000FFFF0002 /* 7-MacThumbnail */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A1B2C3D400000000FFFF0003 /* Exceptions for "7-MacThumbnail" folder in "7-MacThumbnail" target */,
+			);
+			path = "7-MacThumbnail";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -167,6 +252,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1B2C3D400000000EEEE0007 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D400000000EEEE0004 /* SevenZipKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D400000000FFFF0007 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D400000000FFFF0004 /* SevenZipKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -184,6 +285,8 @@
 				A1B2C3D400000000BBBB0103 /* SZKError.h */,
 				A1B2C3D400000000BBBB0104 /* SZKOptions.h */,
 				A1B2C3D400000000BBBB0105 /* SZKProgress.h */,
+				A1B2C3D400000000BBBB0147 /* SZKHash.mm */,
+				A1B2C3D400000000BBBB0145 /* SZKHash.h */,
 				A1B2C3D400000000BBBB0106 /* SZKArchive.mm */,
 				A1B2C3D400000000BBBB0107 /* SZKArchiveEntry.mm */,
 				A1B2C3D400000000BBBB0108 /* SZKOptions.mm */,
@@ -203,6 +306,10 @@
 				A1B2C3D400000000BBBB0140 /* SZKArchiveImpl.hpp */,
 				A1B2C3D400000000BBBB010B /* SZKUpdateCore.hpp */,
 				A1B2C3D400000000BBBB010C /* SZKUpdateCore.cpp */,
+				A1B2C3D400000000BBBB0141 /* SZKHashCore.hpp */,
+				A1B2C3D400000000BBBB0142 /* SZKHashCore.cpp */,
+				A1B2C3D400000000BBBB0143 /* SZKHashInternal.hpp */,
+				A1B2C3D400000000BBBB0149 /* SZKHash+Private.h */,
 				A1B2C3D400000000BBBB010D /* SZKStatus.hpp */,
 				A1B2C3D400000000BBBB010E /* SZKEngineCoreInternal.hpp */,
 				A1B2C3D400000000BBBB010F /* SZKBridging.h */,
@@ -245,6 +352,8 @@
 				F502B1BB30612D0F008EBD0E /* 7-Mac */,
 				A1B2C3D400000000AAAA0019 /* SevenZipKit */,
 				A1B2C3D400000000CCCC0002 /* 7-MacTests */,
+				A1B2C3D400000000FFFF0002 /* 7-MacThumbnail */,
+				A1B2C3D400000000EEEE0002 /* 7-MacPreview */,
 				A1B2C3D400000000AAAA0050 /* Scripts */,
 				A1B2C3D400000000AAAA0053 /* Vendor */,
 				F502B1BA30612D0F008EBD0E /* Products */,
@@ -257,6 +366,8 @@
 				F502B1B930612D0F008EBD0E /* 7-Mac.app */,
 				A1B2C3D400000000AAAA0011 /* SevenZipKit.framework */,
 				A1B2C3D400000000CCCC0001 /* 7-MacTests.xctest */,
+				A1B2C3D400000000FFFF0001 /* 7-MacThumbnail.appex */,
+				A1B2C3D400000000EEEE0001 /* 7-MacPreview.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -276,6 +387,7 @@
 				A1B2C3D400000000BBBB0114 /* SZKError.h in Headers */,
 				A1B2C3D400000000BBBB0115 /* SZKOptions.h in Headers */,
 				A1B2C3D400000000BBBB0116 /* SZKProgress.h in Headers */,
+				A1B2C3D400000000BBBB0146 /* SZKHash.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,11 +447,14 @@
 				F502B1B630612D0F008EBD0E /* Frameworks */,
 				F502B1B730612D0F008EBD0E /* Resources */,
 				A1B2C3D400000000AAAA0044 /* Embed Frameworks */,
+				A1B2C3D400000000EEEE0100 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				A1B2C3D400000000AAAA0040 /* PBXTargetDependency */,
+				A1B2C3D400000000FFFF000F /* PBXTargetDependency */,
+				A1B2C3D400000000EEEE000F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				F502B1BB30612D0F008EBD0E /* 7-Mac */,
@@ -350,6 +465,52 @@
 			productName = "7-Mac";
 			productReference = F502B1B930612D0F008EBD0E /* 7-Mac.app */;
 			productType = "com.apple.product-type.application";
+		};
+		A1B2C3D400000000EEEE0009 /* 7-MacPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C3D400000000EEEE000A /* Build configuration list for PBXNativeTarget "7-MacPreview" */;
+			buildPhases = (
+				A1B2C3D400000000EEEE0006 /* Sources */,
+				A1B2C3D400000000EEEE0007 /* Frameworks */,
+				A1B2C3D400000000EEEE0008 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1B2C3D400000000EEEE000D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A1B2C3D400000000EEEE0002 /* 7-MacPreview */,
+			);
+			name = "7-MacPreview";
+			packageProductDependencies = (
+			);
+			productName = "7-MacPreview";
+			productReference = A1B2C3D400000000EEEE0001 /* 7-MacPreview.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A1B2C3D400000000FFFF0009 /* 7-MacThumbnail */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C3D400000000FFFF000A /* Build configuration list for PBXNativeTarget "7-MacThumbnail" */;
+			buildPhases = (
+				A1B2C3D400000000FFFF0006 /* Sources */,
+				A1B2C3D400000000FFFF0007 /* Frameworks */,
+				A1B2C3D400000000FFFF0008 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1B2C3D400000000FFFF000D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A1B2C3D400000000FFFF0002 /* 7-MacThumbnail */,
+			);
+			name = "7-MacThumbnail";
+			packageProductDependencies = (
+			);
+			productName = "7-MacThumbnail";
+			productReference = A1B2C3D400000000FFFF0001 /* 7-MacThumbnail.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -374,6 +535,12 @@
 					F502B1B830612D0F008EBD0E = {
 						CreatedOnToolsVersion = 26.6;
 					};
+					A1B2C3D400000000FFFF0009 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					A1B2C3D400000000EEEE0009 = {
+						CreatedOnToolsVersion = 26.6;
+					};
 				};
 			};
 			buildConfigurationList = F502B1B430612D0F008EBD0E /* Build configuration list for PBXProject "7-Mac" */;
@@ -382,6 +549,7 @@
 			knownRegions = (
 				en,
 				Base,
+				it,
 			);
 			mainGroup = F502B1B030612D0F008EBD0E;
 			minimizedProjectReferenceProxies = 1;
@@ -394,6 +562,8 @@
 				A1B2C3D400000000AAAA0010 /* SevenZipKit */,
 				A1B2C3D400000000AAAA0001 /* SevenZipEngine */,
 				A1B2C3D400000000CCCC0010 /* 7-MacTests */,
+				A1B2C3D400000000FFFF0009 /* 7-MacThumbnail */,
+				A1B2C3D400000000EEEE0009 /* 7-MacPreview */,
 			);
 		};
 /* End PBXProject section */
@@ -414,6 +584,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F502B1B730612D0F008EBD0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D400000000EEEE0008 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D400000000FFFF0008 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -483,8 +667,10 @@
 				A1B2C3D400000000BBBB0117 /* SZKArchive.mm in Sources */,
 				A1B2C3D400000000BBBB0118 /* SZKArchiveEntry.mm in Sources */,
 				A1B2C3D400000000BBBB0119 /* SZKOptions.mm in Sources */,
+				A1B2C3D400000000BBBB0148 /* SZKHash.mm in Sources */,
 				A1B2C3D400000000BBBB011A /* SZKArchiveCore.cpp in Sources */,
 				A1B2C3D400000000BBBB011B /* SZKUpdateCore.cpp in Sources */,
+				A1B2C3D400000000BBBB0144 /* SZKHashCore.cpp in Sources */,
 				A1B2C3D400000000BBBB011C /* SZKBridging.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,6 +683,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F502B1B530612D0F008EBD0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D400000000EEEE0006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D400000000FFFF0006 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -520,6 +720,26 @@
 			isa = PBXTargetDependency;
 			target = F502B1B830612D0F008EBD0E /* 7-Mac */;
 			targetProxy = A1B2C3D400000000CCCC0041 /* PBXContainerItemProxy */;
+		};
+		A1B2C3D400000000EEEE000D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1B2C3D400000000AAAA0010 /* SevenZipKit */;
+			targetProxy = A1B2C3D400000000EEEE000E /* PBXContainerItemProxy */;
+		};
+		A1B2C3D400000000EEEE000F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1B2C3D400000000EEEE0009 /* 7-MacPreview */;
+			targetProxy = A1B2C3D400000000EEEE0010 /* PBXContainerItemProxy */;
+		};
+		A1B2C3D400000000FFFF000D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1B2C3D400000000AAAA0010 /* SevenZipKit */;
+			targetProxy = A1B2C3D400000000FFFF000E /* PBXContainerItemProxy */;
+		};
+		A1B2C3D400000000FFFF000F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1B2C3D400000000FFFF0009 /* 7-MacThumbnail */;
+			targetProxy = A1B2C3D400000000FFFF0010 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -858,6 +1078,114 @@
 			};
 			name = Release;
 		};
+		A1B2C3D400000000EEEE000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "7-MacPreview/7-MacPreview.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ALUYQV47T2;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "7-MacPreview/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "7-Mac Preview";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michediana.--Mac.Preview";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1B2C3D400000000EEEE000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "7-MacPreview/7-MacPreview.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ALUYQV47T2;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "7-MacPreview/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "7-Mac Preview";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michediana.--Mac.Preview";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A1B2C3D400000000FFFF000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "7-MacThumbnail/7-MacThumbnail.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ALUYQV47T2;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "7-MacThumbnail/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "7-Mac Thumbnail";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michediana.--Mac.Thumbnail";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1B2C3D400000000FFFF000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "7-MacThumbnail/7-MacThumbnail.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ALUYQV47T2;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "7-MacThumbnail/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "7-Mac Thumbnail";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.michediana.--Mac.Thumbnail";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -902,6 +1230,24 @@
 			buildConfigurations = (
 				F502B1C530612D10008EBD0E /* Debug */,
 				F502B1C630612D10008EBD0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1B2C3D400000000EEEE000A /* Build configuration list for PBXNativeTarget "7-MacPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3D400000000EEEE000B /* Debug */,
+				A1B2C3D400000000EEEE000C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1B2C3D400000000FFFF000A /* Build configuration list for PBXNativeTarget "7-MacThumbnail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3D400000000FFFF000B /* Debug */,
+				A1B2C3D400000000FFFF000C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

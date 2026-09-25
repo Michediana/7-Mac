@@ -1,0 +1,66 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ on disk": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ su disco"
+          }
+        }
+      }
+    },
+    "%lld files": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld file"
+          }
+        }
+      }
+    },
+    "1 file": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 file"
+          }
+        }
+      }
+    },
+    "The list of files is encrypted. Open the archive in 7-Mac to enter the password.": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’elenco dei file è cifrato. Apri l’archivio in 7-Mac per inserire la password."
+          }
+        }
+      }
+    },
+    "and %lld more": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e altri %lld"
+          }
+        }
+      }
+    },
+    "encrypted": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cifrato"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

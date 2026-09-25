@@ -8,6 +8,7 @@
 #import "Internal/SZKArchiveEntry+Private.h"
 #import "Internal/SZKBridging.h"
 #import "Internal/SZKUpdateCore.hpp"
+#import "Internal/SZKHash+Private.h"
 
 #import "SZKArchiveEntry.h"
 
@@ -178,6 +179,35 @@ std::vector<std::uint32_t> IndicesFromIndexSet(NSIndexSet *_Nullable indexes)
                       error:error];
 }
 
+- (SZKHashReport *)hashIndexes:(NSIndexSet *)indexes
+                       methods:(NSArray<NSString *> *)methods
+                      progress:(SZKProgressHandler)progress
+              passwordProvider:(SZKPasswordProvider)passwordProvider
+                         error:(NSError **)error
+{
+    std::vector<std::string> names;
+    for (NSString *method in methods) {
+        names.push_back(method.UTF8String);
+    }
+    szk::HashOutcome outcome;
+    const szk::Result result = szk::HashEntries(*_archive, IndicesFromIndexSet(indexes), names,
+                                                SZKMakeProgressHandler(progress),
+                                                SZKMakePasswordProvider(passwordProvider), outcome);
+    // Entries that failed to decode are the point of a test report; only a
+    // run that could not go at all is an error.
+    const bool usable = result.ok() || (!outcome.items.empty()
+                                        && result.status != szk::Status::cancelled
+                                        && result.status != szk::Status::passwordRequired
+                                        && result.status != szk::Status::passwordWrong);
+    if (!usable) {
+        if (error) {
+            *error = SZKErrorFromResult(result);
+        }
+        return nil;
+    }
+    return [[SZKHashReport alloc] initWithOutcome:outcome];
+}
+
 - (BOOL)runExtract:(const std::vector<std::uint32_t> &)indices
            options:(const szk::ExtractOptions &)options
           progress:(SZKProgressHandler)progress
@@ -320,6 +350,11 @@ static BOOL FinishRewrite(const szk::Result &result, const szk::CreateOutcome &c
     }
     coreOptions.encryptHeader = options.encryptsHeader;
     coreOptions.volumeSize = options.volumeSize;
+    for (NSString *name in options.excludedNamePatterns) {
+        coreOptions.excludedNames.emplace_back(name.UTF8String);
+    }
+    coreOptions.storesSymbolicLinks = options.storesSymbolicLinks;
+    coreOptions.storesHardLinks = options.storesHardLinks;
     for (NSString *key in options.methodProperties) {
         coreOptions.methodProperties.emplace_back(key.UTF8String,
                                                   options.methodProperties[key].UTF8String);

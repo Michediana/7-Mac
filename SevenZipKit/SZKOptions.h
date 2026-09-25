@@ -103,6 +103,18 @@ typedef NS_ENUM(NSInteger, SZKCompressionLevel) {
 /// `@{@"m": @"PPMd", @"s": @"off"}`. Applied last, so these win.
 @property (nonatomic, copy, nullable) NSDictionary<NSString *, NSString *> *methodProperties;
 
+/// Names to leave out wherever they occur, with `*` and `?`: `.DS_Store`,
+/// `._*`. Matched against each file or folder name, not against paths.
+@property (nonatomic, copy, nullable) NSArray<NSString *> *excludedNamePatterns;
+
+/// Store symbolic links as links (the default), or follow them and store
+/// what they point to.
+@property (nonatomic) BOOL storesSymbolicLinks;
+
+/// Store further hard links to a file as links (the default) rather than as
+/// copies of it.
+@property (nonatomic) BOOL storesHardLinks;
+
 @end
 
 #pragma mark - Outcomes

@@ -84,7 +84,7 @@ final class JobQueue {
             do {
                 let (outcome, url) = try await perform(job)
                 job.finish(outcome, at: url)
-                if preferences.revealWhenDone {
+                if preferences.revealWhenDone, !job.isTest {
                     NSWorkspace.shared.activateFileViewerSelecting([url])
                 }
             } catch {
@@ -103,6 +103,8 @@ final class JobQueue {
             try await extract(selection, for: job)
         case .compress(let request):
             try await compress(request, for: job)
+        case .test(let archive):
+            try await test(archive, for: job)
         }
     }
 
@@ -178,10 +180,9 @@ final class JobQueue {
                          for job: Job) async throws -> (ArchiveOutcome, URL) {
         var folder = selection.destination
         if !FolderAccess.shared.prepare(folder) {
-            job.note = "Waiting for a destination"
+            job.note = String(localized: "Waiting for a destination")
             guard let chosen = await interaction?.askWritableFolder(
-                message: "7-Mac needs permission to write into “\(folder.lastPathComponent)”. "
-                       + "Choose it, or pick somewhere else.",
+                message: String(localized: "7-Mac needs permission to write into “\(folder.lastPathComponent)”. Choose it, or pick somewhere else."),
                 suggesting: folder)
             else { throw CancellationError() }
             folder = chosen
@@ -220,6 +221,56 @@ final class JobQueue {
         }
     }
 
+    // MARK: - Testing
+
+    /// Decodes every entry and checksums it as it goes. A damaged entry is a
+    /// finding, not a failure: the job finishes and the report says so.
+    private func test(_ archiveURL: URL, for job: Job) async throws -> (ArchiveOutcome, URL) {
+        let scoped = archiveURL.startAccessingSecurityScopedResource()
+        defer { if scoped { archiveURL.stopAccessingSecurityScopedResource() } }
+
+        var password = preferences.offersKeychain ? PasswordStore.password(for: archiveURL) : nil
+        var archive: Archive
+        while true {
+            do {
+                archive = try await Archive.open(archiveURL, password: provider(password))
+                break
+            } catch where error.isPasswordProblem {
+                guard let answer = await askPassword(for: archiveURL, job: job,
+                                                     incorrect: password != nil)
+                else { throw CancellationError() }
+                password = answer.password
+            }
+        }
+
+        if password == nil, archive.entries.contains(where: \.isEncrypted) {
+            guard let answer = await askPassword(for: archiveURL, job: job, incorrect: false)
+            else { throw CancellationError() }
+            password = answer.password
+        }
+
+        while true {
+            do {
+                let report = try await archive.hash(methods: ["CRC32"], password: provider(password),
+                                                    onProgress: progressSink(job))
+                let testReport = TestReport(archiveName: archiveURL.lastPathComponent, report: report)
+                // A wrong password shows up as every encrypted entry failing
+                // its check; that is a question to ask again, not a finding.
+                let passwordFailures = report.failures.filter(\.isPasswordProblem)
+                if !passwordFailures.isEmpty, passwordFailures.count == report.failures.count {
+                    throw NSError(domain: SZKErrorDomain, code: SZKError.Code.passwordWrong.rawValue)
+                }
+                job.testReport = testReport
+                return (ArchiveOutcome(files: report.files, bytes: report.bytes), archiveURL)
+            } catch where error.isPasswordProblem {
+                guard let answer = await askPassword(for: archiveURL, job: job, incorrect: true)
+                else { throw CancellationError() }
+                password = answer.password
+                job.restartMeasurement()
+            }
+        }
+    }
+
     // MARK: - Compression
 
     private func compress(_ request: CompressionRequest,
@@ -233,9 +284,9 @@ final class JobQueue {
         var output = request.output
         let folder = output.deletingLastPathComponent()
         if !FolderAccess.shared.prepare(folder) {
-            job.note = "Waiting for a destination"
+            job.note = String(localized: "Waiting for a destination")
             guard let chosen = await interaction?.askWritableFolder(
-                message: "Choose where to put \(output.lastPathComponent).",
+                message: String(localized: "Choose where to put \(output.lastPathComponent)."),
                 suggesting: folder)
             else { throw CancellationError() }
             output = chosen.appending(component: output.lastPathComponent)
@@ -250,10 +301,23 @@ final class JobQueue {
         let outcome = try await Archive.create(at: output,
                                                from: request.sources,
                                                format: request.formatName,
-                                               level: request.preset.level,
+                                               level: request.profile.compressionLevel,
                                                password: request.password,
                                                encryptsHeader: request.encryptsHeader,
+                                               volumeSize: request.volumeSize,
+                                               methodProperties: request.profile.methodProperties,
+                                               excluding: request.excludedNames,
+                                               storesSymbolicLinks: request.storesSymbolicLinks,
+                                               storesHardLinks: request.storesHardLinks,
                                                onProgress: progressSink(job))
+        // Split output is `name.7z.001`, `.002`…; the first volume is what
+        // to show, and what opens the set.
+        if request.volumeSize > 0 {
+            let first = output.appendingPathExtension("001")
+            if FileManager.default.fileExists(atPath: first.path(percentEncoded: false)) {
+                return (outcome, first)
+            }
+        }
         return (outcome, output)
     }
 
@@ -267,10 +331,10 @@ final class JobQueue {
         case .fixedFolder:
             suggestion = preferences.fixedDestination ?? archiveURL.deletingLastPathComponent()
         case .ask:
-            job.note = "Waiting for a destination"
+            job.note = String(localized: "Waiting for a destination")
             defer { job.note = nil }
             guard let chosen = await interaction?.askWritableFolder(
-                message: "Choose where to extract \(archiveURL.lastPathComponent).",
+                message: String(localized: "Choose where to extract \(archiveURL.lastPathComponent)."),
                 suggesting: archiveURL.deletingLastPathComponent())
             else { throw CancellationError() }
             return chosen
@@ -280,11 +344,10 @@ final class JobQueue {
 
         // Under App Sandbox a dropped file grants access to the file, not to
         // the folder holding it. One panel per folder, then never again.
-        job.note = "Waiting for a destination"
+        job.note = String(localized: "Waiting for a destination")
         defer { job.note = nil }
         guard let chosen = await interaction?.askWritableFolder(
-            message: "7-Mac needs permission to write into “\(suggestion.lastPathComponent)”. "
-                   + "Choose it, or pick somewhere else.",
+            message: String(localized: "7-Mac needs permission to write into “\(suggestion.lastPathComponent)”. Choose it, or pick somewhere else."),
             suggesting: suggestion)
         else { throw CancellationError() }
         return chosen
@@ -292,7 +355,7 @@ final class JobQueue {
 
     private func askPassword(for archive: URL, job: Job, incorrect: Bool) async -> PasswordAnswer? {
         guard let interaction else { return nil }
-        job.note = incorrect ? "That password did not work" : "Waiting for a password"
+        job.note = incorrect ? String(localized: "That password did not work") : String(localized: "Waiting for a password")
         defer { job.note = nil }
         return await interaction.askPassword(for: archive, incorrect: incorrect)
     }

@@ -62,7 +62,7 @@ struct EngineInfoView: View {
                     Text(row.extensions).foregroundStyle(.secondary)
                 }
                 TableColumn("Mode") { row in
-                    Text(row.writable ? "read / write" : "read")
+                    (row.writable ? Text("read / write") : Text("read"))
                         .foregroundStyle(row.writable ? .primary : .secondary)
                 }
                 .width(90)

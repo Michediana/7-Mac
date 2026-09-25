@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionAttributes</key>
+		<dict>
+			<key>QLIsDataBasedPreview</key>
+			<true/>
+			<key>QLSupportedContentTypes</key>
+			<array>
+				<string>com.arj.arj-archive</string>
+				<string>com.facebook.tar-zstd-archive</string>
+				<string>com.facebook.zstd-archive</string>
+				<string>com.microsoft.cab-archive</string>
+				<string>com.microsoft.wim-archive</string>
+				<string>com.rarlab.rar-archive</string>
+				<string>com.redhat.rpm-archive</string>
+				<string>com.unix.compress-archive</string>
+				<string>org.7-zip.7-zip-archive</string>
+				<string>org.7-zip.lzma-archive</string>
+				<string>org.debian.deb-archive</string>
+				<string>org.gnu.gnu-zip-archive</string>
+				<string>org.gnu.gnu-zip-tar-archive</string>
+				<string>org.squashfs.squashfs-image</string>
+				<string>org.tukaani.tar-xz-archive</string>
+				<string>org.tukaani.xz-archive</string>
+				<string>public.bzip2-archive</string>
+				<string>public.cpio-archive</string>
+				<string>public.lzh-archive</string>
+				<string>public.tar-archive</string>
+				<string>public.tar-bzip2-archive</string>
+				<string>public.zip-archive</string>
+			</array>
+			<key>QLSupportsSearchableItems</key>
+			<false/>
+		</dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.quicklook.preview</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).PreviewProvider</string>
+	</dict>
+</dict>
+</plist>

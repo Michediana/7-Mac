@@ -253,15 +253,23 @@ Result Create(const std::vector<std::string> &inputPaths,
     for (const std::string &input : inputPaths) {
         censor.AddPreItem_NoWildcard(GetUnicodeString(input.c_str(), CP_UTF8));
     }
+    // What `-xr!name` does on the command line: an exclusion, recursive, with
+    // wildcards, matched against every name at every depth.
+    for (const std::string &name : options.excludedNames) {
+        NWildcard::CCensorPathProps props;
+        props.Recursive = true;
+        props.WildcardMatching = true;
+        censor.AddPreItem(false, GetUnicodeString(name.c_str(), CP_UTF8), props);
+    }
 
     CUpdateOptions updateOptions;
     updateOptions.SetActionCommand_Add();
     updateOptions.PathMode = NWildcard::k_RelatPath;
-    // Store symlinks as links rather than following them, matching what the
-    // extraction side already restores.
-    updateOptions.SymLinks.Val = true;
+    // By default links are stored as links rather than followed, matching
+    // what the extraction side restores.
+    updateOptions.SymLinks.Val = options.storesSymbolicLinks;
     updateOptions.SymLinks.Def = true;
-    updateOptions.HardLinks.Val = true;
+    updateOptions.HardLinks.Val = options.storesHardLinks;
     updateOptions.HardLinks.Def = true;
 
     if (!types.IsEmpty()) {

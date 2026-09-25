@@ -71,7 +71,7 @@ struct BrowserWindow: View {
                      Display.count(UInt64(tree.fileCount), "file", "files"),
                      Display.bytes(tree.totalSize)]
         if let packed = tree.totalPackedSize, tree.totalSize > 0, packed > 0 {
-            parts.append("\(Display.bytes(packed)) packed")
+            parts.append(String(localized: "\(Display.bytes(packed)) packed"))
         }
         return parts.joined(separator: " · ")
     }
@@ -101,6 +101,16 @@ private struct BrowserContent: View {
         .sheet(item: $renaming) { node in
             RenameSheet(browser: browser, node: node)
         }
+        .sheet(item: $browser.shownTestReport) { report in
+            TestReportView(report: report) { browser.shownTestReport = nil }
+        }
+        .sheet(isPresented: Binding(get: { browser.checksums != nil },
+                                    set: { if !$0 { browser.checksums = nil } })) {
+            if let checksums = browser.checksums {
+                ChecksumView(model: checksums) { browser.checksums = nil }
+                    .frame(width: 820, height: 440)
+            }
+        }
         .onAppear { browser.undoManager = undoManager }
         .onChange(of: undoManager) { browser.undoManager = undoManager }
     }
@@ -113,9 +123,10 @@ private struct BrowserContent: View {
     }
 
     private var addTargetName: String {
-        guard let target = addTarget else { return "the top of the archive" }
+        guard let target = addTarget else { return String(localized: "the top of the archive") }
         let folder = target.isDirectory ? target.path : (target.path as NSString).deletingLastPathComponent
-        return folder.isEmpty ? "the top of the archive" : "“\((folder as NSString).lastPathComponent)”"
+        return folder.isEmpty ? String(localized: "the top of the archive")
+                              : "“\((folder as NSString).lastPathComponent)”"
     }
 
     private var table: some View {
@@ -219,8 +230,9 @@ private struct BrowserContent: View {
         }
         .overlay(alignment: .bottom) {
             if isDropTargeted {
-                Label(browser.canEdit ? "Add to \(addTargetName)"
-                                      : "Cannot change this archive: \(browser.editBlockedReason ?? "busy")",
+                Label(browser.canEdit
+                      ? String(localized: "Add to \(addTargetName)")
+                      : String(localized: "Cannot change this archive: \(browser.editBlockedReason ?? String(localized: "busy"))"),
                       systemImage: browser.canEdit ? "plus.circle.fill" : "nosign")
                     .padding(.horizontal, 14)
                     .padding(.vertical, 8)
@@ -317,10 +329,19 @@ private struct BrowserContent: View {
             .help(browser.extractionSummary)
         }
         ToolbarItemGroup {
+            Button("Test", systemImage: "checkmark.shield") { Task { await browser.test() } }
+                .disabled(browser.activity != nil)
+                .help(browser.selection.isEmpty ? Text("Check every entry decodes intact")
+                                                : Text("Check the selected entries decode intact"))
+            Button("Checksums", systemImage: "number") { Task { await browser.showChecksums() } }
+                .disabled(browser.activity != nil)
+                .help("Checksums of the selected entries, or all of them")
+        }
+        ToolbarItemGroup {
             Button("Add Files…", systemImage: "plus") { chooseFilesToAdd() }
                 .disabled(!browser.canEdit)
-                .help(browser.editBlockedReason.map { "Cannot change this archive: \($0)" }
-                      ?? "Add files to \(addTargetName)")
+                .help(browser.editBlockedReason.map { String(localized: "Cannot change this archive: \($0)") }
+                      ?? String(localized: "Add files to \(addTargetName)"))
             Button("Delete", systemImage: "trash") {
                 let ids = browser.selection
                 Task { await browser.delete(ids) }
@@ -335,9 +356,9 @@ private struct BrowserContent: View {
         panel.canChooseFiles = true
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = true
-        panel.message = "Add to \(addTargetName) in “\(browser.current?.title ?? "")”:"
-        panel.prompt = "Add"
-        let onlyOlder = NSButton(checkboxWithTitle: "Only replace entries older than the file",
+        panel.message = String(localized: "Add to \(addTargetName) in “\(browser.current?.title ?? "")”:")
+        panel.prompt = String(localized: "Add")
+        let onlyOlder = NSButton(checkboxWithTitle: String(localized: "Only replace entries older than the file"),
                                  target: nil, action: nil)
         onlyOlder.state = browser.preferences.onlyReplaceOlder ? .on : .off
         panel.accessoryView = onlyOlder
@@ -355,8 +376,8 @@ private struct BrowserContent: View {
         panel.canCreateDirectories = true
         panel.allowsMultipleSelection = false
         panel.directoryURL = browser.defaultDestination
-        panel.message = "Extract \(browser.extractionSummary.lowercasedFirst) into:"
-        panel.prompt = "Extract"
+        panel.message = String(localized: "Extract \(browser.extractionSummary.lowercasedFirst) into:")
+        panel.prompt = String(localized: "Extract")
         guard panel.runModal() == .OK, let folder = panel.url else { return }
         FolderAccess.shared.grant(folder)
         Task { await browser.extract(to: folder) }
@@ -404,9 +425,9 @@ private struct NameCell: View {
     }
 
     private var accessibilityLabel: String {
-        var label = node.isDirectory ? "Folder \(node.name)" : node.name
-        if node.isEncrypted { label += ", encrypted" }
-        if showsPath { label += ", in \((node.path as NSString).deletingLastPathComponent)" }
+        var label = node.isDirectory ? String(localized: "Folder \(node.name)") : node.name
+        if node.isEncrypted { label += String(localized: ", encrypted") }
+        if showsPath { label += String(localized: ", in \((node.path as NSString).deletingLastPathComponent)") }
         return label
     }
 }
@@ -482,6 +503,7 @@ private struct StatusBar: View {
                 ProgressView(value: activity.fractionCompleted)
                     .progressViewStyle(.linear)
                     .frame(width: 120)
+                    .accessibilityLabel(activity.title)
                 Text(activity.title)
                     .lineLimit(1)
                     .truncationMode(.middle)
@@ -506,10 +528,10 @@ private struct StatusBar: View {
                     Label("Encrypted list", systemImage: "lock")
                 }
                 if browser.levels.count > 1 {
-                    Text(level.isInPlace ? "Read in place" : "Unpacked to a temporary file")
+                    (level.isInPlace ? Text("Read in place") : Text("Unpacked to a temporary file"))
                         .help(level.isInPlace
-                              ? "Read straight out of the archive around it"
-                              : "The archive around it compresses its contents, so this one was unpacked first")
+                              ? Text("Read straight out of the archive around it")
+                              : Text("The archive around it compresses its contents, so this one was unpacked first"))
                 }
             }
         }
@@ -525,10 +547,9 @@ private struct StatusBar: View {
             if browser.isShowingMatches {
                 return Display.count(UInt64(browser.matches.count), "match", "matches")
             }
-            return "\(Display.count(UInt64(tree.fileCount), "file", "files")), "
-                + "\(Display.count(UInt64(tree.folderCount), "folder", "folders"))"
+            return String(localized: "\(Display.count(UInt64(tree.fileCount), "file", "files")), \(Display.count(UInt64(tree.folderCount), "folder", "folders"))")
         }
-        return "\(browser.selection.count) selected — \(browser.extractionSummary)"
+        return String(localized: "\(browser.selection.count) selected — \(browser.extractionSummary)")
     }
 }
 
@@ -543,7 +564,7 @@ private struct RenameSheet: View {
     var body: some View {
         let problem = browser.validateNewName(name, for: node)
         VStack(alignment: .leading, spacing: 12) {
-            Text(node.isDirectory ? "Rename Folder" : "Rename")
+            (node.isDirectory ? Text("Rename Folder") : Text("Rename"))
                 .font(.headline)
             if node.isDirectory, node.fileCount > 0 {
                 Text("Everything inside it — \(Display.count(UInt64(node.fileCount), "file", "files")) — moves with it.")

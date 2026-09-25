@@ -27,6 +27,7 @@
 #include <map>
 
 #include "SZKArchiveImpl.hpp"
+#include "SZKHashInternal.hpp"
 #include "SZKEngineCoreInternal.hpp"
 #include "SZKStatus.hpp"
 
@@ -775,6 +776,19 @@ Result Archive::Extract(const std::vector<std::uint32_t> &indices,
             }
         }
     }
+    // Hashing rides along on a test: CArchiveExtractCallback routes each
+    // entry's decoded bytes through the hash stream when one is set.
+    CCapturingHash hash;
+    if (!options.hashMethods.empty()) {
+        const HRESULT set = hash.Bundle.SetMethods(HashMethodNames(options.hashMethods));
+        if (set != S_OK) {
+            result.status = Status::unsupported;
+            result.message = "unknown hash method";
+            return result;
+        }
+        extractor->SetHashMethods(&hash);
+    }
+
     extractor->Init(ntOptions, nullptr /* no wildcard filter: we select by index */,
                     arc, callback, false /* stdOutMode */, options.testOnly,
                     destination, removePathParts, false, arc->GetEstmatedPhySize());
@@ -799,6 +813,11 @@ Result Archive::Extract(const std::vector<std::uint32_t> &indices,
     }
 
     outcome.bytesProcessed = extractor->UnpackSize;
+    if (!options.hashMethods.empty()) {
+        outcome.hashMethods = hash.MethodNames();
+        outcome.hashes = std::move(hash.Items);
+        outcome.hashSums = hash.DataSums();
+    }
 
     if (hr != S_OK) {
         result = ResultFromHRESULT(hr, callbackSpec->PasswordWasAsked,

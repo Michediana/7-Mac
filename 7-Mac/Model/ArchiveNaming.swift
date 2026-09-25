@@ -102,8 +102,8 @@ nonisolated enum ArchiveNaming {
     /// A suggested archive name for `sources`: the item's own name for one
     /// item, `Archive` for several.
     static func suggestedArchiveName(for sources: [URL]) -> String {
-        guard let first = sources.first else { return "Archive" }
-        return sources.count == 1 ? stem(of: first) : "Archive"
+        guard let first = sources.first else { return String(localized: "Archive") }
+        return sources.count == 1 ? stem(of: first) : String(localized: "Archive")
     }
 
     /// The folder new output should sit in: the deepest one every source is

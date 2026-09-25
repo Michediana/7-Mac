@@ -48,6 +48,16 @@ nonisolated public struct ArchiveOutcome: Sendable {
     /// Entries that failed while the run carried on.
     public let entryErrors: [NSError]
 
+    init(files: UInt64 = 0, folders: UInt64 = 0, bytes: UInt64 = 0, processedBytes: UInt64 = 0,
+         archiveSize: UInt64 = 0, entryErrors: [NSError] = []) {
+        self.files = files
+        self.folders = folders
+        self.bytes = bytes
+        self.processedBytes = processedBytes
+        self.archiveSize = archiveSize
+        self.entryErrors = entryErrors
+    }
+
     init(_ outcome: SZKOutcome) {
         files = outcome.fileCount
         folders = outcome.folderCount
@@ -55,6 +65,49 @@ nonisolated public struct ArchiveOutcome: Sendable {
         processedBytes = outcome.processedByteCount
         archiveSize = outcome.archiveSize
         entryErrors = outcome.entryErrors as [NSError]
+    }
+}
+
+/// Checksums of a set of files, or of an archive's entries.
+nonisolated public struct HashReport: Sendable {
+    public struct Item: Sendable, Identifiable {
+        public let id: Int
+        public let path: String
+        public let isDirectory: Bool
+        public let size: UInt64
+        /// One per method, in `methods` order; empty for a folder.
+        public let digests: [String]
+    }
+
+    /// As the engine names them: `CRC32`, `SHA256`…
+    public let methods: [String]
+    public let items: [Item]
+    /// 7-Zip's "sum of data", one per method over every file.
+    public let dataSums: [String]
+    public let files: UInt64
+    public let bytes: UInt64
+    public let failures: [NSError]
+
+    init(methods: [String], items: [Item], dataSums: [String], files: UInt64, bytes: UInt64,
+         failures: [NSError]) {
+        self.methods = methods
+        self.items = items
+        self.dataSums = dataSums
+        self.files = files
+        self.bytes = bytes
+        self.failures = failures
+    }
+
+    init(_ report: SZKHashReport) {
+        methods = report.methods
+        items = report.items.enumerated().map { position, item in
+            Item(id: position, path: item.path, isDirectory: item.isDirectory,
+                 size: item.size, digests: item.digests)
+        }
+        dataSums = report.dataSums
+        files = report.fileCount
+        bytes = report.byteCount
+        failures = report.failures as [NSError]
     }
 }
 
@@ -225,6 +278,28 @@ nonisolated public final class Archive: @unchecked Sendable {
         } onProgress: { onProgress?($0) }
     }
 
+    /// Decodes `selection` (everything when `nil`) and checksums each entry,
+    /// writing nothing. Entries that fail to decode are in `failures`.
+    public func hash(_ selection: IndexSet? = nil, methods: [String],
+                     password: PasswordProvider? = nil,
+                     onProgress: ProgressObserver? = nil) async throws -> HashReport {
+        try await withTaskCancellationState { isCancelled in
+            try await withCheckedThrowingContinuation { continuation in
+                nonisolated(unsafe) let archive = self.archive
+                queue.async {
+                    do {
+                        let report = try archive.hashIndexes(selection, methods: methods,
+                                                             progress: progressBridge(isCancelled, onProgress),
+                                                             passwordProvider: password.map(bridge))
+                        continuation.resume(returning: HashReport(report))
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
+    }
+
     /// Decodes and verifies without writing anything.
     @discardableResult
     public func test(_ selection: IndexSet? = nil,
@@ -252,8 +327,14 @@ nonisolated public final class Archive: @unchecked Sendable {
                               encryptsHeader: Bool = false,
                               volumeSize: UInt64 = 0,
                               methodProperties: [String: String]? = nil,
+                              excluding excludedNames: [String] = [],
+                              storesSymbolicLinks: Bool = true,
+                              storesHardLinks: Bool = true,
                               onProgress: ProgressObserver? = nil) async throws -> ArchiveOutcome {
         let options = SZKCreateOptions()
+        options.excludedNamePatterns = excludedNames
+        options.storesSymbolicLinks = storesSymbolicLinks
+        options.storesHardLinks = storesHardLinks
         options.formatName = format
         options.level = level
         options.password = password
@@ -294,6 +375,31 @@ nonisolated public final class Archive: @unchecked Sendable {
                     do {
                         let outcome = try body(archive, progressBridge(isCancelled, onProgress))
                         continuation.resume(returning: ArchiveOutcome(outcome ?? SZKOutcome()))
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Hashing files
+
+public nonisolated extension SevenZip {
+    /// Every hash the engine computes, e.g. `CRC32`, `SHA256`, `BLAKE2sp`.
+    static var hashMethods: [String] { SZKHasher.methodNames }
+
+    /// Checksums files and folders (recursively) off the caller's thread.
+    static func hash(_ urls: [URL], methods: [String],
+                     onProgress: ProgressObserver? = nil) async throws -> HashReport {
+        try await withTaskCancellationState { isCancelled in
+            try await withCheckedThrowingContinuation { continuation in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    do {
+                        let report = try SZKHasher.hashURLs(urls, methods: methods,
+                                                        progress: progressBridge(isCancelled, onProgress))
+                        continuation.resume(returning: HashReport(report))
                     } catch {
                         continuation.resume(throwing: error)
                     }

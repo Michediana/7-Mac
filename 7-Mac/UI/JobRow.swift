@@ -9,6 +9,7 @@ import AppKit
 import SwiftUI
 
 struct JobRow: View {
+    @Environment(AppModel.self) private var model
     let job: Job
 
     var body: some View {
@@ -28,6 +29,7 @@ struct JobRow: View {
                 if job.state == .running {
                     ProgressView(value: job.fractionCompleted)
                         .progressViewStyle(.linear)
+                        .accessibilityLabel(job.title)
                 }
 
                 Text(job.statusLine)
@@ -61,6 +63,13 @@ struct JobRow: View {
                 .buttonStyle(.borderless)
                 .labelStyle(.iconOnly)
                 .foregroundStyle(.secondary)
+        case .finished where job.testReport != nil:
+            Button("Show Report", systemImage: "list.bullet.rectangle") {
+                model.shownTestReport = job.testReport
+            }
+            .buttonStyle(.borderless)
+            .labelStyle(.iconOnly)
+            .foregroundStyle(.secondary)
         case .finished:
             if let url = job.resultURL {
                 Button("Show in Finder", systemImage: "magnifyingglass.circle.fill") {
@@ -78,8 +87,9 @@ struct JobRow: View {
     private var icon: String {
         switch job.state {
         case .waiting:   "clock"
-        case .running:   job.isExtraction ? "arrow.down.document" : "archivebox"
-        case .finished:  "checkmark.circle.fill"
+        case .running:   job.isTest ? "checkmark.shield" : (job.isExtraction ? "arrow.down.document" : "archivebox")
+        case .finished where job.testReport?.isHealthy == false: "exclamationmark.shield.fill"
+        case .finished:  job.isTest ? "checkmark.shield.fill" : "checkmark.circle.fill"
         case .failed:    "exclamationmark.triangle.fill"
         case .cancelled: "slash.circle"
         }
@@ -87,6 +97,7 @@ struct JobRow: View {
 
     private var tint: Color {
         switch job.state {
+        case .finished where job.testReport?.isHealthy == false: .orange
         case .finished: .green
         case .failed:   .red
         case .running:  .accentColor

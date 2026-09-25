@@ -87,6 +87,10 @@ final class ArchiveBrowser {
     var passwordPrompt: PasswordPrompt?
     /// A problem worth an alert that does not end the window.
     var problem: String?
+    /// Non-nil while a test report sheet is up.
+    var shownTestReport: TestReport?
+    /// Non-nil while a checksum sheet is up.
+    var checksums: ChecksumModel?
     private(set) var activity: BrowserActivity?
 
     let preferences: Preferences
@@ -148,7 +152,7 @@ final class ArchiveBrowser {
                 guard let answer = await askPassword(for: url.lastPathComponent, incorrect: incorrect,
                                                      offersKeychain: preferences.offersKeychain)
                 else {
-                    phase = .failed("This archive is encrypted.")
+                    phase = .failed(String(localized: "This archive is encrypted."))
                     return
                 }
                 password = answer.password
@@ -233,7 +237,7 @@ final class ArchiveBrowser {
                 password = answer.password
                 incorrect = true
             } catch {
-                problem = "“\(node.name)” could not be opened: \(error.archiveDescription.lowercased())."
+                problem = String(localized: "“\(node.name)” could not be opened: \(error.archiveDescription.lowercased()).")
                 return
             }
         }
@@ -253,7 +257,7 @@ final class ArchiveBrowser {
                 password = answer.password
                 incorrect = true
             } catch {
-                problem = "“\(node.name)” is not an archive 7-Mac can open."
+                problem = String(localized: "“\(node.name)” is not an archive 7-Mac can open.")
                 return
             }
         }
@@ -319,7 +323,7 @@ final class ArchiveBrowser {
         let folder = scratch.appending(component: "\(level.id.uuidString.prefix(8))-\(node.id)",
                                        directoryHint: .isDirectory)
         while true {
-            let activity = BrowserActivity(title: "Unpacking “\(node.name)”")
+            let activity = BrowserActivity(title: String(localized: "Unpacking “\(node.name)”"))
             let attempt = password
             let result: Result<ArchiveOutcome, any Error> = await perform(activity) {
                 try await level.archive.extract(IndexSet(integer: index), to: folder,
@@ -339,8 +343,9 @@ final class ArchiveBrowser {
                 extracted[key] = arrived
                 return arrived
             case .success(let outcome):
-                problem = "“\(node.name)” could not be unpacked: "
-                    + (outcome.entryErrors.first?.archiveDescription.lowercased() ?? "unknown error") + "."
+                let reason = outcome.entryErrors.first?.archiveDescription.lowercased()
+                    ?? String(localized: "unknown error")
+                problem = String(localized: "“\(node.name)” could not be unpacked: \(reason).")
                 return nil
             case .failure(let error) where error.isPasswordProblem:
                 incorrect = true
@@ -349,7 +354,7 @@ final class ArchiveBrowser {
             case .failure(let error) where error is CancellationError || error.sevenZipCode == .cancelled:
                 return nil
             case .failure(let error):
-                problem = "“\(node.name)” could not be unpacked: \(error.archiveDescription.lowercased())."
+                problem = String(localized: "“\(node.name)” could not be unpacked: \(error.archiveDescription.lowercased()).")
                 return nil
             }
         }
@@ -361,7 +366,7 @@ final class ArchiveBrowser {
     var extractionSummary: String {
         guard let level = current else { return "" }
         if selection.isEmpty {
-            return "Everything in “\(level.title)”"
+            return String(localized: "Everything in “\(level.title)”")
         }
         let (files, bytes) = level.tree.summary(of: selection)
         return "\(Display.count(UInt64(files), "file", "files")), \(Display.bytes(bytes))"
@@ -394,9 +399,9 @@ final class ArchiveBrowser {
         if indexes == nil {
             title = level.title
         } else if selection.count == 1, let id = selection.first, let node = level.tree.node(id) {
-            title = "\(node.name) from \(level.title)"
+            title = String(localized: "\(node.name) from \(level.title)")
         } else {
-            title = "\(Display.count(UInt64(selection.count), "item", "items")) from \(level.title)"
+            title = String(localized: "\(Display.count(UInt64(selection.count), "item", "items")) from \(level.title)")
         }
         queue.enqueue([.extractEntries(EntrySelection(archive: level.archive,
                                                       archiveName: level.title,
@@ -410,18 +415,88 @@ final class ArchiveBrowser {
     /// panel and "Extract Here".
     var defaultDestination: URL { url.deletingLastPathComponent() }
 
+    // MARK: - Testing and checksums
+
+    /// Decodes the selection, or everything, and shows what it found. The
+    /// same pass computes CRC32s, which the report lists.
+    func test() async {
+        guard let level = current else { return }
+        let indexes = selection.isEmpty ? nil : level.tree.entryIndexes(for: selection)
+        var password = level.password
+        if password == nil, level.archive.entries.contains(where: {
+            $0.isEncrypted && (indexes?.contains(Int($0.index)) ?? true)
+        }) {
+            guard let answer = await askPassword(for: level.title, incorrect: false) else { return }
+            password = answer.password
+        }
+        var incorrect = false
+        while true {
+            let activity = BrowserActivity(title: String(localized: "Testing “\(level.title)”"))
+            let attempt = password
+            let result: Result<HashReport, any Error> = await perform(activity) {
+                try await level.archive.hash(indexes, methods: ["CRC32"],
+                                             password: self.provider(attempt),
+                                             onProgress: self.progressSink(activity))
+            }
+            switch result {
+            case .success(let report):
+                let failures = report.failures.filter(\.isPasswordProblem)
+                if !failures.isEmpty, failures.count == report.failures.count {
+                    incorrect = true
+                    guard let answer = await askPassword(for: level.title, incorrect: incorrect)
+                    else { return }
+                    password = answer.password
+                    continue
+                }
+                remember(password, for: level)
+                shownTestReport = TestReport(archiveName: level.title, report: report)
+                return
+            case .failure(let error) where error.isPasswordProblem:
+                incorrect = true
+                guard let answer = await askPassword(for: level.title, incorrect: incorrect) else { return }
+                password = answer.password
+            case .failure(let error) where error is CancellationError || error.sevenZipCode == .cancelled:
+                return
+            case .failure(let error):
+                problem = String(localized: "Testing “\(level.title)” did not work: \(error.archiveDescription.lowercased()).")
+                return
+            }
+        }
+    }
+
+    /// Checksums of the selected entries, or all of them, as they decode.
+    func showChecksums() async {
+        guard let level = current else { return }
+        let indexes = selection.isEmpty ? nil : level.tree.entryIndexes(for: selection)
+        var password = level.password
+        if password == nil, level.archive.entries.contains(where: {
+            $0.isEncrypted && (indexes?.contains(Int($0.index)) ?? true)
+        }) {
+            guard let answer = await askPassword(for: level.title, incorrect: false) else { return }
+            password = answer.password
+        }
+        let title = selection.count == 1 ? (level.tree.node(selection.first!)?.name ?? level.title)
+                                         : level.title
+        checksums = ChecksumModel(source: .entries(archive: level.archive, indexes: indexes,
+                                                   title: title, password: password))
+    }
+
     // MARK: - Editing
 
     /// Why the archive on screen cannot be changed, or `nil` when it can.
     var editBlockedReason: String? {
-        guard let level = current else { return "nothing is open" }
+        guard let level = current else { return String(localized: "nothing is open") }
         if levels.count > 1 || level.archive.parent != nil {
-            return "this archive is inside another one"
+            return String(localized: "this archive is inside another one")
         }
-        if let reason = level.archive.reasonNotModifiable { return reason }
+        // The engine's reasons are English sentences; the catalog carries
+        // each one it can give.
+        if let reason = level.archive.reasonNotModifiable {
+            return String(localized: String.LocalizationValue(reason))
+        }
         // A compressor holds one stream, not a list of entries to edit.
         if Self.compressorFormats.contains(level.archive.formatName) {
-            return "a \(level.archive.formatName) file holds a single stream"
+            return String(localized: "a \(level.archive.formatName) file holds a single stream")
         }
         return nil
     }
@@ -433,8 +508,8 @@ final class ArchiveBrowser {
         guard let tree = current?.tree else { return }
         let indexes = tree.entryIndexes(for: ids)
         guard !indexes.isEmpty else { return }
-        let title = ids.count == 1 ? "Delete “\(tree.node(ids.first!)?.name ?? "")”"
-                                   : "Delete \(ids.count) Items"
+        let title = ids.count == 1 ? String(localized: "Delete “\(tree.node(ids.first!)?.name ?? "")”")
+                                   : String(localized: "Delete \(ids.count) Items")
         await edit(title) { archive, destination, password in
             try await archive.writeDeleting(indexes, to: destination, password: password,
                                             onProgress: self.progressSink(self.activity))
@@ -445,13 +520,13 @@ final class ArchiveBrowser {
     /// component, and not already a sibling's.
     func validateNewName(_ name: String, for node: ArchiveNode) -> String? {
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.isEmpty { return "A name cannot be empty." }
-        if trimmed.contains("/") { return "A name cannot contain “/”." }
-        if trimmed == "." || trimmed == ".." { return "That name is reserved." }
+        if trimmed.isEmpty { return String(localized: "A name cannot be empty.") }
+        if trimmed.contains("/") { return String(localized: "A name cannot contain “/”.") }
+        if trimmed == "." || trimmed == ".." { return String(localized: "That name is reserved.") }
         let path = Self.path(replacingLastComponentOf: node.path, with: trimmed)
         if trimmed != node.name,
            current?.tree.allNodes.contains(where: { $0.path == path && $0.id != node.id }) == true {
-            return "“\(trimmed)” is already taken."
+            return String(localized: "“\(trimmed)” is already taken.")
         }
         return nil
     }
@@ -468,7 +543,7 @@ final class ArchiveBrowser {
             renames[index] = newPath + member.path.dropFirst(node.path.count)
         }
         guard !renames.isEmpty else { return }
-        await edit("Rename “\(node.name)”") { archive, destination, password in
+        await edit(String(localized: "Rename “\(node.name)”")) { archive, destination, password in
             try await archive.writeRenaming(renames, to: destination, password: password,
                                             onProgress: self.progressSink(self.activity))
         }
@@ -480,8 +555,8 @@ final class ArchiveBrowser {
         guard !sources.isEmpty, let level = current else { return }
         let folderPath = folder.map { $0.isDirectory ? $0.path : ($0.path as NSString).deletingLastPathComponent } ?? ""
         let onlyIfNewer = preferences.onlyReplaceOlder
-        let title = sources.count == 1 ? "Add “\(sources[0].lastPathComponent)”"
-                                       : "Add \(sources.count) Items"
+        let title = sources.count == 1 ? String(localized: "Add “\(sources[0].lastPathComponent)”")
+                                       : String(localized: "Add \(sources.count) Items")
 
         // New entries in an encrypted archive should be encrypted too, and
         // that takes the password up front: the engine will not ask for the
@@ -535,8 +610,7 @@ final class ArchiveBrowser {
                 case .failure(ArchiveEditError.folderNotWritable(let folder)):
                     guard let interaction = self.interaction,
                           await interaction.askWritableFolder(
-                              message: "To change “\(level.title)”, 7-Mac needs permission to write "
-                                     + "into the folder it is in. Choose “\(folder.lastPathComponent)”.",
+                              message: String(localized: "To change “\(level.title)”, 7-Mac needs permission to write into the folder it is in. Choose “\(folder.lastPathComponent)”."),
                               suggesting: folder) != nil,
                           FolderAccess.shared.prepare(folder)
                     else {
@@ -551,8 +625,7 @@ final class ArchiveBrowser {
                 case .failure(let error) where error is CancellationError || error.sevenZipCode == .cancelled:
                     return
                 case .failure(let error):
-                    self.problem = "\(title) did not work: \(error.archiveDescription.lowercased()). "
-                        + "The archive has not been changed."
+                    self.problem = String(localized: "\(title) did not work: \(error.archiveDescription.lowercased()). The archive has not been changed.")
                     return
                 }
             }
@@ -565,7 +638,7 @@ final class ArchiveBrowser {
                   back ? editor.canUndo : editor.canRedo
             else { return }
             let title = (back ? editor.undoSteps.last : editor.redoSteps.last)?.title ?? ""
-            let activity = BrowserActivity(title: back ? "Undoing \(title)" : "Redoing \(title)")
+            let activity = BrowserActivity(title: back ? String(localized: "Undoing \(title)") : String(localized: "Redoing \(title)"))
             let result = await self.perform(activity) {
                 try await back ? editor.undo() : editor.redo()
             }
@@ -573,7 +646,8 @@ final class ArchiveBrowser {
             case .success:
                 await self.reopen(password: self.levels.first?.password)
             case .failure(let error):
-                self.problem = "Could not \(back ? "undo" : "redo") \(title): \(error.localizedDescription)"
+                self.problem = back ? String(localized: "Could not undo \(title): \(error.localizedDescription)")
+                                    : String(localized: "Could not redo \(title): \(error.localizedDescription)")
                 // History that did not replay is history that cannot be
                 // trusted to replay later either.
                 self.undoManager?.removeAllActions(withTarget: self)

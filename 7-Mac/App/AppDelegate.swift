@@ -15,6 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.servicesProvider = services
+        AppModel.shared.preferences.applyAppearance()
         // Whatever a browser window left behind when it could not clean up.
         ArchiveBrowser.sweepAbandonedScratch()
         // Without this the entries in Info.plist only appear after the system
@@ -36,10 +37,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard queue.isBusy else { return .terminateNow }
 
         let alert = NSAlert()
-        alert.messageText = "A job is still running."
-        alert.informativeText = "Quitting now leaves a half-written folder or archive behind."
-        alert.addButton(withTitle: "Quit Anyway")
-        alert.addButton(withTitle: "Keep Going")
+        alert.messageText = String(localized: "A job is still running.")
+        alert.informativeText = String(localized: "Quitting now leaves a half-written folder or archive behind.")
+        alert.addButton(withTitle: String(localized: "Quit Anyway"))
+        alert.addButton(withTitle: String(localized: "Keep Going"))
         alert.alertStyle = .warning
 
         if alert.runModal() == .alertFirstButtonReturn {
@@ -59,7 +60,7 @@ final class ServicesProvider: NSObject {
                          userData: String?,
                          error: AutoreleasingUnsafeMutablePointer<NSString?>) {
         guard let urls = fileURLs(on: pasteboard) else {
-            error.pointee = "7-Mac did not receive any files."
+            error.pointee = String(localized: "7-Mac did not receive any files.") as NSString
             return
         }
         NSApp.activate()
@@ -71,7 +72,7 @@ final class ServicesProvider: NSObject {
                        userData: String?,
                        error: AutoreleasingUnsafeMutablePointer<NSString?>) {
         guard let urls = fileURLs(on: pasteboard) else {
-            error.pointee = "7-Mac did not receive any files."
+            error.pointee = String(localized: "7-Mac did not receive any files.") as NSString
             return
         }
         NSApp.activate()

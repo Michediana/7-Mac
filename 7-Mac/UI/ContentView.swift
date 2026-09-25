@@ -41,6 +41,10 @@ struct ContentView: View {
                 Button("Compress…", systemImage: "archivebox") {
                     model.chooseItemsToCompress()
                 }
+                Menu("More", systemImage: "ellipsis.circle") {
+                    Button("Test Archive…") { model.chooseArchivesToTest() }
+                    Button("Checksums…") { model.chooseItemsForChecksums() }
+                }
             }
             ToolbarItem {
                 Button("Clear Finished", systemImage: "xmark.circle") {
@@ -52,14 +56,19 @@ struct ContentView: View {
         .onAppear {
             let openWindow = openWindow
             model.windowOpener = { openWindow(id: WindowID.browser, value: $0) }
+            model.checksumOpener = { openWindow(id: WindowID.checksums, value: $0) }
         }
         .sheet(item: $model.passwordPrompt) { PasswordSheet(prompt: $0) }
         .sheet(item: $model.compressionDraft) { CompressSheet(draft: $0) }
+        .sheet(item: $model.shownTestReport) { report in
+            TestReportView(report: report) { model.shownTestReport = nil }
+        }
     }
 }
 
 private struct DropArea: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let isTargeted: Bool
 
     var body: some View {
@@ -83,7 +92,7 @@ private struct DropArea: View {
                               style: StrokeStyle(lineWidth: 1.5, dash: [6, 4]))
                 .padding(12)
         }
-        .animation(.easeOut(duration: 0.12), value: isTargeted)
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.12), value: isTargeted)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Drop archives here to extract them, or other files to compress them")
     }
@@ -106,8 +115,14 @@ private struct QueueList: View {
                     JobRow(job: job)
                         .listRowSeparator(.visible)
                         .contextMenu {
+                            if let report = job.testReport {
+                                Button("Show Report") { model.shownTestReport = report }
+                            }
                             if let archive = job.browsableArchive {
                                 Button("Show Contents") { model.browse([archive]) }
+                                if !job.isTest {
+                                    Button("Test") { model.test([archive]) }
+                                }
                             }
                             if let url = job.resultURL {
                                 Button("Show in Finder") {

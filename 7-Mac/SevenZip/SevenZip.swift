@@ -44,15 +44,15 @@ public nonisolated enum SevenZip {
 nonisolated extension SZKError.Code: @retroactive CustomStringConvertible {
     public var description: String {
         switch self {
-        case .cancelled:        "cancelled"
-        case .passwordRequired: "a password is required"
-        case .passwordWrong:    "the password is not correct"
-        case .notAnArchive:     "not an archive"
-        case .unreadable:       "could not be read or written"
-        case .damaged:          "damaged"
-        case .unsupported:      "unsupported"
-        case .failed:           "failed"
-        @unknown default:       "failed"
+        case .cancelled:        String(localized: "cancelled")
+        case .passwordRequired: String(localized: "a password is required")
+        case .passwordWrong:    String(localized: "the password is not correct")
+        case .notAnArchive:     String(localized: "not an archive")
+        case .unreadable:       String(localized: "could not be read or written")
+        case .damaged:          String(localized: "damaged")
+        case .unsupported:      String(localized: "unsupported")
+        case .failed:           String(localized: "failed")
+        @unknown default:       String(localized: "failed")
         }
     }
 }

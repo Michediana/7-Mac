@@ -19,5 +19,6 @@ FOUNDATION_EXPORT const unsigned char SevenZipKitVersionString[];
 #import <SevenZipKit/SZKEngine.h>
 #import <SevenZipKit/SZKError.h>
 #import <SevenZipKit/SZKFormat.h>
+#import <SevenZipKit/SZKHash.h>
 #import <SevenZipKit/SZKOptions.h>
 #import <SevenZipKit/SZKProgress.h>
