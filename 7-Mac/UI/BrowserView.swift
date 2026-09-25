@@ -87,7 +87,7 @@ private struct BrowserContent: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if browser.levels.count > 1 {
+            if browser.levels.count > 1 || browser.currentFolder != nil {
                 PathBar(browser: browser)
                 Divider()
             }
@@ -116,10 +116,12 @@ private struct BrowserContent: View {
     }
 
     /// Where a drop, or Add Files…, puts things: into the one selected
-    /// folder, or next to the one selected file, or at the top.
+    /// folder, or next to the one selected file, or the open folder.
     private var addTarget: ArchiveNode? {
-        guard browser.selection.count == 1, let id = browser.selection.first else { return nil }
-        return browser.current?.tree.node(id)
+        guard browser.selection.count == 1, let id = browser.selection.first,
+              let node = browser.current?.tree.node(id)
+        else { return browser.currentFolder }
+        return node
     }
 
     private var addTargetName: String {
@@ -285,12 +287,18 @@ private struct BrowserContent: View {
         }
     }
 
-    /// Double-click: into a nested archive, or a look at a file. A folder
-    /// opens with its disclosure triangle, which the outline already has.
+    /// Double-click: into a folder, into a nested archive, or a look at a
+    /// file.
     private func open(_ ids: Set<ArchiveNode.ID>) {
-        guard ids.count == 1, let id = ids.first, let node = browser.current?.tree.node(id),
-              !node.isDirectory
+        guard ids.count == 1, let id = ids.first, let node = browser.current?.tree.node(id)
         else { return }
+        if node.isDirectory {
+            // From search results too: the folder, not more matches.
+            browser.searchText = ""
+            browser.filter = .everything
+            browser.enter(node)
+            return
+        }
         Task {
             if browser.looksLikeArchive(node) {
                 await browser.descend(into: node)
@@ -304,9 +312,10 @@ private struct BrowserContent: View {
     private var toolbar: some ToolbarContent {
         ToolbarItem(placement: .navigation) {
             Button("Back", systemImage: "chevron.left") { browser.goUp() }
-                .disabled(browser.levels.count < 2 || browser.activity != nil)
+                .disabled(!browser.canGoUp || browser.activity != nil)
                 .keyboardShortcut(.upArrow, modifiers: .command)
-                .help("Back to the archive this one is inside")
+                .help(browser.currentFolder != nil ? Text("Back to the enclosing folder")
+                                                   : Text("Back to the archive this one is inside"))
         }
         ToolbarItemGroup {
             Picker("Show", selection: $browser.filter) {
@@ -465,18 +474,15 @@ private enum FileIcons {
     }
 }
 
-/// `outer.7z › inner.tar`, each one a way back.
+/// `outer.7z › inner.tar › docs › old`, each one a way back.
 private struct PathBar: View {
     let browser: ArchiveBrowser
 
     var body: some View {
+        let trail = browser.folderTrail
         HStack(spacing: 4) {
             ForEach(Array(browser.levels.enumerated()), id: \.element.id) { position, level in
-                if position > 0 {
-                    Image(systemName: "chevron.right")
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                }
+                if position > 0 { separator }
                 Button {
                     browser.goBack(to: level.id)
                 } label: {
@@ -484,13 +490,30 @@ private struct PathBar: View {
                         .lineLimit(1)
                 }
                 .buttonStyle(.borderless)
-                .disabled(position == browser.levels.count - 1 || browser.activity != nil)
+                .disabled((position == browser.levels.count - 1 && trail.isEmpty) || browser.activity != nil)
+            }
+            ForEach(Array(trail.enumerated()), id: \.element.id) { position, folder in
+                separator
+                Button {
+                    browser.goToFolder(folder)
+                } label: {
+                    Label(folder.name, systemImage: "folder")
+                        .lineLimit(1)
+                }
+                .buttonStyle(.borderless)
+                .disabled(position == trail.count - 1 || browser.activity != nil)
             }
             Spacer(minLength: 0)
         }
         .font(.callout)
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
+    }
+
+    private var separator: some View {
+        Image(systemName: "chevron.right")
+            .font(.caption2)
+            .foregroundStyle(.tertiary)
     }
 }
 

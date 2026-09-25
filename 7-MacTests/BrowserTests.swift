@@ -213,6 +213,33 @@ final class BrowserTests: XCTestCase {
         browser.close()
     }
 
+    func testFoldersOpenLikeFinderAndUpComesBackOut() async throws {
+        let browser = ArchiveBrowser(url: try await make("tree.zip", from: [fixtures.tree]),
+                                     preferences: preferences, queue: queue)
+        await browser.open()
+        XCTAssertFalse(browser.canGoUp)
+
+        let tree = try XCTUnwrap(browser.roots.first { $0.name == "tree" })
+        browser.enter(tree)
+        XCTAssertEqual(browser.currentFolder?.path, "tree")
+        XCTAssertTrue(browser.roots.contains { $0.name == "hello.txt" })
+
+        let sub = try XCTUnwrap(browser.roots.first { $0.name == "sub" })
+        browser.enter(sub)
+        XCTAssertEqual(browser.folderTrail.map(\.name), ["tree", "sub"])
+        XCTAssertEqual(browser.roots.map(\.name), ["nested.txt"])
+
+        browser.goUp()
+        XCTAssertEqual(browser.currentFolder?.path, "tree")
+        XCTAssertEqual(browser.selection, [sub.id], "coming out selects the folder you were in")
+
+        browser.goToFolder(nil)
+        XCTAssertNil(browser.currentFolder)
+        XCTAssertEqual(browser.selection, [tree.id])
+        XCTAssertEqual(browser.roots.map(\.name), ["tree"])
+        browser.close()
+    }
+
     func testSearchingAndFilteringShowAFlatList() async throws {
         let browser = ArchiveBrowser(url: try await make("tree.zip", from: [fixtures.tree]),
                                      preferences: preferences, queue: queue)

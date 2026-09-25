@@ -638,6 +638,16 @@
         }
       }
     },
+    "Back to the enclosing folder": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Torna alla cartella che contiene questa"
+          }
+        }
+      }
+    },
     "Back to the archive this one is inside": {
       "localizations": {
         "it": {

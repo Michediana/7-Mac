@@ -10,6 +10,7 @@ import AppKit
 import Foundation
 import Observation
 import SevenZipKit
+import SwiftUI
 import UniformTypeIdentifiers
 
 @MainActor @Observable
@@ -29,16 +30,21 @@ final class AppModel: JobInteraction {
     /// Non-nil while the compress sheet is up.
     var compressionDraft: CompressionDraft?
 
-    /// Opens a browser window. SwiftUI only hands out `openWindow` to views,
-    /// and archives arrive from the Finder before any view exists — so the
-    /// first window to appear installs it, and anything that came in earlier
-    /// waits here.
-    var windowOpener: ((BrowserTarget) -> Void)? {
-        didSet { drainPendingBrowsers() }
+    /// A window to open once there is a way to open one.
+    enum WindowRequest {
+        case main
+        case browser(BrowserTarget)
+        case checksums(ChecksumTarget)
     }
-    private var pendingBrowsers: [URL] = []
-    /// Same arrangement, for checksum windows.
-    var checksumOpener: ((ChecksumTarget) -> Void)?
+
+    /// SwiftUI only hands out `openWindow` inside a scene, and archives
+    /// arrive from the Finder before any window exists — so the menu bar
+    /// installs it, and anything that came in earlier waits here.
+    @ObservationIgnored private var openWindow: OpenWindowAction?
+    @ObservationIgnored private var pendingWindows: [WindowRequest] = []
+    /// Whether anything has asked for a window since launch. If a Finder
+    /// "Open With" only asked for a browser, the main window stays shut.
+    @ObservationIgnored private(set) var hasRequestedWindow = false
     /// Non-nil while a test report sheet is up in the main window.
     var shownTestReport: TestReport?
 
@@ -72,20 +78,43 @@ final class AppModel: JobInteraction {
            !urls.isEmpty, urls.allSatisfy({ !ArchiveNaming.isDirectory($0) }) {
             browse(urls)
         } else {
+            // The queue and the compress sheet live in the main window.
+            show(.main)
             accept(urls)
         }
     }
 
     func browse(_ urls: [URL]) {
-        pendingBrowsers.append(contentsOf: urls)
-        drainPendingBrowsers()
+        for url in urls { show(.browser(BrowserTarget(url: url))) }
     }
 
-    private func drainPendingBrowsers() {
-        guard let windowOpener else { return }
-        let urls = pendingBrowsers
-        pendingBrowsers = []
-        for url in urls { windowOpener(BrowserTarget(url: url)) }
+    // MARK: - Windows
+
+    func show(_ request: WindowRequest) {
+        hasRequestedWindow = true
+        pendingWindows.append(request)
+        drainPendingWindows()
+    }
+
+    /// Called from the menu bar, which exists from launch on.
+    func install(_ action: OpenWindowAction) {
+        guard openWindow == nil else { return }
+        openWindow = action
+        // Not from inside the scene update that handed the action over.
+        Task { @MainActor in self.drainPendingWindows() }
+    }
+
+    private func drainPendingWindows() {
+        guard let openWindow else { return }
+        let requests = pendingWindows
+        pendingWindows = []
+        for request in requests {
+            switch request {
+            case .main: openWindow(id: WindowID.main)
+            case .browser(let target): openWindow(id: WindowID.browser, value: target)
+            case .checksums(let target): openWindow(id: WindowID.checksums, value: target)
+            }
+        }
     }
 
     func extract(_ urls: [URL]) {
@@ -94,6 +123,7 @@ final class AppModel: JobInteraction {
 
     func beginCompression(of urls: [URL]) {
         guard !urls.isEmpty else { return }
+        show(.main)
         compressionDraft = CompressionDraft(sources: urls, preferences: preferences)
     }
 
@@ -153,7 +183,7 @@ final class AppModel: JobInteraction {
         panel.message = String(localized: "Choose files or folders to checksum.")
         panel.prompt = String(localized: "Checksum")
         guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
-        checksumOpener?(ChecksumTarget(urls: panel.urls))
+        show(.checksums(ChecksumTarget(urls: panel.urls)))
     }
 
     func chooseItemsToCompress() {

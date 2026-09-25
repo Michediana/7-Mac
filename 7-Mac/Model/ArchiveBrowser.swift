@@ -49,6 +49,9 @@ final class ArchiveBrowser {
         /// true for an archive opened in place, false for one unpacked to a
         /// file of its own.
         let isInPlace: Bool
+        /// The folder being looked at, by path — ids do not survive an
+        /// edit, paths mostly do. Empty for the top of the archive.
+        fileprivate(set) var folderPath = ""
     }
 
     enum Phase: Equatable {
@@ -122,7 +125,23 @@ final class ArchiveBrowser {
     }
 
     var current: Level? { levels.last }
-    var roots: [ArchiveNode] { current?.tree.roots ?? [] }
+    /// What the table lists: the open folder's contents, or the top.
+    var roots: [ArchiveNode] { currentFolder?.children ?? current?.tree.roots ?? [] }
+
+    /// The folder the current level is open on; nil at the top.
+    var currentFolder: ArchiveNode? {
+        guard let level = current, !level.folderPath.isEmpty else { return nil }
+        return level.tree.folder(at: level.folderPath)
+    }
+
+    /// The open folder and the ones above it, outermost first.
+    var folderTrail: [ArchiveNode] {
+        guard let level = current else { return [] }
+        let components = ArchiveTree.components(of: level.folderPath)
+        return components.indices.compactMap {
+            level.tree.folder(at: components[...$0].joined(separator: "/"))
+        }
+    }
 
     // MARK: - Opening
 
@@ -263,26 +282,66 @@ final class ArchiveBrowser {
         }
     }
 
+    // MARK: - Folders
+
+    /// Opens `folder` in the table, the way a double-click does in Finder.
+    func enter(_ folder: ArchiveNode) {
+        guard folder.isDirectory, !levels.isEmpty else { return }
+        show(folder: folder.path)
+    }
+
+    /// Back to one of the folders above, or with nil to the top.
+    func goToFolder(_ folder: ArchiveNode?) {
+        guard !levels.isEmpty else { return }
+        show(folder: folder?.path ?? "")
+    }
+
+    private func show(folder path: String) {
+        let last = levels.count - 1
+        let previous = levels[last].folderPath
+        guard previous != path else { return }
+        levels[last].folderPath = path
+        // Coming back out selects the folder you were in, as Finder does.
+        let target = ArchiveTree.components(of: path)
+        let from = ArchiveTree.components(of: previous)
+        if from.count > target.count, Array(from.prefix(target.count)) == target,
+           let left = levels[last].tree.folder(at: from.prefix(target.count + 1).joined(separator: "/")) {
+            selection = [left.id]
+        } else {
+            selection = []
+        }
+    }
+
     private func push(_ level: Level) {
         levels.append(level)
         selection = []
         refreshMatches()
     }
 
-    /// Pops back to `level`.
+    /// Pops back to `level`, at the top of it.
     func goBack(to level: Level.ID) {
-        guard let position = levels.firstIndex(where: { $0.id == level }),
-              position < levels.count - 1
-        else { return }
+        guard let position = levels.firstIndex(where: { $0.id == level }) else { return }
+        if position == levels.count - 1 {
+            goToFolder(nil)
+            return
+        }
         levels.removeSubrange((position + 1)...)
         selection = []
         refreshMatches()
     }
 
+    /// Up one: the enclosing folder, or the archive this one is inside.
     func goUp() {
+        if let folder = currentFolder {
+            let parent = (folder.path as NSString).deletingLastPathComponent
+            show(folder: parent)
+            return
+        }
         guard levels.count > 1 else { return }
         goBack(to: levels[levels.count - 2].id)
     }
+
+    var canGoUp: Bool { currentFolder != nil || levels.count > 1 }
 
     // MARK: - Preview
 
@@ -673,8 +732,14 @@ final class ArchiveBrowser {
     private func reopen(password: String?) async {
         do {
             let archive = try await Archive.open(url, password: provider(password))
-            let level = await makeLevel(archive, title: url.lastPathComponent,
+            var level = await makeLevel(archive, title: url.lastPathComponent,
                                         password: password, isInPlace: false)
+            // Stay in the folder that was open, or as near it as still exists.
+            var folder = levels.first?.folderPath ?? ""
+            while !folder.isEmpty, level.tree.folder(at: folder) == nil {
+                folder = (folder as NSString).deletingLastPathComponent
+            }
+            level.folderPath = folder
             levels = [level]
             selection = []
             extracted = [:]

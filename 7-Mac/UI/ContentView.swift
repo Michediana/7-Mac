@@ -10,7 +10,6 @@ import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Environment(AppModel.self) private var model
-    @Environment(\.openWindow) private var openWindow
     @State private var isTargeted = false
 
     var body: some View {
@@ -52,11 +51,6 @@ struct ContentView: View {
                 }
                 .disabled(!model.queue.hasFinishedJobs)
             }
-        }
-        .onAppear {
-            let openWindow = openWindow
-            model.windowOpener = { openWindow(id: WindowID.browser, value: $0) }
-            model.checksumOpener = { openWindow(id: WindowID.checksums, value: $0) }
         }
         .sheet(item: $model.passwordPrompt) { PasswordSheet(prompt: $0) }
         .sheet(item: $model.compressionDraft) { CompressSheet(draft: $0) }

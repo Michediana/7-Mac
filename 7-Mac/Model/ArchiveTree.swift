@@ -221,6 +221,7 @@ nonisolated struct ArchiveTree: Sendable {
     let totalPackedSize: UInt64?
 
     private let nodesByID: [Int: ArchiveNode]
+    private let foldersByPath: [String: ArchiveNode]
 
     init(entries: [SZKArchiveEntry]) {
         self.init(records: entries.map(EntryRecord.init))
@@ -312,6 +313,8 @@ nonisolated struct ArchiveTree: Sendable {
         allNodes = everything
         roots = root.children
         nodesByID = Dictionary(uniqueKeysWithValues: everything.map { ($0.id, $0) })
+        folders[""] = nil
+        foldersByPath = folders
         fileCount = root.fileCount
         folderCount = everything.count(where: \.isDirectory)
         totalSize = root.size ?? 0
@@ -328,6 +331,9 @@ nonisolated struct ArchiveTree: Sendable {
     }
 
     func node(_ id: ArchiveNode.ID) -> ArchiveNode? { nodesByID[id] }
+
+    /// The folder at a normalised path, as `ArchiveNode.path` spells it.
+    func folder(at path: String) -> ArchiveNode? { foldersByPath[path] }
 
     // MARK: - Sorting
 

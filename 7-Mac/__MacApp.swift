@@ -13,10 +13,19 @@ struct __MacApp: App {
     @State private var model = AppModel.shared
 
     var body: some Scene {
-        WindowGroup {
+        // One main window, opened by hand: an archive opened from the
+        // Finder to browse should bring up its browser and nothing else.
+        Window("7-Mac", id: WindowID.main) {
             ContentView()
                 .environment(model)
         }
+        .defaultLaunchBehavior(.suppressed)
+        // Restored, it would come back behind a browser too. An ordinary
+        // launch opens it anyway.
+        .restorationBehavior(.disabled)
+        // Files from the Finder go to the app delegate, which decides.
+        // Left to itself SwiftUI would open this window for each one.
+        .handlesExternalEvents(matching: [])
         .commands { SevenMacCommands(model: model) }
 
         WindowGroup("Archive", id: WindowID.browser, for: BrowserTarget.self) { $target in
@@ -29,6 +38,7 @@ struct __MacApp: App {
         // A restored window would point at a file this launch has no
         // sandbox access to. Better to come back without it.
         .restorationBehavior(.disabled)
+        .handlesExternalEvents(matching: [])
 
         WindowGroup("Checksums", id: WindowID.checksums, for: ChecksumTarget.self) { $target in
             if let target {
@@ -37,11 +47,13 @@ struct __MacApp: App {
         }
         .defaultSize(width: 820, height: 420)
         .restorationBehavior(.disabled)
+        .handlesExternalEvents(matching: [])
 
         Window("7-Zip Engine", id: WindowID.engine) {
             EngineInfoView()
         }
         .defaultSize(width: 640, height: 480)
+        .handlesExternalEvents(matching: [])
 
         Settings {
             SettingsView()
@@ -51,6 +63,7 @@ struct __MacApp: App {
 }
 
 enum WindowID {
+    static let main = "main"
     static let engine = "engine"
     static let browser = "browser"
     static let checksums = "checksums"
@@ -61,6 +74,7 @@ struct SevenMacCommands: Commands {
     @Environment(\.openWindow) private var openWindow
 
     var body: some Commands {
+        let _ = model.install(openWindow)
         CommandGroup(replacing: .newItem) {
             Button("Open…") { model.chooseArchivesToBrowse() }
                 .keyboardShortcut("o")

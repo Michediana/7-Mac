@@ -21,6 +21,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Without this the entries in Info.plist only appear after the system
         // has re-scanned the app on its own schedule.
         NSUpdateDynamicServices()
+        // Files opened from the Finder at launch arrive before this. If they
+        // asked for no window of their own, this is an ordinary launch.
+        if !AppModel.shared.hasRequestedWindow {
+            AppModel.shared.show(.main)
+        }
+    }
+
+    /// The Dock icon with no window open: the main window, as ever.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows: Bool) -> Bool {
+        if !hasVisibleWindows { AppModel.shared.show(.main) }
+        return false
     }
 
     /// Double-clicking a `.7z`, or dropping one on the Dock icon.
