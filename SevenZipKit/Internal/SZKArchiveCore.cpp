@@ -26,6 +26,7 @@
 #include <cstdio>
 #include <map>
 
+#include "SZKArchiveImpl.hpp"
 #include "SZKEngineCoreInternal.hpp"
 #include "SZKStatus.hpp"
 
@@ -282,11 +283,6 @@ private:
 // ---------------------------------------------------------------------------
 // Archive
 // ---------------------------------------------------------------------------
-
-class Archive::Impl {
-public:
-    CArchiveLink link;
-};
 
 Archive::Archive(std::unique_ptr<Impl> impl) : impl_(std::move(impl)) {}
 

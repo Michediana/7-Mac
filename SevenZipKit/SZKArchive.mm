@@ -207,6 +207,99 @@ std::vector<std::uint32_t> IndicesFromIndexSet(NSIndexSet *_Nullable indexes)
     return YES;
 }
 
+#pragma mark - Rewriting
+
+- (NSString *)reasonNotModifiable
+{
+    const std::string why = szk::WhyNotModifiable(*_archive);
+    return why.empty() ? nil : @(why.c_str());
+}
+
+static szk::ModifyOptions ModifyOptionsFor(NSURL *destinationURL, NSString *password)
+{
+    szk::ModifyOptions options;
+    options.outputPath = PathFromURL(destinationURL);
+    if (password) {
+        options.password = password.UTF8String;
+    }
+    return options;
+}
+
+/// Shared tail of the three rewrites: box the outcome, map the result.
+static BOOL FinishRewrite(const szk::Result &result, const szk::CreateOutcome &coreOutcome,
+                          SZKOutcome *__autoreleasing *outcome, NSError **error)
+{
+    if (outcome) {
+        *outcome = [[SZKOutcome alloc] initWithFileCount:coreOutcome.files
+                                             folderCount:coreOutcome.folders
+                                             archiveSize:coreOutcome.archiveSize
+                                                failures:coreOutcome.failures];
+    }
+    if (!result.ok()) {
+        if (error) {
+            *error = SZKErrorFromResult(result);
+        }
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)writeDeletingIndexes:(NSIndexSet *)indexes
+                       toURL:(NSURL *)destinationURL
+                    password:(NSString *)password
+                    progress:(SZKProgressHandler)progress
+                     outcome:(SZKOutcome *__autoreleasing *)outcome
+                       error:(NSError **)error
+{
+    szk::CreateOutcome coreOutcome;
+    const szk::Result result = szk::DeleteEntries(*_archive, IndicesFromIndexSet(indexes),
+                                                  ModifyOptionsFor(destinationURL, password),
+                                                  SZKMakeProgressHandler(progress), coreOutcome);
+    return FinishRewrite(result, coreOutcome, outcome, error);
+}
+
+- (BOOL)writeRenaming:(NSDictionary<NSNumber *, NSString *> *)newPaths
+                toURL:(NSURL *)destinationURL
+             password:(NSString *)password
+             progress:(SZKProgressHandler)progress
+              outcome:(SZKOutcome *__autoreleasing *)outcome
+                error:(NSError **)error
+{
+    std::vector<std::pair<std::uint32_t, std::string>> renames;
+    renames.reserve(newPaths.count);
+    for (NSNumber *index in newPaths) {
+        renames.emplace_back(index.unsignedIntValue, newPaths[index].UTF8String ?: "");
+    }
+    szk::CreateOutcome coreOutcome;
+    const szk::Result result = szk::RenameEntries(*_archive, renames,
+                                                  ModifyOptionsFor(destinationURL, password),
+                                                  SZKMakeProgressHandler(progress), coreOutcome);
+    return FinishRewrite(result, coreOutcome, outcome, error);
+}
+
+- (BOOL)writeAddingURLs:(NSArray<NSURL *> *)sourceURLs
+               inFolder:(NSString *)folderPath
+            onlyIfNewer:(BOOL)onlyIfNewer
+                  toURL:(NSURL *)destinationURL
+               password:(NSString *)password
+               progress:(SZKProgressHandler)progress
+                outcome:(SZKOutcome *__autoreleasing *)outcome
+                  error:(NSError **)error
+{
+    std::vector<std::string> inputs;
+    inputs.reserve(sourceURLs.count);
+    for (NSURL *source in sourceURLs) {
+        inputs.push_back(PathFromURL(source));
+    }
+    szk::CreateOutcome coreOutcome;
+    const szk::Result result = szk::AddFiles(*_archive, inputs, folderPath.UTF8String ?: "",
+                                             onlyIfNewer ? szk::AddPolicy::onlyIfNewer
+                                                         : szk::AddPolicy::replace,
+                                             ModifyOptionsFor(destinationURL, password),
+                                             SZKMakeProgressHandler(progress), coreOutcome);
+    return FinishRewrite(result, coreOutcome, outcome, error);
+}
+
 #pragma mark - Creating
 
 + (BOOL)createArchiveAtURL:(NSURL *)url

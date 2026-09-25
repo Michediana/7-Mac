@@ -2,7 +2,7 @@
 
 GUI nativa macOS per 7-Zip, con il motore 7-Zip **incorporato nell'app** come framework.
 
-- **Stato:** M0–M3 completi e verificati; M4 da iniziare
+- **Stato:** M0–M4 completi e verificati; M5 da iniziare
 - **Ultimo aggiornamento:** 2026-09-25
 - **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.03 (2026-09-03)
 
@@ -391,14 +391,88 @@ vuole.
   quanto la voce. Viene cancellata alla chiusura della finestra, e all'avvio se l'app non ha
   fatto in tempo.
 
-### M4 — Modifica in-place  ⏱ 1–2 settimane
+### M4 — Modifica in-place  ✅ fatto
 
 Il differenziatore vero: Keka non lo fa.
 
-- [ ] Aggiungi file a un archivio esistente (drag nella finestra)
-- [ ] Elimina e rinomina voci
-- [ ] Aggiorna solo i file più recenti
-- [ ] Annulla/ripristina a livello di operazione
+- [x] Aggiungi file a un archivio esistente (drag nella finestra, o Add Files…)
+- [x] Elimina e rinomina voci (anche cartelle, con tutto il contenuto)
+- [x] Aggiorna solo i file più recenti ("Only replace entries older than the file")
+- [x] Annulla/ripristina a livello di operazione (⌘Z / ⇧⌘Z, con il nome dell'operazione nel menu Edit)
+
+**Criterio di uscita: raggiunto.** `Scripts/smoke-test.sh` resta a 22 asserzioni ed
+esegue ora **106 test**, tutti verdi: i 93 di M3 più 13 sulla modifica — eliminare un file
+e una cartella, rinominare un file (7z) e una cartella (tar), nomi rifiutati, aggiungere
+dentro una sottocartella, "solo se più recente" in entrambi i sensi, aggiungere a un 7z
+con lista cifrata (la voce nuova esce cifrata e la lista resta cifrata), eliminare da un
+7z solido cifrato senza password (la chiede, perché deve ricomprimere il blocco), undo e
+redo byte per byte, una modifica nuova che cancella il redo, gli archivi che non si possono
+modificare, e una modifica fallita che lascia il file identico e niente accanto.
+
+Struttura aggiunta:
+
+```
+SevenZipKit/Internal/SZKArchiveImpl.hpp   Archive::Impl, condiviso da lettura e riscrittura
+SevenZipKit/Internal/SZKUpdateCore.cpp    DeleteEntries, RenameEntries, AddFiles, WhyNotModifiable
+7-Mac/Model/ArchiveEditor.swift           scrivi accanto, fotografa, scambia; undo = scambio inverso
+7-MacTests/EditTests.swift
+```
+
+### Come funziona una modifica
+
+**Un archivio non si modifica dove sta.** Il motore scrive sempre un archivio nuovo
+intero, copiando le voci invariate così come sono — ancora compresse, dove il formato lo
+consente (7z fuori dai blocchi solidi toccati, zip, tar). Quindi ogni modifica è:
+
+1. scrivere il nuovo archivio in un file nascosto **accanto** all'originale
+   (`.nome.7-Mac-xxxx`), così lo scambio finale è una rename sullo stesso volume;
+2. fotografare l'originale nella cartella temporanea della finestra — un clone APFS, che
+   non costa spazio finché i due non divergono;
+3. `replaceItemAt`: atomico, e il file resta lo stesso per il Finder (nome, posto, tag).
+
+Finché non avviene il punto 3, il file della persona non è stato toccato: una modifica
+fallita o annullata semplicemente non è successa. Undo è lo stesso scambio al contrario.
+
+### Quattro cose emerse implementando
+
+1. **La strada giusta è quella del file manager di 7-Zip, non quella della CLI.**
+   `UpdateArchive` (quello di `7z a/d/rn`) seleziona per nome e wildcard; `AgentOut.cpp`
+   costruisce la lista `CUpdatePair2` per indice e la passa a `IOutArchive::UpdateItems`
+   con `CArchiveUpdateCallback`. È lo stesso codice upstream, compilato, non riscritto —
+   e per indice vuol dire che due voci con lo stesso percorso restano distinguibili.
+2. **7z tiene cifrata la lista da solo.** Senza proprietà, con una password in gioco,
+   `encryptHeaders` segue `_passwordIsDefined` dell'archivio aperto. Passare proprietà
+   esplicite l'avrebbe resa un'opzione da ricordare; non passarne nessuna la rende
+   impossibile da dimenticare.
+3. **Eliminare da un 7z solido può chiedere la password anche se l'archivio si apre
+   senza.** Togliere una voce da un blocco solido significa decodificare e ricomprimere
+   il resto del blocco. Il callback lo dice (`CryptoGetTextPassword`), noi rispondiamo
+   `passwordRequired` e il browser chiede.
+4. **Aggiungere a un archivio cifrato chiede la password prima.** Il motore non chiede
+   con quale password cifrare le voci nuove: se non gliela dai, entrano in chiaro in un
+   archivio che per il resto è cifrato.
+
+### Cosa non si modifica, e perché
+
+- Formati senza scrittore (rar, zstd e gli altri 50): lo dice il motore, non una lista.
+- Archivi divisi in volumi: 7-Zip non li aggiorna.
+- gzip, bzip2, xz: contengono un flusso, non voci.
+- Un archivio dentro un altro (anche un `.tar.gz`, che si apre sul tar): riscriverlo
+  produrrebbe una copia del tar, non del file. Si potrà fare riscrivendo anche il
+  contenitore; non ora.
+- La barra di stato dice "Read-only" con il motivo; aggiungi ed elimina sono disattivati.
+
+### Limiti accettati
+
+- La cronologia di undo vive con la finestra: chiusa la finestra, le fotografie vengono
+  cancellate. Una cronologia che sopravvive a chi la mostra è un undo che nessuno raggiunge.
+- Su un volume non APFS le fotografie sono copie vere: per un archivio grande su un disco
+  esterno, ogni modifica costa il tempo e lo spazio di una copia.
+- Modificare richiede di poter scrivere nella cartella dell'archivio. Fuori da
+  `~/Downloads` il sandbox chiede la cartella una volta, come per l'estrazione.
+- Il drop aggiunge nella cartella selezionata (o accanto al file selezionato, o in cima):
+  una `Table` SwiftUI non dice su quale riga è caduto il drop senza perdere l'estensione
+  sandbox del Finder.
 
 ### M5 — Rifinitura  ⏱ a seguire
 

@@ -105,6 +105,7 @@
 		A1B2C3D400000000BBBB0107 /* SZKArchiveEntry.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SZKArchiveEntry.mm; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB0108 /* SZKOptions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SZKOptions.mm; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB0109 /* SZKArchiveCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKArchiveCore.hpp; sourceTree = "<group>"; };
+		A1B2C3D400000000BBBB0140 /* SZKArchiveImpl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKArchiveImpl.hpp; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB010A /* SZKArchiveCore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SZKArchiveCore.cpp; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB010B /* SZKUpdateCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SZKUpdateCore.hpp; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB010C /* SZKUpdateCore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SZKUpdateCore.cpp; sourceTree = "<group>"; };
@@ -199,6 +200,7 @@
 				A1B2C3D400000000AAAA0027 /* SZKFormat+Private.h */,
 				A1B2C3D400000000BBBB0109 /* SZKArchiveCore.hpp */,
 				A1B2C3D400000000BBBB010A /* SZKArchiveCore.cpp */,
+				A1B2C3D400000000BBBB0140 /* SZKArchiveImpl.hpp */,
 				A1B2C3D400000000BBBB010B /* SZKUpdateCore.hpp */,
 				A1B2C3D400000000BBBB010C /* SZKUpdateCore.cpp */,
 				A1B2C3D400000000BBBB010D /* SZKStatus.hpp */,

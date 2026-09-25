@@ -24,7 +24,8 @@ struct BrowserWindow: View {
     init(target: BrowserTarget, model: AppModel) {
         _browser = State(initialValue: ArchiveBrowser(url: target.url,
                                                       preferences: model.preferences,
-                                                      queue: model.queue))
+                                                      queue: model.queue,
+                                                      interaction: model))
     }
 
     var body: some View {
@@ -78,8 +79,11 @@ struct BrowserWindow: View {
 
 private struct BrowserContent: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.undoManager) private var undoManager
     @Bindable var browser: ArchiveBrowser
     @SceneStorage("BrowserColumns") private var columns = TableColumnCustomization<ArchiveNode>()
+    @State private var renaming: ArchiveNode?
+    @State private var isDropTargeted = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -94,6 +98,24 @@ private struct BrowserContent: View {
         .searchable(text: $browser.searchText, placement: .toolbar, prompt: "Search names")
         .quickLookPreview($browser.previewURL)
         .toolbar { toolbar }
+        .sheet(item: $renaming) { node in
+            RenameSheet(browser: browser, node: node)
+        }
+        .onAppear { browser.undoManager = undoManager }
+        .onChange(of: undoManager) { browser.undoManager = undoManager }
+    }
+
+    /// Where a drop, or Add Files…, puts things: into the one selected
+    /// folder, or next to the one selected file, or at the top.
+    private var addTarget: ArchiveNode? {
+        guard browser.selection.count == 1, let id = browser.selection.first else { return nil }
+        return browser.current?.tree.node(id)
+    }
+
+    private var addTargetName: String {
+        guard let target = addTarget else { return "the top of the archive" }
+        let folder = target.isDirectory ? target.path : (target.path as NSString).deletingLastPathComponent
+        return folder.isEmpty ? "the top of the archive" : "“\((folder as NSString).lastPathComponent)”"
     }
 
     private var table: some View {
@@ -174,9 +196,36 @@ private struct BrowserContent: View {
             Task { await browser.preview(node) }
             return .handled
         }
+        .onDeleteCommand {
+            guard browser.canEdit, !browser.selection.isEmpty else { return }
+            let ids = browser.selection
+            Task { await browser.delete(ids) }
+        }
+        // Item providers, as on the main window: that is the route that
+        // brings a Finder drag's sandbox extension along with the URL.
+        .onDrop(of: [.fileURL], isTargeted: $isDropTargeted) { providers in
+            guard browser.canEdit else { return false }
+            let target = addTarget
+            Task {
+                let urls = await fileURLs(from: providers)
+                await browser.add(urls, into: target)
+            }
+            return true
+        }
         .overlay {
             if browser.isShowingMatches, browser.matches.isEmpty {
                 ContentUnavailableView.search(text: browser.searchText)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            if isDropTargeted {
+                Label(browser.canEdit ? "Add to \(addTargetName)"
+                                      : "Cannot change this archive: \(browser.editBlockedReason ?? "busy")",
+                      systemImage: browser.canEdit ? "plus.circle.fill" : "nosign")
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .background(.regularMaterial, in: Capsule())
+                    .padding(.bottom, 16)
             }
         }
     }
@@ -198,6 +247,22 @@ private struct BrowserContent: View {
                 browser.selection = ids
                 Task { await browser.extract(to: browser.defaultDestination) }
             }
+        }
+        if browser.editBlockedReason == nil {
+            Divider()
+            if nodes.count == 1, let node = nodes.first {
+                Button("Rename…") { renaming = node }
+                    .disabled(!browser.canEdit)
+            }
+            if !nodes.isEmpty {
+                Button("Delete") { Task { await browser.delete(ids) } }
+                    .disabled(!browser.canEdit)
+            }
+            Button("Add Files…") {
+                browser.selection = ids
+                chooseFilesToAdd()
+            }
+            .disabled(!browser.canEdit)
         }
         if nodes.count == 1, let node = nodes.first {
             Divider()
@@ -251,6 +316,36 @@ private struct BrowserContent: View {
             }
             .help(browser.extractionSummary)
         }
+        ToolbarItemGroup {
+            Button("Add Files…", systemImage: "plus") { chooseFilesToAdd() }
+                .disabled(!browser.canEdit)
+                .help(browser.editBlockedReason.map { "Cannot change this archive: \($0)" }
+                      ?? "Add files to \(addTargetName)")
+            Button("Delete", systemImage: "trash") {
+                let ids = browser.selection
+                Task { await browser.delete(ids) }
+            }
+            .disabled(!browser.canEdit || browser.selection.isEmpty)
+            .help("Remove the selected items from the archive")
+        }
+    }
+
+    private func chooseFilesToAdd() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = true
+        panel.message = "Add to \(addTargetName) in “\(browser.current?.title ?? "")”:"
+        panel.prompt = "Add"
+        let onlyOlder = NSButton(checkboxWithTitle: "Only replace entries older than the file",
+                                 target: nil, action: nil)
+        onlyOlder.state = browser.preferences.onlyReplaceOlder ? .on : .off
+        panel.accessoryView = onlyOlder
+        panel.isAccessoryViewDisclosed = true
+        guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
+        browser.preferences.onlyReplaceOlder = onlyOlder.state == .on
+        let target = addTarget
+        Task { await browser.add(panel.urls, into: target) }
     }
 
     private func chooseDestinationAndExtract() {
@@ -403,6 +498,10 @@ private struct StatusBar: View {
             }
             Spacer(minLength: 0)
             if let level = browser.current {
+                if let reason = browser.editBlockedReason, browser.levels.count == 1 {
+                    Label("Read-only", systemImage: "lock.doc")
+                        .help("This archive cannot be changed: \(reason)")
+                }
                 if level.archive.hasEncryptedHeader {
                     Label("Encrypted list", systemImage: "lock")
                 }
@@ -430,6 +529,56 @@ private struct StatusBar: View {
                 + "\(Display.count(UInt64(tree.folderCount), "folder", "folders"))"
         }
         return "\(browser.selection.count) selected — \(browser.extractionSummary)"
+    }
+}
+
+/// A new name for one entry, checked as it is typed.
+private struct RenameSheet: View {
+    let browser: ArchiveBrowser
+    let node: ArchiveNode
+    @Environment(\.dismiss) private var dismiss
+    @State private var name = ""
+    @FocusState private var focused: Bool
+
+    var body: some View {
+        let problem = browser.validateNewName(name, for: node)
+        VStack(alignment: .leading, spacing: 12) {
+            Text(node.isDirectory ? "Rename Folder" : "Rename")
+                .font(.headline)
+            if node.isDirectory, node.fileCount > 0 {
+                Text("Everything inside it — \(Display.count(UInt64(node.fileCount), "file", "files")) — moves with it.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+            TextField("Name", text: $name)
+                .textFieldStyle(.roundedBorder)
+                .focused($focused)
+                .onSubmit(commit)
+            Text(problem ?? " ")
+                .font(.caption)
+                .foregroundStyle(.red)
+            HStack {
+                Spacer()
+                Button("Cancel", role: .cancel) { dismiss() }
+                    .keyboardShortcut(.cancelAction)
+                Button("Rename", action: commit)
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(problem != nil || name == node.name)
+            }
+        }
+        .padding(20)
+        .frame(width: 380)
+        .onAppear {
+            name = node.name
+            focused = true
+        }
+    }
+
+    private func commit() {
+        guard browser.validateNewName(name, for: node) == nil, name != node.name else { return }
+        let name = name
+        dismiss()
+        Task { await browser.rename(node, to: name) }
     }
 }
 

@@ -89,6 +89,55 @@ NS_ASSUME_NONNULL_BEGIN
             outcome:(SZKOutcome *_Nullable *_Nullable)outcome
               error:(NSError **)error;
 
+#pragma mark - Rewriting
+
+/// Why this archive cannot be changed, or `nil` when it can. A format with no
+/// writer (rar, zstd…), a set of volumes, or an archive reached through
+/// another container all say so here — ask before offering an edit.
+@property (nonatomic, readonly, copy, nullable) NSString *reasonNotModifiable;
+
+// The three edits below never touch the archive they are called on. Each
+// writes a complete new archive to `destinationURL` — which must not exist —
+// copying unchanged entries as they are, still compressed where the format
+// allows. Putting it in place of the original is the caller's move, and is
+// what makes an edit cancellable and undoable.
+//
+// `password` decodes existing encrypted entries where the format has to, and
+// encrypts added ones; pass `nil` for an archive with nothing encrypted.
+
+/// Everything except the entries at `indexes`. A folder's contents are
+/// separate entries: pass them too, or they stay.
+- (BOOL)writeDeletingIndexes:(NSIndexSet *)indexes
+                       toURL:(NSURL *)destinationURL
+                    password:(nullable NSString *)password
+                    progress:(nullable SZKProgressHandler)progress
+                     outcome:(SZKOutcome *_Nullable *_Nullable)outcome
+                       error:(NSError **)error;
+
+/// The same entries, with the ones in `newPaths` (index → '/'-separated
+/// archive path) under new names. Nothing is recompressed.
+- (BOOL)writeRenaming:(NSDictionary<NSNumber *, NSString *> *)newPaths
+                toURL:(NSURL *)destinationURL
+             password:(nullable NSString *)password
+             progress:(nullable SZKProgressHandler)progress
+              outcome:(SZKOutcome *_Nullable *_Nullable)outcome
+                error:(NSError **)error;
+
+/// The same entries plus `sourceURLs` (scanned recursively) under
+/// `folderPath` ('/'-separated, empty for the root). A file whose path is
+/// already taken replaces the entry — or, with `onlyIfNewer`, only when its
+/// modification date is later.
+- (BOOL)writeAddingURLs:(NSArray<NSURL *> *)sourceURLs
+               inFolder:(NSString *)folderPath
+            onlyIfNewer:(BOOL)onlyIfNewer
+                  toURL:(NSURL *)destinationURL
+               password:(nullable NSString *)password
+               progress:(nullable SZKProgressHandler)progress
+                outcome:(SZKOutcome *_Nullable *_Nullable)outcome
+                  error:(NSError **)error;
+
+#pragma mark - Creating
+
 /// Creates an archive at `url` from `sourceURLs` (files or folders, scanned
 /// recursively). Paths are stored relative to each source's parent, so adding
 /// `/a/b/tree` stores `tree/…`.

@@ -8,16 +8,25 @@
 #include "SZKUpdateCore.hpp"
 
 #include <cstdio>
+#include <map>
 
 #include "Common/MyWindows.h"
 
 #include "Common/IntToString.h"
 #include "Common/StringConvert.h"
+#include "Windows/FileDir.h"
 #include "Windows/FileFind.h"
+#include "Windows/PropVariant.h"
+#include "7zip/Common/FileStreams.h"
+#include "7zip/UI/Common/EnumDirItems.h"
 #include "7zip/UI/Common/LoadCodecs.h"
 #include "7zip/UI/Common/OpenArchive.h"
 #include "7zip/UI/Common/Update.h"
+#include "7zip/UI/Common/UpdateCallback.h"
+#include "7zip/UI/Common/UpdatePair.h"
+#include "7zip/UI/Common/UpdateProduce.h"
 
+#include "SZKArchiveImpl.hpp"
 #include "SZKEngineCoreInternal.hpp"
 #include "SZKStatus.hpp"
 
@@ -41,6 +50,10 @@ public:
         : progress_(progress), password_(password), outcome_(outcome) {}
 
     bool Cancelled = false;
+    /// The engine needed to decode an encrypted entry.
+    bool PasswordWasAsked = false;
+    /// …and we had no password to give it.
+    bool PasswordUnavailable = false;
 
 private:
     HRESULT Report()
@@ -118,7 +131,9 @@ HRESULT CUpdateCallback::CryptoGetTextPassword2(Int32 *passwordIsDefined, BSTR *
 HRESULT CUpdateCallback::CryptoGetTextPassword(BSTR *password)
 {
     // Asked when re-reading an existing encrypted archive we are updating.
+    PasswordWasAsked = true;
     if (password_.empty()) {
+        PasswordUnavailable = true;
         return E_ABORT;
     }
     return StringToBstr(GetUnicodeString(password_.c_str(), CP_UTF8), password);
@@ -216,7 +231,8 @@ Result Create(const std::vector<std::string> &inputPaths,
     const UString archivePath = GetUnicodeString(options.archivePath.c_str(), CP_UTF8);
 
     // Refuse to walk into an existing archive by accident: `Create` means
-    // create. Updating in place is M4's job and will be its own entry point.
+    // create. Changing an existing one is DeleteEntries, RenameEntries and
+    // AddFiles, below.
     if (NWindows::NFile::NFind::DoesFileOrDirExist(us2fs(archivePath))) {
         result.status = Status::failed;
         result.message = "a file already exists at that path";
@@ -297,6 +313,297 @@ Result Create(const std::vector<std::string> &inputPaths,
         result.message = outcome.failures.front().message;
     }
     return result;
+}
+
+// ---------------------------------------------------------------------------
+// Rewriting
+// ---------------------------------------------------------------------------
+
+/// The one door into an open Archive's engine objects.
+struct Rewriter {
+    static const CArchiveLink &Link(const Archive &archive) { return archive.impl_->link; }
+    static const CArc &Arc(const Archive &archive) { return *archive.impl_->link.GetArc(); }
+};
+
+namespace {
+
+/// UpdateProduce reports what it drops; we have nobody to tell.
+struct CSilentProduceCallback Z7_final: public IUpdateProduceCallback {
+    HRESULT ShowDeleteFile(unsigned) Z7_override { return S_OK; }
+};
+
+/// The part every rewrite shares, and the order 7-Zip's own file manager does
+/// it in (UI/Agent/AgentOut.cpp): an IOutArchive from the handler that opened
+/// the file, an update callback that knows which items are old, new or
+/// renamed, and UpdateItems into a fresh file.
+Result RunUpdate(const Archive &archive,
+                 const CRecordVector<CUpdatePair2> &pairs,
+                 const CObjectVector<CArcItem> *arcItems,
+                 const CDirItems *dirItems,
+                 const UStringVector *newNames,
+                 const ModifyOptions &options,
+                 const ProgressHandler &progress,
+                 CreateOutcome &outcome)
+{
+    Result result;
+    const std::string why = WhyNotModifiable(archive);
+    if (!why.empty()) {
+        result.status = Status::unsupported;
+        result.message = why;
+        return result;
+    }
+
+    const CArc &arc = Rewriter::Arc(archive);
+    CMyComPtr<IOutArchive> outArchive;
+    if (arc.Archive->QueryInterface(IID_IOutArchive, (void **)&outArchive) != S_OK || !outArchive) {
+        result.status = Status::unsupported;
+        result.message = "this format cannot be written";
+        return result;
+    }
+
+    // No properties: the handler keeps what it read. That is the point for
+    // 7z, which otherwise would quietly drop an encrypted entry list; it
+    // keeps one encrypted whenever a password is in play.
+    {
+        CMyComPtr<ISetProperties> setProperties;
+        outArchive.QueryInterface(IID_ISetProperties, &setProperties);
+        if (setProperties) {
+            const HRESULT hr = setProperties->SetProperties(nullptr, nullptr, 0);
+            if (hr != S_OK) {
+                return ResultFromHRESULT(hr, false, false, false);
+            }
+        }
+    }
+
+    const FString outputPath = us2fs(GetUnicodeString(options.outputPath.c_str(), CP_UTF8));
+    CMyComPtr2_Create<IOutStream, COutFileStream> outStream;
+    if (!outStream->Create_NEW(outputPath)) {
+        result.status = Status::unreadable;
+        result.message = "could not create the new archive";
+        return result;
+    }
+
+    CUpdateCallback ui (progress, options.password, outcome);
+    CMyComPtr2_Create<IArchiveUpdateCallback, CArchiveUpdateCallback> callback;
+    callback->Callback = &ui;
+    callback->UpdatePairs = &pairs;
+    callback->ArcItems = arcItems;
+    callback->DirItems = dirItems;
+    callback->NewNames = newNames;
+    callback->Arc = &arc;
+    callback->Archive = arc.Archive;
+    callback->ArcFileName = ExtractFileNameFromPath(arc.Path);
+    // Store links as links, matching Create and what extraction restores.
+    callback->StoreSymLinks = true;
+    callback->StoreHardLinks = true;
+
+    HRESULT hr = outArchive->UpdateItems(outStream, pairs.Size(), callback);
+    const HRESULT closed = outStream->Close();
+    if (hr == S_OK) {
+        hr = closed;
+    }
+
+    if (hr != S_OK || ui.Cancelled) {
+        NWindows::NFile::NDir::DeleteFileAlways(outputPath);
+        if (ui.Cancelled) {
+            result.status = Status::cancelled;
+        } else {
+            result = ResultFromHRESULT(hr, ui.PasswordWasAsked, !options.password.empty(),
+                                       ui.PasswordUnavailable);
+        }
+        return result;
+    }
+
+    NWindows::NFile::NFind::CFileInfo written;
+    if (written.Find(outputPath)) {
+        outcome.archiveSize = written.Size;
+    }
+    if (!outcome.failures.empty()) {
+        result.status = outcome.failures.front().status;
+        result.message = outcome.failures.front().message;
+    }
+    return result;
+}
+
+}  // namespace
+
+std::string WhyNotModifiable(const Archive &archive)
+{
+    const CArchiveLink &link = Rewriter::Link(archive);
+    if (link.Arcs.Size() != 1) {
+        return "this archive was opened through another one";
+    }
+    if (!link.VolumePaths.IsEmpty()) {
+        return "archives split into volumes cannot be changed";
+    }
+    const CArc &arc = Rewriter::Arc(archive);
+    if (arc.IsReadOnly) {
+        return "the engine opened this archive read-only";
+    }
+    CMyComPtr<IOutArchive> outArchive;
+    if (arc.Archive->QueryInterface(IID_IOutArchive, (void **)&outArchive) != S_OK || !outArchive) {
+        return "this format cannot be written";
+    }
+    return {};
+}
+
+Result DeleteEntries(const Archive &archive,
+                     const std::vector<std::uint32_t> &indices,
+                     const ModifyOptions &options,
+                     const ProgressHandler &progress,
+                     CreateOutcome &outcome)
+{
+    std::vector<bool> doomed (archive.entries().size(), false);
+    for (const std::uint32_t index : indices) {
+        if (index < doomed.size()) {
+            doomed[index] = true;
+        }
+    }
+
+    CRecordVector<CUpdatePair2> pairs;
+    for (std::uint32_t i = 0; i < doomed.size(); i++) {
+        if (doomed[i]) {
+            continue;
+        }
+        CUpdatePair2 pair;
+        pair.SetAs_NoChangeArcItem(i);
+        pairs.Add(pair);
+    }
+    return RunUpdate(archive, pairs, nullptr, nullptr, nullptr, options, progress, outcome);
+}
+
+Result RenameEntries(const Archive &archive,
+                     const std::vector<std::pair<std::uint32_t, std::string>> &renames,
+                     const ModifyOptions &options,
+                     const ProgressHandler &progress,
+                     CreateOutcome &outcome)
+{
+    std::map<std::uint32_t, unsigned> nameIndex;
+    UStringVector newNames;
+    for (const auto &rename : renames) {
+        nameIndex[rename.first] = newNames.Add(GetUnicodeString(rename.second.c_str(), CP_UTF8));
+    }
+
+    const CArc &arc = Rewriter::Arc(archive);
+    CRecordVector<CUpdatePair2> pairs;
+    for (std::uint32_t i = 0; i < archive.entries().size(); i++) {
+        CUpdatePair2 pair;
+        pair.SetAs_NoChangeArcItem(i);
+        const auto found = nameIndex.find(i);
+        if (found != nameIndex.end()) {
+            // New properties, old data: the name changes and nothing is
+            // recompressed. UseArcProps stays on, so every other property is
+            // read from the archive as it was.
+            pair.NewProps = true;
+            arc.IsItem_Anti(i, pair.IsAnti);
+            pair.NewNameIndex = static_cast<int>(found->second);
+            pair.IsMainRenameItem = true;
+        }
+        pairs.Add(pair);
+    }
+    return RunUpdate(archive, pairs, nullptr, nullptr, &newNames, options, progress, outcome);
+}
+
+Result AddFiles(const Archive &archive,
+                const std::vector<std::string> &inputPaths,
+                const std::string &folderInArchive,
+                AddPolicy policy,
+                const ModifyOptions &options,
+                const ProgressHandler &progress,
+                CreateOutcome &outcome)
+{
+    Result result;
+    if (inputPaths.empty()) {
+        result.status = Status::failed;
+        result.message = "nothing to add";
+        return result;
+    }
+    const std::string why = WhyNotModifiable(archive);
+    if (!why.empty()) {
+        result.status = Status::unsupported;
+        result.message = why;
+        return result;
+    }
+
+    const CArc &arc = Rewriter::Arc(archive);
+    CUpdateCallback scanUI (progress, options.password, outcome);
+
+    // The files on disk. A physical prefix of "/" and absolute paths below it
+    // means every input keeps its own name and drops its parents -- the
+    // prefix directories of the paths are not stored, EnumerateItems2 says.
+    CDirItems dirItems;
+    dirItems.Callback = &scanUI;
+    dirItems.SymLinks = true;
+    FStringVector names;
+    for (const std::string &input : inputPaths) {
+        FString path = us2fs(GetUnicodeString(input.c_str(), CP_UTF8));
+        while (path.Len() > 1 && IS_PATH_SEPAR(path.Back())) {
+            path.DeleteBack();
+        }
+        if (!path.IsEmpty() && IS_PATH_SEPAR(path[0])) {
+            path.Delete(0);
+        }
+        names.Add(path);
+    }
+    UString logPrefix = GetUnicodeString(folderInArchive.c_str(), CP_UTF8);
+    if (!logPrefix.IsEmpty() && !IS_PATH_SEPAR(logPrefix.Back())) {
+        logPrefix.Add_PathSepar();
+    }
+    HRESULT hr = dirItems.EnumerateItems2(FString(FTEXT("/")), logPrefix, names, nullptr);
+    if (hr != S_OK) {
+        return ResultFromHRESULT(hr, false, false, false);
+    }
+    if (!outcome.failures.empty()) {
+        // A file that could not even be found is not something to half-add.
+        result.status = outcome.failures.front().status;
+        result.message = outcome.failures.front().message;
+        return result;
+    }
+
+    // The files already there, named the way CDirItems names its logical
+    // paths, so the two lists can be paired up by name.
+    CObjectVector<CArcItem> arcItems;
+    for (std::uint32_t i = 0; i < archive.entries().size(); i++) {
+        CArcItem item;
+        item.IndexInServer = i;
+        item.Censored = true;   // every entry is in scope for pairing
+        if (arc.GetItem_Path2(i, item.Name) != S_OK
+            || Archive_IsItem_Dir(arc.Archive, i, item.IsDir) != S_OK
+            || Archive_IsItem_AltStream(arc.Archive, i, item.IsAltStream) != S_OK
+            || arc.GetItem_MTime(i, item.MTime) != S_OK
+            || arc.GetItem_Size(i, item.Size, item.Size_Defined) != S_OK) {
+            result.status = Status::damaged;
+            result.message = "the archive would not describe its entries";
+            return result;
+        }
+        arcItems.Add(item);
+    }
+
+    CMyComPtr<IOutArchive> outArchive;
+    arc.Archive->QueryInterface(IID_IOutArchive, (void **)&outArchive);
+    UInt32 timeType = NFileTimeType::kWindows;
+    if (outArchive) {
+        outArchive->GetFileTimeType(&timeType);
+    }
+
+    CRecordVector<CUpdatePair2> pairs;
+    try {
+        CRecordVector<CUpdatePair> matched;
+        GetUpdatePairInfoList(dirItems, arcItems, (NFileTimeType::EEnum)timeType, matched);
+        CSilentProduceCallback produce;
+        UpdateProduce(matched,
+                      policy == AddPolicy::onlyIfNewer ? NUpdateArchive::k_ActionSet_Update
+                                                       : NUpdateArchive::k_ActionSet_Add,
+                      pairs, &produce);
+    } catch (const UString &message) {
+        // Pairing throws for the one thing it cannot resolve: two entries of
+        // the same name, on either side, that an incoming file would match.
+        result.status = Status::unsupported;
+        result.message = UnicodeStringToMultiByte(message, CP_UTF8).Ptr();
+        return result;
+    }
+
+    return RunUpdate(archive, pairs, &arcItems, &dirItems, nullptr, options, progress, outcome);
 }
 
 }  // namespace szk

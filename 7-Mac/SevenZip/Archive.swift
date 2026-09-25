@@ -80,6 +80,9 @@ nonisolated public final class Archive: @unchecked Sendable {
     public let parent: Archive?
     /// The entry path this archive has inside `parent`.
     public let pathInParent: String?
+    /// Why this archive cannot be edited, or `nil` when it can. Fixed at
+    /// open: it depends on the format and how the file was reached.
+    public let reasonNotModifiable: String?
 
     private init(_ archive: SZKArchive, parent: Archive? = nil) {
         self.archive = archive
@@ -89,6 +92,10 @@ nonisolated public final class Archive: @unchecked Sendable {
             ?? DispatchQueue(label: "eu.dgnet.7-Mac.archive.\(ObjectIdentifier(archive).hashValue)")
         self.parent = parent
         pathInParent = archive.pathInParent
+        // Writing a nested archive would produce a new copy of it, not a new
+        // copy of the file that holds it.
+        reasonNotModifiable = parent == nil ? archive.reasonNotModifiable
+                                            : "this archive is inside another one"
         url = archive.url
         formatName = archive.formatName
         physicalSize = archive.physicalSize?.uint64Value
@@ -169,6 +176,51 @@ nonisolated public final class Archive: @unchecked Sendable {
                                        passwordProvider: password.map(bridge),
                                        overwriteHandler: onOverwrite,
                                        outcome: &outcome)
+            return outcome
+        } onProgress: { onProgress?($0) }
+    }
+
+    // MARK: Rewriting
+    //
+    // Each writes a whole new archive to `destination` and leaves this one
+    // alone; `ArchiveEditor` is what swaps the files and keeps the undo.
+
+
+    /// Writes this archive without the entries in `indexes` to `destination`.
+    @discardableResult
+    public func writeDeleting(_ indexes: IndexSet, to destination: URL, password: String? = nil,
+                              onProgress: ProgressObserver? = nil) async throws -> ArchiveOutcome {
+        try await run { archive, progress in
+            var outcome: SZKOutcome?
+            try archive.writeDeleting(indexes, to: destination, password: password,
+                                             progress: progress, outcome: &outcome)
+            return outcome
+        } onProgress: { onProgress?($0) }
+    }
+
+    /// Writes this archive with the entries in `newPaths` renamed.
+    @discardableResult
+    public func writeRenaming(_ newPaths: [Int: String], to destination: URL, password: String? = nil,
+                              onProgress: ProgressObserver? = nil) async throws -> ArchiveOutcome {
+        let boxed = Dictionary(uniqueKeysWithValues: newPaths.map { (NSNumber(value: $0.key), $0.value) })
+        return try await run { archive, progress in
+            var outcome: SZKOutcome?
+            try archive.writeRenaming(boxed, to: destination, password: password,
+                                      progress: progress, outcome: &outcome)
+            return outcome
+        } onProgress: { onProgress?($0) }
+    }
+
+    /// Writes this archive with `sources` added under `folder`.
+    @discardableResult
+    public func writeAdding(_ sources: [URL], inFolder folder: String, onlyIfNewer: Bool = false,
+                            to destination: URL, password: String? = nil,
+                            onProgress: ProgressObserver? = nil) async throws -> ArchiveOutcome {
+        try await run { archive, progress in
+            var outcome: SZKOutcome?
+            try archive.writeAdding(sources, inFolder: folder, onlyIfNewer: onlyIfNewer,
+                                    to: destination, password: password,
+                                    progress: progress, outcome: &outcome)
             return outcome
         } onProgress: { onProgress?($0) }
     }

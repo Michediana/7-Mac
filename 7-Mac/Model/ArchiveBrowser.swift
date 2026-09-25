@@ -89,18 +89,31 @@ final class ArchiveBrowser {
     var problem: String?
     private(set) var activity: BrowserActivity?
 
-    private let preferences: Preferences
+    let preferences: Preferences
     private let queue: JobQueue
+    /// Asks for folder access when an edit needs to write beside the
+    /// archive. The app model in the app, nothing in tests.
+    private weak var interaction: (any JobInteraction)?
+    /// The root archive's history. Only the root: an archive inside another
+    /// is not a file that can be replaced.
+    private(set) var editor: ArchiveEditor?
+    /// The window's own, so Edit › Undo names the edit and ⌘Z reaches it.
+    weak var undoManager: UndoManager?
+    /// Edits and history steps queue up behind each other: each one swaps
+    /// the file the next one reads.
+    private var editChain: Task<Void, Never>?
     /// Previews and unpacked archives go here, and all of it goes when the
     /// window does.
     let scratch: URL
     /// Level id + node id → extracted copy, so a second look is instant.
     private var extracted: [String: URL] = [:]
 
-    init(url: URL, preferences: Preferences, queue: JobQueue) {
+    init(url: URL, preferences: Preferences, queue: JobQueue,
+         interaction: (any JobInteraction)? = nil) {
         self.url = url
         self.preferences = preferences
         self.queue = queue
+        self.interaction = interaction
         scratch = Self.scratchRoot.appending(component: UUID().uuidString, directoryHint: .isDirectory)
     }
 
@@ -129,6 +142,7 @@ final class ArchiveBrowser {
                                             isInPlace: false)
                 levels = [level]
                 phase = .ready
+                if editor == nil { editor = ArchiveEditor(url: url, scratch: scratch) }
                 break
             } catch where error.isPasswordProblem {
                 guard let answer = await askPassword(for: url.lastPathComponent, incorrect: incorrect,
@@ -396,13 +410,231 @@ final class ArchiveBrowser {
     /// panel and "Extract Here".
     var defaultDestination: URL { url.deletingLastPathComponent() }
 
+    // MARK: - Editing
+
+    /// Why the archive on screen cannot be changed, or `nil` when it can.
+    var editBlockedReason: String? {
+        guard let level = current else { return "nothing is open" }
+        if levels.count > 1 || level.archive.parent != nil {
+            return "this archive is inside another one"
+        }
+        if let reason = level.archive.reasonNotModifiable { return reason }
+        // A compressor holds one stream, not a list of entries to edit.
+        if Self.compressorFormats.contains(level.archive.formatName) {
+            return "a \(level.archive.formatName) file holds a single stream"
+        }
+        return nil
+    }
+
+    var canEdit: Bool { editBlockedReason == nil && activity == nil }
+
+    /// Removes the selected entries — a folder with everything in it.
+    func delete(_ ids: Set<ArchiveNode.ID>) async {
+        guard let tree = current?.tree else { return }
+        let indexes = tree.entryIndexes(for: ids)
+        guard !indexes.isEmpty else { return }
+        let title = ids.count == 1 ? "Delete “\(tree.node(ids.first!)?.name ?? "")”"
+                                   : "Delete \(ids.count) Items"
+        await edit(title) { archive, destination, password in
+            try await archive.writeDeleting(indexes, to: destination, password: password,
+                                            onProgress: self.progressSink(self.activity))
+        }
+    }
+
+    /// Whether `name` would do as a new name for `node`: not empty, one path
+    /// component, and not already a sibling's.
+    func validateNewName(_ name: String, for node: ArchiveNode) -> String? {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty { return "A name cannot be empty." }
+        if trimmed.contains("/") { return "A name cannot contain “/”." }
+        if trimmed == "." || trimmed == ".." { return "That name is reserved." }
+        let path = Self.path(replacingLastComponentOf: node.path, with: trimmed)
+        if trimmed != node.name,
+           current?.tree.allNodes.contains(where: { $0.path == path && $0.id != node.id }) == true {
+            return "“\(trimmed)” is already taken."
+        }
+        return nil
+    }
+
+    /// Renames `node`, and for a folder every entry beneath it: an archive
+    /// has no folders to rename, only paths that begin the same way.
+    func rename(_ node: ArchiveNode, to name: String) async {
+        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard name != node.name, validateNewName(name, for: node) == nil else { return }
+        let newPath = Self.path(replacingLastComponentOf: node.path, with: name)
+        var renames: [Int: String] = [:]
+        for member in node.subtree {
+            guard let index = member.record?.index else { continue }
+            renames[index] = newPath + member.path.dropFirst(node.path.count)
+        }
+        guard !renames.isEmpty else { return }
+        await edit("Rename “\(node.name)”") { archive, destination, password in
+            try await archive.writeRenaming(renames, to: destination, password: password,
+                                            onProgress: self.progressSink(self.activity))
+        }
+    }
+
+    /// Adds files and folders from disk into `folder`, or the root. What
+    /// happens to a name already taken is the "only replace older" setting.
+    func add(_ sources: [URL], into folder: ArchiveNode?) async {
+        guard !sources.isEmpty, let level = current else { return }
+        let folderPath = folder.map { $0.isDirectory ? $0.path : ($0.path as NSString).deletingLastPathComponent } ?? ""
+        let onlyIfNewer = preferences.onlyReplaceOlder
+        let title = sources.count == 1 ? "Add “\(sources[0].lastPathComponent)”"
+                                       : "Add \(sources.count) Items"
+
+        // New entries in an encrypted archive should be encrypted too, and
+        // that takes the password up front: the engine will not ask for the
+        // one it encrypts with.
+        var password = level.password
+        if password == nil, level.archive.entries.contains(where: \.isEncrypted) {
+            guard let answer = await askPassword(for: level.title, incorrect: false) else { return }
+            password = answer.password
+        }
+
+        await edit(title, password: password) { archive, destination, password in
+            let scoped = sources.filter { $0.startAccessingSecurityScopedResource() }
+            defer { scoped.forEach { $0.stopAccessingSecurityScopedResource() } }
+            return try await archive.writeAdding(sources, inFolder: folderPath, onlyIfNewer: onlyIfNewer,
+                                                 to: destination, password: password,
+                                                 onProgress: self.progressSink(self.activity))
+        }
+    }
+
+    /// Takes back the last edit. What ⌘Z does, by way of the window's undo
+    /// manager; callable directly as well.
+    func undo() async { await history(back: true) }
+    func redo() async { await history(back: false) }
+
+    var canUndo: Bool { editor?.canUndo ?? false }
+    var canRedo: Bool { editor?.canRedo ?? false }
+
+    /// Runs one edit: ask for what it needs, write, swap, reopen, remember
+    /// how to undo it.
+    private func edit(_ title: String, password initial: String? = nil,
+                      write: @escaping @MainActor (Archive, URL, String?) async throws -> ArchiveOutcome) async {
+        await serialized {
+            guard self.editBlockedReason == nil, let editor = self.editor,
+                  let level = self.levels.first
+            else { return }
+            var password = initial ?? level.password
+            var incorrect = false
+            while true {
+                let activity = BrowserActivity(title: title)
+                let attempt = password
+                let result: Result<ArchiveOutcome, any Error> = await self.perform(activity) {
+                    try await editor.apply(title) { destination in
+                        try await write(level.archive, destination, attempt)
+                    }
+                }
+                switch result {
+                case .success:
+                    await self.reopen(password: password)
+                    self.registerHistory(title, back: true)
+                    return
+                case .failure(ArchiveEditError.folderNotWritable(let folder)):
+                    guard let interaction = self.interaction,
+                          await interaction.askWritableFolder(
+                              message: "To change “\(level.title)”, 7-Mac needs permission to write "
+                                     + "into the folder it is in. Choose “\(folder.lastPathComponent)”.",
+                              suggesting: folder) != nil,
+                          FolderAccess.shared.prepare(folder)
+                    else {
+                        self.problem = ArchiveEditError.folderNotWritable(folder).localizedDescription
+                        return
+                    }
+                case .failure(let error) where error.isPasswordProblem:
+                    guard let answer = await self.askPassword(for: level.title, incorrect: incorrect)
+                    else { return }
+                    password = answer.password
+                    incorrect = true
+                case .failure(let error) where error is CancellationError || error.sevenZipCode == .cancelled:
+                    return
+                case .failure(let error):
+                    self.problem = "\(title) did not work: \(error.archiveDescription.lowercased()). "
+                        + "The archive has not been changed."
+                    return
+                }
+            }
+        }
+    }
+
+    private func history(back: Bool) async {
+        await serialized {
+            guard let editor = self.editor,
+                  back ? editor.canUndo : editor.canRedo
+            else { return }
+            let title = (back ? editor.undoSteps.last : editor.redoSteps.last)?.title ?? ""
+            let activity = BrowserActivity(title: back ? "Undoing \(title)" : "Redoing \(title)")
+            let result = await self.perform(activity) {
+                try await back ? editor.undo() : editor.redo()
+            }
+            switch result {
+            case .success:
+                await self.reopen(password: self.levels.first?.password)
+            case .failure(let error):
+                self.problem = "Could not \(back ? "undo" : "redo") \(title): \(error.localizedDescription)"
+                // History that did not replay is history that cannot be
+                // trusted to replay later either.
+                self.undoManager?.removeAllActions(withTarget: self)
+            }
+        }
+    }
+
+    /// Tells the window's undo manager how to reverse what just happened.
+    /// Registered from inside an undo, the same call becomes the redo —
+    /// which is how UndoManager wants it done.
+    private func registerHistory(_ title: String, back: Bool) {
+        guard let undoManager else { return }
+        undoManager.registerUndo(withTarget: self) { browser in
+            browser.registerHistory(title, back: !back)
+            Task { await browser.history(back: back) }
+        }
+        undoManager.setActionName(title)
+    }
+
+    /// Reads the archive again after the file under it changed. The stack
+    /// goes back to the root, and anything unpacked from the old file is
+    /// forgotten: its indexes no longer mean the same entries.
+    private func reopen(password: String?) async {
+        do {
+            let archive = try await Archive.open(url, password: provider(password))
+            let level = await makeLevel(archive, title: url.lastPathComponent,
+                                        password: password, isInPlace: false)
+            levels = [level]
+            selection = []
+            extracted = [:]
+            refreshMatches()
+        } catch {
+            phase = .failed(error.archiveDescription)
+        }
+    }
+
+    private func serialized(_ work: @escaping @MainActor () async -> Void) async {
+        let previous = editChain
+        let next = Task { @MainActor in
+            await previous?.value
+            await work()
+        }
+        editChain = next
+        await next.value
+    }
+
+    nonisolated static func path(replacingLastComponentOf path: String, with name: String) -> String {
+        let parent = (path as NSString).deletingLastPathComponent
+        return parent.isEmpty ? name : parent + "/" + name
+    }
+
     // MARK: - Closing
 
-    /// Stops whatever is running and deletes the scratch folder.
+    /// Stops whatever is running and deletes the scratch folder — with it
+    /// the undo history, which nothing could reach once the window is gone.
     func close() {
         activity?.cancel()
         passwordPrompt?.cancel()
         previewURL = nil
+        undoManager?.removeAllActions(withTarget: self)
+        editor?.discardHistory()
         try? FileManager.default.removeItem(at: scratch)
     }
 
@@ -457,13 +689,13 @@ final class ArchiveBrowser {
         }
     }
 
-    private func progressSink(_ activity: BrowserActivity) -> ProgressObserver {
+    private func progressSink(_ activity: BrowserActivity?) -> ProgressObserver {
         let throttle = ProgressThrottle()
         return { progress in
             guard throttle.allow() else { return }
             Task { @MainActor in
-                activity.totalBytes = progress.totalBytes
-                activity.completedBytes = progress.completedBytes
+                activity?.totalBytes = progress.totalBytes
+                activity?.completedBytes = progress.completedBytes
             }
         }
     }

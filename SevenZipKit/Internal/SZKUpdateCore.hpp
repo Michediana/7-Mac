@@ -75,6 +75,74 @@ Result Create(const std::vector<std::string> &inputPaths,
               const ProgressHandler &progress,
               CreateOutcome &outcome);
 
+// ---------------------------------------------------------------------------
+// Rewriting an archive that already exists
+// ---------------------------------------------------------------------------
+//
+// An archive is never edited where it lies. Each of these writes a complete
+// new archive to `outputPath`, copying the entries that did not change as
+// they are -- still compressed, where the format allows -- and leaves putting
+// it in place of the original to the caller. That is what makes an edit safe
+// to cancel and possible to undo: until the caller swaps the files, nothing
+// the person had has been touched.
+
+struct ModifyOptions {
+    /// UTF-8 path of the new archive. Must not already exist.
+    std::string outputPath;
+
+    /// Decodes existing encrypted entries where the format has to (7z
+    /// repacking a solid block that lost a member), and encrypts added ones.
+    /// Empty for an archive with nothing encrypted in it.
+    ///
+    /// 7z keeps an encrypted entry list encrypted on its own when a password
+    /// is set, so there is no header switch here.
+    std::string password;
+};
+
+/// What adding does with a file whose path is already in the archive.
+enum class AddPolicy {
+    replace,      ///< the file on disk wins
+    onlyIfNewer   ///< the file on disk wins only when its date is later
+};
+
+/// Why an archive cannot be rewritten, or an empty string when it can: the
+/// format has no writer (zstd, rar…), the archive spans volumes, or it was
+/// reached through another container (a dmg opened straight to its HFS).
+std::string WhyNotModifiable(const Archive &archive);
+
+/// Rewrites `archive` without the entries at `indices`. Only those: a folder
+/// entry's contents are separate entries, and the caller says which it means.
+Result DeleteEntries(const Archive &archive,
+                     const std::vector<std::uint32_t> &indices,
+                     const ModifyOptions &options,
+                     const ProgressHandler &progress,
+                     CreateOutcome &outcome);
+
+/// Rewrites `archive` with the entries at the given indices under new paths
+/// (UTF-8, '/'-separated, archive-relative). Nothing is recompressed: only
+/// the names change. Renaming a folder means renaming every entry under it,
+/// which the caller does by listing them all.
+Result RenameEntries(const Archive &archive,
+                     const std::vector<std::pair<std::uint32_t, std::string>> &renames,
+                     const ModifyOptions &options,
+                     const ProgressHandler &progress,
+                     CreateOutcome &outcome);
+
+/// Rewrites `archive` with the files and folders at `inputPaths` (UTF-8,
+/// scanned recursively) added under `folderInArchive` ('/'-separated, empty
+/// for the root). An input keeps its own name and loses its parents on disk,
+/// as with Create.
+///
+/// `outcome.files` and `folders` count what was taken from disk, which with
+/// `onlyIfNewer` may be less than what was offered.
+Result AddFiles(const Archive &archive,
+                const std::vector<std::string> &inputPaths,
+                const std::string &folderInArchive,
+                AddPolicy policy,
+                const ModifyOptions &options,
+                const ProgressHandler &progress,
+                CreateOutcome &outcome);
+
 }  // namespace szk
 
 #endif /* SZKUpdateCore_hpp */

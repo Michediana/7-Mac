@@ -121,6 +121,12 @@ final class Preferences {
         didSet { defaults.set(openAction.rawValue, forKey: "OpenAction") }
     }
 
+    /// Adding a file whose name an archive already has: replace the entry
+    /// only when the file on disk is newer. Off means the file always wins.
+    var onlyReplaceOlder: Bool {
+        didSet { defaults.set(onlyReplaceOlder, forKey: "OnlyReplaceOlder") }
+    }
+
     /// Show the extraction or the new archive in the Finder when a job ends.
     var revealWhenDone: Bool {
         didSet { defaults.set(revealWhenDone, forKey: "RevealWhenDone") }
@@ -136,6 +142,7 @@ final class Preferences {
             "OffersKeychain": true,
             "RevealWhenDone": true,
             "OpenAction": OpenAction.extract.rawValue,
+            "OnlyReplaceOlder": false,
         ])
         destinationPolicy = DestinationPolicy(
             rawValue: defaults.string(forKey: "DestinationPolicy") ?? "") ?? .besideArchive
@@ -150,6 +157,7 @@ final class Preferences {
         offersKeychain = defaults.bool(forKey: "OffersKeychain")
         revealWhenDone = defaults.bool(forKey: "RevealWhenDone")
         openAction = OpenAction(rawValue: defaults.string(forKey: "OpenAction") ?? "") ?? .extract
+        onlyReplaceOlder = defaults.bool(forKey: "OnlyReplaceOlder")
     }
 }
 

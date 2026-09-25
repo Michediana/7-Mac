@@ -236,6 +236,10 @@ public:
                                        const PasswordProvider &password,
                                        Result &result);
 
+    // Rewriting -- Delete, Rename and Add -- lives in SZKUpdateCore.hpp,
+    // with the rest of the writing. They need this class's engine objects,
+    // hence the friendship.
+
     /// Decodes and verifies without writing anything.
     Result Test(const std::vector<std::uint32_t> &indices,
                 const ProgressHandler &progress,
@@ -243,6 +247,7 @@ public:
                 ExtractOutcome &outcome);
 
 private:
+    friend struct Rewriter;
     class Impl;
     explicit Archive(std::unique_ptr<Impl> impl);
 
