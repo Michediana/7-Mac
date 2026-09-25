@@ -248,16 +248,16 @@ private struct BrowserContent: View {
     private func menu(for ids: Set<ArchiveNode.ID>) -> some View {
         let nodes = ids.compactMap { browser.current?.tree.node($0) }
         if nodes.count == 1, let node = nodes.first, !node.isDirectory {
-            Button("Quick Look") { Task { await browser.preview(node) } }
-            Button("Open as Archive") { Task { await browser.descend(into: node) } }
+            Button("Quick Look", systemImage: "eye") { Task { await browser.preview(node) } }
+            Button("Open as Archive", systemImage: "shippingbox") { Task { await browser.descend(into: node) } }
             Divider()
         }
         if !nodes.isEmpty {
-            Button("Extract…") {
+            Button("Extract…", systemImage: "arrow.down.document") {
                 browser.selection = ids
                 chooseDestinationAndExtract()
             }
-            Button("Extract Here") {
+            Button("Extract Here", systemImage: "arrow.down.to.line") {
                 browser.selection = ids
                 Task { await browser.extract(to: browser.defaultDestination) }
             }
@@ -265,14 +265,14 @@ private struct BrowserContent: View {
         if browser.editBlockedReason == nil {
             Divider()
             if nodes.count == 1, let node = nodes.first {
-                Button("Rename…") { renaming = node }
+                Button("Rename…", systemImage: "pencil") { renaming = node }
                     .disabled(!browser.canEdit)
             }
             if !nodes.isEmpty {
-                Button("Delete") { Task { await browser.delete(ids) } }
+                Button("Delete", systemImage: "trash") { Task { await browser.delete(ids) } }
                     .disabled(!browser.canEdit)
             }
-            Button("Add Files…") {
+            Button("Add Files…", systemImage: "plus") {
                 browser.selection = ids
                 chooseFilesToAdd()
             }
@@ -280,7 +280,7 @@ private struct BrowserContent: View {
         }
         if nodes.count == 1, let node = nodes.first {
             Divider()
-            Button("Copy Path") {
+            Button("Copy Path", systemImage: "doc.on.doc") {
                 NSPasteboard.general.clearContents()
                 NSPasteboard.general.setString(node.path, forType: .string)
             }
