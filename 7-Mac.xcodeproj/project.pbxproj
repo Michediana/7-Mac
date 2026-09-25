@@ -646,13 +646,13 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(CONTENTS_FOLDER_PATH)/Resources/7-Zip-License.txt",
-				"$(BUILT_PRODUCTS_DIR)/$(CONTENTS_FOLDER_PATH)/Resources/7-Zip-copying.txt",
-				"$(BUILT_PRODUCTS_DIR)/$(CONTENTS_FOLDER_PATH)/Resources/7-Zip-unRarLicense.txt",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/7-Zip-License.txt",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/7-Zip-copying.txt",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/7-Zip-unRarLicense.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# LGPL: the engine's licence texts ship inside the framework that carries it.\n# Inputs and outputs are declared above so this survives script sandboxing.\nset -eu\ndest=\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Resources\"\nmkdir -p \"$dest\"\ncp \"$SEVENZIP_ENGINE_DIR/licenses/License.txt\"       \"$dest/7-Zip-License.txt\"\ncp \"$SEVENZIP_ENGINE_DIR/licenses/copying.txt\"       \"$dest/7-Zip-copying.txt\"\ncp \"$SEVENZIP_ENGINE_DIR/licenses/unRarLicense.txt\" \"$dest/7-Zip-unRarLicense.txt\"\n";
+			shellScript = "# LGPL: the engine's licence texts ship inside the framework that carries it.\n# Inputs and outputs are declared above so this survives script sandboxing.\nset -eu\n# TARGET_BUILD_DIR, not BUILT_PRODUCTS_DIR: when archiving, the latter holds only a\n# symlink to the framework, and the sandbox rejects writes through it.\ndest=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\nmkdir -p \"$dest\"\ncp \"$SEVENZIP_ENGINE_DIR/licenses/License.txt\"       \"$dest/7-Zip-License.txt\"\ncp \"$SEVENZIP_ENGINE_DIR/licenses/copying.txt\"       \"$dest/7-Zip-copying.txt\"\ncp \"$SEVENZIP_ENGINE_DIR/licenses/unRarLicense.txt\" \"$dest/7-Zip-unRarLicense.txt\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
