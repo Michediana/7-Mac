@@ -2,8 +2,8 @@
 
 GUI nativa macOS per 7-Zip, con il motore 7-Zip **incorporato nell'app** come framework.
 
-- **Stato:** M0, M1 e M2 completi e verificati; M3 da iniziare
-- **Ultimo aggiornamento:** 2026-09-21
+- **Stato:** M0–M3 completi e verificati; M4 da iniziare
+- **Ultimo aggiornamento:** 2026-09-25
 - **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.03 (2026-09-03)
 
 ---
@@ -313,15 +313,83 @@ archivio da quarantamila voci non è una funzione. Le tre offerte sono "tieni en
 `SZKOverwriteHandler` resta nel framework per quando M3 avrà una vista da cui
 rispondere sensatamente.
 
-### M3 — Browser dell'archivio  ⏱ 2 settimane  ← prossimo
+### M3 — Browser dell'archivio  ✅ fatto
 
 Qui l'app smette di essere un wrapper.
 
-- [ ] Vista ad albero delle voci con dimensioni, ratio, metodo, CRC, attributi POSIX
-- [ ] Estrazione parziale nativa (array di indici, non wildcard)
-- [ ] Anteprima in-place dei file dentro l'archivio
-- [ ] **Archivi annidati**: `.tar.gz` navigato come un albero unico (`IInArchiveGetStream`)
-- [ ] Ordinamento, ricerca, filtri
+- [x] Vista ad albero delle voci con dimensioni, ratio, metodo, CRC, attributi POSIX
+- [x] Estrazione parziale nativa (array di indici, non wildcard)
+- [x] Anteprima in-place dei file dentro l'archivio (Quick Look, barra spaziatrice)
+- [x] **Archivi annidati**: `.tar.gz` navigato come un albero unico (`IInArchiveGetStream`)
+- [x] Ordinamento, ricerca, filtri
+
+**Criterio di uscita: raggiunto.** `Scripts/smoke-test.sh` resta a 22 asserzioni ed
+esegue ora **93 test**, tutti verdi: i 71 di M2 più 12 sull'albero (cartelle implicite,
+`./`, percorsi duplicati, totali, ordinamento, ricerca, filtri) e 10 sul browser e sulle
+due primitive nuove del motore — estrazione relativa alla cartella comune, tar dentro tar
+aperto in place, 7z che rifiuta di farlo, `.tar.gz` che scende da solo nel tar, zip dentro
+7z scompattato e aperto, anteprima (anche cifrata, con password sbagliata e ritentativo),
+estrazione di una selezione e di un archivio annidato attraverso la coda.
+
+Verificato anche dal vivo: `outer.zip` con dentro uno zip e un `.tar.gz` mostra le due
+voci con dimensioni, metodo (`Store`, `Deflate`) e data; `project.tar.gz` si apre dritto
+su `project.tar`, con la barra del percorso per risalire e "Unpacked to a temporary file"
+nella barra di stato.
+
+Struttura aggiunta:
+
+```
+SevenZipKit/Internal/SZKArchiveCore.cpp   OpenEntry (IInArchiveGetStream) e removePathParts
+7-Mac/Model/ArchiveTree.swift             voci piatte → albero; ordinamento, ricerca, filtri
+7-Mac/Model/ArchiveBrowser.swift          lo stato di una finestra: pila di livelli, anteprima
+7-Mac/UI/BrowserView.swift                Table ad albero, barra percorso, barra di stato
+7-MacTests/{ArchiveTree,Browser}Tests.swift
+```
+
+### Come si arriva al browser
+
+File › Open… (⌘O), il pulsante "Open…" nella finestra principale, "Show Contents" nel
+menu contestuale di un job. Il doppio clic dal Finder **estrae ancora**, come in M2: è una
+preferenza ("Opening an archive from the Finder"), e il predefinito non cambia sotto i
+piedi di chi c'era già. Il drop sulla finestra estrae sempre — quel gesto dice già cosa
+vuole.
+
+### Cinque cose emerse implementando
+
+1. **Gli archivi non contengono un albero.** Contengono percorsi, spesso senza le cartelle
+   intermedie. L'albero sintetizza le cartelle mancanti e le sostituisce se l'archivio le
+   nomina più tardi; una cartella sintetica non ha indice, quindi selezionarla significa
+   selezionare ciò che contiene. Lo stesso percorso due volte (un tar accodato) resta due
+   file: sono diversi.
+2. **`CArchiveLink` scende già da solo, ma non in un `.tar.gz`.** Segue
+   `kpidMainSubfile` — per questo un `.dmg` si apre direttamente su HFS — però pretende un
+   `IInStream`, e lo stream decompresso di gzip va solo avanti. Il browser fa lo stesso
+   gesto a mano: prova `IInArchiveGetStream` (tar, iso, dmg, cpio, ar: costo zero) e,
+   se il contenitore comprime, scompatta la voce in una cartella temporanea e apre quella.
+   È ciò che fa anche il file manager di 7-Zip. Il salto automatico vale solo per i
+   compressori (gzip, bzip2, xz, zstd, lzma, Z) con una sola voce: uno zip che contiene uno
+   zip resta uno zip che si vuole vedere.
+3. **"Estrai questi" non vuole il percorso completo.** Chi estrae `docs/2026/report.pdf`
+   vuole `report.pdf`. `CArchiveExtractCallback` ha già `removePathParts`, ma rifiuta con
+   `E_FAIL` qualunque voce fuori dal prefisso: il prefisso lo calcola il framework dagli
+   stessi `PathParts` che il callback confronta, non l'app dalla sua normalizzazione, così
+   un `./` in testa non può farli divergere.
+4. **Un archivio annidato non ha un file da riaprire.** Il job della coda quindi riceve
+   l'`Archive` già aperto (`EntrySelection`), non un URL. Un archivio aperto in place legge
+   attraverso lo stream del genitore: condivide la sua coda seriale e lo tiene in vita.
+5. **La password si chiede nella finestra che serve.** Il browser ha il suo foglio, e la
+   chiede *prima* di accodare un'estrazione cifrata: il foglio della coda sta nella
+   finestra principale, che può essere chiusa.
+
+### Limiti accettati
+
+- Il doppio clic su una cartella non la espande: in `Table` l'espansione di `OutlineGroup`
+  non è pilotabile; c'è il triangolo.
+- Niente trascinamento di voci verso il Finder: richiede `NSFilePromiseProvider` e una
+  sorgente di drag AppKit. Candidato per M5.
+- Un annidato dentro un contenitore compresso costa una copia su disco temporanea, grande
+  quanto la voce. Viene cancellata alla chiusura della finestra, e all'avvio se l'app non ha
+  fatto in tempo.
 
 ### M4 — Modifica in-place  ⏱ 1–2 settimane
 

@@ -10,6 +10,7 @@ import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.openWindow) private var openWindow
     @State private var isTargeted = false
 
     var body: some View {
@@ -30,6 +31,10 @@ struct ContentView: View {
         }
         .toolbar {
             ToolbarItemGroup {
+                Button("Open…", systemImage: "folder") {
+                    model.chooseArchivesToBrowse()
+                }
+                .help("Look inside an archive")
                 Button("Extract…", systemImage: "arrow.down.document") {
                     model.chooseArchivesToExtract()
                 }
@@ -43,6 +48,10 @@ struct ContentView: View {
                 }
                 .disabled(!model.queue.hasFinishedJobs)
             }
+        }
+        .onAppear {
+            let openWindow = openWindow
+            model.windowOpener = { openWindow(id: WindowID.browser, value: $0) }
         }
         .sheet(item: $model.passwordPrompt) { PasswordSheet(prompt: $0) }
         .sheet(item: $model.compressionDraft) { CompressSheet(draft: $0) }
@@ -96,6 +105,16 @@ private struct QueueList: View {
                 ForEach(model.queue.jobs) { job in
                     JobRow(job: job)
                         .listRowSeparator(.visible)
+                        .contextMenu {
+                            if let archive = job.browsableArchive {
+                                Button("Show Contents") { model.browse([archive]) }
+                            }
+                            if let url = job.resultURL {
+                                Button("Show in Finder") {
+                                    NSWorkspace.shared.activateFileViewerSelecting([url])
+                                }
+                            }
+                        }
                 }
             }
             .listStyle(.inset)

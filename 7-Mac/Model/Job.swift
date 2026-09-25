@@ -18,8 +18,25 @@ nonisolated struct CompressionRequest: Sendable {
     var encryptsHeader: Bool
 }
 
+/// Entries picked in a browser window, out of an archive it already has
+/// open — which may be one nested inside another and have no file of its own
+/// to reopen.
+nonisolated struct EntrySelection: Sendable {
+    var archive: Archive
+    /// The archive's name as the browser shows it.
+    var archiveName: String
+    /// `nil` for everything.
+    var indexes: IndexSet?
+    /// The folder the entries go into.
+    var destination: URL
+    var password: String?
+    /// What the queue row says.
+    var title: String
+}
+
 nonisolated enum JobRequest: Sendable {
     case extract(archive: URL)
+    case extractEntries(EntrySelection)
     case compress(CompressionRequest)
 }
 
@@ -60,14 +77,22 @@ final class Job: Identifiable {
         switch request {
         case .extract(let archive):
             title = archive.lastPathComponent
+        case .extractEntries(let selection):
+            title = selection.title
         case .compress(let compression):
             title = compression.output.lastPathComponent
         }
     }
 
     var isExtraction: Bool {
-        if case .extract = request { return true }
-        return false
+        if case .compress = request { return false }
+        return true
+    }
+
+    /// The archive file a browser can open for this job, if there is one.
+    var browsableArchive: URL? {
+        if case .extract(let archive) = request { return archive }
+        return nil
     }
 
     var isFinished: Bool {

@@ -48,6 +48,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, copy) NSArray<SZKArchiveEntry *> *entries;
 
+/// For an archive opened out of another one: the archive it lives in, and
+/// the entry path it has there. `nil` for an archive opened from a file.
+@property (nonatomic, readonly, nullable) SZKArchive *parentArchive;
+@property (nonatomic, readonly, copy, nullable) NSString *pathInParent;
+
+/// Opens entry `index` as an archive, reading it in place through this
+/// archive's own stream.
+///
+/// Works where the handler can seek inside an entry — tar, iso, dmg, cpio, ar
+/// and similar containers. Formats that compress their entries (7z, zip,
+/// gzip…) cannot, and fail with `SZKErrorUnsupported`: extract the entry to a
+/// file and open that instead.
+///
+/// The result keeps this archive alive and reads through it, so the two share
+/// its thread restriction: use them from one thread at a time, together.
+- (nullable SZKArchive *)openEntryAtIndex:(NSUInteger)index
+                         passwordProvider:(nullable SZKPasswordProvider)passwordProvider
+                                    error:(NSError **)error;
+
 /// Extracts `indexes`, or everything when `indexes` is `nil`.
 ///
 /// Selection is by index, not by name pattern: picking three entries out of

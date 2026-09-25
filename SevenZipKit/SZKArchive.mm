@@ -97,6 +97,38 @@ std::vector<std::uint32_t> IndicesFromIndexSet(NSIndexSet *_Nullable indexes)
     return self;
 }
 
+- (SZKArchive *)openEntryAtIndex:(NSUInteger)index
+                passwordProvider:(SZKPasswordProvider)passwordProvider
+                           error:(NSError **)error
+{
+    if (index >= _entries.count) {
+        if (error) {
+            szk::Result result;
+            result.status = szk::Status::failed;
+            result.message = "no such entry";
+            *error = SZKErrorFromResult(result);
+        }
+        return nil;
+    }
+
+    szk::Result result;
+    szk::PasswordProvider password = SZKMakePasswordProvider(passwordProvider);
+    std::unique_ptr<szk::Archive> opened =
+        _archive->OpenEntry(static_cast<std::uint32_t>(index), password, result);
+    if (!opened) {
+        if (error) {
+            *error = SZKErrorFromResult(result);
+        }
+        return nil;
+    }
+
+    SZKArchive *nested = [[SZKArchive alloc] initWithArchive:std::move(opened) url:_url];
+    // The nested handler reads through our stream: it must not outlive us.
+    nested->_parentArchive = self;
+    nested->_pathInParent = [_entries[index].path copy];
+    return nested;
+}
+
 #pragma mark - Extracting
 
 - (BOOL)extractIndexes:(NSIndexSet *)indexes
@@ -111,6 +143,7 @@ std::vector<std::uint32_t> IndicesFromIndexSet(NSIndexSet *_Nullable indexes)
     coreOptions.destinationDirectory = PathFromURL(options.destinationDirectory);
     coreOptions.paths = (options.paths == SZKPathPolicyFlatten) ? szk::PathPolicy::flatten
                                                                 : szk::PathPolicy::fullPaths;
+    coreOptions.relativeToCommonParent = options.relativeToCommonParent;
     switch (options.overwrite) {
         case SZKOverwritePolicyAsk:            coreOptions.overwrite = szk::OverwritePolicy::ask; break;
         case SZKOverwritePolicyOverwrite:      coreOptions.overwrite = szk::OverwritePolicy::overwrite; break;

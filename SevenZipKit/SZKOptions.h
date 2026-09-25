@@ -54,6 +54,12 @@ typedef NS_ENUM(NSInteger, SZKOverwriteDecision) {
 @property (nonatomic) SZKPathPolicy paths;
 @property (nonatomic) SZKOverwritePolicy overwrite;
 
+/// Write a partial selection relative to the deepest folder its entries
+/// share: picking `docs/2026/report.pdf` writes `report.pdf`, and picking the
+/// folder `docs/2026` writes `2026/…`. This is what a browser means by
+/// "extract these". Ignored for a full extraction and with `Flatten`.
+@property (nonatomic) BOOL relativeToCommonParent;
+
 - (instancetype)initWithDestinationDirectory:(NSURL *)destinationDirectory;
 - (instancetype)init NS_UNAVAILABLE;
 @end

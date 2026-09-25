@@ -19,6 +19,17 @@ struct __MacApp: App {
         }
         .commands { SevenMacCommands(model: model) }
 
+        WindowGroup("Archive", id: WindowID.browser, for: BrowserTarget.self) { $target in
+            if let target {
+                BrowserWindow(target: target, model: model)
+                    .environment(model)
+            }
+        }
+        .defaultSize(width: 920, height: 580)
+        // A restored window would point at a file this launch has no
+        // sandbox access to. Better to come back without it.
+        .restorationBehavior(.disabled)
+
         Window("7-Zip Engine", id: WindowID.engine) {
             EngineInfoView()
         }
@@ -33,6 +44,7 @@ struct __MacApp: App {
 
 enum WindowID {
     static let engine = "engine"
+    static let browser = "browser"
 }
 
 struct SevenMacCommands: Commands {
@@ -41,6 +53,8 @@ struct SevenMacCommands: Commands {
 
     var body: some Commands {
         CommandGroup(replacing: .newItem) {
+            Button("Open…") { model.chooseArchivesToBrowse() }
+                .keyboardShortcut("o")
             Button("Extract…") { model.chooseArchivesToExtract() }
                 .keyboardShortcut("e")
             Button("Compress…") { model.chooseItemsToCompress() }

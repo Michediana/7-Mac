@@ -29,6 +29,15 @@ final class AppModel: JobInteraction {
     /// Non-nil while the compress sheet is up.
     var compressionDraft: CompressionDraft?
 
+    /// Opens a browser window. SwiftUI only hands out `openWindow` to views,
+    /// and archives arrive from the Finder before any view exists — so the
+    /// first window to appear installs it, and anything that came in earlier
+    /// waits here.
+    var windowOpener: ((BrowserTarget) -> Void)? {
+        didSet { drainPendingBrowsers() }
+    }
+    private var pendingBrowsers: [URL] = []
+
     init() {
         queue = JobQueue(preferences: preferences)
         queue.interaction = self
@@ -49,6 +58,30 @@ final class AppModel: JobInteraction {
         } else {
             beginCompression(of: urls)
         }
+    }
+
+    /// Files opened from the Finder: the Dock icon, a double-click, "Open
+    /// With". Unlike a drop, what this means is a preference.
+    func open(_ urls: [URL]) {
+        let urls = urls.filter { $0.isFileURL }
+        if preferences.openAction == .browse,
+           !urls.isEmpty, urls.allSatisfy({ !ArchiveNaming.isDirectory($0) }) {
+            browse(urls)
+        } else {
+            accept(urls)
+        }
+    }
+
+    func browse(_ urls: [URL]) {
+        pendingBrowsers.append(contentsOf: urls)
+        drainPendingBrowsers()
+    }
+
+    private func drainPendingBrowsers() {
+        guard let windowOpener else { return }
+        let urls = pendingBrowsers
+        pendingBrowsers = []
+        for url in urls { windowOpener(BrowserTarget(url: url)) }
     }
 
     func extract(_ urls: [URL]) {
@@ -80,6 +113,17 @@ final class AppModel: JobInteraction {
         // Explicit choice, so no extension filter: if the engine can open it,
         // it gets extracted.
         extract(panel.urls)
+    }
+
+    func chooseArchivesToBrowse() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = true
+        panel.message = "Choose archives to look inside."
+        panel.prompt = "Open"
+        guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
+        browse(panel.urls)
     }
 
     func chooseItemsToCompress() {

@@ -11,6 +11,7 @@
 
 #include "Common/MyCom.h"
 #include "Common/StringConvert.h"
+#include "Common/Wildcard.h"
 #include "Windows/FileDir.h"
 #include "Windows/FileName.h"
 #include "Windows/PropVariant.h"
@@ -328,7 +329,80 @@ std::unique_ptr<Archive> Archive::Open(const std::string &path,
                                    callback.PasswordUnavailable);
         return nullptr;
     }
+    return Finish(std::move(impl),
+                  callback.PasswordWasAsked && callback.PasswordWasSupplied, result);
+}
 
+std::unique_ptr<Archive> Archive::OpenEntry(std::uint32_t index,
+                                            const PasswordProvider &password,
+                                            Result &result)
+{
+    CCodecs *codecs = SharedCodecs();
+    const CArc *arc = impl_->link.GetArc();
+    if (!codecs || !arc || index >= entries_.size()) {
+        result.status = Status::failed;
+        result.message = "no such entry";
+        return nullptr;
+    }
+
+    // The same three steps CArchiveLink::Open takes for a kpidMainSubfile, but
+    // for an entry of our choosing. Each can fail for a perfectly ordinary
+    // reason -- the handler has no GetStream, or its stream only reads
+    // forwards -- and every one of them means "extract it instead".
+    CMyComPtr<IInArchiveGetStream> getStream;
+    if (arc->Archive->QueryInterface(IID_IInArchiveGetStream, (void **)&getStream) != S_OK
+        || !getStream) {
+        result.status = Status::unsupported;
+        result.message = "this format cannot open an entry in place";
+        return nullptr;
+    }
+    CMyComPtr<ISequentialInStream> sequential;
+    if (getStream->GetStream(index, &sequential) != S_OK || !sequential) {
+        result.status = Status::unsupported;
+        result.message = "this entry cannot be opened in place";
+        return nullptr;
+    }
+    CMyComPtr<IInStream> stream;
+    if (sequential.QueryInterface(IID_IInStream, &stream) != S_OK || !stream) {
+        result.status = Status::unsupported;
+        result.message = "this entry can only be read from start to end";
+        return nullptr;
+    }
+
+    UString itemPath;
+    arc->GetItem_Path(index, itemPath);
+
+    auto impl = std::make_unique<Impl>();
+    const OpenProgressHandler noProgress;
+    COpenCallback callback (password, noProgress);
+
+    CObjectVector<COpenType> types;
+    CIntVector excludedFormats;
+    const CObjectVector<CProperty> noProperties;   // see Open: must be set
+
+    COpenOptions options;
+    options.props = &noProperties;
+    options.codecs = codecs;
+    options.types = &types;
+    options.excludedFormats = &excludedFormats;
+    options.stdInMode = false;
+    options.stream = stream;
+    options.filePath = itemPath;
+
+    const HRESULT hr = impl->link.Open_Strict(options, &callback);
+    if (hr != S_OK) {
+        result = ResultFromHRESULT(hr, callback.PasswordWasAsked, callback.PasswordWasSupplied,
+                                   callback.PasswordUnavailable);
+        return nullptr;
+    }
+    return Finish(std::move(impl),
+                  callback.PasswordWasAsked && callback.PasswordWasSupplied, result);
+}
+
+std::unique_ptr<Archive> Archive::Finish(std::unique_ptr<Impl> impl, bool headerEncrypted,
+                                         Result &result)
+{
+    CCodecs *codecs = SharedCodecs();
     std::unique_ptr<Archive> archive (new Archive(std::move(impl)));
     const CArc *arc = archive->impl_->link.GetArc();
     IInArchive *inArchive = arc->Archive;
@@ -342,7 +416,7 @@ std::unique_ptr<Archive> Archive::Open(const std::string &path,
     info.hasPhysicalSize = arc->PhySize_Defined;
     info.physicalSize = arc->PhySize;
     info.readOnly = arc->IsReadOnly;
-    info.headerEncrypted = callback.PasswordWasAsked && callback.PasswordWasSupplied;
+    info.headerEncrypted = headerEncrypted;
     // VolumePaths holds the *additional* volumes the engine opened; the one we
     // were handed is not in it (upstream comments its Add out). So a plain
     // archive gives an empty list, and a 4-part set gives three.
@@ -670,7 +744,41 @@ Result Archive::Extract(const std::vector<std::uint32_t> &indices,
         }
     }
 
-    const UStringVector removePathParts;  // nothing to strip: paths are archive-relative
+    // Paths are archive-relative. Asked to, strip the folders every selected
+    // entry shares -- computed from the engine's own split of each path, the
+    // same parts CArchiveExtractCallback compares against, so a `./` prefix
+    // or a doubled slash cannot make the two disagree. An entry outside the
+    // prefix would be an E_FAIL, which by construction there is none of.
+    UStringVector removePathParts;
+    if (options.relativeToCommonParent && !indices.empty()
+        && options.paths == PathPolicy::fullPaths) {
+        bool first = true;
+        for (const std::uint32_t index : indices) {
+            CReadArcItem item;
+            if (arc->GetItem(index, item) != S_OK) {
+                removePathParts.Clear();
+                break;
+            }
+            UStringVector parent = item.PathParts;
+            if (!parent.IsEmpty()) {
+                parent.DeleteBack();
+            }
+            if (first) {
+                removePathParts = parent;
+                first = false;
+                continue;
+            }
+            unsigned shared = 0;
+            while (shared < removePathParts.Size() && shared < parent.Size()
+                   && CompareFileNames(removePathParts[shared], parent[shared]) == 0) {
+                shared++;
+            }
+            removePathParts.DeleteFrom(shared);
+            if (removePathParts.IsEmpty()) {
+                break;
+            }
+        }
+    }
     extractor->Init(ntOptions, nullptr /* no wildcard filter: we select by index */,
                     arc, callback, false /* stdOutMode */, options.testOnly,
                     destination, removePathParts, false, arc->GetEstmatedPhySize());

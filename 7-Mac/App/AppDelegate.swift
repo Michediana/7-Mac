@@ -15,6 +15,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.servicesProvider = services
+        // Whatever a browser window left behind when it could not clean up.
+        ArchiveBrowser.sweepAbandonedScratch()
         // Without this the entries in Info.plist only appear after the system
         // has re-scanned the app on its own schedule.
         NSUpdateDynamicServices()
@@ -22,7 +24,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// Double-clicking a `.7z`, or dropping one on the Dock icon.
     func application(_ application: NSApplication, open urls: [URL]) {
-        AppModel.shared.accept(urls)
+        AppModel.shared.open(urls)
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

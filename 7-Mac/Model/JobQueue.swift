@@ -99,6 +99,8 @@ final class JobQueue {
         switch job.request {
         case .extract(let archive):
             try await extract(archive, for: job)
+        case .extractEntries(let selection):
+            try await extract(selection, for: job)
         case .compress(let request):
             try await compress(request, for: job)
         }
@@ -164,6 +166,54 @@ final class JobQueue {
                 else { throw CancellationError() }
                 password = answer.password
                 remember = answer.remember
+                retrying = true
+                job.restartMeasurement()
+            }
+        }
+    }
+
+    /// Entries a browser picked, from the archive it already has open. No
+    /// opening and no destination policy: the browser asked where.
+    private func extract(_ selection: EntrySelection,
+                         for job: Job) async throws -> (ArchiveOutcome, URL) {
+        var folder = selection.destination
+        if !FolderAccess.shared.prepare(folder) {
+            job.note = "Waiting for a destination"
+            guard let chosen = await interaction?.askWritableFolder(
+                message: "7-Mac needs permission to write into “\(folder.lastPathComponent)”. "
+                       + "Choose it, or pick somewhere else.",
+                suggesting: folder)
+            else { throw CancellationError() }
+            folder = chosen
+            job.note = nil
+        }
+
+        // A selection goes straight into the folder, the way a file dragged
+        // out of a window would. The whole archive is a drop by another name,
+        // and gets a drop's destination.
+        let destination = selection.indexes == nil
+            ? ArchiveNaming.extractionDestination(entries: selection.archive.entries,
+                                                  archive: URL(filePath: selection.archiveName),
+                                                  in: folder)
+            : folder
+
+        var password = selection.password
+        var retrying = false
+        while true {
+            do {
+                let outcome = try await selection.archive.extract(
+                    selection.indexes,
+                    to: destination,
+                    relativeToCommonParent: selection.indexes != nil,
+                    overwrite: retrying ? .overwrite : preferences.overwritePolicy,
+                    password: provider(password),
+                    onProgress: progressSink(job))
+                return (outcome, destination)
+            } catch where error.isPasswordProblem {
+                guard let answer = await askPassword(for: URL(filePath: selection.archiveName), job: job,
+                                                     incorrect: password != nil)
+                else { throw CancellationError() }
+                password = answer.password
                 retrying = true
                 job.restartMeasurement()
             }
@@ -267,7 +317,7 @@ final class JobQueue {
 
 /// `SetCompleted` fires far more often than a screen refreshes. Dropping the
 /// surplus here keeps the main actor out of it entirely.
-private nonisolated final class ProgressThrottle: @unchecked Sendable {
+nonisolated final class ProgressThrottle: @unchecked Sendable {
     private let lock = NSLock()
     private var last = Date.distantPast
     private let interval: TimeInterval = 1.0 / 15

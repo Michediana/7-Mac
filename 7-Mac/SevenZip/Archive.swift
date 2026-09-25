@@ -75,10 +75,20 @@ nonisolated public final class Archive: @unchecked Sendable {
     public let volumeCount: Int
     public let additionalVolumeURLs: [URL]
     public let entries: [SZKArchiveEntry]
+    /// For an archive read in place out of another: that archive, which this
+    /// one reads through and therefore keeps alive.
+    public let parent: Archive?
+    /// The entry path this archive has inside `parent`.
+    public let pathInParent: String?
 
-    private init(_ archive: SZKArchive) {
+    private init(_ archive: SZKArchive, parent: Archive? = nil) {
         self.archive = archive
-        self.queue = DispatchQueue(label: "eu.dgnet.7-Mac.archive.\(ObjectIdentifier(archive).hashValue)")
+        // A nested archive reads through its parent's stream, so the two
+        // must never run at once: they share the parent's queue.
+        self.queue = parent?.queue
+            ?? DispatchQueue(label: "eu.dgnet.7-Mac.archive.\(ObjectIdentifier(archive).hashValue)")
+        self.parent = parent
+        pathInParent = archive.pathInParent
         url = archive.url
         formatName = archive.formatName
         physicalSize = archive.physicalSize?.uint64Value
@@ -108,22 +118,47 @@ nonisolated public final class Archive: @unchecked Sendable {
     private static let openQueue = DispatchQueue(label: "eu.dgnet.7-Mac.archive.open",
                                                  attributes: .concurrent)
 
+    /// Opens entry `index` as an archive without extracting it, reading
+    /// through this archive's stream.
+    ///
+    /// Works for containers that can seek inside an entry — tar, iso, dmg,
+    /// cpio, ar. Formats that compress their entries throw
+    /// `SZKError.unsupported`; extract the entry and open the file instead.
+    public func openEntry(_ index: Int, password: PasswordProvider? = nil) async throws -> Archive {
+        try await withCheckedThrowingContinuation { continuation in
+            nonisolated(unsafe) let archive = self.archive
+            queue.async {
+                do {
+                    let nested = try archive.openEntry(at: UInt(index),
+                                                       passwordProvider: password.map(bridge))
+                    continuation.resume(returning: Archive(nested, parent: self))
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
     /// Extracts `selection`, or everything when it is `nil`, into `destination`.
     ///
     /// Selection is by entry index rather than by name pattern, so picking a
-    /// handful out of a large archive costs a handful of entries' work.
+    /// handful out of a large archive costs a handful of entries' work. With
+    /// `relativeToCommonParent` the selection lands without the folders its
+    /// entries share, which is what extracting from a browser means.
     /// Cancelling the surrounding `Task` stops the engine cooperatively and
     /// throws `CancellationError`.
     @discardableResult
     public func extract(_ selection: IndexSet? = nil,
                         to destination: URL,
                         paths: SZKPathPolicy = .fullPaths,
+                        relativeToCommonParent: Bool = false,
                         overwrite: SZKOverwritePolicy = .autoRename,
                         password: PasswordProvider? = nil,
                         onOverwrite: (@Sendable (SZKOverwriteRequest) -> SZKOverwriteDecision)? = nil,
                         onProgress: ProgressObserver? = nil) async throws -> ArchiveOutcome {
         let options = SZKExtractOptions(destinationDirectory: destination)
         options.paths = paths
+        options.relativeToCommonParent = relativeToCommonParent
         options.overwrite = overwrite
 
         return try await run { archive, progress in

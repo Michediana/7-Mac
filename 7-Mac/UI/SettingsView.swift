@@ -13,6 +13,18 @@ struct SettingsView: View {
         @Bindable var preferences = model.preferences
 
         Form {
+            Section("Opening") {
+                Picker("Opening an archive from the Finder", selection: $preferences.openAction) {
+                    ForEach(OpenAction.allCases) { action in
+                        Text(action.title).tag(action)
+                    }
+                }
+                Text("Dropping an archive on the 7-Mac window always extracts it. "
+                     + "File › Open… always shows its contents.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             Section("Extracting") {
                 Picker("Put files", selection: $preferences.destinationPolicy) {
                     ForEach(DestinationPolicy.allCases) { policy in

@@ -169,6 +169,10 @@ struct ExtractOptions {
     OverwritePolicy overwrite = OverwritePolicy::autoRename;
     /// Decode and verify everything, write nothing. This is `test`.
     bool testOnly = false;
+    /// Write the selected entries relative to the deepest folder they all sit
+    /// in, rather than with their full archive path: picking `a/b/c.txt`
+    /// writes `c.txt`, not `a/b/c.txt`. Only meaningful with `fullPaths`.
+    bool relativeToCommonParent = false;
 };
 
 struct ExtractOutcome {
@@ -218,6 +222,20 @@ public:
                    const OverwriteHandler &overwrite,
                    ExtractOutcome &outcome);
 
+    /// Opens entry `index` as an archive in its own right, reading it
+    /// straight out of this one -- no temporary file.
+    ///
+    /// Only works where the handler can hand out a seekable stream for an
+    /// entry (`IInArchiveGetStream`): tar, iso, dmg, cpio, ar and a few more.
+    /// Compressed formats such as 7z, zip or gzip cannot, and answer
+    /// Status::unsupported; the caller extracts the entry instead.
+    ///
+    /// The result reads through this archive's stream, so it must not outlive
+    /// it and must not be used from another thread at the same time.
+    std::unique_ptr<Archive> OpenEntry(std::uint32_t index,
+                                       const PasswordProvider &password,
+                                       Result &result);
+
     /// Decodes and verifies without writing anything.
     Result Test(const std::vector<std::uint32_t> &indices,
                 const ProgressHandler &progress,
@@ -227,6 +245,10 @@ public:
 private:
     class Impl;
     explicit Archive(std::unique_ptr<Impl> impl);
+
+    /// Reads the archive-level facts and the entry list once the link is open.
+    static std::unique_ptr<Archive> Finish(std::unique_ptr<Impl> impl,
+                                           bool headerEncrypted, Result &result);
 
     std::unique_ptr<Impl> impl_;
     ArchiveInfo info_;

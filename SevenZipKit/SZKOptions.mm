@@ -25,6 +25,7 @@
         [[SZKExtractOptions allocWithZone:zone] initWithDestinationDirectory:_destinationDirectory];
     copy.paths = _paths;
     copy.overwrite = _overwrite;
+    copy.relativeToCommonParent = _relativeToCommonParent;
     return copy;
 }
 

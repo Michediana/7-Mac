@@ -62,6 +62,21 @@ nonisolated enum DestinationPolicy: String, CaseIterable, Identifiable, Sendable
     }
 }
 
+/// What opening an archive from the Finder does.
+nonisolated enum OpenAction: String, CaseIterable, Identifiable, Sendable {
+    case extract
+    case browse
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .extract: "Extract it"
+        case .browse:  "Show its contents"
+        }
+    }
+}
+
 @MainActor @Observable
 final class Preferences {
     /// Injectable so tests get their own suite instead of editing the
@@ -99,6 +114,13 @@ final class Preferences {
         didSet { defaults.set(offersKeychain, forKey: "OffersKeychain") }
     }
 
+    /// Double-click in the Finder: unpack at once, or open a browser. A drop
+    /// on the window always extracts — that gesture already says what it
+    /// wants.
+    var openAction: OpenAction {
+        didSet { defaults.set(openAction.rawValue, forKey: "OpenAction") }
+    }
+
     /// Show the extraction or the new archive in the Finder when a job ends.
     var revealWhenDone: Bool {
         didSet { defaults.set(revealWhenDone, forKey: "RevealWhenDone") }
@@ -113,6 +135,7 @@ final class Preferences {
             "DefaultFormat": "7z",
             "OffersKeychain": true,
             "RevealWhenDone": true,
+            "OpenAction": OpenAction.extract.rawValue,
         ])
         destinationPolicy = DestinationPolicy(
             rawValue: defaults.string(forKey: "DestinationPolicy") ?? "") ?? .besideArchive
@@ -126,6 +149,7 @@ final class Preferences {
         defaultFormat = defaults.string(forKey: "DefaultFormat") ?? "7z"
         offersKeychain = defaults.bool(forKey: "OffersKeychain")
         revealWhenDone = defaults.bool(forKey: "RevealWhenDone")
+        openAction = OpenAction(rawValue: defaults.string(forKey: "OpenAction") ?? "") ?? .extract
     }
 }
 
