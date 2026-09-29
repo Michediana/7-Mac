@@ -3,7 +3,7 @@
 GUI nativa macOS per 7-Zip, con il motore 7-Zip **incorporato nell'app** come framework.
 
 - **Stato:** M0–M5 completi e verificati, tranne la notarizzazione (rinviata)
-- **Ultimo aggiornamento:** 2026-09-25
+- **Ultimo aggiornamento:** 2026-09-29
 - **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.03 (2026-09-03)
 
 ---
@@ -385,8 +385,7 @@ vuole.
 
 - Il doppio clic su una cartella non la espande: in `Table` l'espansione di `OutlineGroup`
   non è pilotabile; c'è il triangolo.
-- Niente trascinamento di voci verso il Finder: richiede `NSFilePromiseProvider` e una
-  sorgente di drag AppKit. Candidato per M5.
+- ~~Niente trascinamento di voci verso il Finder~~ — fatto dopo M5, vedi sotto.
 - Un annidato dentro un contenitore compresso costa una copia su disco temporanea, grande
   quanto la voce. Viene cancellata alla chiusura della finestra, e all'avvio se l'app non ha
   fatto in tempo.
@@ -567,7 +566,43 @@ cifrate falliscono" e viene chiesta di nuovo.
   con VoiceOver acceso.
 - Nella UI solo l'italiano oltre all'inglese. Aggiungere una lingua è aggiungere una colonna
   al catalogo.
-- Il trascinamento di voci verso il Finder (limite di M3) resta da fare.
+- ~~Il trascinamento di voci verso il Finder (limite di M3) resta da fare.~~ Fatto, vedi sotto.
+
+### Dopo M5 — due debiti chiusi
+
+- [x] **Trascinamento di voci verso il Finder**, file e cartelle, anche da un archivio annidato
+- [x] **Crediti e licenze nell'app** (§6): finestra *Informazioni su 7-Mac*, anche da Aiuto › Licenze
+
+`Scripts/smoke-test.sh` verifica ora **28 asserzioni** (una in più: la licenza MIT nel bundle
+è identica a `LICENSE`) ed esegue **145 test**: quattro sul trascinamento (un file, una
+cartella con tutto dentro, una cartella solo implicita dai percorsi, un drag partito prima di
+una modifica che non consegna niente) e tre sui crediti (i quattro testi ci sono, quello
+dell'app è `LICENSE`, la clausola unRAR è quella testuale).
+
+Struttura aggiunta:
+
+```
+7-Mac/UI/DragOut.swift        il gesto, la sessione AppKit, le file promise
+7-Mac/UI/AboutView.swift      crediti; i testi di licenza letti dai file che viaggiano col bundle
+7-Mac/Credits/7-Mac-License.txt   copia di LICENSE, tenuta identica da un test
+```
+
+**Il drag è AppKit sotto una `Table` SwiftUI.** I drag di SwiftUI portano item provider, non
+file promise, e senza promise un'app sandboxata non può scrivere dove cade il drop. Un
+monitor locale guarda i mouse-down sulla tabella: un clic resta un clic e passa, doppio clic e
+clic con modificatori pure; un gesto che si muove di 4 punti diventa una sessione
+`beginDraggingSession` con un `NSFilePromiseProvider` per voce. La voce si estrae solo quando
+il Finder dice dove è caduta, nella cartella temporanea della finestra (la stessa cache
+dell'anteprima), e poi si copia — un clone, su APFS. Ogni riga porta una vista invisibile con
+l'id del nodo: è così che un mouse-down risale alla voce.
+
+**Limiti accettati:** il drag non è provabile senza un puntatore — i test coprono cosa succede
+dopo il drop, non il gesto. Trascinare a partire da una riga sostituisce la selezione a
+elastico che partiva da lì, come nel Finder.
+
+**I testi di licenza non sono riscritti.** I tre di 7-Zip vengono dal framework, dove già
+viaggiavano; quello dell'app è una copia di `LICENSE`. La clausola unRAR va riportata
+testualmente, e il modo più sicuro è non ricopiarla mai a mano.
 
 ---
 

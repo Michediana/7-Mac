@@ -49,6 +49,13 @@ struct __MacApp: App {
         .restorationBehavior(.disabled)
         .handlesExternalEvents(matching: [])
 
+        Window("About 7-Mac", id: WindowID.about) {
+            AboutView()
+        }
+        .windowResizability(.contentSize)
+        .restorationBehavior(.disabled)
+        .handlesExternalEvents(matching: [])
+
         Window("7-Zip Engine", id: WindowID.engine) {
             EngineInfoView()
         }
@@ -64,6 +71,7 @@ struct __MacApp: App {
 
 enum WindowID {
     static let main = "main"
+    static let about = "about"
     static let engine = "engine"
     static let browser = "browser"
     static let checksums = "checksums"
@@ -75,6 +83,11 @@ struct SevenMacCommands: Commands {
 
     var body: some Commands {
         let _ = model.install(openWindow)
+        // The standard panel has no room for the licences 7-Zip asks to be
+        // shown with it.
+        CommandGroup(replacing: .appInfo) {
+            Button("About 7-Mac") { openWindow(id: WindowID.about) }
+        }
         CommandGroup(replacing: .newItem) {
             Button("Open…") { model.chooseArchivesToBrowse() }
                 .keyboardShortcut("o")
@@ -97,6 +110,7 @@ struct SevenMacCommands: Commands {
         }
         CommandGroup(replacing: .help) {
             Button("7-Zip Engine") { openWindow(id: WindowID.engine) }
+            Button("Licences") { openWindow(id: WindowID.about) }
         }
     }
 }

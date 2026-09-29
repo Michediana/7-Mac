@@ -225,6 +225,8 @@ private struct BrowserContent: View {
             }
             return true
         }
+        // Rows dragged out become files where they land: see DragOut.swift.
+        .background(ArchiveDragSource(browser: browser))
         .overlay {
             if browser.isShowingMatches, browser.matches.isEmpty {
                 ContentUnavailableView.search(text: browser.searchText)
@@ -429,6 +431,7 @@ private struct NameCell: View {
                     .help("Symbolic link")
             }
         }
+        .background(DragTag(nodeID: node.id))
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
     }
@@ -455,7 +458,7 @@ private struct NumberCell: View {
 
 /// Finder icons by kind, looked up once per extension.
 @MainActor
-private enum FileIcons {
+enum FileIcons {
     private static var cache: [String: NSImage] = [:]
 
     static func icon(for node: ArchiveNode) -> NSImage {

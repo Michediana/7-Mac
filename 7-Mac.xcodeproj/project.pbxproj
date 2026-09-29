@@ -1132,7 +1132,7 @@
 				INFOPLIST_FILE = "7-Mac/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "7-Mac";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Michediana. MIT License. 7-Zip engine © Igor Pavlov, GNU LGPL.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1168,7 +1168,7 @@
 				INFOPLIST_FILE = "7-Mac/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "7-Mac";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Michediana. MIT License. 7-Zip engine © Igor Pavlov, GNU LGPL.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

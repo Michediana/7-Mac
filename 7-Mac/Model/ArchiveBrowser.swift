@@ -106,8 +106,8 @@ final class ArchiveBrowser {
     private(set) var editor: ArchiveEditor?
     /// The window's own, so Edit › Undo names the edit and ⌘Z reaches it.
     weak var undoManager: UndoManager?
-    /// Edits and history steps queue up behind each other: each one swaps
-    /// the file the next one reads.
+    /// Edits, history steps and drags out queue up behind each other: each
+    /// edit swaps the file the next one reads.
     private var editChain: Task<Void, Never>?
     /// Previews and unpacked archives go here, and all of it goes when the
     /// window does.
@@ -361,44 +361,71 @@ final class ArchiveBrowser {
     }
 
     /// Unpacks `node` into the scratch folder, asking for a password when
-    /// the entry needs one, and returns the file. `nil` means it did not
+    /// the entry needs one, and returns what arrived: the file, or for a
+    /// folder the folder with everything beneath it. `nil` means it did not
     /// happen, and when that was not the person's own choice, `problem` says
     /// why.
     private func extractForViewing(_ node: ArchiveNode, in level: Level) async -> URL? {
-        guard let index = node.record?.index else { return nil }
+        let indexes = level.tree.entryIndexes(for: [node.id])
+        guard node.isDirectory || !indexes.isEmpty else { return nil }
         let key = "\(level.id)/\(node.id)"
         if let cached = extracted[key],
            FileManager.default.fileExists(atPath: cached.path(percentEncoded: false)) {
             return cached
         }
 
+        let folder = scratch.appending(component: "\(level.id.uuidString.prefix(8))-\(node.id)",
+                                       directoryHint: .isDirectory)
+        // A folder keeps the path it has in the archive, so a folder only
+        // implied by the paths beneath it arrives with its name all the same.
+        let expected = node.isDirectory ? folder.appending(path: node.path, directoryHint: .isDirectory)
+                                        : folder.appending(component: node.name)
+        if indexes.isEmpty {
+            // A folder with nothing in it: nothing for the engine to do.
+            do {
+                try FileManager.default.createDirectory(at: expected, withIntermediateDirectories: true)
+            } catch {
+                problem = String(localized: "“\(node.name)” could not be unpacked: \(error.localizedDescription.lowercased())")
+                return nil
+            }
+            extracted[key] = expected
+            return expected
+        }
+
         var password = level.password
         var incorrect = false
-        if node.isEncrypted, password == nil {
+        if password == nil, node.subtree.contains(where: \.isEncrypted) {
             guard let answer = await askPassword(for: node.name, incorrect: false) else { return nil }
             password = answer.password
         }
 
-        let folder = scratch.appending(component: "\(level.id.uuidString.prefix(8))-\(node.id)",
-                                       directoryHint: .isDirectory)
         while true {
             let activity = BrowserActivity(title: String(localized: "Unpacking “\(node.name)”"))
             let attempt = password
             let result: Result<ArchiveOutcome, any Error> = await perform(activity) {
-                try await level.archive.extract(IndexSet(integer: index), to: folder,
-                                                paths: .flatten, overwrite: .overwrite,
+                try await level.archive.extract(indexes, to: folder,
+                                                paths: node.isDirectory ? .fullPaths : .flatten,
+                                                overwrite: .overwrite,
                                                 password: self.provider(attempt),
                                                 onProgress: self.progressSink(activity))
             }
             switch result {
             case .success(let outcome) where outcome.entryErrors.isEmpty:
                 remember(password, for: level)
-                // Flattening writes the entry under its own name — unless the
-                // filesystem would not take that name and the engine had to
-                // change it. The folder holds exactly one thing either way.
-                let arrived = (try? FileManager.default.contentsOfDirectory(
-                    at: folder, includingPropertiesForKeys: nil))?.first
-                    ?? folder.appending(component: node.name)
+                // The entry lands under its own name — unless the filesystem
+                // would not take that name and the engine had to change it.
+                // A flattened file is then the one thing in the folder.
+                var arrived = expected
+                if !FileManager.default.fileExists(atPath: expected.path(percentEncoded: false)) {
+                    guard !node.isDirectory,
+                          let only = (try? FileManager.default.contentsOfDirectory(
+                              at: folder, includingPropertiesForKeys: nil))?.first
+                    else {
+                        problem = String(localized: "“\(node.name)” could not be unpacked under its own name.")
+                        return nil
+                    }
+                    arrived = only
+                }
                 extracted[key] = arrived
                 return arrived
             case .success(let outcome):
@@ -416,6 +443,28 @@ final class ArchiveBrowser {
                 problem = String(localized: "“\(node.name)” could not be unpacked: \(error.archiveDescription.lowercased()).")
                 return nil
             }
+        }
+    }
+
+    // MARK: - Dragging out
+
+    /// What a drag to the Finder hands over for `node`: a copy in the scratch
+    /// folder, the same one a preview would use. The drag carries a file
+    /// promise, and this runs only once the drop has landed somewhere.
+    ///
+    /// `level` is the one the drag started from. If the archive has changed
+    /// since — an edit reopens it — the node is gone and so is the promise.
+    /// Drags wait for each other and for edits: each has one activity to
+    /// show, and an edit swaps the file a drag would read.
+    func fileForDrag(_ node: ArchiveNode, from level: Level.ID) async -> URL? {
+        await serialized {
+            guard let level = self.levels.first(where: { $0.id == level }),
+                  level.tree.node(node.id) === node
+            else {
+                self.problem = String(localized: "“\(node.name)” is no longer where it was: the archive has changed since the drag began.")
+                return nil
+            }
+            return await self.extractForViewing(node, in: level)
         }
     }
 
@@ -749,14 +798,15 @@ final class ArchiveBrowser {
         }
     }
 
-    private func serialized(_ work: @escaping @MainActor () async -> Void) async {
+    @discardableResult
+    private func serialized<T: Sendable>(_ work: @escaping @MainActor () async -> T) async -> T {
         let previous = editChain
         let next = Task { @MainActor in
             await previous?.value
-            await work()
+            return await work()
         }
-        editChain = next
-        await next.value
+        editChain = Task { _ = await next.value }
+        return await next.value
     }
 
     nonisolated static func path(replacingLastComponentOf path: String, with name: String) -> String {

@@ -60,6 +60,32 @@
         }
       }
     },
+    "“%@” could not be unpacked under its own name." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non è stato possibile estrarre “%@” con il suo nome."
+          }
+        }
+      }
+    },
+    "“%@” could not be unpacked: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "“%1$@” could not be unpacked: %2$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non è stato possibile estrarre “%1$@”: %2$@"
+          }
+        }
+      }
+    },
     "“%@” could not be unpacked: %@." : {
       "localizations" : {
         "en" : {
@@ -82,6 +108,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "“%@” è già usato."
+          }
+        }
+      }
+    },
+    "“%@” is no longer where it was: the archive has changed since the drag began." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” non è più dove si trovava: l'archivio è cambiato dall'inizio del trascinamento."
           }
         }
       }
@@ -308,6 +344,16 @@
         }
       }
     },
+    "© 2026 Michediana. 7-Mac is free software under the MIT License." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. 7-Mac è software libero con licenza MIT."
+          }
+        }
+      }
+    },
     "7-Mac" : {
 
     },
@@ -361,6 +407,16 @@
         }
       }
     },
+    "7-Zip" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip"
+          }
+        }
+      }
+    },
     "7-Zip %@ engine, embedded" : {
       "localizations" : {
         "it" : {
@@ -371,12 +427,42 @@
         }
       }
     },
+    "7-Zip © 1999–2026 Igor Pavlov. unRAR code © Alexander Roshal." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip © 1999–2026 Igor Pavlov. Codice unRAR © Alexander Roshal."
+          }
+        }
+      }
+    },
     "7-Zip Engine" : {
       "localizations" : {
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Motore 7-Zip"
+          }
+        }
+      }
+    },
+    "7-Zip source" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorgente di 7-Zip"
+          }
+        }
+      }
+    },
+    "7-zip.org" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-zip.org"
           }
         }
       }
@@ -471,6 +557,16 @@
         }
       }
     },
+    "A native Mac app for 7-Zip, with the 7-Zip %@ engine built in." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un'app Mac nativa per 7-Zip, con il motore 7-Zip %@ incorporato."
+          }
+        }
+      }
+    },
     "A password is only ever saved when you tick the box in the prompt. Turning this off also stops 7-Mac using the ones it saved before. Saved passwords are keyed to the archive's path, so moving the file forgets it." : {
       "localizations" : {
         "it" : {
@@ -539,6 +635,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "circa %lld minuti rimanenti"
+          }
+        }
+      }
+    },
+    "About 7-Mac" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informazioni su 7-Mac"
           }
         }
       }
@@ -1678,6 +1784,16 @@
         }
       }
     },
+    "GNU LGPL" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GNU LGPL"
+          }
+        }
+      }
+    },
     "If a file is already there" : {
       "localizations" : {
         "it" : {
@@ -1764,6 +1880,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Livello"
+          }
+        }
+      }
+    },
+    "Licence" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licenza"
+          }
+        }
+      }
+    },
+    "Licence text" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testo della licenza"
+          }
+        }
+      }
+    },
+    "Licences" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licenze"
           }
         }
       }
@@ -2896,6 +3042,26 @@
         }
       }
     },
+    "The 7-Zip engine is in SevenZipKit.framework, inside the app, and is covered by these terms. It is linked dynamically, so it can be replaced with another build of the same library." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il motore 7-Zip si trova in SevenZipKit.framework, dentro l'app, ed è coperto da questi termini. È collegato dinamicamente, quindi può essere sostituito con un'altra build della stessa libreria."
+          }
+        }
+      }
+    },
+    "The app itself: its interface and the Swift code around the engine." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'app vera e propria: l'interfaccia e il codice Swift attorno al motore."
+          }
+        }
+      }
+    },
     "The archive around it compresses its contents, so this one was unpacked first" : {
       "localizations" : {
         "it" : {
@@ -2927,12 +3093,32 @@
         }
       }
     },
+    "The GNU Lesser General Public License, version 2.1, that most of 7-Zip is distributed under." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La GNU Lesser General Public License, versione 2.1, con cui è distribuita la maggior parte di 7-Zip."
+          }
+        }
+      }
+    },
     "the password is not correct" : {
       "localizations" : {
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "la password non è corretta"
+          }
+        }
+      }
+    },
+    "The RAR decoder comes with an extra restriction: it may not be used to re-create the RAR compression algorithm. 7-Mac reads RAR archives and never writes them." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il decodificatore RAR ha una restrizione in più: non può essere usato per ricreare l'algoritmo di compressione RAR. 7-Mac legge gli archivi RAR e non li scrive mai."
           }
         }
       }
@@ -3025,6 +3211,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "questo formato non può essere scritto"
+          }
+        }
+      }
+    },
+    "This text is missing from the app. It should not be: please report it." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo testo manca dall'app. Non dovrebbe: per favore segnalalo."
           }
         }
       }
@@ -3145,6 +3341,16 @@
         }
       }
     },
+    "unRAR" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unRAR"
+          }
+        }
+      }
+    },
     "unsupported" : {
       "localizations" : {
         "it" : {
@@ -3161,6 +3367,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usa questa cartella"
+          }
+        }
+      }
+    },
+    "Version %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %1$@ (%2$@)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versione %1$@ (%2$@)"
           }
         }
       }

@@ -49,6 +49,8 @@ check "the app exists"              "yes" "$([ -d "$APP" ] && echo yes || echo n
 check "the framework is embedded"   "yes" "$([ -f "$BINARY" ] && echo yes || echo no)"
 check "the framework is signed"     "yes" "$(codesign -v "$FRAMEWORKS/SevenZipKit.framework" 2>/dev/null && echo yes || echo no)"
 check "licence texts ship with it"  "3"   "$(find "$FRAMEWORKS/SevenZipKit.framework/Versions/A/Resources" -name '7-Zip-*' 2>/dev/null | wc -l | tr -d ' ')"
+# The About window shows all four; the app's own is a copy of LICENSE.
+check "the app's licence ships"     "yes" "$(cmp -s "$APP/Contents/Resources/7-Mac-License.txt" "$REPO_ROOT/LICENSE" && echo yes || echo no)"
 
 printf '\nlinkage\n'
 # Roadmap risk 2: upstream's dylib is born as b/m_arm64/7z.so, which the app

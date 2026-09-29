@@ -1,4 +1,8 @@
 {
+  "color-space-for-untagged-svg-colors" : "display-p3",
+  "features" : [
+    "refractivity"
+  ],
   "fill" : {
     "linear-gradient" : [
       "srgb:1.00000,0.74384,0.38334,1.00000",
@@ -17,6 +21,7 @@
   },
   "groups" : [
     {
+      "blur-material" : 0.5,
       "layers" : [
         {
           "fill-specializations" : [
@@ -49,6 +54,8 @@
               }
             }
           ],
+          "glass" : true,
+          "hidden" : false,
           "image-name" : "7macicon 2.svg",
           "name" : "7macicon 2",
           "position" : {
@@ -60,6 +67,12 @@
           }
         }
       ],
+      "lighting" : "individual",
+      "refractivity" : {
+        "depth" : 1,
+        "enabled" : true,
+        "strength" : 1
+      },
       "shadow" : {
         "kind" : "neutral",
         "opacity" : 0.5

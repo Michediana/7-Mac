@@ -258,6 +258,93 @@ final class BrowserTests: XCTestCase {
         browser.close()
     }
 
+    // MARK: - Dragging out
+    //
+    // The drag itself is AppKit and needs a pointer; what a file promise does
+    // once the drop lands is this, and this can be checked.
+
+    func testDraggingAFileOutDeliversItsBytesAndUnpacksItOnce() async throws {
+        let browser = ArchiveBrowser(url: try await make("tree.7z", from: [fixtures.tree]),
+                                     preferences: preferences, queue: queue)
+        await browser.open()
+        let level = try XCTUnwrap(browser.current)
+        let hello = try XCTUnwrap(level.tree.allNodes.first { $0.path == "tree/hello.txt" })
+
+        let sourceDrag = await browser.fileForDrag(hello, from: level.id)
+        let source = try XCTUnwrap(sourceDrag)
+        XCTAssertTrue(source.path.hasPrefix(browser.scratch.path))
+        let dropped = fixtures.path("Desktop").appending(component: hello.name)
+        try FileManager.default.createDirectory(at: dropped.deletingLastPathComponent(),
+                                                withIntermediateDirectories: true)
+        try DragOutController.deliver(source, to: dropped)
+        XCTAssertEqual(try String(contentsOf: dropped, encoding: .utf8), Fixtures.files["hello.txt"])
+
+        let again = await browser.fileForDrag(hello, from: level.id)
+        XCTAssertEqual(again, source, "a second drag reuses the first copy")
+        browser.close()
+    }
+
+    func testDraggingAFolderOutBringsEverythingInsideIt() async throws {
+        let browser = ArchiveBrowser(url: try await make("tree.7z", from: [fixtures.tree]),
+                                     preferences: preferences, queue: queue)
+        await browser.open()
+        let level = try XCTUnwrap(browser.current)
+        let tree = try XCTUnwrap(level.tree.allNodes.first { $0.path == "tree" })
+
+        let sourceDrag = await browser.fileForDrag(tree, from: level.id)
+        let source = try XCTUnwrap(sourceDrag)
+        XCTAssertEqual(source.lastPathComponent, "tree")
+        let dropped = fixtures.path("Desktop").appending(component: "tree")
+        try FileManager.default.createDirectory(at: dropped.deletingLastPathComponent(),
+                                                withIntermediateDirectories: true)
+        try DragOutController.deliver(source, to: dropped)
+        XCTAssertEqual(Fixtures.differences(between: fixtures.tree, and: dropped), [])
+
+        // One level down: the folder alone, not the one it sits in.
+        let sub = try XCTUnwrap(level.tree.allNodes.first { $0.path == "tree/sub" })
+        let subSourceDrag = await browser.fileForDrag(sub, from: level.id)
+        let subSource = try XCTUnwrap(subSourceDrag)
+        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: subSource.path), ["nested.txt"])
+        browser.close()
+    }
+
+    func testAFolderOnlyImpliedByItsContentsStillArrivesAsAFolder() async throws {
+        // Take the folder's own entry out, leaving only the path under it.
+        let full = try await Archive.open(try await make("full.7z", from: [fixtures.tree]))
+        let folderEntry = try XCTUnwrap(full.entries.first { $0.path == "tree/sub" && $0.isDirectory })
+        let implied = fixtures.path("implied.7z")
+        try await full.writeDeleting(IndexSet(integer: Int(folderEntry.index)), to: implied)
+
+        let browser = ArchiveBrowser(url: implied, preferences: preferences, queue: queue)
+        await browser.open()
+        let level = try XCTUnwrap(browser.current)
+        let sub = try XCTUnwrap(level.tree.allNodes.first { $0.path == "tree/sub" })
+        XCTAssertNil(sub.record, "the folder should exist only in the tree")
+
+        let sourceDrag = await browser.fileForDrag(sub, from: level.id)
+        let source = try XCTUnwrap(sourceDrag)
+        XCTAssertEqual(source.lastPathComponent, "sub")
+        XCTAssertEqual(try String(contentsOf: source.appending(component: "nested.txt"), encoding: .utf8),
+                       Fixtures.files["sub/nested.txt"])
+        browser.close()
+    }
+
+    func testADragFromBeforeAnEditPromisesNothing() async throws {
+        let browser = ArchiveBrowser(url: try await make("tree.7z", from: [fixtures.tree]),
+                                     preferences: preferences, queue: queue)
+        await browser.open()
+        let before = try XCTUnwrap(browser.current)
+        let hello = try XCTUnwrap(before.tree.allNodes.first { $0.path == "tree/hello.txt" })
+        let blob = try XCTUnwrap(before.tree.allNodes.first { $0.path == "tree/blob.bin" })
+
+        await browser.delete([blob.id])
+        XCTAssertNil(browser.problem)
+        let stale = await browser.fileForDrag(hello, from: before.id)
+        XCTAssertNil(stale)
+        XCTAssertNotNil(browser.problem, "the drop should be told why nothing arrived")
+        browser.close()
+    }
+
     // MARK: - Helpers
 
     private func make(_ name: String, from sources: [URL], format: String? = nil) async throws -> URL {
