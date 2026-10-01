@@ -3796,6 +3796,76 @@
           }
         }
       }
+    },
+    "Drop files and folders to archive" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina qui file e cartelle da archiviare"
+          }
+        }
+      }
+    },
+    "Add as many as you like, then create the archive." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungine quanti vuoi, poi crea l’archivio."
+          }
+        }
+      }
+    },
+    "Drop files and folders here to gather them into a new archive" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina qui file e cartelle per raccoglierli in un nuovo archivio"
+          }
+        }
+      }
+    },
+    "Clear" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Svuota"
+          }
+        }
+      }
+    },
+    "Create Archive…" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea archivio…"
+          }
+        }
+      }
+    },
+    "Remove from the archive" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Togli dall’archivio"
+          }
+        }
+      }
+    },
+    "^[%lld item](inflect: true)" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld elemento](inflect: true)"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

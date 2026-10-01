@@ -29,6 +29,9 @@ final class AppModel: JobInteraction {
     var passwordPrompt: PasswordPrompt?
     /// Non-nil while the compress sheet is up.
     var compressionDraft: CompressionDraft?
+    /// Files and folders gathered in the main window's "create archive"
+    /// area, waiting for the person to say they have them all.
+    private(set) var stagedItems: [URL] = []
 
     /// A window to open once there is a way to open one.
     enum WindowRequest {
@@ -175,6 +178,32 @@ final class AppModel: JobInteraction {
         preferences.defaultFormat = draft.formatName
         queue.enqueue([.compress(draft.request)])
         compressionDraft = nil
+        // Only once the archive is on its way: cancelling the sheet keeps
+        // the gathered items for another try.
+        if draft.sources == stagedItems { stagedItems = [] }
+    }
+
+    // MARK: - Gathering items for an archive
+
+    /// Adds dropped items to the ones waiting to be archived, once each.
+    func stage(_ urls: [URL]) {
+        let known = Set(stagedItems.map(\.standardizedFileURL))
+        var seen = known
+        for url in urls where url.isFileURL {
+            if seen.insert(url.standardizedFileURL).inserted { stagedItems.append(url) }
+        }
+    }
+
+    func unstage(_ url: URL) {
+        stagedItems.removeAll { $0 == url }
+    }
+
+    func clearStaged() {
+        stagedItems = []
+    }
+
+    func compressStaged() {
+        beginCompression(of: stagedItems)
     }
 
     // MARK: - Panels
