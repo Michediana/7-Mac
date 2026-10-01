@@ -700,6 +700,50 @@
         }
       }
     },
+    "1 of 2" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 di 2"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 de 2"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 sur 2"
+          }
+        }
+      }
+    },
+    "2 of 2" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 di 2"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 de 2"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 sur 2"
+          }
+        }
+      }
+    },
     "7-Mac" : {},
     "7-Mac did not receive any files." : {
       "localizations" : {
@@ -1417,6 +1461,28 @@
         }
       }
     },
+    "Add 7-Mac to the Finder’s menu?" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungere 7-Mac al menu del Finder?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Añadir 7-Mac al menú del Finder?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter 7-Mac au menu du Finder ?"
+          }
+        }
+      }
+    },
     "Add files to %@" : {
       "localizations" : {
         "es" : {
@@ -1579,6 +1645,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nascondi anche l’elenco dei file"
+          }
+        }
+      }
+    },
+    "Another app" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un’altra app"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otra app"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une autre app"
           }
         }
       }
@@ -2597,6 +2685,28 @@
         }
       }
     },
+    "Continue" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continua"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
     "Copy" : {
       "localizations" : {
         "es" : {
@@ -2939,6 +3049,28 @@
         }
       }
     },
+    "Default app for archives" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App predefinita per gli archivi"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App predeterminada para archivos comprimidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App par défaut pour les archives"
+          }
+        }
+      }
+    },
     "Delete" : {
       "localizations" : {
         "es" : {
@@ -3089,6 +3221,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fine"
+          }
+        }
+      }
+    },
+    "Double-clicking a .zip, .7z, .rar or any other archive 7-Mac can read will open it here. Disc images keep opening as they do now." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facendo doppio clic su un .zip, .7z, .rar o qualsiasi altro archivio che 7-Mac sa leggere, si aprirà qui. Le immagini disco continuano ad aprirsi come adesso."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al hacer doble clic en un .zip, .7z, .rar o cualquier otro archivo comprimido que 7-Mac sepa leer, se abrirá aquí. Las imágenes de disco se siguen abriendo como hasta ahora."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un double-clic sur un .zip, un .7z, un .rar ou toute autre archive que 7-Mac sait lire l’ouvrira ici. Les images disque continuent de s’ouvrir comme maintenant."
           }
         }
       }
@@ -4084,6 +4238,50 @@
         }
       }
     },
+    "macOS asks you to allow this yourself: in System Settings, under Login Items & Extensions, turn on 7-Mac’s Finder extension, then come back here." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS chiede che sia tu a consentirlo: in Impostazioni di Sistema, sotto Elementi login ed estensioni, attiva l’estensione Finder di 7-Mac, poi torna qui."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS pide que lo permitas tú: en Ajustes del Sistema, en Ítems de inicio y extensiones, activa la extensión del Finder de 7-Mac y vuelve aquí."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS vous demande de l’autoriser vous-même : dans Réglages Système, sous Ouverture et extensions, activez l’extension Finder de 7-Mac, puis revenez ici."
+          }
+        }
+      }
+    },
+    "macOS did not let 7-Mac open these: %@. Try again from Settings › Opening." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS non ha permesso a 7-Mac di aprire questi: %@. Riprova da Impostazioni › Apertura."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS no ha dejado que 7-Mac abra estos: %@. Vuelve a intentarlo desde Ajustes › Abriendo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS n’a pas laissé 7-Mac ouvrir ceux-ci : %@. Réessayez depuis Réglages › Ouverture."
+          }
+        }
+      }
+    },
     "match" : {
       "localizations" : {
         "es" : {
@@ -4574,6 +4772,50 @@
         }
       }
     },
+    "Not Now" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non ora"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora no"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus tard"
+          }
+        }
+      }
+    },
+    "Not turned on yet" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non ancora attivata"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no activada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore activée"
+          }
+        }
+      }
+    },
     "nothing is open" : {
       "localizations" : {
         "es" : {
@@ -4772,6 +5014,28 @@
         }
       }
     },
+    "Open archives with 7-Mac?" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprire gli archivi con 7-Mac?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Abrir los archivos comprimidos con 7-Mac?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir les archives avec 7-Mac ?"
+          }
+        }
+      }
+    },
     "Open as Archive" : {
       "localizations" : {
         "es" : {
@@ -4790,6 +5054,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apri come archivio"
+          }
+        }
+      }
+    },
+    "Open System Settings…" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri Impostazioni di Sistema…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ajustes del Sistema…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Réglages Système…"
           }
         }
       }
@@ -5626,6 +5912,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Esito: %@"
+          }
+        }
+      }
+    },
+    "Right-click files in the Finder to extract, open, test or compress them with 7-Mac." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic destro sui file nel Finder per estrarli, aprirli, verificarli o comprimerli con 7-Mac."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic derecho en los archivos del Finder para extraerlos, abrirlos, probarlos o comprimirlos con 7-Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites un clic droit sur des fichiers dans le Finder pour les extraire, les ouvrir, les tester ou les compresser avec 7-Mac."
           }
         }
       }
@@ -7015,6 +7323,28 @@
         }
       }
     },
+    "Turned on" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivata"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activée"
+          }
+        }
+      }
+    },
     "Ultra" : {
       "localizations" : {
         "es" : {
@@ -7187,6 +7517,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "non supportato"
+          }
+        }
+      }
+    },
+    "Use 7-Mac" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa 7-Mac"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar 7-Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser 7-Mac"
           }
         }
       }
@@ -8491,6 +8843,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oppure fai clic per sceglierli."
+          }
+        }
+      }
+    },
+    "You can change this later in Settings, or for a single type in the Finder’s Get Info window." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi cambiarlo più tardi nelle Impostazioni, o per un singolo tipo dalla finestra Ottieni informazioni del Finder."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes cambiarlo más tarde en Ajustes, o para un solo tipo en la ventana Obtener información del Finder."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pourrez le changer plus tard dans les Réglages, ou pour un seul type dans la fenêtre Lire les informations du Finder."
           }
         }
       }

@@ -14,6 +14,7 @@ struct SettingsView: View {
     /// lives in System Settings, and that is where the person just was.
     @State private var finderMenuEnabled = FIFinderSyncController.isExtensionEnabled
     @State private var showsPermissions = false
+    @State private var isDefaultApp = DefaultArchiveApp.isDefault
 
     var body: some View {
         @Bindable var preferences = model.preferences
@@ -29,6 +30,20 @@ struct SettingsView: View {
             }
 
             Section("Opening") {
+                LabeledContent("Default app for archives") {
+                    HStack {
+                        Text(isDefaultApp ? "7-Mac" : "Another app")
+                            .foregroundStyle(.secondary)
+                        if !isDefaultApp {
+                            Button("Use 7-Mac") {
+                                Task {
+                                    await DefaultArchiveApp.makeDefault()
+                                    isDefaultApp = DefaultArchiveApp.isDefault
+                                }
+                            }
+                        }
+                    }
+                }
                 Picker("Opening an archive from the Finder", selection: $preferences.openAction) {
                     ForEach(OpenAction.allCases) { action in
                         Text(action.title).tag(action)
@@ -55,6 +70,7 @@ struct SettingsView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
                 finderMenuEnabled = FIFinderSyncController.isExtensionEnabled
+                isDefaultApp = DefaultArchiveApp.isDefault
             }
 
             Section("Extracting") {

@@ -154,6 +154,12 @@ final class Preferences {
         didSet { defaults.set(revealWhenDone, forKey: "RevealWhenDone") }
     }
 
+    /// The first-launch questions — default app, Finder menu — have been
+    /// put. Set however they were answered, so they are asked only once.
+    var hasShownWelcome: Bool {
+        didSet { defaults.set(hasShownWelcome, forKey: "HasShownWelcome") }
+    }
+
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         defaults.register(defaults: [
@@ -195,6 +201,7 @@ final class Preferences {
         openAction = OpenAction(rawValue: defaults.string(forKey: "OpenAction") ?? "") ?? .extract
         onlyReplaceOlder = defaults.bool(forKey: "OnlyReplaceOlder")
         appearance = AppearanceChoice(rawValue: defaults.string(forKey: "Appearance") ?? "") ?? .system
+        hasShownWelcome = defaults.bool(forKey: "HasShownWelcome")
     }
 }
 

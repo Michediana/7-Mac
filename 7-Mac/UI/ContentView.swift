@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var isTargeted = false
     /// How tall the row of drop targets is; the divider under it drags.
     @AppStorage("dropAreaHeight") private var dropAreaHeight: Double = 190
+    @State private var showsWelcome = false
 
     var body: some View {
         @Bindable var model = model
@@ -67,6 +68,9 @@ struct ContentView: View {
         .sheet(item: $model.shownTestReport) { report in
             TestReportView(report: report) { model.shownTestReport = nil }
         }
+        // The first time the window opens, however the app was launched.
+        .sheet(isPresented: $showsWelcome) { WelcomeView() }
+        .onAppear { showsWelcome = !model.preferences.hasShownWelcome }
     }
 }
 

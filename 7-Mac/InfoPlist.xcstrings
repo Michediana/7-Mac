@@ -73,6 +73,30 @@
         }
       }
     },
+    "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "7-Mac"
+          }
+        }
+      }
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "7-Mac"
+          }
+        }
+      }
+    },
     "compress archive" : {
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
