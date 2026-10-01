@@ -198,6 +198,10 @@ check "the Finder extension does not link the engine" "" \
 
 printf '\nlocalization\n'
 check "Italian ships" "yes" "$([ -f "$APP/Contents/Resources/it.lproj/Localizable.strings" ] && echo yes || echo no)"
+# What the Finder shows without asking the app: a file's Kind, the Services
+# menu. Both come from Info.plist and need tables of their own.
+check "Italian covers Info.plist and Services" "yes yes" \
+      "$(for t in InfoPlist ServicesMenu; do [ -f "$APP/Contents/Resources/it.lproj/$t.strings" ] && printf 'yes ' || printf 'no '; done | sed 's/ $//')"
 
 printf '\nunit tests\n'
 # The checks above say the package is put together correctly. These say the

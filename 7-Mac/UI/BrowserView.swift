@@ -422,7 +422,7 @@ private struct NameCell: View {
                 Image(systemName: "lock.fill")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                    .help("Encrypted")
+                    .help("Encrypted entry")
             }
             if node.isSymbolicLink {
                 Image(systemName: "arrowshape.turn.up.right")

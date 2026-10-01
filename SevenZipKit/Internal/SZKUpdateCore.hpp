@@ -80,6 +80,10 @@ struct CreateOutcome {
 /// Creates an archive from `inputPaths` (UTF-8 files or directories, scanned
 /// recursively). Paths are stored relative to each input's parent, so adding
 /// `/a/b/tree` stores `tree/...`.
+///
+/// A file that cannot be opened or read is skipped and listed in
+/// `outcome.failures`; the result is still a success. It fails only when
+/// nothing at all could be stored, and then no archive is left on disk.
 Result Create(const std::vector<std::string> &inputPaths,
               const CreateOptions &options,
               const ProgressHandler &progress,

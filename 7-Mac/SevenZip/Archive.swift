@@ -58,6 +58,13 @@ nonisolated public struct ArchiveOutcome: Sendable {
         self.entryErrors = entryErrors
     }
 
+    /// The same outcome with more failures: sources set aside before the
+    /// engine ever saw them.
+    func adding(entryErrors more: [NSError]) -> ArchiveOutcome {
+        ArchiveOutcome(files: files, folders: folders, bytes: bytes, processedBytes: processedBytes,
+                       archiveSize: archiveSize, entryErrors: more + entryErrors)
+    }
+
     init(_ outcome: SZKOutcome) {
         files = outcome.fileCount
         folders = outcome.folderCount
@@ -318,6 +325,9 @@ nonisolated public final class Archive: @unchecked Sendable {
     /// Creates an archive at `url` from `sources`, scanning folders recursively.
     /// Paths are stored relative to each source's parent, so adding `/a/b/tree`
     /// stores `tree/…`. Fails if anything already exists at `url`.
+    ///
+    /// Files that cannot be read are skipped, not fatal: they come back in
+    /// `entryErrors`. Only an archive with nothing in it is an error.
     @discardableResult
     public static func create(at url: URL,
                               from sources: [URL],

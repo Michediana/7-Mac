@@ -65,7 +65,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non è stato possibile estrarre “%@” con il suo nome."
+            "value" : "Impossibile estrarre “%@” con il suo nome."
           }
         }
       }
@@ -81,7 +81,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non è stato possibile estrarre “%1$@”: %2$@"
+            "value" : "Impossibile estrarre “%1$@”: %2$@"
           }
         }
       }
@@ -117,7 +117,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "“%@” non è più dove si trovava: l'archivio è cambiato dall'inizio del trascinamento."
+            "value" : "“%@” non è più dove si trovava: l’archivio è cambiato dall’inizio del trascinamento."
           }
         }
       }
@@ -562,7 +562,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un'app Mac nativa per 7-Zip, con il motore 7-Zip %@ incorporato."
+            "value" : "Un’app Mac nativa per 7-Zip, con il motore 7-Zip %@ incorporato."
           }
         }
       }
@@ -2295,7 +2295,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aprendo un archivio dal Finder"
+            "value" : "Quando apri un archivio dal Finder"
           }
         }
       }
@@ -2415,7 +2415,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Metti i file"
+            "value" : "Estrai i file"
           }
         }
       }
@@ -3047,7 +3047,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il motore 7-Zip si trova in SevenZipKit.framework, dentro l'app, ed è coperto da questi termini. È collegato dinamicamente, quindi può essere sostituito con un'altra build della stessa libreria."
+            "value" : "Il motore 7-Zip si trova in SevenZipKit.framework, dentro l’app, ed è coperto da questi termini. È collegato dinamicamente, quindi può essere sostituito con un’altra build della stessa libreria."
           }
         }
       }
@@ -3057,7 +3057,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'app vera e propria: l'interfaccia e il codice Swift attorno al motore."
+            "value" : "L’app vera e propria: l’interfaccia e il codice Swift attorno al motore."
           }
         }
       }
@@ -3118,7 +3118,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il decodificatore RAR ha una restrizione in più: non può essere usato per ricreare l'algoritmo di compressione RAR. 7-Mac legge gli archivi RAR e non li scrive mai."
+            "value" : "Il decodificatore RAR ha una restrizione in più: non può essere usato per ricreare l’algoritmo di compressione RAR. 7-Mac legge gli archivi RAR e non li scrive mai."
           }
         }
       }
@@ -3220,7 +3220,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questo testo manca dall'app. Non dovrebbe: per favore segnalalo."
+            "value" : "Questo testo manca dall’app. Non dovrebbe: per favore segnalalo."
           }
         }
       }
@@ -3433,6 +3433,116 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Solo scrivibili"
+          }
+        }
+      }
+    },
+    "Finder" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder"
+          }
+        }
+      }
+    },
+    "7-Mac menu in the Finder" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu 7-Mac nel Finder"
+          }
+        }
+      }
+    },
+    "On" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivo"
+          }
+        }
+      }
+    },
+    "Off" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disattivo"
+          }
+        }
+      }
+    },
+    "Manage…" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestisci…"
+          }
+        }
+      }
+    },
+    "Turn On…" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva…"
+          }
+        }
+      }
+    },
+    "Right-click files in the Finder to extract, open, test or compress them with 7-Mac. The switch is in System Settings, under Login Items & Extensions." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic destro sui file nel Finder per estrarli, aprirli, verificarli o comprimerli con 7-Mac. L’interruttore è in Impostazioni di Sistema, in Elementi login ed estensioni."
+          }
+        }
+      }
+    },
+    "7-Mac needs your permission to use the folder “%@”. Choose it, or a folder that contains it — your home folder, for instance — and 7-Mac will not ask again for anything inside." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac ha bisogno del tuo permesso per usare la cartella “%@”. Sceglila, oppure una cartella che la contiene — per esempio la tua cartella Inizio — e 7-Mac non lo chiederà più per nulla al suo interno."
+          }
+        }
+      }
+    },
+    "That folder does not contain “%@”." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quella cartella non contiene “%@”."
+          }
+        }
+      }
+    },
+    "Choose the folder itself, or one of the folders it is in." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli la cartella stessa, o una delle cartelle in cui si trova."
+          }
+        }
+      }
+    },
+    "Encrypted entry" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voce cifrata"
           }
         }
       }

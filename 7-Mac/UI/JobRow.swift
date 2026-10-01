@@ -37,6 +37,7 @@ struct JobRow: View {
                     .foregroundStyle(job.state == .failed ? Color.red : .secondary)
                     .lineLimit(1)
                     .truncationMode(.middle)
+                    .help(job.skippedDetail ?? "")
 
                 if job.state == .running, !job.currentPath.isEmpty {
                     Text(job.currentPath)
@@ -89,6 +90,7 @@ struct JobRow: View {
         case .waiting:   "clock"
         case .running:   job.isTest ? "checkmark.shield" : (job.isExtraction ? "arrow.down.document" : "archivebox")
         case .finished where job.testReport?.isHealthy == false: "exclamationmark.shield.fill"
+        case .finished where job.finishedWithSkips: "exclamationmark.circle.fill"
         case .finished:  job.isTest ? "checkmark.shield.fill" : "checkmark.circle.fill"
         case .failed:    "exclamationmark.triangle.fill"
         case .cancelled: "slash.circle"
@@ -98,6 +100,7 @@ struct JobRow: View {
     private var tint: Color {
         switch job.state {
         case .finished where job.testReport?.isHealthy == false: .orange
+        case .finished where job.finishedWithSkips: .orange
         case .finished: .green
         case .failed:   .red
         case .running:  .accentColor

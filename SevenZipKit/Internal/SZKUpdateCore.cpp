@@ -142,7 +142,14 @@ HRESULT CUpdateCallback::CryptoGetTextPassword(BSTR *password)
 HRESULT CUpdateCallback::OpenFileError(const FString &path, DWORD systemError)
 {
     RecordFailure(path, systemError, "could not open");
-    return S_OK;  // keep going; the entry is reported as failed
+    // GetStream counted it on the way in, but nothing of it was stored.
+    if (outcome_.files > 0) {
+        outcome_.files--;
+    }
+    // S_FALSE, as the command line answers: leave the entry out. S_OK would
+    // carry on too, but with the file stored as empty -- an archive that
+    // extracts a zero-byte stand-in where the real file should be.
+    return S_FALSE;
 }
 
 HRESULT CUpdateCallback::ReadingFileError(const FString &path, DWORD systemError)
@@ -316,7 +323,14 @@ Result Create(const std::vector<std::string> &inputPaths,
         return result;
     }
 
-    if (!outcome.failures.empty()) {
+    // A file that could not be read is skipped, the way the command line
+    // warns and carries on: the archive holds everything else, and the
+    // failures travel in the outcome. Only an archive with nothing in it is a
+    // failure -- and then it is not left behind.
+    if (!outcome.failures.empty() && outcome.files == 0 && outcome.folders == 0) {
+        if (options.volumeSize == 0) {
+            NWindows::NFile::NDir::DeleteFileAlways(us2fs(archivePath));
+        }
         result.status = outcome.failures.front().status;
         result.message = outcome.failures.front().message;
     }

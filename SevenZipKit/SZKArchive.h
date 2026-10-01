@@ -152,7 +152,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// recursively). Paths are stored relative to each source's parent, so adding
 /// `/a/b/tree` stores `tree/…`.
 ///
-/// Fails if anything already exists at `url`.
+/// A file that cannot be read is skipped and listed in the outcome's
+/// `entryErrors`; the call still succeeds. It fails if nothing at all could
+/// be stored — leaving no archive behind — or if anything already exists at
+/// `url`.
 + (BOOL)createArchiveAtURL:(NSURL *)url
                 fromURLs:(NSArray<NSURL *> *)sourceURLs
                    options:(SZKCreateOptions *)options

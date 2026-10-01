@@ -1,0 +1,270 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "7-Zip archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio 7-Zip"
+          }
+        }
+      }
+    },
+    "ARJ archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio ARJ"
+          }
+        }
+      }
+    },
+    "Bzip2 archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio Bzip2"
+          }
+        }
+      }
+    },
+    "compress archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio compress"
+          }
+        }
+      }
+    },
+    "cpio archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio cpio"
+          }
+        }
+      }
+    },
+    "Debian package" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pacchetto Debian"
+          }
+        }
+      }
+    },
+    "Disc image" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagine disco"
+          }
+        }
+      }
+    },
+    "Gzip archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio Gzip"
+          }
+        }
+      }
+    },
+    "LHA archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio LHA"
+          }
+        }
+      }
+    },
+    "LZMA archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio LZMA"
+          }
+        }
+      }
+    },
+    "NSHumanReadableCopyright" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. Licenza MIT. Motore 7-Zip © Igor Pavlov, GNU LGPL."
+          }
+        }
+      }
+    },
+    "RAR archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio RAR"
+          }
+        }
+      }
+    },
+    "RPM package" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pacchetto RPM"
+          }
+        }
+      }
+    },
+    "SquashFS image" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagine SquashFS"
+          }
+        }
+      }
+    },
+    "Tar archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio Tar"
+          }
+        }
+      }
+    },
+    "Windows cabinet" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio cabinet di Windows"
+          }
+        }
+      }
+    },
+    "Windows imaging archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagine WIM di Windows"
+          }
+        }
+      }
+    },
+    "XZ archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio XZ"
+          }
+        }
+      }
+    },
+    "XZ-compressed tar archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio tar compresso con XZ"
+          }
+        }
+      }
+    },
+    "Zip archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio Zip"
+          }
+        }
+      }
+    },
+    "Zstandard archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio Zstandard"
+          }
+        }
+      }
+    },
+    "Zstandard-compressed tar archive" : {
+      "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio tar compresso con Zstandard"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

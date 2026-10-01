@@ -298,8 +298,14 @@ final class JobQueue {
         // have picked the same name minutes apart.
         output = ArchiveNaming.unique(output)
 
+        // A source macOS will not let us read at all — the Photos library is
+        // the usual one, behind its own privacy switch — would go in as an
+        // empty folder. Leave it out, and say so.
+        let (sources, unreadable) = Self.partitionReadable(request.sources)
+        guard !sources.isEmpty else { throw unreadable[0] }
+
         let outcome = try await Archive.create(at: output,
-                                               from: request.sources,
+                                               from: sources,
                                                format: request.formatName,
                                                level: request.profile.compressionLevel,
                                                password: request.password,
@@ -310,6 +316,7 @@ final class JobQueue {
                                                storesSymbolicLinks: request.storesSymbolicLinks,
                                                storesHardLinks: request.storesHardLinks,
                                                onProgress: progressSink(job))
+            .adding(entryErrors: unreadable)
         // Split output is `name.7z.001`, `.002`…; the first volume is what
         // to show, and what opens the set.
         if request.volumeSize > 0 {
@@ -319,6 +326,38 @@ final class JobQueue {
             }
         }
         return (outcome, output)
+    }
+
+    /// Which sources can be read, and an error for each one that cannot.
+    ///
+    /// Only the sources themselves are tried: one listing per folder, not a
+    /// second walk of the tree. A folder deeper down that cannot be read is
+    /// left to the engine, which skips what it cannot open and reports it.
+    nonisolated static func partitionReadable(_ sources: [URL]) -> ([URL], [NSError]) {
+        var readable: [URL] = []
+        var unreadable: [NSError] = []
+        for source in sources {
+            if canRead(source) {
+                readable.append(source)
+            } else {
+                unreadable.append(NSError(domain: SZKErrorDomain, code: SZKError.Code.unreadable.rawValue,
+                                          userInfo: [NSFilePathErrorKey: source.path(percentEncoded: false),
+                                                     NSDebugDescriptionErrorKey: "not readable by this app"]))
+            }
+        }
+        return (readable, unreadable)
+    }
+
+    private nonisolated static func canRead(_ url: URL) -> Bool {
+        let values = try? url.resourceValues(forKeys: [.isSymbolicLinkKey, .isDirectoryKey])
+        // A link is stored as a link: what it points to is not ours to read.
+        if values?.isSymbolicLink == true { return true }
+        if values?.isDirectory == true {
+            return (try? FileManager.default.contentsOfDirectory(atPath: url.path(percentEncoded: false))) != nil
+        }
+        guard let handle = try? FileHandle(forReadingFrom: url) else { return false }
+        try? handle.close()
+        return true
     }
 
     // MARK: - Asking

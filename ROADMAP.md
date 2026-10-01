@@ -2,8 +2,8 @@
 
 GUI nativa macOS per 7-Zip, con il motore 7-Zip **incorporato nell'app** come framework.
 
-- **Stato:** M0–M5 completi e verificati, tranne la notarizzazione (rinviata)
-- **Ultimo aggiornamento:** 2026-09-29
+- **Stato:** M0–M5 completi e verificati, tranne la notarizzazione (rinviata); dopo M5, trascinamento verso il Finder, crediti e menu nel Finder
+- **Ultimo aggiornamento:** 2026-10-01
 - **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.03 (2026-09-03)
 
 ---
@@ -603,6 +603,61 @@ elastico che partiva da lì, come nel Finder.
 **I testi di licenza non sono riscritti.** I tre di 7-Zip vengono dal framework, dove già
 viaggiavano; quello dell'app è una copia di `LICENSE`. La clausola unRAR va riportata
 testualmente, e il modo più sicuro è non ricopiarla mai a mano.
+
+### Dopo M5 — il menu 7-Mac nel Finder
+
+- [x] **Sottomenu "7-Mac" nel menu contestuale del Finder**, al primo livello: Estrai, Apri
+  senza estrarre e Verifica archivio quando la selezione è fatta solo di archivi; Comprimi… e
+  Checksum… sempre. Su ogni volume, anche quelli montati dopo
+- [x] Impostazioni › Finder: dice se il menu è attivo e apre il pannello di sistema per attivarlo
+- [x] **Un file illeggibile non fa più fallire una compressione**: viene saltato e la riga lo dice
+
+`Scripts/smoke-test.sh` verifica ora **33 asserzioni** (quattro sull'estensione: c'è, condivide
+l'app group con l'app, il gruppo che il codice legge è quello della firma, non linka il motore;
+una sulle traduzioni di `Info.plist` — il Tipo dei file nel Finder e il menu Servizi, che finora
+restavano in inglese)
+ed esegue **158 test**: sette sul passaggio di consegne fra estensione e app e sei sulle
+sorgenti illeggibili.
+
+Struttura aggiunta:
+
+```
+7-MacFinder/FinderMenu.swift          l'estensione Finder Sync: il menu e la consegna all'app
+7-MacFinder/FinderHandoff.swift       la richiesta lasciata nell'app group (anche nel target app)
+7-MacFinder/ArchiveExtensions.swift   cosa conta come archivio, una lista per menu e drop
+```
+
+**È una Finder Sync extension, non un servizio.** I servizi c'erano già da M2, ma il Finder li
+mette in fondo, sotto Azioni rapide. Una Finder Sync extension è l'unico modo di stare al primo
+livello del menu. Il prezzo è che l'utente la deve attivare in Impostazioni di Sistema, e da qui
+la sezione nelle impostazioni dell'app.
+
+**L'estensione non apre i file con l'app: le lascia un biglietto.** Era il primo tentativo, e
+non funziona: l'estensione è sandboxata e non ha accesso ai file selezionati, e Launch Services
+rifiuta di consegnare quello che il mittente non può leggere ("L'applicazione non può aprire il
+documento"). Ora l'estensione scrive la richiesta (azione e percorsi) in un file nell'app group,
+uno per richiesta, e apre `sevenmac://finder/<id>`. L'app legge il file, lo cancella, e
+raggiunge i percorsi attraverso le cartelle che le sono state concesse: la prima volta per
+cartella chiede un pannello (`FolderAccess`, lo stesso di M2), e una cartella più in alto — la
+Inizio — vale per tutto quello che contiene. Una richiesta più vecchia di un minuto non vale.
+Il primo tentativo con `UserDefaults(suiteName:)` sull'app group non funzionava neppure: i
+log riportano che cfprefsd non è disponibile per quel dominio da dentro l'estensione.
+
+**Un file illeggibile si salta, non si archivia vuoto.** Comprimere il contenuto di Immagini
+falliva per colpa della libreria di Foto, che macOS protegge con un permesso a parte. Due
+difetti, tutti e due del motore: `Create` segnava come fallito l'intero archivio per un solo
+file illeggibile, pur avendolo scritto; e il callback rispondeva `S_OK` all'errore di
+apertura, cosa che fa scrivere al gestore 7z una voce **da 0 byte** al posto del file.
+`S_FALSE`, come risponde la riga di comando, la lascia fuori. Ora fallisce solo un archivio
+in cui non è entrato niente, e in quel caso non resta su disco. In più l'app prova a leggere
+ciascuna sorgente prima di passarla al motore: una cartella illeggibile in cima alla selezione
+non entra come cartella vuota. La riga del job è arancione, dice "N saltati" e il tooltip
+elenca quali e perché.
+
+**Limiti accettati:** una cartella illeggibile più in profondità finisce nell'archivio come
+cartella vuota (il motore la trova scandendo, e non ha modo di toglierla); è comunque segnalata
+fra i saltati. La modifica in place (M4) non è cambiata: aggiungere un file illeggibile a un
+archivio esistente fallisce ancora, e l'archivio resta com'era.
 
 ---
 

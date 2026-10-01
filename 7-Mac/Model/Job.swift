@@ -190,6 +190,23 @@ final class Job: Identifiable {
 
     // MARK: - What the row says
 
+    /// Finished, but not with everything: entries skipped along the way.
+    var finishedWithSkips: Bool {
+        state == .finished && !(outcome?.entryErrors.isEmpty ?? true)
+    }
+
+    /// One line per skipped entry, for the row's tooltip.
+    var skippedDetail: String? {
+        guard let errors = outcome?.entryErrors, !errors.isEmpty else { return nil }
+        let lines = errors.prefix(20).map { error in
+            let name = (error.userInfo[NSFilePathErrorKey] as? String)
+                .map { ($0 as NSString).lastPathComponent } ?? "?"
+            return "\(name): \(error.archiveDescription.lowercased())"
+        }
+        let more = errors.count > 20 ? ["\u{2026}"] : []
+        return (lines + more).joined(separator: "\n")
+    }
+
     var statusLine: String {
         switch state {
         case .waiting:
