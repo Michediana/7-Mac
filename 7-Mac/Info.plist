@@ -305,6 +305,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>LSUIElement</key>
+	<false/>
 	<key>SevenMacAppGroup</key>
 	<string>$(DEVELOPMENT_TEAM).com.michediana.Seven-Mac</string>
 	<key>UTImportedTypeDeclarations</key>

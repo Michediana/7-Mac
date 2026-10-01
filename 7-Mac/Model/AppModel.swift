@@ -73,6 +73,16 @@ final class AppModel: JobInteraction {
         }
     }
 
+    /// A drop on the main window outside the "create archive" area. That
+    /// area is where archives get made, so anything that is not an archive
+    /// joins it rather than opening the compress sheet straight away.
+    func acceptDrop(_ urls: [URL]) {
+        let urls = urls.filter { $0.isFileURL }
+        let archives = urls.filter(ArchiveNaming.looksLikeArchive)
+        if !archives.isEmpty { extract(archives) }
+        stage(urls.filter { !ArchiveNaming.looksLikeArchive($0) })
+    }
+
     /// Files opened from the Finder: the Dock icon, a double-click, "Open
     /// With". Unlike a drop, what this means is a preference.
     func open(_ urls: [URL]) {
@@ -267,6 +277,18 @@ final class AppModel: JobInteraction {
         panel.prompt = String(localized: "Choose")
         guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
         beginCompression(of: panel.urls)
+    }
+
+    /// The main window's right target, clicked rather than dropped on.
+    func chooseItemsToStage() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = true
+        panel.message = String(localized: "Choose files and folders to add to the archive.")
+        panel.prompt = String(localized: "Add")
+        guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
+        stage(panel.urls)
     }
 
     // MARK: - JobInteraction

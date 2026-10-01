@@ -779,7 +779,8 @@
             "value" : "Tutto il resto viene compresso."
           }
         }
-      }
+      },
+      "extractionState" : "stale"
     },
     "Appearance" : {
       "localizations" : {
@@ -1472,7 +1473,8 @@
             "value" : "Trascina qui gli archivi per estrarli, o altri file per comprimerli"
           }
         }
-      }
+      },
+      "extractionState" : "stale"
     },
     "Drop archives to extract" : {
       "localizations" : {
@@ -3863,6 +3865,76 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "^[%lld elemento](inflect: true)"
+          }
+        }
+      }
+    },
+    "Click to choose files and folders to archive" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic per scegliere file e cartelle da archiviare"
+          }
+        }
+      }
+    },
+    "Choose files and folders to add to the archive." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli i file e le cartelle da aggiungere all’archivio."
+          }
+        }
+      }
+    },
+    "Add…" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi…"
+          }
+        }
+      }
+    },
+    "Drop area height" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altezza dell’area di rilascio"
+          }
+        }
+      }
+    },
+    "Click to choose archives to extract" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic per scegliere gli archivi da estrarre"
+          }
+        }
+      }
+    },
+    "Drop archives here to extract them, or click to choose them" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina qui gli archivi per estrarli, o fai clic per sceglierli"
+          }
+        }
+      }
+    },
+    "Or click to choose them." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oppure fai clic per sceglierli."
           }
         }
       }

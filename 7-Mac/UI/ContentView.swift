@@ -12,25 +12,30 @@ import UniformTypeIdentifiers
 struct ContentView: View {
     @Environment(AppModel.self) private var model
     @State private var isTargeted = false
+    /// How tall the row of drop targets is; the divider under it drags.
+    @AppStorage("dropAreaHeight") private var dropAreaHeight: Double = 190
 
     var body: some View {
         @Bindable var model = model
 
-        VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                DropArea(isTargeted: isTargeted)
-                StagingArea()
+        GeometryReader { geometry in
+            let range = DropAreaHeight.range(in: geometry.size.height)
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    DropArea(isTargeted: isTargeted)
+                    StagingArea()
+                }
+                .frame(height: min(max(dropAreaHeight, range.lowerBound), range.upperBound))
+                ResizeHandle(height: $dropAreaHeight, range: range)
+                QueueList()
             }
-            .frame(height: 190)
-            Divider()
-            QueueList()
         }
         .frame(minWidth: 520, minHeight: 420)
         // `onDrop` with item providers rather than `dropDestination(for:)`:
         // a Finder drag arrives as `public.file-url` plus a sandbox extension
         // for each item, and this is the path that hands both over intact.
         .onDrop(of: [.fileURL], isTargeted: $isTargeted) { providers in
-            Task { model.accept(await fileURLs(from: providers)) }
+            Task { model.acceptDrop(await fileURLs(from: providers)) }
             return true
         }
         .toolbar {
@@ -66,10 +71,21 @@ struct ContentView: View {
 }
 
 private struct DropArea: View {
+    @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let isTargeted: Bool
 
     var body: some View {
+        // A click does what a drop does, for whoever would rather not drag.
+        Button { model.chooseArchivesToExtract() } label: { content }
+            .buttonStyle(.plain)
+            .help("Click to choose archives to extract")
+            .background { DropOutline(isTargeted: isTargeted) }
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.12), value: isTargeted)
+            .accessibilityLabel("Drop archives here to extract them, or click to choose them")
+    }
+
+    private var content: some View {
         VStack(spacing: 8) {
             Image(systemName: isTargeted ? "archivebox.fill" : "archivebox")
                 .font(.system(size: 34, weight: .light))
@@ -77,17 +93,14 @@ private struct DropArea: View {
                 .contentTransition(.symbolEffect(.replace))
             Text("Drop archives to extract")
                 .font(.headline)
-            Text("Anything else gets compressed.")
+            Text("Or click to choose them.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }
         .multilineTextAlignment(.center)
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background { DropOutline(isTargeted: isTargeted) }
-        .animation(reduceMotion ? nil : .easeOut(duration: 0.12), value: isTargeted)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Drop archives here to extract them, or other files to compress them")
+        .contentShape(Rectangle())
     }
 }
 
@@ -118,6 +131,13 @@ private struct StagingArea: View {
     }
 
     private var empty: some View {
+        Button { model.chooseItemsToStage() } label: { emptyContent }
+            .buttonStyle(.plain)
+            .help("Click to choose files and folders to archive")
+            .accessibilityLabel("Drop files and folders here to gather them into a new archive")
+    }
+
+    private var emptyContent: some View {
         VStack(spacing: 8) {
             Image(systemName: isTargeted ? "plus.rectangle.on.folder.fill" : "plus.rectangle.on.folder")
                 .font(.system(size: 34, weight: .light))
@@ -131,8 +151,8 @@ private struct StagingArea: View {
         }
         .multilineTextAlignment(.center)
         .padding(.horizontal, 24)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Drop files and folders here to gather them into a new archive")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .contentShape(Rectangle())
     }
 
     private var gathered: some View {
@@ -151,6 +171,7 @@ private struct StagingArea: View {
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 Spacer(minLength: 0)
+                Button("Add…") { model.chooseItemsToStage() }
                 Button("Clear") { model.clearStaged() }
                 Button("Create Archive…") { model.compressStaged() }
                     .buttonStyle(.borderedProminent)
@@ -198,6 +219,56 @@ private struct DropOutline: View {
             .strokeBorder(isTargeted ? Color.accentColor : Color.secondary.opacity(0.35),
                           style: StrokeStyle(lineWidth: 1.5, dash: [6, 4]))
             .padding(12)
+    }
+}
+
+private enum DropAreaHeight {
+    static let minimum: Double = 120
+    /// Room the queue keeps however far the divider is dragged.
+    static let queueMinimum: Double = 150
+
+    static func range(in total: Double) -> ClosedRange<Double> {
+        minimum...max(minimum, total - queueMinimum)
+    }
+}
+
+/// The divider between the drop targets and the queue, dragged to give one
+/// more room than the other.
+private struct ResizeHandle: View {
+    @Binding var height: Double
+    let range: ClosedRange<Double>
+    @State private var startHeight: Double?
+
+    var body: some View {
+        Divider()
+            .padding(.vertical, 3)
+            .contentShape(Rectangle())
+            .padding(.vertical, -3)
+            .pointerStyle(.rowResize)
+            .gesture(
+                // Global space: the handle moves with the drag, so its own
+                // coordinates would shift under the pointer.
+                DragGesture(minimumDistance: 1, coordinateSpace: .global)
+                    .onChanged { value in
+                        let start = startHeight ?? clamped(height)
+                        startHeight = start
+                        height = clamped(start + value.translation.height)
+                    }
+                    .onEnded { _ in startHeight = nil }
+            )
+            .accessibilityElement()
+            .accessibilityLabel("Drop area height")
+            .accessibilityAdjustableAction { direction in
+                switch direction {
+                case .increment: height = clamped(height + 20)
+                case .decrement: height = clamped(height - 20)
+                @unknown default: break
+                }
+            }
+    }
+
+    private func clamped(_ value: Double) -> Double {
+        min(max(value, range.lowerBound), range.upperBound)
     }
 }
 
