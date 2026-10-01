@@ -618,6 +618,8 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				fr,
 				it,
 			);
 			mainGroup = F502B1B030612D0F008EBD0E;

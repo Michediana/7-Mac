@@ -5,6 +5,18 @@
       "comment" : "Info.plist NSServices: the Services menu titles.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimir con 7-Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compresser avec 7-Mac"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17,6 +29,18 @@
       "comment" : "Info.plist NSServices: the Services menu titles.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraer con 7-Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraire avec 7-Mac"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",

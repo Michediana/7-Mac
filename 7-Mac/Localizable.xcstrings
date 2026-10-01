@@ -1,11 +1,21 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
+    "" : {},
     "—" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "—"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "—"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16,6 +26,18 @@
     },
     ", encrypted" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", cifrado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", chiffré"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26,6 +48,18 @@
     },
     ", in %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", en %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", dans %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36,6 +70,18 @@
     },
     "·" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "·"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "·"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -52,6 +98,18 @@
             "value" : "“%1$@” could not be opened: %2$@."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido abrir “%1$@”: %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d’ouvrir « %1$@ » : %2$@."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -62,6 +120,18 @@
     },
     "“%@” could not be unpacked under its own name." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido descomprimir “%@” con su propio nombre."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d’extraire « %@ » sous son propre nom."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -76,6 +146,18 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "“%1$@” could not be unpacked: %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido descomprimir “%1$@”: %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d’extraire « %1$@ » : %2$@"
           }
         },
         "it" : {
@@ -94,6 +176,18 @@
             "value" : "“%1$@” could not be unpacked: %2$@."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido descomprimir “%1$@”: %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d’extraire « %1$@ » : %2$@."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -104,6 +198,18 @@
     },
     "“%@” is already taken." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” ya está en uso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« %@ » est déjà utilisé."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -114,6 +220,18 @@
     },
     "“%@” is no longer where it was: the archive has changed since the drag began." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” ya no está donde estaba: el archivo comprimido ha cambiado desde que empezó el arrastre."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« %@ » n’est plus à sa place : l’archive a changé depuis le début du glissement."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -124,6 +242,18 @@
     },
     "“%@” is not an archive 7-Mac can open." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” no es un archivo comprimido que 7-Mac pueda abrir."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« %@ » n’est pas une archive que 7-Mac peut ouvrir."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -134,6 +264,18 @@
     },
     "(unnamed)" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(sin nombre)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(sans nom)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -150,6 +292,18 @@
             "value" : "%1$@ (%2$@)"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$@)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$@)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -160,6 +314,18 @@
     },
     "%@ archives cannot be encrypted." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los archivos %@ no se pueden cifrar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les archives %@ ne peuvent pas être chiffrées."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -174,6 +340,18 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ did not work: %2$@. The archive has not been changed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ no ha funcionado: %2$@. El archivo comprimido no se ha modificado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ n’a pas fonctionné : %2$@. L’archive n’a pas été modifiée."
           }
         },
         "it" : {
@@ -192,6 +370,18 @@
             "value" : "%1$@ from %2$@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de %2$@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -206,6 +396,18 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ in %2$@."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ en %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ dans %2$@."
           }
         },
         "it" : {
@@ -224,6 +426,18 @@
             "value" : "%1$@ of %2$@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ de %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ sur %2$@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -234,6 +448,18 @@
     },
     "%@ packed" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ comprimidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ compressés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -244,6 +470,18 @@
     },
     "%@ test report.txt" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informe de verificación de %@.txt"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapport de vérification %@.txt"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -260,6 +498,18 @@
             "value" : "%1$@, %2$@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -270,6 +520,18 @@
     },
     "%lld" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -280,6 +542,18 @@
     },
     "%lld could not be read" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld no se han podido leer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld illisibles"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -290,6 +564,18 @@
     },
     "%lld formats readable" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld formatos legibles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld formats lisibles"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -300,6 +586,18 @@
     },
     "%lld seconds left" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "quedan %lld segundos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld secondes restantes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -316,6 +614,18 @@
             "value" : "%1$lld selected — %2$@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld seleccionados — %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld sélectionnés — %2$@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -326,6 +636,18 @@
     },
     "%lld skipped" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld omitidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld ignorés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -336,6 +658,18 @@
     },
     "%lld writable" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld con escritura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld en écriture"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -346,6 +680,18 @@
     },
     "© 2026 Michediana. 7-Mac is free software under the MIT License." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. 7-Mac es software libre con licencia MIT."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. 7-Mac est un logiciel libre sous licence MIT."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -354,11 +700,21 @@
         }
       }
     },
-    "7-Mac" : {
-
-    },
+    "7-Mac" : {},
     "7-Mac did not receive any files." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac no ha recibido ningún archivo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac n’a reçu aucun fichier."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -369,6 +725,18 @@
     },
     "7-Mac integrity report" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informe de integridad de 7-Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapport d’intégrité de 7-Mac"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -379,6 +747,18 @@
     },
     "7-Mac is not allowed to write into “%@”." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac no tiene permiso para escribir en “%@”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac n’est pas autorisé à écrire dans « %@ »."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -389,6 +769,18 @@
     },
     "7-Mac needs permission to write into “%@”. Choose it, or pick somewhere else." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac necesita permiso para escribir en “%@”. Selecciónala o elige otra ubicación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac a besoin d’une autorisation pour écrire dans « %@ ». Choisissez-le, ou choisissez un autre emplacement."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -399,6 +791,18 @@
     },
     "7-Mac will ask for permission to write here." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac pedirá permiso para escribir aquí."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac demandera l’autorisation d’écrire ici."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -409,6 +813,18 @@
     },
     "7-Zip" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -419,6 +835,18 @@
     },
     "7-Zip %@ engine, embedded" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motor de 7-Zip %@, integrado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moteur 7-Zip %@, intégré"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -429,6 +857,18 @@
     },
     "7-Zip © 1999–2026 Igor Pavlov. unRAR code © Alexander Roshal." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip © 1999–2026 Igor Pavlov. Código de unRAR © Alexander Roshal."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip © 1999–2026 Igor Pavlov. Code unRAR © Alexander Roshal."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -439,6 +879,18 @@
     },
     "7-Zip Engine" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motor de 7-Zip"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moteur 7-Zip"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -449,6 +901,18 @@
     },
     "7-Zip source" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código fuente de 7-Zip"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Source de 7-Zip"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -459,6 +923,18 @@
     },
     "7-zip.org" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-zip.org"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-zip.org"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -469,6 +945,18 @@
     },
     "7-Zip's combined checksum of every file's contents" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La suma de verificación combinada de 7-Zip del contenido de todos los archivos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La somme de contrôle combinée de 7-Zip sur le contenu de tous les fichiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -479,6 +967,18 @@
     },
     "a %@ file holds a single stream" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "un archivo %@ contiene un único flujo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "un fichier %@ contient un seul flux"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -489,6 +989,18 @@
     },
     "A folder I choose" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En una carpeta que elija"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dans un dossier de mon choix"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -499,6 +1011,18 @@
     },
     "A job is still running." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todavía hay una tarea en curso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une tâche est encore en cours."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -509,6 +1033,18 @@
     },
     "A link is followed, and what it points to is stored in its place." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se sigue el enlace y se guarda en su lugar aquello a lo que apunta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le lien est suivi, et ce vers quoi il pointe est stocké à sa place."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -519,6 +1055,18 @@
     },
     "A link is stored as a link and comes back as one." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El enlace se guarda como enlace y se recupera como tal."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le lien est stocké comme lien et ressort comme tel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -529,6 +1077,18 @@
     },
     "a moment left" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "queda un momento"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "encore un instant"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -539,6 +1099,18 @@
     },
     "A name cannot be empty." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El nombre no puede estar vacío."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le nom ne peut pas être vide."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -549,6 +1121,18 @@
     },
     "A name cannot contain “/”." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El nombre no puede contener “/”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le nom ne peut pas contenir « / »."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -559,6 +1143,18 @@
     },
     "A native Mac app for 7-Zip, with the 7-Zip %@ engine built in." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una app nativa de Mac para 7-Zip, con el motor de 7-Zip %@ integrado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une app Mac native pour 7-Zip, avec le moteur 7-Zip %@ intégré."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -569,6 +1165,18 @@
     },
     "A password is only ever saved when you tick the box in the prompt. Turning this off also stops 7-Mac using the ones it saved before. Saved passwords are keyed to the archive's path, so moving the file forgets it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una contraseña solo se guarda si marcas la casilla en la solicitud. Si desactivas esta opción, 7-Mac también dejará de usar las que guardó antes. Las contraseñas guardadas están ligadas a la ruta del archivo comprimido, así que al moverlo se olvidan."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un mot de passe n’est enregistré que si vous cochez la case dans la demande. Désactiver cette option empêche aussi 7-Mac d’utiliser ceux enregistrés auparavant. Les mots de passe enregistrés sont liés au chemin de l’archive : déplacer le fichier les fait oublier."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -579,6 +1187,18 @@
     },
     "a password is required" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "se necesita una contraseña"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "un mot de passe est requis"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -593,6 +1213,18 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "About %1$@ of memory to compress with %2$@, %3$@ to extract."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unos %1$@ de memoria para comprimir con %2$@, %3$@ para extraer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Environ %1$@ de mémoire pour compresser avec %2$@, %3$@ pour extraire."
           }
         },
         "it" : {
@@ -611,6 +1243,18 @@
             "value" : "About %1$@ of memory to compress, %2$@ to extract."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unos %1$@ de memoria para comprimir, %2$@ para extraer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Environ %1$@ de mémoire pour compresser, %2$@ pour extraire."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -621,6 +1265,18 @@
     },
     "about %lld hours left" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "quedan unas %lld horas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "environ %lld heures restantes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -631,6 +1287,18 @@
     },
     "about %lld minutes left" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "quedan unos %lld minutos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "environ %lld minutes restantes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -641,6 +1309,18 @@
     },
     "About 7-Mac" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca de 7-Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos de 7-Mac"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -651,6 +1331,18 @@
     },
     "about a minute left" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "queda aproximadamente un minuto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "environ une minute restante"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -661,6 +1353,18 @@
     },
     "Add" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -671,6 +1375,18 @@
     },
     "Add “%@”" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter « %@ »"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -681,6 +1397,18 @@
     },
     "Add %lld Items" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir %lld ítems"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter %lld éléments"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -691,6 +1419,18 @@
     },
     "Add files to %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir archivos a %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter des fichiers à %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -701,6 +1441,18 @@
     },
     "Add Files…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir archivos…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter des fichiers…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -711,6 +1463,18 @@
     },
     "Add to %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -727,6 +1491,18 @@
             "value" : "Add to %1$@ in “%2$@”:"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a %1$@ en “%2$@”:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à %1$@ dans « %2$@ » :"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -737,6 +1513,18 @@
     },
     "Advanced" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avanzado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avancé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -753,6 +1541,18 @@
             "value" : "All %1$@ are intact (%2$@)."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los %1$@ están intactos (%2$@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les %1$@ sont intacts (%2$@)."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -763,6 +1563,18 @@
     },
     "Also hide the list of files" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocultar también la lista de archivos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer aussi la liste des fichiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -773,6 +1585,18 @@
     },
     "Anything else gets compressed." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo lo demás se comprime."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout le reste est compressé."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -784,6 +1608,18 @@
     },
     "Appearance" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aspecto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apparence"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -794,6 +1630,18 @@
     },
     "Archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -804,6 +1652,18 @@
     },
     "Archive: %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo comprimido: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive : %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -814,6 +1674,18 @@
     },
     "Archives" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivos comprimidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archives"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -825,6 +1697,18 @@
     "archives split into volumes cannot be changed" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "los archivos divididos en volúmenes no se pueden modificar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "les archives découpées en volumes ne peuvent pas être modifiées"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -835,6 +1719,18 @@
     },
     "Ask" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preguntar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -845,6 +1741,18 @@
     },
     "Ask each time" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preguntar cada vez"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander à chaque fois"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -855,6 +1763,18 @@
     },
     "Audio" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -865,6 +1785,18 @@
     },
     "Automatic" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automático"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatique"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -875,6 +1807,18 @@
     },
     "Automatic (%lld)" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automático (%lld)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatique (%lld)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -885,6 +1829,18 @@
     },
     "Back" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atrás"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -895,6 +1851,18 @@
     },
     "Back to the archive this one is inside" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver al archivo comprimido que contiene este"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revenir à l’archive qui contient celle-ci"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -905,6 +1873,18 @@
     },
     "Back to the enclosing folder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a la carpeta que contiene esta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revenir au dossier parent"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -915,6 +1895,18 @@
     },
     "Blocks of %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloques de %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocs de %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -925,6 +1917,18 @@
     },
     "busy" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ocupado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "occupé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -935,6 +1939,18 @@
     },
     "Cancel" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -945,6 +1961,18 @@
     },
     "Cancel All Jobs" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar todas las tareas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler toutes les tâches"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -955,6 +1983,18 @@
     },
     "cancelled" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cancelado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "annulé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -965,6 +2005,18 @@
     },
     "Cancelled" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -975,6 +2027,18 @@
     },
     "Cannot change this archive: %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede modificar este archivo comprimido: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de modifier cette archive : %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -985,6 +2049,18 @@
     },
     "Change…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -995,6 +2071,18 @@
     },
     "Check every entry decodes intact" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprobar que cada entrada se descomprime intacta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier que chaque entrée se décompresse intacte"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1005,6 +2093,18 @@
     },
     "Check the selected entries decode intact" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprobar que las entradas seleccionadas se descomprimen intactas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier que les entrées sélectionnées se décompressent intactes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1015,6 +2115,18 @@
     },
     "Checksum" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calcular"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calculer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1025,6 +2137,18 @@
     },
     "Checksums" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sumas de verificación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sommes de contrôle"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1035,6 +2159,18 @@
     },
     "Checksums — %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sumas de verificación — %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sommes de contrôle — %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1045,6 +2181,18 @@
     },
     "Checksums of the selected entries, or all of them" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sumas de verificación de las entradas seleccionadas, o de todas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sommes de contrôle des entrées sélectionnées, ou de toutes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1055,6 +2203,18 @@
     },
     "Checksums…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sumas de verificación…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sommes de contrôle…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1065,6 +2225,18 @@
     },
     "Choose" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1075,6 +2247,18 @@
     },
     "Choose archives to extract." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige los archivos comprimidos que quieres extraer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les archives à extraire."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1085,6 +2269,18 @@
     },
     "Choose archives to look inside." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige los archivos comprimidos cuyo contenido quieres ver."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les archives dont afficher le contenu."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1095,6 +2291,18 @@
     },
     "Choose archives to test. Nothing is written: every entry is decoded and checked." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige los archivos comprimidos que quieres verificar. No se escribe nada: cada entrada se descomprime y se comprueba."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les archives à vérifier. Rien n’est écrit : chaque entrée est décompressée et contrôlée."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1105,6 +2313,18 @@
     },
     "Choose files and folders to compress." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige los archivos y carpetas que quieres comprimir."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les fichiers et dossiers à compresser."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1115,6 +2335,18 @@
     },
     "Choose files or folders to checksum." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige los archivos o carpetas de los que calcular la suma de verificación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les fichiers ou dossiers dont calculer la somme de contrôle."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1125,6 +2357,18 @@
     },
     "Choose the folder extractions should go into." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige la carpeta donde se extraerá."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez le dossier où extraire."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1135,6 +2379,18 @@
     },
     "Choose where to extract %@." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige dónde extraer %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez où extraire %@."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1145,6 +2401,18 @@
     },
     "Choose where to put %@." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige dónde guardar %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez où enregistrer %@."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1155,6 +2423,18 @@
     },
     "Choose which checksums to compute" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige qué sumas de verificación calcular"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les sommes de contrôle à calculer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1165,6 +2445,18 @@
     },
     "Choose…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1175,6 +2467,18 @@
     },
     "Clear Finished" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar terminadas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer les terminées"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1185,6 +2489,18 @@
     },
     "Clear Finished Jobs" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar tareas terminadas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer les tâches terminées"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1195,6 +2511,18 @@
     },
     "Compress" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compresser"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1205,6 +2533,18 @@
     },
     "Compress %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimir %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compresser %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1215,6 +2555,18 @@
     },
     "Compress…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimir…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compresser…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1225,6 +2577,18 @@
     },
     "Compressing" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimiendo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compression"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1235,6 +2599,18 @@
     },
     "Copy" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1245,6 +2621,18 @@
     },
     "Copy All" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar todo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout copier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1255,6 +2643,18 @@
     },
     "Copy Checksum" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar suma de verificación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier la somme de contrôle"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1265,6 +2665,18 @@
     },
     "Copy Path" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiar ruta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier le chemin"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1275,6 +2687,18 @@
     },
     "could not be read or written" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no se ha podido leer ni escribir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lecture ou écriture impossible"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1285,6 +2709,18 @@
     },
     "Could not compute checksums" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se han podido calcular las sumas de verificación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de calculer les sommes de contrôle"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1295,6 +2731,18 @@
     },
     "Could not open “%@”" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido abrir “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d’ouvrir « %@ »"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1309,6 +2757,18 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Could not redo %1$@: %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido rehacer %1$@: %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de rétablir %1$@ : %2$@"
           }
         },
         "it" : {
@@ -1327,6 +2787,18 @@
             "value" : "Could not undo %1$@: %2$@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido deshacer %1$@: %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d’annuler %1$@ : %2$@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1337,6 +2809,18 @@
     },
     "CRC" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CRC"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CRC"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1347,6 +2831,18 @@
     },
     "CRC32 / Problem" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CRC32 / Problema"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CRC32 / Problème"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1357,6 +2853,18 @@
     },
     "damaged" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dañado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "endommagé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1367,6 +2875,18 @@
     },
     "Damaged" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dañado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Endommagé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1377,6 +2897,18 @@
     },
     "Dark" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscuro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sombre"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1387,6 +2919,18 @@
     },
     "Default (%@)" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predeterminado (%@)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Par défaut (%@)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1397,6 +2941,18 @@
     },
     "Delete" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1407,6 +2963,18 @@
     },
     "Delete “%@”" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer « %@ »"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1417,6 +2985,18 @@
     },
     "Delete %lld Items" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar %lld ítems"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer %lld éléments"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1427,6 +3007,18 @@
     },
     "Delete Preset" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar preajuste"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer le préréglage"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1437,6 +3029,18 @@
     },
     "Dictionary" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diccionario"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictionnaire"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1447,6 +3051,18 @@
     },
     "Documents" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documents"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1457,6 +3073,18 @@
     },
     "Done" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1467,6 +3095,18 @@
     },
     "Drop archives here to extract them, or other files to compress them" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos comprimidos para extraerlos, u otros archivos para comprimirlos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez ici des archives pour les extraire, ou d’autres fichiers pour les compresser"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1478,6 +3118,18 @@
     },
     "Drop archives to extract" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos comprimidos para extraerlos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez des archives pour les extraire"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1488,6 +3140,18 @@
     },
     "Dropping an archive on the 7-Mac window always extracts it. File › Open… always shows its contents." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soltar un archivo comprimido en la ventana de 7-Mac siempre lo extrae. Archivo › Abrir… siempre muestra su contenido."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposer une archive sur la fenêtre de 7-Mac l’extrait toujours. Fichier › Ouvrir… affiche toujours son contenu."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1498,6 +3162,18 @@
     },
     "Encrypted" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cifrados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiffrés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1508,6 +3184,18 @@
     },
     "Encrypted list" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista cifrada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste chiffrée"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1518,6 +3206,18 @@
     },
     "Encryption" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cifrado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiffrement"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1528,6 +3228,18 @@
     },
     "Everything" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1538,6 +3250,18 @@
     },
     "Everything in “%@”" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo el contenido de “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout le contenu de « %@ »"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1548,6 +3272,18 @@
     },
     "Everything inside it — %@ — moves with it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo lo que contiene — %@ — se mueve con ella."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout ce qu’il contient — %@ — est déplacé avec lui."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1558,6 +3294,18 @@
     },
     "Extensions" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extensiones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extensions"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1568,6 +3316,18 @@
     },
     "Extract" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraire"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1578,6 +3338,18 @@
     },
     "Extract %@ into:" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraer %@ en:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraire %@ dans :"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1588,6 +3360,18 @@
     },
     "Extract Here" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraer aquí"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraire ici"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1598,6 +3382,18 @@
     },
     "Extract it" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraerlo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’extraire"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1608,6 +3404,18 @@
     },
     "Extract…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraer…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraire…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1618,6 +3426,18 @@
     },
     "Extracting" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extrayendo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraction"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1628,6 +3448,18 @@
     },
     "failed" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "error"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "échec"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1638,6 +3470,18 @@
     },
     "Failed" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1648,6 +3492,18 @@
     },
     "Fast" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rápida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapide"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1658,6 +3514,18 @@
     },
     "Fastest" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La más rápida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La plus rapide"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1668,6 +3536,18 @@
     },
     "file" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "archivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fichier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1678,6 +3558,18 @@
     },
     "files" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "archivos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fichiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1688,6 +3580,18 @@
     },
     "Filter formats" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar formatos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrer les formats"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1698,6 +3602,18 @@
     },
     "Finished jobs stay here until you clear them." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las tareas terminadas permanecen aquí hasta que las borres."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les tâches terminées restent ici jusqu’à ce que vous les effaciez."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1708,6 +3624,18 @@
     },
     "folder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "carpeta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dossier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1718,6 +3646,18 @@
     },
     "Folder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carpeta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1728,6 +3668,18 @@
     },
     "Folder %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carpeta %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossier %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1738,6 +3690,18 @@
     },
     "folders" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "carpetas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dossiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1748,6 +3712,18 @@
     },
     "Format" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Formato"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Format"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1758,6 +3734,18 @@
     },
     "Format, level, method, dictionary, solid blocks and threads are saved. A preset with the same name is replaced." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se guardan el formato, el nivel, el método, el diccionario, los bloques sólidos y los hilos. Un preajuste con el mismo nombre se sustituye."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le format, le niveau, la méthode, le dictionnaire, les blocs solides et les threads sont enregistrés. Un préréglage du même nom est remplacé."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1768,6 +3756,18 @@
     },
     "GNU LGPL" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GNU LGPL"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GNU LGPL"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1778,6 +3778,18 @@
     },
     "If a file is already there" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si ya hay un archivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si un fichier existe déjà"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1788,6 +3800,18 @@
     },
     "Images" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imágenes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Images"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1798,6 +3822,18 @@
     },
     "Intact" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intacto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intact"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1808,6 +3844,18 @@
     },
     "item" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ítem"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "élément"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1818,6 +3866,18 @@
     },
     "items" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ítems"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "éléments"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1828,6 +3888,18 @@
     },
     "Keep both" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conservar ambos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conserver les deux"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1838,6 +3910,18 @@
     },
     "Keep Going" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1848,6 +3932,18 @@
     },
     "Leave out macOS system files" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excluir los archivos de sistema de macOS"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exclure les fichiers système de macOS"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1858,6 +3954,18 @@
     },
     "Level" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nivel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1868,6 +3976,18 @@
     },
     "Licence" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licencia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licence"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1878,6 +3998,18 @@
     },
     "Licence text" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto de la licencia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texte de la licence"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1888,6 +4020,18 @@
     },
     "Licences" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licencias"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licences"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1898,6 +4042,18 @@
     },
     "Light" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clair"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1908,6 +4064,18 @@
     },
     "Look inside an archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver el contenido de un archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir le contenu d’une archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1918,6 +4086,18 @@
     },
     "match" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "coincidencia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "correspondance"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1928,6 +4108,18 @@
     },
     "matches" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "coincidencias"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "correspondances"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1938,6 +4130,18 @@
     },
     "Matches" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coincide"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correspond"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1954,6 +4158,18 @@
             "value" : "Matches %1$@ (%2$@)"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coincide con %1$@ (%2$@)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correspond à %1$@ (%2$@)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1964,6 +4180,18 @@
     },
     "Maximum" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Máxima"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximale"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1974,6 +4202,18 @@
     },
     "Method" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Método"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Méthode"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1984,6 +4224,18 @@
     },
     "Mode" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1994,6 +4246,18 @@
     },
     "Model size" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamaño del modelo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille du modèle"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2004,6 +4268,18 @@
     },
     "modified" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "modificado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "modifié"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2014,6 +4290,18 @@
     },
     "Modified" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modificado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifié"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2024,6 +4312,18 @@
     },
     "More" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Más"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2034,6 +4334,18 @@
     },
     "Movies" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Películas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vidéos"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2044,6 +4356,18 @@
     },
     "Name" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2054,6 +4378,18 @@
     },
     "Names" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombres"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noms"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2064,6 +4400,18 @@
     },
     "Next to the archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Junto al archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À côté de l’archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2074,6 +4422,18 @@
     },
     "No — one file" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No — un solo archivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non — un seul fichier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2084,6 +4444,18 @@
     },
     "No files" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ningún archivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun fichier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2094,6 +4466,18 @@
     },
     "No match" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin coincidencias"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune correspondance"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2104,6 +4488,18 @@
     },
     "None (store)" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguna (almacenar)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune (stocker)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2114,6 +4510,18 @@
     },
     "Normal" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normale"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2124,6 +4532,18 @@
     },
     "not an archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no es un archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "n’est pas une archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2134,6 +4554,18 @@
     },
     "Not chosen" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin elegir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non choisi"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2144,6 +4576,18 @@
     },
     "nothing is open" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no hay nada abierto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "rien n’est ouvert"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2154,6 +4598,18 @@
     },
     "Nothing queued" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay tareas en cola"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune tâche en attente"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2164,6 +4620,18 @@
     },
     "Off — every file on its own" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivados — cada archivo por separado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivés — chaque fichier séparément"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2174,6 +4642,18 @@
     },
     "Offer to remember passwords in the keychain" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ofrecer guardar las contraseñas en el llavero"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proposer d’enregistrer les mots de passe dans le trousseau"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2184,6 +4664,18 @@
     },
     "OK" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2194,6 +4686,18 @@
     },
     "One block for everything" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un bloque para todo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un seul bloc pour tout"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2204,6 +4708,18 @@
     },
     "Only problems" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo los problemas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seulement les problèmes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2214,6 +4730,18 @@
     },
     "Only replace entries older than the file" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sustituir solo las entradas más antiguas que el archivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remplacer seulement les entrées plus anciennes que le fichier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2224,6 +4752,18 @@
     },
     "Open" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2234,6 +4774,18 @@
     },
     "Open as Archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir como archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir comme archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2244,6 +4796,18 @@
     },
     "Open…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2254,6 +4818,18 @@
     },
     "Opening" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abriendo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouverture"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2264,6 +4840,18 @@
     },
     "Opening “%@”…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abriendo “%@”…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouverture de « %@ »…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2274,6 +4862,18 @@
     },
     "Opening an archive from the Finder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al abrir un archivo comprimido desde el Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À l’ouverture d’une archive depuis le Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2284,6 +4884,18 @@
     },
     "Packed" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compressé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2294,6 +4906,18 @@
     },
     "Password" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contraseña"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot de passe"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2304,6 +4928,18 @@
     },
     "Passwords" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contraseñas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mots de passe"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2314,6 +4950,18 @@
     },
     "Paste a checksum to compare" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pega una suma de verificación para comparar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collez une somme de contrôle à comparer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2324,6 +4972,18 @@
     },
     "Permissions" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permisos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisations"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2334,6 +4994,18 @@
     },
     "PPMd (text)" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PPMd (texto)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PPMd (texte)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2344,6 +5016,18 @@
     },
     "Preset" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preajuste"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préréglage"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2354,6 +5038,18 @@
     },
     "Preset actions" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acciones del preajuste"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actions du préréglage"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2364,6 +5060,18 @@
     },
     "Preview the selected file" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsualizar el archivo seleccionado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prévisualiser le fichier sélectionné"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2374,6 +5082,18 @@
     },
     "problem" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "problema"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "problème"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2384,6 +5104,18 @@
     },
     "problems" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "problemas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "problèmes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2394,6 +5126,18 @@
     },
     "Put files" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraer los archivos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraire les fichiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2404,6 +5148,18 @@
     },
     "Quick Look" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista rápida"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coup d’œil"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2414,6 +5170,18 @@
     },
     "Quit Anyway" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salir de todos modos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter quand même"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2424,6 +5192,18 @@
     },
     "Quitting now leaves a half-written folder or archive behind." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si sales ahora, quedará una carpeta o un archivo comprimido a medio escribir."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter maintenant laissera un dossier ou une archive à moitié écrit."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2434,6 +5214,18 @@
     },
     "Ratio" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proporción"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taux"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2444,6 +5236,18 @@
     },
     "read" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lectura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lecture"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2454,6 +5258,18 @@
     },
     "read / write" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lectura / escritura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "lecture / écriture"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2464,6 +5280,18 @@
     },
     "Read in place" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leído in situ"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lu sur place"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2474,6 +5302,18 @@
     },
     "Read straight out of the archive around it" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leído directamente del archivo comprimido que lo contiene"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lu directement depuis l’archive qui le contient"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2484,6 +5324,18 @@
     },
     "Read-only" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo lectura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture seule"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2494,6 +5346,18 @@
     },
     "Reading the archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyendo el archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture de l’archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2504,6 +5368,18 @@
     },
     "Reading…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyendo…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2514,6 +5390,18 @@
     },
     "Redoing %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rehaciendo %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rétablissement de %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2524,6 +5412,18 @@
     },
     "Remember this password in my keychain" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recordar esta contraseña en mi llavero"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoriser ce mot de passe dans mon trousseau"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2534,6 +5434,18 @@
     },
     "Remove the selected items from the archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar los ítems seleccionados del archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer les éléments sélectionnés de l’archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2544,6 +5456,18 @@
     },
     "Rename" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renommer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2554,6 +5478,18 @@
     },
     "Rename “%@”" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renommer « %@ »"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2564,6 +5500,18 @@
     },
     "Rename Folder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar carpeta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renommer le dossier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2574,6 +5522,18 @@
     },
     "Rename what is there" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar el existente"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renommer l’existant"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2584,6 +5544,18 @@
     },
     "Rename…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renombrar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renommer…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2594,6 +5566,18 @@
     },
     "Replace" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sustituir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remplacer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2604,6 +5588,18 @@
     },
     "Restore Defaults" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restaurar valores predeterminados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rétablir les valeurs par défaut"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2614,6 +5610,18 @@
     },
     "Result: %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resultado: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résultat : %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2624,6 +5632,18 @@
     },
     "Same as the system" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igual que el sistema"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comme le système"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2634,6 +5654,18 @@
     },
     "Save" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2644,6 +5676,18 @@
     },
     "Save as" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar como"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer sous"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2654,6 +5698,18 @@
     },
     "Save as Preset…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar como preajuste…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer comme préréglage…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2664,6 +5720,18 @@
     },
     "Save Preset" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar preajuste"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer le préréglage"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2674,6 +5742,18 @@
     },
     "Save Report…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar informe…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer le rapport…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2684,6 +5764,18 @@
     },
     "Save…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2694,6 +5786,18 @@
     },
     "Scanning" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analizando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analyse"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2704,6 +5808,18 @@
     },
     "Search names" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar en los nombres"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher dans les noms"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2714,6 +5830,18 @@
     },
     "Separate with commas. `*` and `?` work as in the Terminal." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separa con comas. `*` y `?` funcionan como en el Terminal."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Séparez par des virgules. `*` et `?` fonctionnent comme dans le Terminal."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2724,6 +5852,18 @@
     },
     "Show" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2734,6 +5874,18 @@
     },
     "Show Contents" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar contenido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le contenu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2744,6 +5896,18 @@
     },
     "Show in Finder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar en el Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher dans le Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2754,6 +5918,18 @@
     },
     "Show its contents" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar su contenido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher son contenu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2764,6 +5940,18 @@
     },
     "Show only one kind of file" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar solo un tipo de archivo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher un seul type de fichier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2774,6 +5962,18 @@
     },
     "Show Report" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar informe"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le rapport"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2784,6 +5984,18 @@
     },
     "Show the result in the Finder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el resultado en el Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le résultat dans le Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2794,6 +6006,18 @@
     },
     "Signatures" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firmas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signatures"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2804,6 +6028,18 @@
     },
     "Size" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamaño"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2814,6 +6050,18 @@
     },
     "Skip" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omitir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ignorer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2824,6 +6072,18 @@
     },
     "Solid blocks" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloques sólidos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocs solides"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2834,6 +6094,18 @@
     },
     "Something went wrong" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algo ha ido mal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un problème est survenu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2844,6 +6116,18 @@
     },
     "Source Code" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código fuente"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code source"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2854,6 +6138,18 @@
     },
     "Split into volumes" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dividir en volúmenes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Découper en volumes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2864,6 +6160,18 @@
     },
     "Stop" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2874,6 +6182,18 @@
     },
     "Store — no compression" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Almacenar — sin compresión"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stocker — sans compression"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2884,6 +6204,18 @@
     },
     "Store hard links as links" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar los enlaces físicos como enlaces"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stocker les liens physiques comme liens"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2894,6 +6226,18 @@
     },
     "Store symbolic links as links" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar los enlaces simbólicos como enlaces"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stocker les liens symboliques comme liens"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2910,6 +6254,18 @@
             "value" : "Sum of data (%1$@): %2$@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suma de los datos (%1$@): %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Somme des données (%1$@) : %2$@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2920,6 +6276,18 @@
     },
     "Symbolic link" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlace simbólico"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lien symbolique"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2930,6 +6298,18 @@
     },
     "Test" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2940,6 +6320,18 @@
     },
     "Test Archive…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificar archivo comprimido…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier l’archive…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2950,6 +6342,18 @@
     },
     "Tested %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificado el %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifié le %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2960,6 +6364,18 @@
     },
     "Tested: %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificado: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifié : %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2970,6 +6386,18 @@
     },
     "Testing “%@”" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verificando “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérification de « %@ »"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2986,6 +6414,18 @@
             "value" : "Testing “%1$@” did not work: %2$@."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La verificación de “%1$@” no ha funcionado: %2$@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La vérification de « %1$@ » n’a pas fonctionné : %2$@."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2996,6 +6436,18 @@
     },
     "That is more than this Mac can spare. Choose a smaller dictionary or fewer threads." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es más de lo que este Mac puede asignar. Elige un diccionario más pequeño o menos hilos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C’est plus que ce que ce Mac peut allouer. Choisissez un dictionnaire plus petit ou moins de threads."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3006,6 +6458,18 @@
     },
     "That name is reserved." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ese nombre está reservado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce nom est réservé."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3016,6 +6480,18 @@
     },
     "That password did not work" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esa contraseña no es correcta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce mot de passe n’est pas correct"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3026,6 +6502,18 @@
     },
     "The 7-Zip engine is in SevenZipKit.framework, inside the app, and is covered by these terms. It is linked dynamically, so it can be replaced with another build of the same library." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El motor de 7-Zip está en SevenZipKit.framework, dentro de la app, y está sujeto a estas condiciones. Se enlaza dinámicamente, así que puede sustituirse por otra compilación de la misma biblioteca."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le moteur 7-Zip se trouve dans SevenZipKit.framework, à l’intérieur de l’app, et est couvert par ces conditions. Il est lié dynamiquement, il peut donc être remplacé par une autre compilation de la même bibliothèque."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3036,6 +6524,18 @@
     },
     "The app itself: its interface and the Swift code around the engine." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La app propiamente dicha: su interfaz y el código Swift en torno al motor."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’app elle-même : son interface et le code Swift autour du moteur."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3046,6 +6546,18 @@
     },
     "The archive around it compresses its contents, so this one was unpacked first" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El archivo comprimido que lo contiene comprime su contenido, así que primero se ha descomprimido este"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’archive qui le contient compresse son contenu, celui-ci a donc d’abord été extrait"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3056,6 +6568,18 @@
     },
     "The archive will not even open without the password." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin la contraseña, el archivo comprimido ni siquiera se abrirá."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans le mot de passe, l’archive ne s’ouvrira même pas."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3067,6 +6591,18 @@
     "the engine opened this archive read-only" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "el motor ha abierto este archivo comprimido en solo lectura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le moteur a ouvert cette archive en lecture seule"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3077,6 +6613,18 @@
     },
     "The GNU Lesser General Public License, version 2.1, that most of 7-Zip is distributed under." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La GNU Lesser General Public License, versión 2.1, bajo la que se distribuye la mayor parte de 7-Zip."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La GNU Lesser General Public License, version 2.1, sous laquelle est distribuée la majeure partie de 7-Zip."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3087,6 +6635,18 @@
     },
     "the password is not correct" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la contraseña no es correcta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le mot de passe n’est pas correct"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3097,6 +6657,18 @@
     },
     "The RAR decoder comes with an extra restriction: it may not be used to re-create the RAR compression algorithm. 7-Mac reads RAR archives and never writes them." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El descodificador RAR tiene una restricción adicional: no puede usarse para recrear el algoritmo de compresión RAR. 7-Mac lee archivos RAR y nunca los escribe."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le décodeur RAR comporte une restriction supplémentaire : il ne peut pas être utilisé pour recréer l’algorithme de compression RAR. 7-Mac lit les archives RAR et n’en écrit jamais."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3107,6 +6679,18 @@
     },
     "The sandbox grants access to the files you drop, not to the folders around them. Folders you have allowed 7-Mac to write into are remembered." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El sandbox da acceso a los archivos que sueltas, no a las carpetas que los contienen. Las carpetas en las que has permitido escribir a 7-Mac se recuerdan."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le bac à sable donne accès aux fichiers que vous déposez, pas aux dossiers qui les contiennent. Les dossiers dans lesquels vous avez autorisé 7-Mac à écrire sont mémorisés."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3117,6 +6701,18 @@
     },
     "the top of the archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la raíz del archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la racine de l’archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3127,6 +6723,18 @@
     },
     "There was nothing to checksum." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No había nada de lo que calcular la suma de verificación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il n’y avait rien dont calculer la somme de contrôle."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3137,6 +6745,18 @@
     },
     "This archive cannot be changed: %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este archivo comprimido no se puede modificar: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette archive ne peut pas être modifiée : %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3147,6 +6767,18 @@
     },
     "This archive is encrypted" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este archivo comprimido está cifrado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette archive est chiffrée"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3157,6 +6789,18 @@
     },
     "This archive is encrypted." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este archivo comprimido está cifrado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette archive est chiffrée."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3167,6 +6811,18 @@
     },
     "this archive is inside another one" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "este archivo comprimido está dentro de otro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cette archive se trouve dans une autre"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3178,6 +6834,18 @@
     "this archive was opened through another one" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "este archivo comprimido se ha abierto a través de otro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cette archive a été ouverte via une autre"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3189,6 +6857,18 @@
     "this format cannot be written" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "este formato no se puede escribir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ce format ne peut pas être écrit"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3199,6 +6879,18 @@
     },
     "This text is missing from the app. It should not be: please report it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta este texto en la app. No debería: por favor, notifícalo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce texte manque dans l’app. Cela ne devrait pas arriver : merci de le signaler."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3209,6 +6901,18 @@
     },
     "thread" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hilo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "thread"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3219,6 +6923,18 @@
     },
     "threads" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hilos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "threads"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3229,6 +6945,18 @@
     },
     "Threads" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hilos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Threads"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3245,6 +6973,18 @@
             "value" : "To change “%1$@”, 7-Mac needs permission to write into the folder it is in. Choose “%2$@”."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para modificar “%1$@”, 7-Mac necesita permiso para escribir en la carpeta que lo contiene. Elige “%2$@”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour modifier « %1$@ », 7-Mac a besoin d’une autorisation pour écrire dans le dossier qui le contient. Choisissez « %2$@ »."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3255,6 +6995,18 @@
     },
     "Try Again" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reintentar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réessayer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3265,6 +7017,18 @@
     },
     "Ultra" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3275,6 +7039,18 @@
     },
     "Undoing %@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deshaciendo %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulation de %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3285,6 +7061,18 @@
     },
     "unknown error" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "error desconocido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "erreur inconnue"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3295,6 +7083,18 @@
     },
     "Unlock" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desbloquear"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouiller"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3305,6 +7105,18 @@
     },
     "Unpacked to a temporary file" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descomprimido en un archivo temporal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extrait dans un fichier temporaire"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3315,6 +7127,18 @@
     },
     "Unpacking “%@”" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descomprimiendo “%@”"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extraction de « %@ »"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3325,6 +7149,18 @@
     },
     "unRAR" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unRAR"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unRAR"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3335,6 +7171,18 @@
     },
     "unsupported" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no compatible"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "non pris en charge"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3345,6 +7193,18 @@
     },
     "Use This Folder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar esta carpeta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser ce dossier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3361,6 +7221,18 @@
             "value" : "Version %1$@ (%2$@)"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión %1$@ (%2$@)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version %1$@ (%2$@)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3371,6 +7243,18 @@
     },
     "Waiting" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En espera"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3381,6 +7265,18 @@
     },
     "Waiting for a destination" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esperando un destino"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente d’une destination"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3391,6 +7287,18 @@
     },
     "Waiting for a password" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esperando una contraseña"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente d’un mot de passe"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3401,6 +7309,18 @@
     },
     "Where should the archive go?" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Dónde guardar el archivo comprimido?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Où enregistrer l’archive ?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3411,6 +7331,18 @@
     },
     "Writable only" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo con escritura"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seulement en écriture"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3421,6 +7353,18 @@
     },
     "Finder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3431,6 +7375,18 @@
     },
     "7-Mac menu in the Finder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menú de 7-Mac en el Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu 7-Mac dans le Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3441,6 +7397,18 @@
     },
     "On" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3451,6 +7419,18 @@
     },
     "Off" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3461,6 +7441,18 @@
     },
     "Manage…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestionar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gérer…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3471,6 +7463,18 @@
     },
     "Turn On…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3481,6 +7485,18 @@
     },
     "Right-click files in the Finder to extract, open, test or compress them with 7-Mac. The switch is in System Settings, under Login Items & Extensions." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic derecho en archivos del Finder para extraerlos, abrirlos, verificarlos o comprimirlos con 7-Mac. El interruptor está en Ajustes del Sistema, en Ítems de inicio y extensiones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cliquez avec le bouton droit sur des fichiers dans le Finder pour les extraire, les ouvrir, les vérifier ou les compresser avec 7-Mac. Le réglage se trouve dans Réglages Système, sous Ouverture et extensions."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3491,6 +7507,18 @@
     },
     "7-Mac needs your permission to use the folder “%@”. Choose it, or a folder that contains it — your home folder, for instance — and 7-Mac will not ask again for anything inside." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac necesita tu permiso para usar la carpeta “%@”. Selecciónala, o una carpeta que la contenga —tu carpeta de inicio, por ejemplo—, y 7-Mac no volverá a preguntar por nada de su interior."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac a besoin de votre autorisation pour utiliser le dossier « %@ ». Choisissez-le, ou un dossier qui le contient — votre dossier de départ, par exemple — et 7-Mac ne demandera plus rien pour ce qu’il contient."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3501,6 +7529,18 @@
     },
     "That folder does not contain “%@”." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esa carpeta no contiene “%@”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce dossier ne contient pas « %@ »."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3511,6 +7551,18 @@
     },
     "Choose the folder itself, or one of the folders it is in." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige la propia carpeta o una de las carpetas en las que se encuentra."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez le dossier lui-même, ou l’un des dossiers qui le contiennent."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3521,6 +7573,18 @@
     },
     "Encrypted entry" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrada cifrada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrée chiffrée"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3531,6 +7595,18 @@
     },
     "7-Mac asks the first time it needs a folder, and remembers it. Allowing your home folder covers everything in it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac pregunta la primera vez que necesita una carpeta y la recuerda. Permitir tu carpeta de inicio cubre todo lo que contiene."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac demande la première fois qu’il a besoin d’un dossier, puis s’en souvient. Autoriser votre dossier de départ couvre tout ce qu’il contient."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3541,6 +7617,18 @@
     },
     "Allow a Folder…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitir una carpeta…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser un dossier…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3551,6 +7639,18 @@
     },
     "Allowed, with everything inside it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitida, con todo lo que contiene."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisé, avec tout ce qu’il contient."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3561,6 +7661,18 @@
     },
     "Always allowed: 7-Mac never asks for it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siempre permitida: 7-Mac nunca la pide."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toujours autorisé : 7-Mac ne le demande jamais."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3571,6 +7683,18 @@
     },
     "Check Again" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a comprobar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier à nouveau"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3581,6 +7705,18 @@
     },
     "Check Permissions…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprobar permisos…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier les autorisations…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3591,6 +7727,18 @@
     },
     "Choose a folder 7-Mac may use without asking. Everything inside it is included: your home folder covers almost everything." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige una carpeta que 7-Mac pueda usar sin preguntar. Se incluye todo lo que contiene: tu carpeta de inicio cubre casi todo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez un dossier que 7-Mac peut utiliser sans demander. Tout ce qu’il contient est inclus : votre dossier de départ couvre presque tout."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3601,6 +7749,18 @@
     },
     "Downloads" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descargas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargements"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3611,6 +7771,18 @@
     },
     "Folders" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carpetas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3621,6 +7793,18 @@
     },
     "Folders protected by macOS itself, such as the Photos library, stay closed to every app whatever you allow here. 7-Mac skips them and says so." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las carpetas protegidas por el propio macOS, como la fototeca, siguen cerradas para todas las apps, permitas lo que permitas aquí. 7-Mac las omite y lo indica."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les dossiers protégés par macOS lui-même, comme la photothèque, restent fermés à toutes les apps quoi que vous autorisiez ici. 7-Mac les ignore et le signale."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3631,6 +7815,18 @@
     },
     "Forget All Folders" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Olvidar todas las carpetas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oublier tous les dossiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3641,6 +7837,18 @@
     },
     "Last active: %@." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actividad: %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernière activité : %@."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3651,6 +7859,18 @@
     },
     "Loaded by the Finder" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargado por el Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargé par le Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3661,6 +7881,18 @@
     },
     "Needs attention" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requiere atención"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À vérifier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3671,6 +7903,18 @@
     },
     "No longer usable: the folder was moved or deleted, or the permission was withdrawn." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya no se puede usar: la carpeta se ha movido o eliminado, o se ha retirado el permiso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N’est plus utilisable : le dossier a été déplacé ou supprimé, ou l’autorisation a été retirée."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3681,6 +7925,18 @@
     },
     "No other folders yet" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todavía no hay otras carpetas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore d’autres dossiers"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3691,6 +7947,18 @@
     },
     "Not working" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No funciona"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ne fonctionne pas"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3701,6 +7969,18 @@
     },
     "Not writable, although 7-Mac is entitled to it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin permiso de escritura, aunque 7-Mac tiene derecho a ella."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non accessible en écriture, bien que 7-Mac y ait droit."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3711,6 +7991,18 @@
     },
     "Relaunch the Finder: hold Option, right-click its icon in the Dock and choose Relaunch." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reinicia el Finder: mantén pulsada la tecla Opción, haz clic derecho en su icono del Dock y elige Reiniciar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relancez le Finder : maintenez la touche Option, cliquez avec le bouton droit sur son icône dans le Dock et choisissez Relancer."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3721,6 +8013,18 @@
     },
     "Remove" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3731,6 +8035,18 @@
     },
     "Shared with the Finder menu" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartido con el menú del Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partagé avec le menu du Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3741,6 +8057,18 @@
     },
     "The Finder has not loaded the menu since it last started. Last loaded: %@." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El Finder no ha cargado el menú desde su último arranque. Última carga: %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Finder n’a pas chargé le menu depuis son dernier démarrage. Dernier chargement : %@."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3751,6 +8079,18 @@
     },
     "The Finder has not loaded the menu yet." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El Finder todavía no ha cargado el menú."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Finder n’a pas encore chargé le menu."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3761,6 +8101,18 @@
     },
     "The container the menu and the app share cannot be written. The menu will do nothing; reinstalling 7-Mac should fix it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede escribir en el contenedor que comparten el menú y la app. El menú no hará nada; reinstalar 7-Mac debería solucionarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le conteneur partagé par le menu et l’app n’est pas accessible en écriture. Le menu ne fera rien ; réinstaller 7-Mac devrait régler le problème."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3771,6 +8123,18 @@
     },
     "The menu can hand its requests to the app." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El menú puede pasar sus solicitudes a la app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le menu peut transmettre ses demandes à l’app."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3781,6 +8145,18 @@
     },
     "Turned off. Turn it on in System Settings, under Login Items & Extensions." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivado. Actívalo en Ajustes del Sistema, en Ítems de inicio y extensiones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivé. Activez-le dans Réglages Système, sous Ouverture et extensions."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3791,6 +8167,18 @@
     },
     "Turned on in System Settings." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activado en Ajustes del Sistema."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé dans Réglages Système."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3801,6 +8189,18 @@
     },
     "Drop files and folders to archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos y carpetas para comprimirlos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez des fichiers et dossiers à archiver"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3811,6 +8211,18 @@
     },
     "Add as many as you like, then create the archive." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade todos los que quieras y luego crea el archivo comprimido."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez-en autant que vous voulez, puis créez l’archive."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3821,6 +8233,18 @@
     },
     "Drop files and folders here to gather them into a new archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos y carpetas para reunirlos en un nuevo archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez ici des fichiers et dossiers pour les réunir dans une nouvelle archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3831,6 +8255,18 @@
     },
     "Clear" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaciar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vider"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3841,6 +8277,18 @@
     },
     "Create Archive…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear archivo comprimido…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer l’archive…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3851,6 +8299,18 @@
     },
     "Remove from the archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar del archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer de l’archive"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3861,6 +8321,18 @@
     },
     "^[%lld item](inflect: true)" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld ítem](inflect: true)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld élément](inflect: true)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3871,6 +8343,18 @@
     },
     "Click to choose files and folders to archive" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic para elegir archivos y carpetas que comprimir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cliquez pour choisir des fichiers et dossiers à archiver"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3881,6 +8365,18 @@
     },
     "Choose files and folders to add to the archive." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige los archivos y carpetas que añadir al archivo comprimido."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les fichiers et dossiers à ajouter à l’archive."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3891,6 +8387,18 @@
     },
     "Add…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3901,6 +8409,18 @@
     },
     "Drop area height" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altura del área de soltar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hauteur de la zone de dépôt"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3911,6 +8431,18 @@
     },
     "Click to choose archives to extract" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic para elegir archivos comprimidos que extraer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cliquez pour choisir des archives à extraire"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3921,6 +8453,18 @@
     },
     "Drop archives here to extract them, or click to choose them" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos comprimidos para extraerlos, o haz clic para elegirlos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez ici des archives pour les extraire, ou cliquez pour les choisir"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3931,6 +8475,18 @@
     },
     "Or click to choose them." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O haz clic para elegirlos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou cliquez pour les choisir."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
