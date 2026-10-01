@@ -26,6 +26,7 @@ final class FinderMenu: FIFinderSync {
         // "/" alone stops at the boot volume; other disks are added as they
         // come and go.
         updateDirectories()
+        FinderMenuHeartbeat.beat(always: true)
         let center = NSWorkspace.shared.notificationCenter
         for name in [NSWorkspace.didMountNotification, NSWorkspace.didUnmountNotification] {
             center.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
@@ -46,6 +47,7 @@ final class FinderMenu: FIFinderSync {
         guard menuKind == .contextualMenuForItems,
               let items = FIFinderSyncController.default().selectedItemURLs(), !items.isEmpty
         else { return nil }
+        FinderMenuHeartbeat.beat()
 
         let submenu = NSMenu(title: "7-Mac")
         if items.allSatisfy(Self.looksLikeArchive) {

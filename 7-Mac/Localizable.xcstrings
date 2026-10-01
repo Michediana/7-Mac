@@ -1734,32 +1734,12 @@
         }
       }
     },
-    "Folder permissions" : {
-      "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permessi delle cartelle"
-          }
-        }
-      }
-    },
     "folders" : {
       "localizations" : {
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "cartelle"
-          }
-        }
-      }
-    },
-    "Forget Allowed Folders" : {
-      "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dimentica le cartelle autorizzate"
           }
         }
       }
@@ -3543,6 +3523,276 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voce cifrata"
+          }
+        }
+      }
+    },
+    "7-Mac asks the first time it needs a folder, and remembers it. Allowing your home folder covers everything in it." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac chiede la prima volta che gli serve una cartella e se la ricorda. Autorizzare la cartella Inizio copre tutto ciò che contiene."
+          }
+        }
+      }
+    },
+    "Allow a Folder…" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorizza una cartella…"
+          }
+        }
+      }
+    },
+    "Allowed, with everything inside it." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorizzata, con tutto ciò che contiene."
+          }
+        }
+      }
+    },
+    "Always allowed: 7-Mac never asks for it." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sempre autorizzata: 7-Mac non la chiede mai."
+          }
+        }
+      }
+    },
+    "Check Again" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica di nuovo"
+          }
+        }
+      }
+    },
+    "Check Permissions…" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica permessi…"
+          }
+        }
+      }
+    },
+    "Choose a folder 7-Mac may use without asking. Everything inside it is included: your home folder covers almost everything." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli una cartella che 7-Mac può usare senza chiedere. È compreso tutto ciò che contiene: la cartella Inizio copre quasi tutto."
+          }
+        }
+      }
+    },
+    "Downloads" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        }
+      }
+    },
+    "Folders" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartelle"
+          }
+        }
+      }
+    },
+    "Folders protected by macOS itself, such as the Photos library, stay closed to every app whatever you allow here. 7-Mac skips them and says so." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le cartelle protette da macOS stesso, come la libreria di Foto, restano chiuse a tutte le app qualunque cosa autorizzi qui. 7-Mac le salta e lo segnala."
+          }
+        }
+      }
+    },
+    "Forget All Folders" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimentica tutte le cartelle"
+          }
+        }
+      }
+    },
+    "Last active: %@." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultima attività: %@."
+          }
+        }
+      }
+    },
+    "Loaded by the Finder" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricato dal Finder"
+          }
+        }
+      }
+    },
+    "Needs attention" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Da controllare"
+          }
+        }
+      }
+    },
+    "No longer usable: the folder was moved or deleted, or the permission was withdrawn." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non più utilizzabile: la cartella è stata spostata o eliminata, oppure il permesso è stato revocato."
+          }
+        }
+      }
+    },
+    "No other folders yet" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ancora nessun’altra cartella"
+          }
+        }
+      }
+    },
+    "Not working" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non funziona"
+          }
+        }
+      }
+    },
+    "Not writable, although 7-Mac is entitled to it." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non scrivibile, anche se 7-Mac ne ha diritto."
+          }
+        }
+      }
+    },
+    "Relaunch the Finder: hold Option, right-click its icon in the Dock and choose Relaunch." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riavvia il Finder: tieni premuto Opzione, fai clic destro sulla sua icona nel Dock e scegli Riapri."
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimuovi"
+          }
+        }
+      }
+    },
+    "Shared with the Finder menu" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condivisione con il menu del Finder"
+          }
+        }
+      }
+    },
+    "The Finder has not loaded the menu since it last started. Last loaded: %@." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Finder non ha caricato il menu dall’ultimo avvio. Ultimo caricamento: %@."
+          }
+        }
+      }
+    },
+    "The Finder has not loaded the menu yet." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Finder non ha ancora caricato il menu."
+          }
+        }
+      }
+    },
+    "The container the menu and the app share cannot be written. The menu will do nothing; reinstalling 7-Mac should fix it." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il contenitore condiviso da menu e app non è scrivibile. Il menu non farà nulla; reinstallare 7-Mac dovrebbe risolvere."
+          }
+        }
+      }
+    },
+    "The menu can hand its requests to the app." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il menu può passare le sue richieste all’app."
+          }
+        }
+      }
+    },
+    "Turned off. Turn it on in System Settings, under Login Items & Extensions." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disattivato. Attivalo in Impostazioni di Sistema, in Elementi login ed estensioni."
+          }
+        }
+      }
+    },
+    "Turned on in System Settings." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivato in Impostazioni di Sistema."
           }
         }
       }

@@ -74,6 +74,23 @@ final class FolderAccess {
         }
     }
 
+    /// The folders granted so far, as the person chose them.
+    var grantedFolders: [URL] {
+        bookmarks.keys.sorted().map { URL(filePath: $0, directoryHint: .isDirectory) }
+    }
+
+    /// Whether a granted folder still opens: it exists, its bookmark
+    /// resolves, and the sandbox lets us write there.
+    func isReachable(_ folder: URL) -> Bool {
+        prepare(folder)
+    }
+
+    func forget(_ folder: URL) {
+        let path = folder.standardized.path(percentEncoded: false)
+        bookmarks[path] = nil
+        UserDefaults.standard.set(bookmarks, forKey: defaultsKey)
+    }
+
     func forgetEverything() {
         bookmarks.removeAll()
         UserDefaults.standard.removeObject(forKey: defaultsKey)

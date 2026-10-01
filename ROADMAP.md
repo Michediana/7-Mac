@@ -611,13 +611,16 @@ testualmente, e il modo più sicuro è non ricopiarla mai a mano.
   Checksum… sempre. Su ogni volume, anche quelli montati dopo
 - [x] Impostazioni › Finder: dice se il menu è attivo e apre il pannello di sistema per attivarlo
 - [x] **Un file illeggibile non fa più fallire una compressione**: viene saltato e la riga lo dice
+- [x] **Impostazioni › Permessi › Verifica permessi…**: elenca cosa il sistema concede adesso
+  (menu del Finder attivato e caricato, contenitore condiviso, Download, cartelle autorizzate) e
+  permette di autorizzare o rimuovere una cartella
 
 `Scripts/smoke-test.sh` verifica ora **33 asserzioni** (quattro sull'estensione: c'è, condivide
 l'app group con l'app, il gruppo che il codice legge è quello della firma, non linka il motore;
 una sulle traduzioni di `Info.plist` — il Tipo dei file nel Finder e il menu Servizi, che finora
 restavano in inglese)
-ed esegue **158 test**: sette sul passaggio di consegne fra estensione e app e sei sulle
-sorgenti illeggibili.
+ed esegue **166 test**: sette sul passaggio di consegne fra estensione e app, sei sulle
+sorgenti illeggibili e otto sulla verifica dei permessi.
 
 Struttura aggiunta:
 
@@ -653,6 +656,14 @@ in cui non è entrato niente, e in quel caso non resta su disco. In più l'app p
 ciascuna sorgente prima di passarla al motore: una cartella illeggibile in cima alla selezione
 non entra come cartella vuota. La riga del job è arancione, dice "N saltati" e il tooltip
 elenca quali e perché.
+
+**"Attivato" non vuol dire "caricato".** Dopo una reinstallazione il menu è sparito pur
+restando attivo in Impostazioni di Sistema: il Finder aveva provato ad avviare l'estensione
+mentre veniva sostituita, il lancio era fallito ("Launchd job spawn failed") e non ci ha più
+riprovato fino al riavvio del Finder. Nessuna API dice se il Finder ha caricato un'estensione,
+quindi l'estensione lascia un battito nell'app group quando parte e quando costruisce un menu;
+la verifica dei permessi lo confronta con la data di avvio del Finder e, se è più vecchio,
+dice come riavviarlo. Un'app sandboxata non può riavviare il Finder da sé.
 
 **Limiti accettati:** una cartella illeggibile più in profondità finisce nell'archivio come
 cartella vuota (il motore la trova scandendo, e non ha modo di toglierla); è comunque segnalata

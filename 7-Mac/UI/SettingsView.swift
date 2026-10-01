@@ -13,6 +13,7 @@ struct SettingsView: View {
     /// Asked again whenever the app comes back to the front: the switch
     /// lives in System Settings, and that is where the person just was.
     @State private var finderMenuEnabled = FIFinderSyncController.isExtensionEnabled
+    @State private var showsPermissions = false
 
     var body: some View {
         @Bindable var preferences = model.preferences
@@ -116,12 +117,16 @@ struct SettingsView: View {
                     .foregroundStyle(.secondary)
             }
 
-            Section("Folder permissions") {
+            Section("Permissions") {
                 Text("The sandbox grants access to the files you drop, not to the folders around them. Folders you have allowed 7-Mac to write into are remembered.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                Button("Forget Allowed Folders") { FolderAccess.shared.forgetEverything() }
+                Button("Check Permissions…") { showsPermissions = true }
             }
+        }
+        .sheet(isPresented: $showsPermissions) {
+            PermissionsView()
+                .environment(model)
         }
         .formStyle(.grouped)
         .frame(width: 480)

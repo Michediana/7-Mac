@@ -87,3 +87,33 @@ nonisolated struct FinderHandoff: Codable, Sendable {
         return handoff
     }
 }
+
+/// When the Finder last had the menu extension running.
+///
+/// The switch in System Settings says whether the menu is allowed, not
+/// whether the Finder actually loaded it: an extension that failed to start
+/// stays switched on and absent. So the extension notes the time whenever it
+/// starts or builds a menu, and the app compares that with when the Finder
+/// itself last started.
+nonisolated enum FinderMenuHeartbeat {
+    private static var file: URL? {
+        FinderHandoff.directory?.deletingLastPathComponent().appending(component: "Finder Menu Heartbeat")
+    }
+
+    /// `always` on start: a Finder relaunched within the minute must still
+    /// find a beat newer than itself.
+    static func beat(always: Bool = false, now: Date = .now) {
+        guard let file else { return }
+        // A right-click should not mean a disk write every time.
+        if !always, let last = lastBeat, now.timeIntervalSince(last) < 60 { return }
+        try? FileManager.default.createDirectory(at: file.deletingLastPathComponent(),
+                                                 withIntermediateDirectories: true)
+        try? Data().write(to: file)
+        try? FileManager.default.setAttributes([.modificationDate: now], ofItemAtPath: file.path)
+    }
+
+    static var lastBeat: Date? {
+        guard let file else { return nil }
+        return (try? file.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate
+    }
+}
