@@ -84,6 +84,49 @@ final class AppModel: JobInteraction {
         }
     }
 
+    /// An item chosen from the Finder's 7-Mac menu. Unlike `open`, the
+    /// person has already said what they want: no preference applies.
+    func perform(_ request: FinderHandoff) async {
+        let urls = request.urls
+        guard !urls.isEmpty, await reachFolders(around: urls) else { return }
+        switch request.action {
+        case .extract:
+            show(.main)
+            extract(urls)
+        case .browse:
+            browse(urls)
+        case .test:
+            show(.main)
+            test(urls)
+        case .compress:
+            beginCompression(of: urls)
+        case .checksums:
+            show(.checksums(ChecksumTarget(urls: urls)))
+        }
+    }
+
+    /// The Finder menu hands over paths, not files: nothing came with them
+    /// that opens the sandbox. What does is a grant for the folder they are
+    /// in — remembered, so each folder (or any folder above it) asks once.
+    /// The same grant lets an extraction or a new archive land beside them.
+    private func reachFolders(around urls: [URL]) async -> Bool {
+        let folders = Set(urls.map { $0.deletingLastPathComponent().standardizedFileURL })
+        for folder in folders.sorted(by: { $0.path < $1.path }) {
+            if FolderAccess.shared.prepare(folder) { continue }
+            NSApp.activate()
+            let message = String(localized: "7-Mac needs your permission to use the folder “\(folder.lastPathComponent)”. Choose it, or a folder that contains it — your home folder, for instance — and 7-Mac will not ask again for anything inside.")
+            guard await askWritableFolder(message: message, suggesting: folder) != nil else { return false }
+            guard FolderAccess.shared.prepare(folder) else {
+                let alert = NSAlert()
+                alert.messageText = String(localized: "That folder does not contain “\(folder.lastPathComponent)”.")
+                alert.informativeText = String(localized: "Choose the folder itself, or one of the folders it is in.")
+                alert.runModal()
+                return false
+            }
+        }
+        return true
+    }
+
     func browse(_ urls: [URL]) {
         for url in urls { show(.browser(BrowserTarget(url: url))) }
     }

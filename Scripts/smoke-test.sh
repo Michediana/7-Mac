@@ -158,7 +158,7 @@ entitlements=$(codesign -d --entitlements - --xml "$APP" 2>/dev/null \
 keys = sorted(k for k in json.load(sys.stdin) if k != "com.apple.security.get-task-allow")
 print(" ".join(keys))')
 check "exactly the entitlements we mean to ship" \
-      "com.apple.security.app-sandbox com.apple.security.files.bookmarks.app-scope com.apple.security.files.downloads.read-write com.apple.security.files.user-selected.read-write" \
+      "com.apple.security.app-sandbox com.apple.security.application-groups com.apple.security.files.bookmarks.app-scope com.apple.security.files.downloads.read-write com.apple.security.files.user-selected.read-write" \
       "$entitlements"
 check "Info.plist is not also copied in as a resource" \
       "" "$(find "$APP/Contents/Resources" -name 'Info.plist' -o -name '*.entitlements' 2>/dev/null | tr '\n' ' ' | sed 's/ $//')"
@@ -180,6 +180,21 @@ check "both extensions are signed and sandboxed" "2" "$(for x in 7-MacPreview 7-
     done | grep -c True)"
 check "the extensions use the app's framework, not a copy" "" \
       "$(find "$plugins" -name 'SevenZipKit.framework' | tr '\n' ' ' | sed 's/ $//')"
+
+printf '\nfinder menu\n'
+# After M5: the 7-Mac submenu in the Finder. The extension carries no engine;
+# it passes the chosen item to the app through the app group they share.
+check "the Finder extension is embedded" "com.apple.FinderSync" "$(extension_point 7-MacFinder)"
+group_of() {  # group_of <bundle> -> the app groups it is signed with
+    codesign -d --entitlements - --xml "$1" 2>/dev/null \
+        | plutil -convert json -o - - \
+        | python3 -c 'import json, sys; print(" ".join(json.load(sys.stdin).get("com.apple.security.application-groups", [])))'
+}
+check "app and extension share one app group" "$(group_of "$APP")" "$(group_of "$plugins/7-MacFinder.appex")"
+check "the group the code reads is the one it is signed for" "$(group_of "$APP")" \
+      "$(/usr/libexec/PlistBuddy -c 'Print :SevenMacAppGroup' "$plugins/7-MacFinder.appex/Contents/Info.plist")"
+check "the Finder extension does not link the engine" "" \
+      "$(otool -L "$plugins/7-MacFinder.appex/Contents/MacOS/7-MacFinder" | grep SevenZipKit)"
 
 printf '\nlocalization\n'
 check "Italian ships" "yes" "$([ -f "$APP/Contents/Resources/it.lproj/Localizable.strings" ] && echo yes || echo no)"

@@ -16,15 +16,10 @@ nonisolated enum ArchiveNaming {
     /// image — but someone dragging one of those onto an archiver means
     /// "compress this" far more often than "unpack this". The Extract command
     /// has no such filter: there, the engine decides.
-    static let droppedArchiveExtensions: Set<String> = [
-        "7z", "zip", "zipx", "jar", "war", "apk", "ipa",
-        "rar", "cbr", "cbz", "cb7", "cbt",
-        "tar", "gz", "tgz", "bz2", "tbz", "tbz2", "xz", "txz", "zst", "tzst",
-        "lzma", "lz", "lzh", "lha", "arj", "z", "taz",
-        "cab", "cpio", "deb", "rpm", "xar", "wim", "swm", "esd",
-        "iso", "udf", "squashfs", "sfs", "chm", "msi",
-        "001",
-    ]
+    ///
+    /// The list itself is shared with the Finder menu, which has to decide
+    /// without the engine.
+    static let droppedArchiveExtensions = ArchiveExtensions.dropped
 
     /// Everything the engine claims, asked rather than assumed.
     static let engineExtensions: Set<String> = Set(

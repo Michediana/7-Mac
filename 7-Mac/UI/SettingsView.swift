@@ -3,11 +3,16 @@
 //  7-Mac
 //
 
+import AppKit
+import FinderSync
 import SwiftUI
 import SevenZipKit
 
 struct SettingsView: View {
     @Environment(AppModel.self) private var model
+    /// Asked again whenever the app comes back to the front: the switch
+    /// lives in System Settings, and that is where the person just was.
+    @State private var finderMenuEnabled = FIFinderSyncController.isExtensionEnabled
 
     var body: some View {
         @Bindable var preferences = model.preferences
@@ -31,6 +36,24 @@ struct SettingsView: View {
                 Text("Dropping an archive on the 7-Mac window always extracts it. File › Open… always shows its contents.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+            }
+
+            Section("Finder") {
+                LabeledContent("7-Mac menu in the Finder") {
+                    HStack {
+                        Text(finderMenuEnabled ? "On" : "Off")
+                            .foregroundStyle(.secondary)
+                        Button(finderMenuEnabled ? "Manage…" : "Turn On…") {
+                            FIFinderSyncController.showExtensionManagementInterface()
+                        }
+                    }
+                }
+                Text("Right-click files in the Finder to extract, open, test or compress them with 7-Mac. The switch is in System Settings, under Login Items & Extensions.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+                finderMenuEnabled = FIFinderSyncController.isExtensionEnabled
             }
 
             Section("Extracting") {

@@ -34,9 +34,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return false
     }
 
-    /// Double-clicking a `.7z`, or dropping one on the Dock icon.
+    /// Double-clicking a `.7z`, dropping one on the Dock icon — or an item of
+    /// the Finder's 7-Mac menu, which arrives as a `sevenmac://` URL naming
+    /// the request it left in the app group.
     func application(_ application: NSApplication, open urls: [URL]) {
-        AppModel.shared.open(urls)
+        for url in urls where url.scheme == FinderHandoff.scheme {
+            if let request = FinderHandoff.take(url) {
+                Task { await AppModel.shared.perform(request) }
+            }
+        }
+        let files = urls.filter(\.isFileURL)
+        if !files.isEmpty { AppModel.shared.open(files) }
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

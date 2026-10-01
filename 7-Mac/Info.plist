@@ -292,6 +292,21 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<!-- Only the Finder menu uses it: sevenmac://finder/<id> names a
+			     request it left in the app group. An unknown id does nothing. -->
+			<key>CFBundleURLName</key>
+			<string>com.michediana.Seven-Mac.finder-request</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sevenmac</string>
+			</array>
+		</dict>
+	</array>
+	<key>SevenMacAppGroup</key>
+	<string>$(DEVELOPMENT_TEAM).com.michediana.Seven-Mac</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

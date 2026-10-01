@@ -4,6 +4,12 @@
 <dict>
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
+	<!-- Shared with the Finder menu extension, which leaves here which of
+	     its items was chosen. See FinderHandoff. -->
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>$(TeamIdentifierPrefix)com.michediana.Seven-Mac</string>
+	</array>
 	<!-- Remember a destination folder the user has allowed, so "extract next
 	     to the archive" costs one panel rather than one per job. -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>

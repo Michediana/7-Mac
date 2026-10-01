@@ -1,0 +1,56 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Extract": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estrai"
+          }
+        }
+      }
+    },
+    "Open Without Extracting": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri senza estrarre"
+          }
+        }
+      }
+    },
+    "Test Archive": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifica archivio"
+          }
+        }
+      }
+    },
+    "Compress…": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprimi…"
+          }
+        }
+      }
+    },
+    "Checksums…": {
+      "localizations": {
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checksum…"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
