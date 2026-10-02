@@ -129,7 +129,8 @@ final class Preferences {
         didSet { defaults.set(offersKeychain, forKey: "OffersKeychain") }
     }
 
-    /// Double-click in the Finder: unpack at once, or open a browser. A drop
+    /// Double-click in the Finder: open a browser (the default), or unpack
+    /// at once. A drop
     /// on the window always extracts — that gesture already says what it
     /// wants.
     var openAction: OpenAction {
@@ -172,7 +173,7 @@ final class Preferences {
             "DefaultFormat": "7z",
             "OffersKeychain": true,
             "RevealWhenDone": true,
-            "OpenAction": OpenAction.extract.rawValue,
+            "OpenAction": OpenAction.browse.rawValue,
             "OnlyReplaceOlder": false,
         ])
         destinationPolicy = DestinationPolicy(
@@ -198,7 +199,7 @@ final class Preferences {
         defaultFormat = defaults.string(forKey: "DefaultFormat") ?? "7z"
         offersKeychain = defaults.bool(forKey: "OffersKeychain")
         revealWhenDone = defaults.bool(forKey: "RevealWhenDone")
-        openAction = OpenAction(rawValue: defaults.string(forKey: "OpenAction") ?? "") ?? .extract
+        openAction = OpenAction(rawValue: defaults.string(forKey: "OpenAction") ?? "") ?? .browse
         onlyReplaceOlder = defaults.bool(forKey: "OnlyReplaceOlder")
         appearance = AppearanceChoice(rawValue: defaults.string(forKey: "Appearance") ?? "") ?? .system
         hasShownWelcome = defaults.bool(forKey: "HasShownWelcome")
