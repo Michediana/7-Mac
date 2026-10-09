@@ -5,6 +5,12 @@
       "comment" : "Info.plist NSServices: the Services menu titles.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit 7-Mac komprimieren"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22,6 +28,24 @@
             "state" : "translated",
             "value" : "Comprimi con 7-Mac"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimeer met 7-Mac"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kompresuj w 7-Mac"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimir com o 7-Mac"
+          }
         }
       }
     },
@@ -29,6 +53,12 @@
       "comment" : "Info.plist NSServices: the Services menu titles.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit 7-Mac entpacken"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45,6 +75,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estrai con 7-Mac"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pak uit met 7-Mac"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozpakuj w 7-Mac"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extrair com o 7-Mac"
           }
         }
       }

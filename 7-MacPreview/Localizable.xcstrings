@@ -3,6 +3,12 @@
   "strings" : {
     "%@ on disk" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ auf dem Volume"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20,11 +26,35 @@
             "state" : "translated",
             "value" : "%@ su disco"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ op schijf"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ na dysku"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ em disco"
+          }
         }
       }
     },
     "%lld files" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Dateien"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42,11 +72,35 @@
             "state" : "translated",
             "value" : "%lld file"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld bestanden"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pliki: %lld"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld ficheiros"
+          }
         }
       }
     },
     "1 file" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Datei"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64,11 +118,35 @@
             "state" : "translated",
             "value" : "1 file"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 bestand"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 plik"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 ficheiro"
+          }
         }
       }
     },
     "The list of files is encrypted. Open the archive in 7-Mac to enter the password." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Dateiliste ist verschlüsselt. Öffne das Archiv in 7-Mac, um das Passwort einzugeben."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86,11 +164,35 @@
             "state" : "translated",
             "value" : "L’elenco dei file è cifrato. Apri l’archivio in 7-Mac per inserire la password."
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De lijst met bestanden is versleuteld. Open het archief in 7-Mac om het wachtwoord in te voeren."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista plików jest zaszyfrowana. Otwórz archiwum w 7-Mac, aby wprowadzić hasło."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A lista de ficheiros está encriptada. Abra o arquivo no 7-Mac para introduzir a palavra-passe."
+          }
         }
       }
     },
     "and %lld more" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "und %lld weitere"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -108,11 +210,35 @@
             "state" : "translated",
             "value" : "e altri %lld"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "en nog %lld"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "i jeszcze %lld"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "e mais %lld"
+          }
         }
       }
     },
     "encrypted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "verschlüsselt"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -129,6 +255,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "cifrato"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "versleuteld"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "zaszyfrowane"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "encriptado"
           }
         }
       }

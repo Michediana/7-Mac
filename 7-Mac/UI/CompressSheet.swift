@@ -159,7 +159,7 @@ struct CompressSheet: View {
     private var summary: String {
         draft.sources.count == 1
             ? "“\(draft.sources[0].lastPathComponent)”"
-            : Display.count(UInt64(draft.sources.count), "item", "items")
+            : Display.count(UInt64(draft.sources.count), .item)
     }
 }
 
@@ -244,7 +244,7 @@ private struct MemoryLine: View {
             Label {
                 VStack(alignment: .leading, spacing: 2) {
                     if let threads = estimate.threads {
-                        Text("About \(Display.bytes(estimate.compress)) of memory to compress with \(Display.count(UInt64(threads), "thread", "threads")), \(Display.bytes(estimate.decompress)) to extract.")
+                        Text("About \(Display.bytes(estimate.compress)) of memory to compress with \(Display.count(UInt64(threads), .thread)), \(Display.bytes(estimate.decompress)) to extract.")
                     } else {
                         Text("About \(Display.bytes(estimate.compress)) of memory to compress, \(Display.bytes(estimate.decompress)) to extract.")
                     }

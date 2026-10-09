@@ -68,7 +68,7 @@ struct BrowserWindow: View {
         guard let level = browser.current else { return "" }
         let tree = level.tree
         var parts = [level.archive.formatName,
-                     Display.count(UInt64(tree.fileCount), "file", "files"),
+                     Display.count(UInt64(tree.fileCount), .file),
                      Display.bytes(tree.totalSize)]
         if let packed = tree.totalPackedSize, tree.totalSize > 0, packed > 0 {
             parts.append(String(localized: "\(Display.bytes(packed)) packed"))
@@ -571,9 +571,9 @@ private struct StatusBar: View {
         guard let tree = browser.current?.tree else { return "" }
         if browser.selection.isEmpty {
             if browser.isShowingMatches {
-                return Display.count(UInt64(browser.matches.count), "match", "matches")
+                return Display.count(UInt64(browser.matches.count), .match)
             }
-            return String(localized: "\(Display.count(UInt64(tree.fileCount), "file", "files")), \(Display.count(UInt64(tree.folderCount), "folder", "folders"))")
+            return String(localized: "\(Display.count(UInt64(tree.fileCount), .file)), \(Display.count(UInt64(tree.folderCount), .folder))")
         }
         return String(localized: "\(browser.selection.count) selected — \(browser.extractionSummary)")
     }
@@ -593,7 +593,7 @@ private struct RenameSheet: View {
             (node.isDirectory ? Text("Rename Folder") : Text("Rename"))
                 .font(.headline)
             if node.isDirectory, node.fileCount > 0 {
-                Text("Everything inside it — \(Display.count(UInt64(node.fileCount), "file", "files")) — moves with it.")
+                Text("Everything inside it — \(Display.count(UInt64(node.fileCount), .file)) — moves with it.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }

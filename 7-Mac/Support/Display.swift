@@ -31,12 +31,23 @@ nonisolated enum Display {
         }
     }
 
-    /// `3 files`, `1 folder`, and the honest `nothing` for an empty run.
+    /// Something `count` can count.
+    enum Noun { case file, folder, item, match, problem, thread }
+
+    /// `3 files`, `1 folder`.
     ///
-    /// The nouns are looked up in the string catalog, so each language
-    /// supplies its own pair: Italian's "file" does not change for plural.
-    static func count(_ n: UInt64, _ singular: LocalizedStringResource,
-                      _ plural: LocalizedStringResource) -> String {
-        "\(n) \(String(localized: n == 1 ? singular : plural))"
+    /// Each phrase is a plural variation in the string catalog, so every
+    /// language supplies its own forms: Polish has three ("2 pliki",
+    /// "5 plików"), and a plain singular/plural pair cannot express them.
+    static func count(_ n: UInt64, _ noun: Noun) -> String {
+        let n = Int(clamping: n)
+        return switch noun {
+        case .file:    String(localized: "\(n) files")
+        case .folder:  String(localized: "\(n) folders")
+        case .item:    String(localized: "\(n) items")
+        case .match:   String(localized: "\(n) matches")
+        case .problem: String(localized: "\(n) problems")
+        case .thread:  String(localized: "\(n) threads")
+        }
     }
 }

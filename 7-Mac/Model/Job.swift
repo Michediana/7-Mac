@@ -232,9 +232,9 @@ final class Job: Identifiable {
         case .finished:
             if let testReport { return testReport.summary }
             guard let outcome else { return String(localized: "Done") }
-            var parts = [Display.count(outcome.files, "file", "files")]
+            var parts = [Display.count(outcome.files, .file)]
             if outcome.folders > 0 {
-                parts.append(Display.count(outcome.folders, "folder", "folders"))
+                parts.append(Display.count(outcome.folders, .folder))
             }
             if isExtraction {
                 parts.append(Display.bytes(outcome.bytes))

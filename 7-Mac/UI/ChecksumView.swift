@@ -146,7 +146,7 @@ struct ChecksumView: View {
     private var footer: some View {
         HStack(spacing: 10) {
             if let report = model.report {
-                Text("\(Display.count(report.files, "file", "files")), \(Display.bytes(report.bytes))")
+                Text("\(Display.count(report.files, .file)), \(Display.bytes(report.bytes))")
                 if !report.failures.isEmpty {
                     Label("\(report.failures.count) could not be read", systemImage: "exclamationmark.triangle")
                         .foregroundStyle(.orange)

@@ -47,7 +47,7 @@ final class ChecksumModel {
         self.source = source
         switch source {
         case .files(let urls):
-            title = urls.count == 1 ? urls[0].lastPathComponent : Display.count(UInt64(urls.count), "item", "items")
+            title = urls.count == 1 ? urls[0].lastPathComponent : Display.count(UInt64(urls.count), .item)
         case .entries(_, _, let title, _):
             self.title = title
         }
@@ -251,9 +251,9 @@ nonisolated struct TestReport: Sendable, Identifiable {
 
     var summary: String {
         if isHealthy {
-            return String(localized: "All \(Display.count(UInt64(fileCount), "file", "files")) are intact (\(Display.bytes(byteCount))).")
+            return String(localized: "All \(Display.count(UInt64(fileCount), .file)) are intact (\(Display.bytes(byteCount))).")
         }
-        return String(localized: "\(Display.count(UInt64(failedCount), "problem", "problems")) in \(Display.count(UInt64(fileCount), "file", "files")).")
+        return String(localized: "\(Display.count(UInt64(failedCount), .problem)) in \(Display.count(UInt64(fileCount), .file)).")
     }
 
     /// Plain text, for saving next to the archive or pasting into a ticket.

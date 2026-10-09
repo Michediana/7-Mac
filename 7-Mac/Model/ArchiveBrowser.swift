@@ -477,7 +477,7 @@ final class ArchiveBrowser {
             return String(localized: "Everything in “\(level.title)”")
         }
         let (files, bytes) = level.tree.summary(of: selection)
-        return "\(Display.count(UInt64(files), "file", "files")), \(Display.bytes(bytes))"
+        return "\(Display.count(UInt64(files), .file)), \(Display.bytes(bytes))"
     }
 
     /// Queues the selection — or the whole archive when nothing is selected
@@ -509,7 +509,7 @@ final class ArchiveBrowser {
         } else if selection.count == 1, let id = selection.first, let node = level.tree.node(id) {
             title = String(localized: "\(node.name) from \(level.title)")
         } else {
-            title = String(localized: "\(Display.count(UInt64(selection.count), "item", "items")) from \(level.title)")
+            title = String(localized: "\(Display.count(UInt64(selection.count), .item)) from \(level.title)")
         }
         queue.enqueue([.extractEntries(EntrySelection(archive: level.archive,
                                                       archiveName: level.title,

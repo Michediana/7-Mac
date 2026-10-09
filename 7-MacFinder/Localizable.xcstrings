@@ -3,6 +3,12 @@
   "strings" : {
     "Extract" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entpacken"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20,11 +26,35 @@
             "state" : "translated",
             "value" : "Estrai"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pak uit"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozpakuj"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extrair"
+          }
         }
       }
     },
     "Open Without Extracting" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ohne Entpacken öffnen"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42,11 +72,35 @@
             "state" : "translated",
             "value" : "Apri senza estrarre"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open zonder uit te pakken"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otwórz bez rozpakowywania"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir sem extrair"
+          }
         }
       }
     },
     "Test Archive" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiv testen"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64,11 +118,35 @@
             "state" : "translated",
             "value" : "Verifica archivio"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testuj archiwum"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testar arquivo"
+          }
         }
       }
     },
     "Compress…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Komprimieren …"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86,11 +164,35 @@
             "state" : "translated",
             "value" : "Comprimi…"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimeer…"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kompresuj…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprimir…"
+          }
         }
       }
     },
     "Checksums…" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prüfsummen …"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -107,6 +209,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Checksum…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checksums…"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sumy kontrolne…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Somas de verificação…"
           }
         }
       }

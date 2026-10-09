@@ -5,6 +5,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22,6 +28,24 @@
             "state" : "translated",
             "value" : "Archivio 7-Zip"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Zip-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum 7-Zip"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo 7-Zip"
+          }
         }
       }
     },
@@ -29,6 +53,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ARJ-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46,6 +76,24 @@
             "state" : "translated",
             "value" : "Archivio ARJ"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ARJ-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum ARJ"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo ARJ"
+          }
         }
       }
     },
@@ -53,6 +101,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bzip2-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69,6 +123,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archivio Bzip2"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bzip2-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum Bzip2"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo Bzip2"
           }
         }
       }
@@ -101,6 +173,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "compress-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -118,6 +196,24 @@
             "state" : "translated",
             "value" : "Archivio compress"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "compress-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum compress"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo compress"
+          }
         }
       }
     },
@@ -125,6 +221,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cpio-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -142,6 +244,24 @@
             "state" : "translated",
             "value" : "Archivio cpio"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cpio-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum cpio"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo cpio"
+          }
         }
       }
     },
@@ -149,6 +269,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debian-Paket"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -166,6 +292,24 @@
             "state" : "translated",
             "value" : "Pacchetto Debian"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debian-pakket"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pakiet Debian"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pacote Debian"
+          }
         }
       }
     },
@@ -173,6 +317,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disk-Image"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -190,6 +340,24 @@
             "state" : "translated",
             "value" : "Immagine disco"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schijfkopie"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obraz dysku"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem de disco"
+          }
         }
       }
     },
@@ -197,6 +365,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gzip-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -214,6 +388,24 @@
             "state" : "translated",
             "value" : "Archivio Gzip"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gzip-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum Gzip"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo Gzip"
+          }
         }
       }
     },
@@ -221,6 +413,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LHA-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -238,6 +436,24 @@
             "state" : "translated",
             "value" : "Archivio LHA"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LHA-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum LHA"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo LHA"
+          }
         }
       }
     },
@@ -245,6 +461,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LZMA-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -262,6 +484,24 @@
             "state" : "translated",
             "value" : "Archivio LZMA"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LZMA-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum LZMA"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo LZMA"
+          }
         }
       }
     },
@@ -269,6 +509,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. MIT-Lizenz. 7-Zip-Engine © Igor Pavlov, GNU LGPL."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -286,6 +532,24 @@
             "state" : "translated",
             "value" : "© 2026 Michediana. Licenza MIT. Motore 7-Zip © Igor Pavlov, GNU LGPL."
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. MIT-licentie. 7-Zip-engine © Igor Pavlov, GNU LGPL."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. Licencja MIT. Silnik 7-Zip © Igor Pavlov, GNU LGPL."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Michediana. Licença MIT. Motor 7-Zip © Igor Pavlov, GNU LGPL."
+          }
         }
       }
     },
@@ -293,6 +557,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RAR-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -310,6 +580,24 @@
             "state" : "translated",
             "value" : "Archivio RAR"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RAR-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum RAR"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo RAR"
+          }
         }
       }
     },
@@ -317,6 +605,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RPM-Paket"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -334,16 +628,83 @@
             "state" : "translated",
             "value" : "Pacchetto RPM"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RPM-pakket"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pakiet RPM"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pacote RPM"
+          }
         }
       }
     },
     "Split archive" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geteiltes Archiv"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo dividido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive fractionnée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivio diviso"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesplitst archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum dzielone"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo dividido"
+          }
+        }
+      }
     },
     "SquashFS image" : {
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SquashFS-Image"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -361,6 +722,24 @@
             "state" : "translated",
             "value" : "Immagine SquashFS"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SquashFS-kopie"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obraz SquashFS"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem SquashFS"
+          }
         }
       }
     },
@@ -368,6 +747,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -385,6 +770,24 @@
             "state" : "translated",
             "value" : "Archivio Tar"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tar-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum Tar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo Tar"
+          }
         }
       }
     },
@@ -392,6 +795,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Windows-Cabinet-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -409,6 +818,24 @@
             "state" : "translated",
             "value" : "Archivio cabinet di Windows"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Windows-cabinetarchief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum cabinet Windows"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo cabinet do Windows"
+          }
         }
       }
     },
@@ -416,6 +843,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Windows-Imaging-Archiv (WIM)"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -433,6 +866,24 @@
             "state" : "translated",
             "value" : "Immagine WIM di Windows"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Windows Imaging-archief (WIM)"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obraz WIM Windows"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem WIM do Windows"
+          }
         }
       }
     },
@@ -440,6 +891,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "XZ-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -457,6 +914,24 @@
             "state" : "translated",
             "value" : "Archivio XZ"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "XZ-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum XZ"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo XZ"
+          }
         }
       }
     },
@@ -464,6 +939,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "XZ-komprimiertes Tar-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -481,6 +962,24 @@
             "state" : "translated",
             "value" : "Archivio tar compresso con XZ"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Met XZ gecomprimeerd tar-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum tar skompresowane XZ"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo tar comprimido com XZ"
+          }
         }
       }
     },
@@ -488,6 +987,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zip-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -505,6 +1010,24 @@
             "state" : "translated",
             "value" : "Archivio Zip"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zip-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum Zip"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo Zip"
+          }
         }
       }
     },
@@ -512,6 +1035,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zstandard-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -529,6 +1058,24 @@
             "state" : "translated",
             "value" : "Archivio Zstandard"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zstandard-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum Zstandard"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo Zstandard"
+          }
         }
       }
     },
@@ -536,6 +1083,12 @@
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zstandard-komprimiertes Tar-Archiv"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -552,6 +1105,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Archivio tar compresso con Zstandard"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Met Zstandard gecomprimeerd tar-archief"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archiwum tar skompresowane Zstandard"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arquivo tar comprimido com Zstandard"
           }
         }
       }
