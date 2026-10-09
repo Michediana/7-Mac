@@ -334,3 +334,23 @@ final class DroppedItemsTests: XCTestCase {
         XCTAssertEqual(resolved.map(\.lastPathComponent), ["tree"])
     }
 }
+
+/// A drop on the main window starts nothing: it fills the two lists, and
+/// each waits for its button.
+@MainActor
+final class DropStagingTests: XCTestCase {
+    func testDroppedArchivesWaitForTheExtractButton() {
+        let model = AppModel()
+        let archive = URL(filePath: "/nowhere/site.tgz.aa")
+        let document = URL(filePath: "/nowhere/notes.txt")
+
+        model.acceptDrop([archive, document, archive])
+
+        XCTAssertEqual(model.stagedArchives, [archive], "once each, and only archives")
+        XCTAssertEqual(model.stagedItems, [document])
+        XCTAssertTrue(model.queue.jobs.isEmpty, "nothing is extracted on the drop")
+
+        model.unstageArchive(archive)
+        XCTAssertTrue(model.stagedArchives.isEmpty)
+    }
+}

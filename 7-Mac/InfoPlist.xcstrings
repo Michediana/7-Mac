@@ -337,6 +337,9 @@
         }
       }
     },
+    "Split archive" : {
+
+    },
     "SquashFS image" : {
       "comment" : "Info.plist: document and imported type names, shown as the Kind of a file in the Finder; and the copyright line.",
       "extractionState" : "manual",

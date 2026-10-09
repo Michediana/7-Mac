@@ -2,8 +2,9 @@
 //  ContentView.swift
 //  7-Mac
 //
-//  The one window: two targets to drop things on — one that acts at once,
-//  one that gathers items into an archive — and the queue underneath them.
+//  The one window: two targets to drop things on — one that gathers archives
+//  to extract, one that gathers items into an archive — and the queue
+//  underneath them. Neither starts anything until its button is pressed.
 //
 
 import SwiftUI
@@ -74,22 +75,36 @@ struct ContentView: View {
     }
 }
 
+/// Gathers archives, from as many drops as it takes, to extract together —
+/// when the person says so, not on the first drop. The drop itself lands on
+/// the window, which sorts archives here.
 private struct DropArea: View {
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let isTargeted: Bool
 
     var body: some View {
+        Group {
+            if model.stagedArchives.isEmpty {
+                empty
+            } else {
+                gathered
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background { DropOutline(isTargeted: isTargeted) }
+        .animation(reduceMotion ? nil : .easeOut(duration: 0.12), value: isTargeted)
+    }
+
+    private var empty: some View {
         // A click does what a drop does, for whoever would rather not drag.
-        Button { model.chooseArchivesToExtract() } label: { content }
+        Button { model.chooseArchivesToStage() } label: { emptyContent }
             .buttonStyle(.plain)
             .help("Click to choose archives to extract")
-            .background { DropOutline(isTargeted: isTargeted) }
-            .animation(reduceMotion ? nil : .easeOut(duration: 0.12), value: isTargeted)
             .accessibilityLabel("Drop archives here to extract them, or click to choose them")
     }
 
-    private var content: some View {
+    private var emptyContent: some View {
         VStack(spacing: 8) {
             Image(systemName: isTargeted ? "archivebox.fill" : "archivebox")
                 .font(.system(size: 34, weight: .light))
@@ -97,7 +112,7 @@ private struct DropArea: View {
                 .contentTransition(.symbolEffect(.replace))
             Text("Drop archives to extract")
                 .font(.headline)
-            Text("Or click to choose them.")
+            Text("Add as many as you like, then start the extraction.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }
@@ -105,6 +120,37 @@ private struct DropArea: View {
         .padding(.horizontal, 24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .contentShape(Rectangle())
+    }
+
+    private var gathered: some View {
+        VStack(spacing: 0) {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 2) {
+                    ForEach(model.stagedArchives, id: \.self) { url in
+                        StagedItemRow(url: url, removeHelp: "Remove from the list") {
+                            model.unstageArchive(url)
+                        }
+                    }
+                }
+                .padding(.vertical, 4)
+            }
+            Divider()
+            HStack(spacing: 8) {
+                Text("^[\(model.stagedArchives.count) archive](inflect: true)")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                Spacer(minLength: 0)
+                Button("Add…") { model.chooseArchivesToStage() }
+                Button("Clear") { model.clearStagedArchives() }
+                Button("Start Extraction") { model.extractStaged() }
+                    .buttonStyle(.borderedProminent)
+            }
+            .controlSize(.small)
+            .padding(.vertical, 8)
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 4)
+        .padding(12)
     }
 }
 
@@ -164,7 +210,9 @@ private struct StagingArea: View {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 2) {
                     ForEach(model.stagedItems, id: \.self) { url in
-                        StagedItemRow(url: url) { model.unstage(url) }
+                        StagedItemRow(url: url, removeHelp: "Remove from the archive") {
+                            model.unstage(url)
+                        }
                     }
                 }
                 .padding(.vertical, 4)
@@ -192,6 +240,7 @@ private struct StagingArea: View {
 
 private struct StagedItemRow: View {
     let url: URL
+    let removeHelp: LocalizedStringKey
     let remove: () -> Void
 
     var body: some View {
@@ -207,7 +256,7 @@ private struct StagedItemRow: View {
                 .labelStyle(.iconOnly)
                 .buttonStyle(.borderless)
                 .foregroundStyle(.secondary)
-                .help("Remove from the archive")
+                .help(removeHelp)
         }
         .padding(.horizontal, 4)
         .help(url.path(percentEncoded: false))

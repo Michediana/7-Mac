@@ -32,6 +32,9 @@ final class AppModel: JobInteraction {
     /// Files and folders gathered in the main window's "create archive"
     /// area, waiting for the person to say they have them all.
     private(set) var stagedItems: [URL] = []
+    /// Archives gathered in the main window's "extract" area, waiting for
+    /// the person to start the extraction.
+    private(set) var stagedArchives: [URL] = []
 
     /// A window to open once there is a way to open one.
     enum WindowRequest {
@@ -73,13 +76,12 @@ final class AppModel: JobInteraction {
         }
     }
 
-    /// A drop on the main window outside the "create archive" area. That
-    /// area is where archives get made, so anything that is not an archive
-    /// joins it rather than opening the compress sheet straight away.
+    /// A drop on the main window outside the "create archive" area. Nothing
+    /// starts on a drop: archives join the "extract" list and anything else
+    /// joins the "create archive" one, each waiting for its button.
     func acceptDrop(_ urls: [URL]) {
         let urls = urls.filter { $0.isFileURL }
-        let archives = urls.filter(ArchiveNaming.looksLikeArchive)
-        if !archives.isEmpty { extract(archives) }
+        stageArchives(urls.filter(ArchiveNaming.looksLikeArchive))
         stage(urls.filter { !ArchiveNaming.looksLikeArchive($0) })
     }
 
@@ -197,11 +199,7 @@ final class AppModel: JobInteraction {
 
     /// Adds dropped items to the ones waiting to be archived, once each.
     func stage(_ urls: [URL]) {
-        let known = Set(stagedItems.map(\.standardizedFileURL))
-        var seen = known
-        for url in urls where url.isFileURL {
-            if seen.insert(url.standardizedFileURL).inserted { stagedItems.append(url) }
-        }
+        stagedItems = Self.appending(urls, to: stagedItems)
     }
 
     func unstage(_ url: URL) {
@@ -214,6 +212,36 @@ final class AppModel: JobInteraction {
 
     func compressStaged() {
         beginCompression(of: stagedItems)
+    }
+
+    // MARK: - Gathering archives to extract
+
+    /// Adds dropped archives to the ones waiting to be extracted, once each.
+    func stageArchives(_ urls: [URL]) {
+        stagedArchives = Self.appending(urls, to: stagedArchives)
+    }
+
+    func unstageArchive(_ url: URL) {
+        stagedArchives.removeAll { $0 == url }
+    }
+
+    func clearStagedArchives() {
+        stagedArchives = []
+    }
+
+    func extractStaged() {
+        extract(stagedArchives)
+        stagedArchives = []
+    }
+
+    /// `list` and then each file URL in `urls` it does not hold yet.
+    private static func appending(_ urls: [URL], to list: [URL]) -> [URL] {
+        var list = list
+        var seen = Set(list.map(\.standardizedFileURL))
+        for url in urls where url.isFileURL {
+            if seen.insert(url.standardizedFileURL).inserted { list.append(url) }
+        }
+        return list
     }
 
     // MARK: - Panels
@@ -289,6 +317,19 @@ final class AppModel: JobInteraction {
         panel.prompt = String(localized: "Add")
         guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
         stage(panel.urls)
+    }
+
+    /// The main window's left target, clicked rather than dropped on.
+    func chooseArchivesToStage() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = true
+        panel.message = String(localized: "Choose archives to extract.")
+        panel.prompt = String(localized: "Add")
+        guard panel.runModal() == .OK, !panel.urls.isEmpty else { return }
+        // Explicit choice, so no extension filter, as for the toolbar.
+        stageArchives(panel.urls)
     }
 
     // MARK: - JobInteraction

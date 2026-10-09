@@ -1,7 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {},
+    "" : {
+
+    },
     "—" : {
       "localizations" : {
         "es" : {
@@ -678,6 +680,50 @@
         }
       }
     },
+    "^[%lld archive](inflect: true)" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld archivo comprimido](inflect: true)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld archive](inflect: true)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld archivio](inflect: true)"
+          }
+        }
+      }
+    },
+    "^[%lld item](inflect: true)" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld ítem](inflect: true)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld élément](inflect: true)"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "^[%lld elemento](inflect: true)"
+          }
+        }
+      }
+    },
     "© 2026 Michediana. 7-Mac is free software under the MIT License." : {
       "localizations" : {
         "es" : {
@@ -702,12 +748,6 @@
     },
     "1 of 2" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 di 2"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -719,17 +759,17 @@
             "state" : "translated",
             "value" : "1 sur 2"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 di 2"
+          }
         }
       }
     },
     "2 of 2" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2 di 2"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -741,10 +781,40 @@
             "state" : "translated",
             "value" : "2 sur 2"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 di 2"
+          }
         }
       }
     },
-    "7-Mac" : {},
+    "7-Mac" : {
+
+    },
+    "7-Mac asks the first time it needs a folder, and remembers it. Allowing your home folder covers everything in it." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac pregunta la primera vez que necesita una carpeta y la recuerda. Permitir tu carpeta de inicio cubre todo lo que contiene."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac demande la première fois qu’il a besoin d’un dossier, puis s’en souvient. Autoriser votre dossier de départ couvre tout ce qu’il contient."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac chiede la prima volta che gli serve una cartella e se la ricorda. Autorizzare la cartella Inizio copre tutto ciò che contiene."
+          }
+        }
+      }
+    },
     "7-Mac did not receive any files." : {
       "localizations" : {
         "es" : {
@@ -811,6 +881,28 @@
         }
       }
     },
+    "7-Mac menu in the Finder" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menú de 7-Mac en el Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu 7-Mac dans le Finder"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu 7-Mac nel Finder"
+          }
+        }
+      }
+    },
     "7-Mac needs permission to write into “%@”. Choose it, or pick somewhere else." : {
       "localizations" : {
         "es" : {
@@ -829,6 +921,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "7-Mac ha bisogno del permesso per scrivere in “%@”. Sceglila, oppure scegli un’altra posizione."
+          }
+        }
+      }
+    },
+    "7-Mac needs your permission to use the folder “%@”. Choose it, or a folder that contains it — your home folder, for instance — and 7-Mac will not ask again for anything inside." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac necesita tu permiso para usar la carpeta “%@”. Selecciónala, o una carpeta que la contenga —tu carpeta de inicio, por ejemplo—, y 7-Mac no volverá a preguntar por nada de su interior."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac a besoin de votre autorisation pour utiliser le dossier « %@ ». Choisissez-le, ou un dossier qui le contient — votre dossier de départ, par exemple — et 7-Mac ne demandera plus rien pour ce qu’il contient."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7-Mac ha bisogno del tuo permesso per usare la cartella “%@”. Sceglila, oppure una cartella che la contiene — per esempio la tua cartella Inizio — e 7-Mac non lo chiederà più per nulla al suo interno."
           }
         }
       }
@@ -1463,12 +1577,6 @@
     },
     "Add 7-Mac to the Finder’s menu?" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aggiungere 7-Mac al menu del Finder?"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1479,6 +1587,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajouter 7-Mac au menu du Finder ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungere 7-Mac al menu del Finder?"
+          }
+        }
+      }
+    },
+    "Add as many as you like, then create the archive." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade todos los que quieras y luego crea el archivo comprimido."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez-en autant que vous voulez, puis créez l’archive."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungine quanti vuoi, poi crea l’archivio."
+          }
+        }
+      }
+    },
+    "Add as many as you like, then start the extraction." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade tantos como quieras y luego inicia la extracción."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez-en autant que vous voulez, puis lancez l’extraction."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungine quanti vuoi, poi avvia l’estrazione."
           }
         }
       }
@@ -1577,6 +1735,28 @@
         }
       }
     },
+    "Add…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi…"
+          }
+        }
+      }
+    },
     "Advanced" : {
       "localizations" : {
         "es" : {
@@ -1627,6 +1807,50 @@
         }
       }
     },
+    "Allow a Folder…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitir una carpeta…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser un dossier…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorizza una cartella…"
+          }
+        }
+      }
+    },
+    "Allowed, with everything inside it." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitida, con todo lo que contiene."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisé, avec tout ce qu’il contient."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorizzata, con tutto ciò che contiene."
+          }
+        }
+      }
+    },
     "Also hide the list of files" : {
       "localizations" : {
         "es" : {
@@ -1649,14 +1873,30 @@
         }
       }
     },
-    "Another app" : {
+    "Always allowed: 7-Mac never asks for it." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siempre permitida: 7-Mac nunca la pide."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toujours autorisé : 7-Mac ne le demande jamais."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un’altra app"
+            "value" : "Sempre autorizzata: 7-Mac non la chiede mai."
           }
-        },
+        }
+      }
+    },
+    "Another app" : {
+      "localizations" : {
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1668,10 +1908,17 @@
             "state" : "translated",
             "value" : "Une autre app"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un’altra app"
+          }
         }
       }
     },
     "Anything else gets compressed." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1691,8 +1938,7 @@
             "value" : "Tutto il resto viene compresso."
           }
         }
-      },
-      "extractionState" : "stale"
+      }
     },
     "Appearance" : {
       "localizations" : {
@@ -2157,6 +2403,28 @@
         }
       }
     },
+    "Check Again" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a comprobar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier à nouveau"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica di nuovo"
+          }
+        }
+      }
+    },
     "Check every entry decodes intact" : {
       "localizations" : {
         "es" : {
@@ -2175,6 +2443,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verifica che ogni voce si decomprima integra"
+          }
+        }
+      }
+    },
+    "Check Permissions…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprobar permisos…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérifier les autorisations…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica permessi…"
           }
         }
       }
@@ -2333,6 +2623,28 @@
         }
       }
     },
+    "Choose a folder 7-Mac may use without asking. Everything inside it is included: your home folder covers almost everything." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige una carpeta que 7-Mac pueda usar sin preguntar. Se incluye todo lo que contiene: tu carpeta de inicio cubre casi todo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez un dossier que 7-Mac peut utiliser sans demander. Tout ce qu’il contient est inclus : votre dossier de départ couvre presque tout."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli una cartella che 7-Mac può usare senza chiedere. È compreso tutto ciò che contiene: la cartella Inizio copre quasi tutto."
+          }
+        }
+      }
+    },
     "Choose archives to extract." : {
       "localizations" : {
         "es" : {
@@ -2399,6 +2711,28 @@
         }
       }
     },
+    "Choose files and folders to add to the archive." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige los archivos y carpetas que añadir al archivo comprimido."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les fichiers et dossiers à ajouter à l’archive."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli i file e le cartelle da aggiungere all’archivio."
+          }
+        }
+      }
+    },
     "Choose files and folders to compress." : {
       "localizations" : {
         "es" : {
@@ -2461,6 +2795,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scegli la cartella in cui estrarre."
+          }
+        }
+      }
+    },
+    "Choose the folder itself, or one of the folders it is in." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige la propia carpeta o una de las carpetas en las que se encuentra."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez le dossier lui-même, ou l’un des dossiers qui le contiennent."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scegli la cartella stessa, o una delle cartelle in cui si trova."
           }
         }
       }
@@ -2553,6 +2909,28 @@
         }
       }
     },
+    "Clear" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaciar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vider"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Svuota"
+          }
+        }
+      }
+    },
     "Clear Finished" : {
       "localizations" : {
         "es" : {
@@ -2593,6 +2971,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rimuovi operazioni completate"
+          }
+        }
+      }
+    },
+    "Click to choose archives to extract" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic para elegir archivos comprimidos que extraer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cliquez pour choisir des archives à extraire"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic per scegliere gli archivi da estrarre"
+          }
+        }
+      }
+    },
+    "Click to choose files and folders to archive" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic para elegir archivos y carpetas que comprimir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cliquez pour choisir des fichiers et dossiers à archiver"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic per scegliere file e cartelle da archiviare"
           }
         }
       }
@@ -2687,12 +3109,6 @@
     },
     "Continue" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continua"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2703,6 +3119,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continua"
           }
         }
       }
@@ -2961,6 +3383,28 @@
         }
       }
     },
+    "Create Archive…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear archivo comprimido…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer l’archive…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea archivio…"
+          }
+        }
+      }
+    },
     "damaged" : {
       "localizations" : {
         "es" : {
@@ -3051,12 +3495,6 @@
     },
     "Default app for archives" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "App predefinita per gli archivi"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3067,6 +3505,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "App par défaut pour les archives"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App predefinita per gli archivi"
           }
         }
       }
@@ -3227,12 +3671,6 @@
     },
     "Double-clicking a .zip, .7z, .rar or any other archive 7-Mac can read will open it here. Disc images keep opening as they do now." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Facendo doppio clic su un .zip, .7z, .rar o qualsiasi altro archivio che 7-Mac sa leggere, si aprirà qui. Le immagini disco continuano ad aprirsi come adesso."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3244,10 +3682,61 @@
             "state" : "translated",
             "value" : "Un double-clic sur un .zip, un .7z, un .rar ou toute autre archive que 7-Mac sait lire l’ouvrira ici. Les images disque continuent de s’ouvrir comme maintenant."
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facendo doppio clic su un .zip, .7z, .rar o qualsiasi altro archivio che 7-Mac sa leggere, si aprirà qui. Le immagini disco continuano ad aprirsi come adesso."
+          }
+        }
+      }
+    },
+    "Downloads" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descargas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargements"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        }
+      }
+    },
+    "Drop archives here to extract them, or click to choose them" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos comprimidos para extraerlos, o haz clic para elegirlos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez ici des archives pour les extraire, ou cliquez pour les choisir"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina qui gli archivi per estrarli, o fai clic per sceglierli"
+          }
         }
       }
     },
     "Drop archives here to extract them, or other files to compress them" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -3267,8 +3756,7 @@
             "value" : "Trascina qui gli archivi per estrarli, o altri file per comprimerli"
           }
         }
-      },
-      "extractionState" : "stale"
+      }
     },
     "Drop archives to extract" : {
       "localizations" : {
@@ -3288,6 +3776,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trascina qui gli archivi da estrarre"
+          }
+        }
+      }
+    },
+    "Drop area height" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altura del área de soltar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hauteur de la zone de dépôt"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altezza dell’area di rilascio"
+          }
+        }
+      }
+    },
+    "Drop files and folders here to gather them into a new archive" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos y carpetas para reunirlos en un nuevo archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez ici des fichiers et dossiers pour les réunir dans une nouvelle archive"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina qui file e cartelle per raccoglierli in un nuovo archivio"
+          }
+        }
+      }
+    },
+    "Drop files and folders to archive" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suelta aquí archivos y carpetas para comprimirlos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez des fichiers et dossiers à archiver"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trascina qui file e cartelle da archiviare"
           }
         }
       }
@@ -3332,6 +3886,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cifrati"
+          }
+        }
+      }
+    },
+    "Encrypted entry" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrada cifrada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrée chiffrée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voce cifrata"
           }
         }
       }
@@ -3754,6 +4330,28 @@
         }
       }
     },
+    "Finder" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder"
+          }
+        }
+      }
+    },
     "Finished jobs stay here until you clear them." : {
       "localizations" : {
         "es" : {
@@ -3860,6 +4458,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "cartelle"
+          }
+        }
+      }
+    },
+    "Folders" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carpetas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossiers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartelle"
+          }
+        }
+      }
+    },
+    "Folders protected by macOS itself, such as the Photos library, stay closed to every app whatever you allow here. 7-Mac skips them and says so." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las carpetas protegidas por el propio macOS, como la fototeca, siguen cerradas para todas las apps, permitas lo que permitas aquí. 7-Mac las omite y lo indica."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les dossiers protégés par macOS lui-même, comme la photothèque, restent fermés à toutes les apps quoi que vous autorisiez ici. 7-Mac les ignore et le signale."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le cartelle protette da macOS stesso, come la libreria di Foto, restano chiuse a tutte le app qualunque cosa autorizzi qui. 7-Mac le salta e lo segnala."
+          }
+        }
+      }
+    },
+    "Forget All Folders" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Olvidar todas las carpetas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oublier tous les dossiers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dimentica tutte le cartelle"
           }
         }
       }
@@ -4084,6 +4748,28 @@
         }
       }
     },
+    "Last active: %@." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actividad: %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernière activité : %@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultima attività: %@."
+          }
+        }
+      }
+    },
     "Leave out macOS system files" : {
       "localizations" : {
         "es" : {
@@ -4216,6 +4902,28 @@
         }
       }
     },
+    "Loaded by the Finder" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargado por el Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargé par le Finder"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricato dal Finder"
+          }
+        }
+      }
+    },
     "Look inside an archive" : {
       "localizations" : {
         "es" : {
@@ -4240,12 +4948,6 @@
     },
     "macOS asks you to allow this yourself: in System Settings, under Login Items & Extensions, turn on 7-Mac’s Finder extension, then come back here." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS chiede che sia tu a consentirlo: in Impostazioni di Sistema, sotto Elementi login ed estensioni, attiva l’estensione Finder di 7-Mac, poi torna qui."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4257,17 +4959,17 @@
             "state" : "translated",
             "value" : "macOS vous demande de l’autoriser vous-même : dans Réglages Système, sous Ouverture et extensions, activez l’extension Finder de 7-Mac, puis revenez ici."
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS chiede che sia tu a consentirlo: in Impostazioni di Sistema, sotto Elementi login ed estensioni, attiva l’estensione Finder di 7-Mac, poi torna qui."
+          }
         }
       }
     },
     "macOS did not let 7-Mac open these: %@. Try again from Settings › Opening." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS non ha permesso a 7-Mac di aprire questi: %@. Riprova da Impostazioni › Apertura."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4278,6 +4980,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "macOS n’a pas laissé 7-Mac ouvrir ceux-ci : %@. Réessayez depuis Réglages › Ouverture."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS non ha permesso a 7-Mac di aprire questi: %@. Riprova da Impostazioni › Apertura."
+          }
+        }
+      }
+    },
+    "Manage…" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestionar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gérer…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestisci…"
           }
         }
       }
@@ -4596,6 +5326,28 @@
         }
       }
     },
+    "Needs attention" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requiere atención"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À vérifier"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Da controllare"
+          }
+        }
+      }
+    },
     "Next to the archive" : {
       "localizations" : {
         "es" : {
@@ -4662,6 +5414,28 @@
         }
       }
     },
+    "No longer usable: the folder was moved or deleted, or the permission was withdrawn." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya no se puede usar: la carpeta se ha movido o eliminado, o se ha retirado el permiso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N’est plus utilisable : le dossier a été déplacé ou supprimé, ou l’autorisation a été retirée."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non più utilizzabile: la cartella è stata spostata o eliminata, oppure il permesso è stato revocato."
+          }
+        }
+      }
+    },
     "No match" : {
       "localizations" : {
         "es" : {
@@ -4680,6 +5454,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessuna corrispondenza"
+          }
+        }
+      }
+    },
+    "No other folders yet" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todavía no hay otras carpetas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore d’autres dossiers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ancora nessun’altra cartella"
           }
         }
       }
@@ -4774,12 +5570,6 @@
     },
     "Not Now" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non ora"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4791,17 +5581,17 @@
             "state" : "translated",
             "value" : "Plus tard"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non ora"
+          }
         }
       }
     },
     "Not turned on yet" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non ancora attivata"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4812,6 +5602,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas encore activée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non ancora attivata"
+          }
+        }
+      }
+    },
+    "Not working" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No funciona"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ne fonctionne pas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non funziona"
+          }
+        }
+      }
+    },
+    "Not writable, although 7-Mac is entitled to it." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin permiso de escritura, aunque 7-Mac tiene derecho a ella."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non accessible en écriture, bien que 7-Mac y ait droit."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non scrivibile, anche se 7-Mac ne ha diritto."
           }
         }
       }
@@ -4856,6 +5696,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessuna operazione in coda"
+          }
+        }
+      }
+    },
+    "Off" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disattivo"
           }
         }
       }
@@ -4922,6 +5784,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        }
+      }
+    },
+    "On" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivo"
           }
         }
       }
@@ -5016,12 +5900,6 @@
     },
     "Open archives with 7-Mac?" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aprire gli archivi con 7-Mac?"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5032,6 +5910,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir les archives avec 7-Mac ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprire gli archivi con 7-Mac?"
           }
         }
       }
@@ -5060,12 +5944,6 @@
     },
     "Open System Settings…" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apri Impostazioni di Sistema…"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5076,6 +5954,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir Réglages Système…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri Impostazioni di Sistema…"
           }
         }
       }
@@ -5164,6 +6048,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quando apri un archivio dal Finder"
+          }
+        }
+      }
+    },
+    "Or click to choose them." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O haz clic para elegirlos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou cliquez pour les choisir."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oppure fai clic per sceglierli."
           }
         }
       }
@@ -5696,6 +6603,28 @@
         }
       }
     },
+    "Relaunch the Finder: hold Option, right-click its icon in the Dock and choose Relaunch." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reinicia el Finder: mantén pulsada la tecla Opción, haz clic derecho en su icono del Dock y elige Reiniciar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relancez le Finder : maintenez la touche Option, cliquez avec le bouton droit sur son icône dans le Dock et choisissez Relancer."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riavvia il Finder: tieni premuto Opzione, fai clic destro sulla sua icona nel Dock e scegli Riapri."
+          }
+        }
+      }
+    },
     "Remember this password in my keychain" : {
       "localizations" : {
         "es" : {
@@ -5714,6 +6643,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ricorda questa password nel mio portachiavi"
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimuovi"
+          }
+        }
+      }
+    },
+    "Remove from the archive" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar del archivo comprimido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer de l’archive"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Togli dall’archivio"
+          }
+        }
+      }
+    },
+    "Remove from the list" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar de la lista"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer de la liste"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Togli dalla lista"
           }
         }
       }
@@ -5918,12 +6913,6 @@
     },
     "Right-click files in the Finder to extract, open, test or compress them with 7-Mac." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fai clic destro sui file nel Finder per estrarli, aprirli, verificarli o comprimerli con 7-Mac."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5934,6 +6923,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faites un clic droit sur des fichiers dans le Finder pour les extraire, les ouvrir, les tester ou les compresser avec 7-Mac."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic destro sui file nel Finder per estrarli, aprirli, verificarli o comprimerli con 7-Mac."
+          }
+        }
+      }
+    },
+    "Right-click files in the Finder to extract, open, test or compress them with 7-Mac. The switch is in System Settings, under Login Items & Extensions." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz clic derecho en archivos del Finder para extraerlos, abrirlos, verificarlos o comprimirlos con 7-Mac. El interruptor está en Ajustes del Sistema, en Ítems de inicio y extensiones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cliquez avec le bouton droit sur des fichiers dans le Finder pour les extraire, les ouvrir, les vérifier ou les compresser avec 7-Mac. Le réglage se trouve dans Réglages Système, sous Ouverture et extensions."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai clic destro sui file nel Finder per estrarli, aprirli, verificarli o comprimerli con 7-Mac. L’interruttore è in Impostazioni di Sistema, in Elementi login ed estensioni."
           }
         }
       }
@@ -6154,6 +7171,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Separa con virgole. `*` e `?` funzionano come nel Terminale."
+          }
+        }
+      }
+    },
+    "Shared with the Finder menu" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartido con el menú del Finder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partagé avec le menu du Finder"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condivisione con il menu del Finder"
           }
         }
       }
@@ -6466,6 +7505,28 @@
         }
       }
     },
+    "Start Extraction" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar extracción"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancer l’extraction"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avvia estrazione"
+          }
+        }
+      }
+    },
     "Stop" : {
       "localizations" : {
         "es" : {
@@ -6742,6 +7803,28 @@
         }
       }
     },
+    "That folder does not contain “%@”." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esa carpeta no contiene “%@”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce dossier ne contient pas « %@ »."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quella cartella non contiene “%@”."
+          }
+        }
+      }
+    },
     "That is more than this Mac can spare. Choose a smaller dictionary or fewer threads." : {
       "localizations" : {
         "es" : {
@@ -6896,6 +7979,28 @@
         }
       }
     },
+    "The container the menu and the app share cannot be written. The menu will do nothing; reinstalling 7-Mac should fix it." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede escribir en el contenedor que comparten el menú y la app. El menú no hará nada; reinstalar 7-Mac debería solucionarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le conteneur partagé par le menu et l’app n’est pas accessible en écriture. Le menu ne fera rien ; réinstaller 7-Mac devrait régler le problème."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il contenitore condiviso da menu e app non è scrivibile. Il menu non farà nulla; reinstallare 7-Mac dovrebbe risolvere."
+          }
+        }
+      }
+    },
     "the engine opened this archive read-only" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6919,6 +8024,50 @@
         }
       }
     },
+    "The Finder has not loaded the menu since it last started. Last loaded: %@." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El Finder no ha cargado el menú desde su último arranque. Última carga: %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Finder n’a pas chargé le menu depuis son dernier démarrage. Dernier chargement : %@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Finder non ha caricato il menu dall’ultimo avvio. Ultimo caricamento: %@."
+          }
+        }
+      }
+    },
+    "The Finder has not loaded the menu yet." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El Finder todavía no ha cargado el menú."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Finder n’a pas encore chargé le menu."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Finder non ha ancora caricato il menu."
+          }
+        }
+      }
+    },
     "The GNU Lesser General Public License, version 2.1, that most of 7-Zip is distributed under." : {
       "localizations" : {
         "es" : {
@@ -6937,6 +8086,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La GNU Lesser General Public License, versione 2.1, con cui è distribuita la maggior parte di 7-Zip."
+          }
+        }
+      }
+    },
+    "The menu can hand its requests to the app." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El menú puede pasar sus solicitudes a la app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le menu peut transmettre ses demandes à l’app."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il menu può passare le sue richieste all’app."
           }
         }
       }
@@ -7323,14 +8494,52 @@
         }
       }
     },
-    "Turned on" : {
+    "Turn On…" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attivata"
+            "value" : "Attiva…"
+          }
+        }
+      }
+    },
+    "Turned off. Turn it on in System Settings, under Login Items & Extensions." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivado. Actívalo en Ajustes del Sistema, en Ítems de inicio y extensiones."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivé. Activez-le dans Réglages Système, sous Ouverture et extensions."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disattivato. Attivalo in Impostazioni di Sistema, in Elementi login ed estensioni."
+          }
+        }
+      }
+    },
+    "Turned on" : {
+      "localizations" : {
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7341,6 +8550,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivata"
+          }
+        }
+      }
+    },
+    "Turned on in System Settings." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activado en Ajustes del Sistema."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé dans Réglages Système."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attivato in Impostazioni di Sistema."
           }
         }
       }
@@ -7523,12 +8760,6 @@
     },
     "Use 7-Mac" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa 7-Mac"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7539,6 +8770,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utiliser 7-Mac"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa 7-Mac"
           }
         }
       }
@@ -7703,1158 +8940,8 @@
         }
       }
     },
-    "Finder" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finder"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finder"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finder"
-          }
-        }
-      }
-    },
-    "7-Mac menu in the Finder" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Menú de 7-Mac en el Finder"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Menu 7-Mac dans le Finder"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Menu 7-Mac nel Finder"
-          }
-        }
-      }
-    },
-    "On" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activado"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activé"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attivo"
-          }
-        }
-      }
-    },
-    "Off" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desactivado"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactivé"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disattivo"
-          }
-        }
-      }
-    },
-    "Manage…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gestionar…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gérer…"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gestisci…"
-          }
-        }
-      }
-    },
-    "Turn On…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activar…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activer…"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attiva…"
-          }
-        }
-      }
-    },
-    "Right-click files in the Finder to extract, open, test or compress them with 7-Mac. The switch is in System Settings, under Login Items & Extensions." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haz clic derecho en archivos del Finder para extraerlos, abrirlos, verificarlos o comprimirlos con 7-Mac. El interruptor está en Ajustes del Sistema, en Ítems de inicio y extensiones."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cliquez avec le bouton droit sur des fichiers dans le Finder pour les extraire, les ouvrir, les vérifier ou les compresser avec 7-Mac. Le réglage se trouve dans Réglages Système, sous Ouverture et extensions."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fai clic destro sui file nel Finder per estrarli, aprirli, verificarli o comprimerli con 7-Mac. L’interruttore è in Impostazioni di Sistema, in Elementi login ed estensioni."
-          }
-        }
-      }
-    },
-    "7-Mac needs your permission to use the folder “%@”. Choose it, or a folder that contains it — your home folder, for instance — and 7-Mac will not ask again for anything inside." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7-Mac necesita tu permiso para usar la carpeta “%@”. Selecciónala, o una carpeta que la contenga —tu carpeta de inicio, por ejemplo—, y 7-Mac no volverá a preguntar por nada de su interior."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7-Mac a besoin de votre autorisation pour utiliser le dossier « %@ ». Choisissez-le, ou un dossier qui le contient — votre dossier de départ, par exemple — et 7-Mac ne demandera plus rien pour ce qu’il contient."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7-Mac ha bisogno del tuo permesso per usare la cartella “%@”. Sceglila, oppure una cartella che la contiene — per esempio la tua cartella Inizio — e 7-Mac non lo chiederà più per nulla al suo interno."
-          }
-        }
-      }
-    },
-    "That folder does not contain “%@”." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esa carpeta no contiene “%@”."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ce dossier ne contient pas « %@ »."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quella cartella non contiene “%@”."
-          }
-        }
-      }
-    },
-    "Choose the folder itself, or one of the folders it is in." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elige la propia carpeta o una de las carpetas en las que se encuentra."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisissez le dossier lui-même, ou l’un des dossiers qui le contiennent."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scegli la cartella stessa, o una delle cartelle in cui si trova."
-          }
-        }
-      }
-    },
-    "Encrypted entry" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entrada cifrada"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entrée chiffrée"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voce cifrata"
-          }
-        }
-      }
-    },
-    "7-Mac asks the first time it needs a folder, and remembers it. Allowing your home folder covers everything in it." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7-Mac pregunta la primera vez que necesita una carpeta y la recuerda. Permitir tu carpeta de inicio cubre todo lo que contiene."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7-Mac demande la première fois qu’il a besoin d’un dossier, puis s’en souvient. Autoriser votre dossier de départ couvre tout ce qu’il contient."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "7-Mac chiede la prima volta che gli serve una cartella e se la ricorda. Autorizzare la cartella Inizio copre tutto ciò che contiene."
-          }
-        }
-      }
-    },
-    "Allow a Folder…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permitir una carpeta…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autoriser un dossier…"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorizza una cartella…"
-          }
-        }
-      }
-    },
-    "Allowed, with everything inside it." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permitida, con todo lo que contiene."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisé, avec tout ce qu’il contient."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorizzata, con tutto ciò che contiene."
-          }
-        }
-      }
-    },
-    "Always allowed: 7-Mac never asks for it." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Siempre permitida: 7-Mac nunca la pide."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toujours autorisé : 7-Mac ne le demande jamais."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sempre autorizzata: 7-Mac non la chiede mai."
-          }
-        }
-      }
-    },
-    "Check Again" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volver a comprobar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifier à nouveau"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verifica di nuovo"
-          }
-        }
-      }
-    },
-    "Check Permissions…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comprobar permisos…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifier les autorisations…"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verifica permessi…"
-          }
-        }
-      }
-    },
-    "Choose a folder 7-Mac may use without asking. Everything inside it is included: your home folder covers almost everything." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elige una carpeta que 7-Mac pueda usar sin preguntar. Se incluye todo lo que contiene: tu carpeta de inicio cubre casi todo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisissez un dossier que 7-Mac peut utiliser sans demander. Tout ce qu’il contient est inclus : votre dossier de départ couvre presque tout."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scegli una cartella che 7-Mac può usare senza chiedere. È compreso tutto ciò che contiene: la cartella Inizio copre quasi tutto."
-          }
-        }
-      }
-    },
-    "Downloads" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Descargas"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Téléchargements"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download"
-          }
-        }
-      }
-    },
-    "Folders" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Carpetas"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dossiers"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cartelle"
-          }
-        }
-      }
-    },
-    "Folders protected by macOS itself, such as the Photos library, stay closed to every app whatever you allow here. 7-Mac skips them and says so." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las carpetas protegidas por el propio macOS, como la fototeca, siguen cerradas para todas las apps, permitas lo que permitas aquí. 7-Mac las omite y lo indica."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les dossiers protégés par macOS lui-même, comme la photothèque, restent fermés à toutes les apps quoi que vous autorisiez ici. 7-Mac les ignore et le signale."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le cartelle protette da macOS stesso, come la libreria di Foto, restano chiuse a tutte le app qualunque cosa autorizzi qui. 7-Mac le salta e lo segnala."
-          }
-        }
-      }
-    },
-    "Forget All Folders" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Olvidar todas las carpetas"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oublier tous les dossiers"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dimentica tutte le cartelle"
-          }
-        }
-      }
-    },
-    "Last active: %@." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Última actividad: %@."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dernière activité : %@."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ultima attività: %@."
-          }
-        }
-      }
-    },
-    "Loaded by the Finder" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cargado por el Finder"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chargé par le Finder"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Caricato dal Finder"
-          }
-        }
-      }
-    },
-    "Needs attention" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Requiere atención"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À vérifier"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Da controllare"
-          }
-        }
-      }
-    },
-    "No longer usable: the folder was moved or deleted, or the permission was withdrawn." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ya no se puede usar: la carpeta se ha movido o eliminado, o se ha retirado el permiso."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "N’est plus utilisable : le dossier a été déplacé ou supprimé, ou l’autorisation a été retirée."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non più utilizzabile: la cartella è stata spostata o eliminata, oppure il permesso è stato revocato."
-          }
-        }
-      }
-    },
-    "No other folders yet" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Todavía no hay otras carpetas"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas encore d’autres dossiers"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ancora nessun’altra cartella"
-          }
-        }
-      }
-    },
-    "Not working" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No funciona"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ne fonctionne pas"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non funziona"
-          }
-        }
-      }
-    },
-    "Not writable, although 7-Mac is entitled to it." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin permiso de escritura, aunque 7-Mac tiene derecho a ella."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non accessible en écriture, bien que 7-Mac y ait droit."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non scrivibile, anche se 7-Mac ne ha diritto."
-          }
-        }
-      }
-    },
-    "Relaunch the Finder: hold Option, right-click its icon in the Dock and choose Relaunch." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reinicia el Finder: mantén pulsada la tecla Opción, haz clic derecho en su icono del Dock y elige Reiniciar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Relancez le Finder : maintenez la touche Option, cliquez avec le bouton droit sur son icône dans le Dock et choisissez Relancer."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Riavvia il Finder: tieni premuto Opzione, fai clic destro sulla sua icona nel Dock e scegli Riapri."
-          }
-        }
-      }
-    },
-    "Remove" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rimuovi"
-          }
-        }
-      }
-    },
-    "Shared with the Finder menu" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compartido con el menú del Finder"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Partagé avec le menu du Finder"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Condivisione con il menu del Finder"
-          }
-        }
-      }
-    },
-    "The Finder has not loaded the menu since it last started. Last loaded: %@." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El Finder no ha cargado el menú desde su último arranque. Última carga: %@."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le Finder n’a pas chargé le menu depuis son dernier démarrage. Dernier chargement : %@."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il Finder non ha caricato il menu dall’ultimo avvio. Ultimo caricamento: %@."
-          }
-        }
-      }
-    },
-    "The Finder has not loaded the menu yet." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El Finder todavía no ha cargado el menú."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le Finder n’a pas encore chargé le menu."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il Finder non ha ancora caricato il menu."
-          }
-        }
-      }
-    },
-    "The container the menu and the app share cannot be written. The menu will do nothing; reinstalling 7-Mac should fix it." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se puede escribir en el contenedor que comparten el menú y la app. El menú no hará nada; reinstalar 7-Mac debería solucionarlo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le conteneur partagé par le menu et l’app n’est pas accessible en écriture. Le menu ne fera rien ; réinstaller 7-Mac devrait régler le problème."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il contenitore condiviso da menu e app non è scrivibile. Il menu non farà nulla; reinstallare 7-Mac dovrebbe risolvere."
-          }
-        }
-      }
-    },
-    "The menu can hand its requests to the app." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El menú puede pasar sus solicitudes a la app."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le menu peut transmettre ses demandes à l’app."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Il menu può passare le sue richieste all’app."
-          }
-        }
-      }
-    },
-    "Turned off. Turn it on in System Settings, under Login Items & Extensions." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desactivado. Actívalo en Ajustes del Sistema, en Ítems de inicio y extensiones."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactivé. Activez-le dans Réglages Système, sous Ouverture et extensions."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disattivato. Attivalo in Impostazioni di Sistema, in Elementi login ed estensioni."
-          }
-        }
-      }
-    },
-    "Turned on in System Settings." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activado en Ajustes del Sistema."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activé dans Réglages Système."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Attivato in Impostazioni di Sistema."
-          }
-        }
-      }
-    },
-    "Drop files and folders to archive" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suelta aquí archivos y carpetas para comprimirlos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déposez des fichiers et dossiers à archiver"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trascina qui file e cartelle da archiviare"
-          }
-        }
-      }
-    },
-    "Add as many as you like, then create the archive." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Añade todos los que quieras y luego crea el archivo comprimido."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajoutez-en autant que vous voulez, puis créez l’archive."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aggiungine quanti vuoi, poi crea l’archivio."
-          }
-        }
-      }
-    },
-    "Drop files and folders here to gather them into a new archive" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suelta aquí archivos y carpetas para reunirlos en un nuevo archivo comprimido"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déposez ici des fichiers et dossiers pour les réunir dans une nouvelle archive"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trascina qui file e cartelle per raccoglierli in un nuovo archivio"
-          }
-        }
-      }
-    },
-    "Clear" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vaciar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vider"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Svuota"
-          }
-        }
-      }
-    },
-    "Create Archive…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crear archivo comprimido…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Créer l’archive…"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Crea archivio…"
-          }
-        }
-      }
-    },
-    "Remove from the archive" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quitar del archivo comprimido"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retirer de l’archive"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Togli dall’archivio"
-          }
-        }
-      }
-    },
-    "^[%lld item](inflect: true)" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "^[%lld ítem](inflect: true)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "^[%lld élément](inflect: true)"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "^[%lld elemento](inflect: true)"
-          }
-        }
-      }
-    },
-    "Click to choose files and folders to archive" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haz clic para elegir archivos y carpetas que comprimir"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cliquez pour choisir des fichiers et dossiers à archiver"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fai clic per scegliere file e cartelle da archiviare"
-          }
-        }
-      }
-    },
-    "Choose files and folders to add to the archive." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elige los archivos y carpetas que añadir al archivo comprimido."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisissez les fichiers et dossiers à ajouter à l’archive."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scegli i file e le cartelle da aggiungere all’archivio."
-          }
-        }
-      }
-    },
-    "Add…" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Añadir…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter…"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aggiungi…"
-          }
-        }
-      }
-    },
-    "Drop area height" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Altura del área de soltar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hauteur de la zone de dépôt"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Altezza dell’area di rilascio"
-          }
-        }
-      }
-    },
-    "Click to choose archives to extract" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haz clic para elegir archivos comprimidos que extraer"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cliquez pour choisir des archives à extraire"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fai clic per scegliere gli archivi da estrarre"
-          }
-        }
-      }
-    },
-    "Drop archives here to extract them, or click to choose them" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suelta aquí archivos comprimidos para extraerlos, o haz clic para elegirlos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déposez ici des archives pour les extraire, ou cliquez pour les choisir"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trascina qui gli archivi per estrarli, o fai clic per sceglierli"
-          }
-        }
-      }
-    },
-    "Or click to choose them." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O haz clic para elegirlos."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ou cliquez pour les choisir."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oppure fai clic per sceglierli."
-          }
-        }
-      }
-    },
     "You can change this later in Settings, or for a single type in the Finder’s Get Info window." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Puoi cambiarlo più tardi nelle Impostazioni, o per un singolo tipo dalla finestra Ottieni informazioni del Finder."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8865,6 +8952,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous pourrez le changer plus tard dans les Réglages, ou pour un seul type dans la fenêtre Lire les informations du Finder."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi cambiarlo più tardi nelle Impostazioni, o per un singolo tipo dalla finestra Ottieni informazioni del Finder."
           }
         }
       }
