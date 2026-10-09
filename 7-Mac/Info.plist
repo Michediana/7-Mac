@@ -5,6 +5,28 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<!-- The first piece of a split archive: `site.tgz.aa` from `split`,
+			     `site.7z.001` from 7-Zip. Alternate, not Owner: the extension
+			     alone does not make a file an archive, but "Open With" must
+			     offer 7-Mac. The engine finds the other pieces itself.
+			     The system already names both extensions — `.aa` as an
+			     Audible audiobook, `.001` after BetterZip when it is
+			     installed — and a declared type beats an imported one, so
+			     those are listed too; ours covers a Mac with neither. -->
+			<key>CFBundleTypeName</key>
+			<string>Split archive</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.michediana.Seven-Mac.split-volume</string>
+				<string>com.audible.aa-audiobook</string>
+				<string>com.macitbetter.segmented-archive</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeName</key>
 			<string>7-Zip archive</string>
 			<key>CFBundleTypeRole</key>
@@ -311,6 +333,24 @@
 	<string>$(DEVELOPMENT_TEAM).com.michediana.Seven-Mac</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Split archive</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.michediana.Seven-Mac.split-volume</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>aa</string>
+					<string>001</string>
+				</array>
+			</dict>
+		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>

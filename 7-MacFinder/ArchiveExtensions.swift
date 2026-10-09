@@ -18,4 +18,20 @@ nonisolated enum ArchiveExtensions {
         "iso", "udf", "squashfs", "sfs", "chm", "msi",
         "001",
     ]
+
+    /// Whether a file of this name reads as an archive.
+    static func matches(_ name: String) -> Bool {
+        dropped.contains((name as NSString).pathExtension.lowercased())
+            || joinedName(ofFirstSplitPiece: name) != nil
+    }
+
+    /// `site.tgz.aa` → `site.tgz`. What `split` leaves when it cuts a file
+    /// up — `.aa`, `.ab`… — and the first piece stands for the set, as `.001`
+    /// does for 7-Zip's own volumes; the engine finds the rest. Only after an
+    /// archive extension: `notes.aa` is nobody's archive.
+    static func joinedName(ofFirstSplitPiece name: String) -> String? {
+        guard (name as NSString).pathExtension.lowercased() == "aa" else { return nil }
+        let joined = (name as NSString).deletingPathExtension
+        return dropped.contains((joined as NSString).pathExtension.lowercased()) ? joined : nil
+    }
 }

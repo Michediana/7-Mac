@@ -39,6 +39,7 @@ final class ArchiveNamingTests: XCTestCase {
         // `2026` is not a format, so the dot is part of the name.
         XCTAssertEqual(ArchiveNaming.stem(of: URL(filePath: "/a/notes.2026.zip")), "notes.2026")
         XCTAssertEqual(ArchiveNaming.stem(of: URL(filePath: "/a/plain")), "plain")
+        XCTAssertEqual(ArchiveNaming.stem(of: URL(filePath: "/a/site.tgz.aa")), "site")
     }
 
     // MARK: - Drop classification
@@ -47,6 +48,13 @@ final class ArchiveNamingTests: XCTestCase {
         let archive = fixtures.path("thing.7z")
         try Data().write(to: archive)
         XCTAssertTrue(ArchiveNaming.looksLikeArchive(archive))
+    }
+
+    /// `split` names its pieces `.aa`, `.ab`…; the first one opens the set.
+    func testDropTreatsTheFirstSplitPieceAsAnArchive() throws {
+        XCTAssertTrue(ArchiveNaming.looksLikeArchive(fixtures.path("site.tgz.aa")))
+        XCTAssertFalse(ArchiveNaming.looksLikeArchive(fixtures.path("site.tgz.ab")))
+        XCTAssertFalse(ArchiveNaming.looksLikeArchive(fixtures.path("notes.aa")))
     }
 
     func testDropDoesNotTreatFoldersOrPlainFilesAsArchives() throws {

@@ -109,6 +109,6 @@ final class FinderMenu: FIFinderSync {
     /// The same rule the app applies to a drop, by extension only: the menu is
     /// built while the Finder waits, so nothing here may touch the file.
     static func looksLikeArchive(_ url: URL) -> Bool {
-        !url.hasDirectoryPath && ArchiveExtensions.dropped.contains(url.pathExtension.lowercased())
+        !url.hasDirectoryPath && ArchiveExtensions.matches(url.lastPathComponent)
     }
 }

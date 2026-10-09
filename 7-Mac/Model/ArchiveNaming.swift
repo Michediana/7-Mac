@@ -28,7 +28,7 @@ nonisolated enum ArchiveNaming {
     /// Whether a drop of this URL should extract rather than compress.
     static func looksLikeArchive(_ url: URL) -> Bool {
         guard !isDirectory(url) else { return false }
-        return droppedArchiveExtensions.contains(url.pathExtension.lowercased())
+        return ArchiveExtensions.matches(url.lastPathComponent)
     }
 
     static func isDirectory(_ url: URL) -> Bool {
@@ -40,7 +40,8 @@ nonisolated enum ArchiveNaming {
     /// Two passes at most, and only over extensions the engine recognises, so
     /// a version number in the middle of a name survives.
     static func stem(of url: URL) -> String {
-        var name = url.lastPathComponent
+        var name = ArchiveExtensions.joinedName(ofFirstSplitPiece: url.lastPathComponent)
+            ?? url.lastPathComponent
         for _ in 0..<2 {
             let ext = (name as NSString).pathExtension.lowercased()
             guard !ext.isEmpty,
