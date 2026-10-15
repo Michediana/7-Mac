@@ -23,5 +23,12 @@
 	     needed read-only. -->
 	<key>com.apple.security.files.user-selected.read-write</key>
 	<true/>
+	<!-- Sparkle's installer XPC service, which replaces the app from outside
+	     the sandbox. -->
+	<key>com.apple.security.temporary-exception.mach-lookup.global-name</key>
+	<array>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)-spks</string>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)-spki</string>
+	</array>
 </dict>
 </plist>

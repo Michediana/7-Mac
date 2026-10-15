@@ -331,6 +331,20 @@
 	<false/>
 	<key>SevenMacAppGroup</key>
 	<string>$(DEVELOPMENT_TEAM).com.michediana.Seven-Mac</string>
+	<!-- Sparkle. The feed is an asset of the latest GitHub release, which
+	     Scripts/release.sh writes: one item, signed with the EdDSA key whose
+	     public half is below. -->
+	<key>SUFeedURL</key>
+	<string>https://github.com/Michediana/7-Mac/releases/latest/download/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>$(SPARKLE_PUBLIC_ED_KEY)</string>
+	<!-- The app is sandboxed: Sparkle installs through its own XPC service,
+	     and downloads through another so the app itself never needs
+	     com.apple.security.network.client. -->
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUEnableDownloaderService</key>
+	<true/>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

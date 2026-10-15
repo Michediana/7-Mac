@@ -71,6 +71,7 @@ enum WindowID {
 
 struct SevenMacCommands: Commands {
     let model: AppModel
+    private let updater = Updater.shared
     @Environment(\.openWindow) private var openWindow
 
     var body: some Commands {
@@ -79,6 +80,10 @@ struct SevenMacCommands: Commands {
         // shown with it.
         CommandGroup(replacing: .appInfo) {
             Button("About 7-Mac") { openWindow(id: WindowID.about) }
+            if updater.isAvailable {
+                Button("Check for Updates…") { updater.checkForUpdates() }
+                    .disabled(!updater.canCheckForUpdates)
+            }
         }
         CommandGroup(replacing: .newItem) {
             Button("Open…") { model.chooseArchivesToBrowse() }

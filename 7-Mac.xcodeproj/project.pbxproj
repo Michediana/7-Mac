@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A1B2C3D4000000005BA40003 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4000000005BA40002 /* Sparkle */; };
 		A1B2C3D40000000011110005 /* 7-MacFinder.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A1B2C3D40000000011110001 /* 7-MacFinder.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A1B2C3D400000000AAAA0030 /* SevenZipKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000AAAA0020 /* SevenZipKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1B2C3D400000000AAAA0031 /* SZKEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = A1B2C3D400000000AAAA0021 /* SZKEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -306,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B2C3D400000000AAAA0042 /* SevenZipKit.framework in Frameworks */,
+				A1B2C3D4000000005BA40003 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +575,7 @@
 			);
 			name = "7-Mac";
 			packageProductDependencies = (
+				A1B2C3D4000000005BA40002 /* Sparkle */,
 			);
 			productName = "7-Mac";
 			productReference = F502B1B930612D0F008EBD0E /* 7-Mac.app */;
@@ -628,6 +631,9 @@
 			);
 			mainGroup = F502B1B030612D0F008EBD0E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A1B2C3D4000000005BA40001 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F502B1BA30612D0F008EBD0E /* Products */;
 			projectDirPath = "";
@@ -1290,6 +1296,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michediana.Seven-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
+				SPARKLE_PUBLIC_ED_KEY = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -1326,6 +1333,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michediana.Seven-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
+				SPARKLE_PUBLIC_ED_KEY = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -1411,6 +1419,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A1B2C3D4000000005BA40001 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1B2C3D4000000005BA40002 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3D4000000005BA40001 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F502B1B130612D0F008EBD0E /* Project object */;
 }

@@ -90,6 +90,22 @@ Scripts/smoke-test.sh Release
 The first build compiles the engine for arm64 and x86_64 (about 15 seconds). Later
 builds skip that step unless the source, architectures or deployment target change.
 
+## Releasing
+
+Releases update themselves through [Sparkle](https://sparkle-project.org). Each GitHub
+release carries the notarized `7-Mac-<version>.zip` and an `appcast.xml`. The app reads
+the appcast of the latest release.
+
+Push a tag and the [Release workflow](.github/workflows/release.yml) does the rest:
+
+```sh
+git tag v1.1 && git push origin v1.1
+```
+
+To build the same release locally, run `Scripts/release.sh 1.1` (add `--publish` to
+create the GitHub release too). The build number is the commit count on `HEAD`. Builds
+from source carry no Sparkle key, so they never offer updates.
+
 ## How it's built
 
 ```
