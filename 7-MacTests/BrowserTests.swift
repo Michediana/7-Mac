@@ -111,6 +111,37 @@ final class BrowserTests: XCTestCase {
         browser.close()
     }
 
+    func testBackAndForwardRetraceWhereTheWindowWent() async throws {
+        let zip = try await make("inner.zip", from: [fixtures.tree])
+        let browser = ArchiveBrowser(url: try await make("outer.7z", from: [zip]),
+                                     preferences: preferences, queue: queue)
+        await browser.open()
+        XCTAssertFalse(browser.canGoBackInHistory, "opening is not a step back from anything")
+
+        await browser.descend(into: try XCTUnwrap(browser.roots.first))
+        let tree = try XCTUnwrap(browser.roots.first(where: \.isDirectory))
+        browser.enter(tree)
+        XCTAssertEqual(browser.currentFolder?.name, "tree")
+
+        browser.goBackInHistory()
+        XCTAssertNil(browser.currentFolder)
+        XCTAssertEqual(browser.levels.count, 2)
+        browser.goBackInHistory()
+        XCTAssertEqual(browser.levels.count, 1)
+        XCTAssertFalse(browser.canGoBackInHistory)
+
+        browser.goForwardInHistory()
+        browser.goForwardInHistory()
+        XCTAssertEqual(browser.levels.count, 2)
+        XCTAssertEqual(browser.currentFolder?.name, "tree")
+        XCTAssertFalse(browser.canGoForwardInHistory)
+
+        browser.goBackInHistory()
+        browser.goUp()
+        XCTAssertFalse(browser.canGoForwardInHistory, "going somewhere new drops the way forward")
+        browser.close()
+    }
+
     func testAZipInsideA7zIsUnpackedAndOpened() async throws {
         let zip = try await make("inner.zip", from: [fixtures.tree])
         let browser = ArchiveBrowser(url: try await make("outer.7z", from: [zip]),

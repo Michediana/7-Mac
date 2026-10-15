@@ -313,19 +313,44 @@ private struct BrowserContent: View {
     @ToolbarContentBuilder
     private var toolbar: some ToolbarContent {
         ToolbarItem(placement: .navigation) {
-            Button("Back", systemImage: "chevron.left") { browser.goUp() }
-                .disabled(!browser.canGoUp || browser.activity != nil)
-                .keyboardShortcut(.upArrow, modifiers: .command)
-                .help(browser.currentFolder != nil ? Text("Back to the enclosing folder")
-                                                   : Text("Back to the archive this one is inside"))
+            ControlGroup {
+                Button("Back", systemImage: "chevron.left") { browser.goBackInHistory() }
+                    .disabled(!browser.canGoBackInHistory || browser.activity != nil)
+                    .keyboardShortcut("[", modifiers: .command)
+                    .help("See the previous location")
+                Button("Forward", systemImage: "chevron.right") { browser.goForwardInHistory() }
+                    .disabled(!browser.canGoForwardInHistory || browser.activity != nil)
+                    .keyboardShortcut("]", modifiers: .command)
+                    .help("See the next location")
+            } label: {
+                Label("Back/Forward", systemImage: "chevron.left.chevron.right")
+            }
+            .controlGroupStyle(.navigation)
+            .background {
+                // Finder's ⌘↑, with no button of its own: the path bar is
+                // the visible way up.
+                Button("Enclosing Folder") { browser.goUp() }
+                    .keyboardShortcut(.upArrow, modifiers: .command)
+                    .disabled(!browser.canGoUp || browser.activity != nil)
+                    .opacity(0)
+                    .accessibilityHidden(true)
+            }
         }
         ToolbarItemGroup {
-            Picker("Show", selection: $browser.filter) {
-                ForEach(EntryFilter.allCases) { filter in
-                    Label(filter.title, systemImage: filter.systemImage).tag(filter)
+            // A toolbar draws a picker's choice icon-only; a menu with its
+            // own label keeps the name of the filter in view.
+            Menu {
+                Picker("Show", selection: $browser.filter) {
+                    ForEach(EntryFilter.allCases) { filter in
+                        Label(filter.title, systemImage: filter.systemImage).tag(filter)
+                    }
                 }
+                .pickerStyle(.inline)
+                .labelsHidden()
+            } label: {
+                Label(browser.filter.title, systemImage: browser.filter.systemImage)
+                    .labelStyle(.titleAndIcon)
             }
-            .pickerStyle(.menu)
             .help("Show only one kind of file")
 
             Button("Quick Look", systemImage: "eye") {
@@ -339,14 +364,21 @@ private struct BrowserContent: View {
             }
             .help(browser.extractionSummary)
         }
-        ToolbarItemGroup {
-            Button("Test", systemImage: "checkmark.shield") { Task { await browser.test() } }
-                .disabled(browser.activity != nil)
-                .help(browser.selection.isEmpty ? Text("Check every entry decodes intact")
-                                                : Text("Check the selected entries decode intact"))
-            Button("Checksums", systemImage: "number") { Task { await browser.showChecksums() } }
-                .disabled(browser.activity != nil)
-                .help("Checksums of the selected entries, or all of them")
+        ToolbarItem {
+            // Folded away so the search field has room to stay open: when the
+            // toolbar runs short, macOS collapses it to a button whose
+            // expanded field lets clicks through to the items beneath.
+            Menu {
+                Button("Test", systemImage: "checkmark.shield") { Task { await browser.test() } }
+                    .help(browser.selection.isEmpty ? Text("Check every entry decodes intact")
+                                                    : Text("Check the selected entries decode intact"))
+                Button("Checksums", systemImage: "number") { Task { await browser.showChecksums() } }
+                    .help("Checksums of the selected entries, or all of them")
+            } label: {
+                Label("More", systemImage: "ellipsis")
+            }
+            .disabled(browser.activity != nil)
+            .help("Test the archive or work out checksums")
         }
         ToolbarItemGroup {
             Button("Add Files…", systemImage: "plus") { chooseFilesToAdd() }

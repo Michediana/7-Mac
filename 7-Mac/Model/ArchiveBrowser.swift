@@ -62,7 +62,16 @@ final class ArchiveBrowser {
 
     /// The archive the window was opened on.
     let url: URL
-    private(set) var levels: [Level] = []
+    private(set) var levels: [Level] = [] {
+        didSet { recordVisit(leaving: oldValue) }
+    }
+    /// Where Back and Forward go: whole stacks, as Finder keeps whole
+    /// windows. Levels are cheap to keep — the archive is shared and the
+    /// tree is copied on write.
+    private var backHistory: [[Level]] = []
+    private var forwardHistory: [[Level]] = []
+    /// Set while a change of `levels` is not a place the person went to.
+    private var isRewritingHistory = false
     private(set) var phase: Phase = .opening
 
     var selection: Set<ArchiveNode.ID> = []
@@ -163,7 +172,7 @@ final class ArchiveBrowser {
                 let level = await makeLevel(archive, title: url.lastPathComponent,
                                             password: archive.hasEncryptedHeader ? password : nil,
                                             isInPlace: false)
-                levels = [level]
+                withoutHistory { levels = [level] }
                 phase = .ready
                 if editor == nil { editor = ArchiveEditor(url: url, scratch: scratch) }
                 break
@@ -186,6 +195,9 @@ final class ArchiveBrowser {
         if let wrapped = Self.wrappedArchive(in: levels[0].archive),
            let node = levels[0].tree.allNodes.first(where: { $0.record?.index == wrapped }) {
             await descend(into: node)
+            // Going straight through the compressor is not a step to undo.
+            backHistory = []
+            forwardHistory = []
         }
     }
 
@@ -342,6 +354,51 @@ final class ArchiveBrowser {
     }
 
     var canGoUp: Bool { currentFolder != nil || levels.count > 1 }
+
+    // MARK: - History
+
+    var canGoBackInHistory: Bool { !backHistory.isEmpty }
+    var canGoForwardInHistory: Bool { !forwardHistory.isEmpty }
+
+    /// The place before the last one, the way Finder's Back does.
+    func goBackInHistory() {
+        guard let previous = backHistory.popLast() else { return }
+        forwardHistory.append(levels)
+        restore(previous)
+    }
+
+    func goForwardInHistory() {
+        guard let next = forwardHistory.popLast() else { return }
+        backHistory.append(levels)
+        restore(next)
+    }
+
+    private func restore(_ stack: [Level]) {
+        // A password found since the snapshot was taken still holds.
+        let known = Dictionary(levels.map { ($0.id, $0.password) }, uniquingKeysWith: { a, _ in a })
+        var stack = stack
+        for position in stack.indices where stack[position].password == nil {
+            stack[position].password = known[stack[position].id] ?? nil
+        }
+        withoutHistory { levels = stack }
+        selection = []
+        resort()
+    }
+
+    private func recordVisit(leaving old: [Level]) {
+        guard !isRewritingHistory, !old.isEmpty else { return }
+        let moved = old.map(\.id) != levels.map(\.id)
+            || old.map(\.folderPath) != levels.map(\.folderPath)
+        guard moved else { return }
+        backHistory.append(old)
+        forwardHistory = []
+    }
+
+    private func withoutHistory(_ change: () -> Void) {
+        isRewritingHistory = true
+        defer { isRewritingHistory = false }
+        change()
+    }
 
     // MARK: - Preview
 
@@ -789,7 +846,10 @@ final class ArchiveBrowser {
                 folder = (folder as NSString).deletingLastPathComponent
             }
             level.folderPath = folder
-            levels = [level]
+            // The old stacks name entries by indexes that have moved.
+            withoutHistory { levels = [level] }
+            backHistory = []
+            forwardHistory = []
             selection = []
             extracted = [:]
             refreshMatches()

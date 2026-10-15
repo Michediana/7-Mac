@@ -40,6 +40,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func application(_ application: NSApplication, open urls: [URL]) {
         for url in urls where url.scheme == FinderHandoff.scheme {
             if let request = FinderHandoff.take(url) {
+                // Said now, not when `perform` gets round to it: the launch
+                // check for an ordinary start runs before the task does.
+                AppModel.shared.expectWindow()
                 Task { await AppModel.shared.perform(request) }
             }
         }

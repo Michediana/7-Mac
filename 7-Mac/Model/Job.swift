@@ -5,6 +5,7 @@
 //  One queued operation and its live state.
 //
 
+import AppKit
 import Foundation
 import Observation
 import SevenZipKit
@@ -113,6 +114,19 @@ final class Job: Identifiable {
         switch request {
         case .extract(let archive), .test(let archive): archive
         default:                                         nil
+        }
+    }
+
+    /// Shows the result in Finder. Entries picked in a browser land straight
+    /// in an existing folder, so that folder is opened rather than selected
+    /// in its parent; everything else gets a folder or archive of its own,
+    /// which is selected where it was made.
+    func revealResult() {
+        guard let resultURL else { return }
+        if case .extractEntries(let selection) = request, selection.indexes != nil {
+            NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: resultURL.path(percentEncoded: false))
+        } else {
+            NSWorkspace.shared.activateFileViewerSelecting([resultURL])
         }
     }
 

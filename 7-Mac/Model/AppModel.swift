@@ -154,6 +154,12 @@ final class AppModel: JobInteraction {
         drainPendingWindows()
     }
 
+    /// For a request that will open its own window once it has finished
+    /// asking — folder access, say — so launch leaves the main window shut.
+    func expectWindow() {
+        hasRequestedWindow = true
+    }
+
     /// Called from the menu bar, which exists from launch on.
     func install(_ action: OpenWindowAction) {
         guard openWindow == nil else { return }

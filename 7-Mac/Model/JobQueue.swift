@@ -85,7 +85,7 @@ final class JobQueue {
                 let (outcome, url) = try await perform(job)
                 job.finish(outcome, at: url)
                 if preferences.revealWhenDone, !job.isTest {
-                    NSWorkspace.shared.activateFileViewerSelecting([url])
+                    job.revealResult()
                 }
             } catch {
                 job.fail(error)

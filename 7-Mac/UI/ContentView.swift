@@ -351,10 +351,8 @@ private struct QueueList: View {
                                     Button("Test") { model.test([archive]) }
                                 }
                             }
-                            if let url = job.resultURL {
-                                Button("Show in Finder") {
-                                    NSWorkspace.shared.activateFileViewerSelecting([url])
-                                }
+                            if job.resultURL != nil {
+                                Button("Show in Finder") { job.revealResult() }
                             }
                         }
                 }

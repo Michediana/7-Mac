@@ -72,9 +72,9 @@ struct JobRow: View {
             .labelStyle(.iconOnly)
             .foregroundStyle(.secondary)
         case .finished:
-            if let url = job.resultURL {
+            if job.resultURL != nil {
                 Button("Show in Finder", systemImage: "magnifyingglass.circle.fill") {
-                    NSWorkspace.shared.activateFileViewerSelecting([url])
+                    job.revealResult()
                 }
                 .buttonStyle(.borderless)
                 .labelStyle(.iconOnly)
