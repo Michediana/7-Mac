@@ -139,9 +139,15 @@ check "we own .rar"                "Owner"     "$(handler com.rarlab.rar-archive
 # not ours to make at install time.
 check "we are only an alternative for .zip" \
                                    "Alternate" "$(handler public.zip-archive)"
-check "the imported types are declared" \
-      "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleDocumentTypes' "$plist" | grep -c 'LSHandlerRank = Owner')" \
-      "$(/usr/libexec/PlistBuddy -c 'Print :UTImportedTypeDeclarations' "$plist" | grep -c 'UTTypeIdentifier')"
+# The first piece of a split archive is only an alternative: `.aa` and `.001`
+# do not make a file an archive on their own.
+check "we are only an alternative for split volumes" \
+                                   "Alternate" "$(handler com.michediana.Seven-Mac.split-volume)"
+# Importing a type is only worth it if we open it, at whatever rank.
+unhandled=$(/usr/libexec/PlistBuddy -c 'Print :UTImportedTypeDeclarations' "$plist" \
+    | awk '$1 == "UTTypeIdentifier" { print $3 }' \
+    | while read -r uti; do [ -n "$(handler "$uti")" ] || printf '%s ' "$uti"; done)
+check "every imported type is opened by us" "" "$unhandled"
 check "both services are declared" "extractArchives compressItems" \
       "$(/usr/libexec/PlistBuddy -c 'Print :NSServices' "$plist" | awk '$1 == "NSMessage" { printf "%s ", $3 }' | sed 's/ $//')"
 
