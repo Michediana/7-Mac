@@ -151,7 +151,7 @@
 		A1B2C3D400000000AAAA0051 /* build-7zip-engine.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-7zip-engine.sh"; sourceTree = "<group>"; };
 		A1B2C3D400000000AAAA0052 /* upstream-pin.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "upstream-pin.sh"; sourceTree = "<group>"; };
 		A1B2C3D400000000AAAA0054 /* UPSTREAM.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = UPSTREAM.txt; sourceTree = "<group>"; };
-		A1B2C3D400000000AAAA0055 /* 7z2603-src.tar.xz */ = {isa = PBXFileReference; lastKnownFileType = archive.tar; path = "7z2603-src.tar.xz"; sourceTree = "<group>"; };
+		A1B2C3D400000000AAAA0055 /* 7z2604-src.tar.xz */ = {isa = PBXFileReference; lastKnownFileType = archive.tar; path = "7z2604-src.tar.xz"; sourceTree = "<group>"; };
 		A1B2C3D400000000AAAA0056 /* ROADMAP.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ROADMAP.md; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB0101 /* SZKArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZKArchive.h; sourceTree = "<group>"; };
 		A1B2C3D400000000BBBB0102 /* SZKArchiveEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SZKArchiveEntry.h; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D400000000AAAA0054 /* UPSTREAM.txt */,
-				A1B2C3D400000000AAAA0055 /* 7z2603-src.tar.xz */,
+				A1B2C3D400000000AAAA0055 /* 7z2604-src.tar.xz */,
 			);
 			path = 7zip;
 			sourceTree = "<group>";
@@ -699,7 +699,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Vendor/7zip/7z2603-src.tar.xz",
+				"$(SRCROOT)/Vendor/7zip/7z2604-src.tar.xz",
 				"$(SRCROOT)/Scripts/upstream-pin.sh",
 				"$(SRCROOT)/Scripts/build-7zip-engine.sh",
 			);

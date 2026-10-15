@@ -109,7 +109,7 @@ clang -fobjc-arc -o "$WORK/probe" "$WORK/probe.m" \
 }
 "$WORK/probe" > "$WORK/probe.out"
 
-check "engine reports its version"  "26.03" "$(sed -n 1p "$WORK/probe.out")"
+check "engine reports its version"  "26.04" "$(sed -n 1p "$WORK/probe.out")"
 check "60 formats are registered"   "60"    "$(sed -n 2p "$WORK/probe.out")"
 check "the 7 writable formats"      "7z bzip2 gzip tar wim xz zip" "$(sed -n 3p "$WORK/probe.out")"
 check "gzip unwraps .tgz to tar"    "tar"  "$(sed -n 4p "$WORK/probe.out")"

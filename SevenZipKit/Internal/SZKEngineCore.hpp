@@ -50,10 +50,10 @@ struct FormatInfo {
 /// Built once and cached.
 const std::vector<FormatInfo> &AllFormats();
 
-/// Upstream 7-Zip version, e.g. "26.03".
+/// Upstream 7-Zip version, e.g. "26.04".
 std::string UpstreamVersion();
 
-/// Upstream release date, e.g. "2026-09-03".
+/// Upstream release date, e.g. "2026-10-05".
 std::string UpstreamDate();
 
 }  // namespace szk

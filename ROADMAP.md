@@ -3,8 +3,8 @@
 GUI nativa macOS per 7-Zip, con il motore 7-Zip **incorporato nell'app** come framework.
 
 - **Stato:** M0–M5 completi e verificati, tranne la notarizzazione (rinviata); dopo M5, trascinamento verso il Finder, crediti e menu nel Finder
-- **Ultimo aggiornamento:** 2026-10-01
-- **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.03 (2026-09-03)
+- **Ultimo aggiornamento:** 2026-10-15
+- **Upstream:** [ip7z/7zip](https://github.com/ip7z/7zip) 26.04 (2026-10-05)
 
 ---
 
@@ -116,7 +116,7 @@ pe/exe, elf, macho, swf, flv, base64, uuencode, split, z, …
 **Criterio di uscita: raggiunto.** `Scripts/smoke-test.sh Release` parte da un albero
 pulito e verifica 14 asserzioni: `.app` universale e firmata, framework incorporato con
 `install_name` `@rpath`, nessuna dipendenza fuori da `/usr/lib` e `/System`, motore che
-riporta `26.03`, **60 formati**, i **7 scrivibili** attesi, zstd read-only, e che a
+riporta `26.04`, **60 formati**, i **7 scrivibili** attesi, zstd read-only, e che a
 caricarsi sia davvero la copia dentro il bundle.
 
 Struttura prodotta:
@@ -717,8 +717,8 @@ dei rilasci, non il repository di sviluppo.
 
 | Artefatto | SHA-256 |
 |---|---|
-| `7z2603-src.tar.xz` | `9cbde5099c6deb73691b0579063da5827522ccbbcba3f0020fd04e8c8c16c0d4` |
-| `7z2603-mac.tar.xz` (solo riferimento) | `5ca87677072c59f5602e5c49baa27d4694bacd2259b4e507f0094249d4281480` |
+| `7z2604-src.tar.xz` | `9691944c0fe0d01bb49373a704fb983fd33bc98b1738695179dfbf99ac1734f6` |
+| `7z2604-mac.tar.xz` (solo riferimento) | `bee04358cbcbc7106273cee0e8d72916db2696c48067a3538c34d8cd6fd16578` |
 
 L'hash va verificato in fase di build: un aggiornamento dell'upstream deve essere una
 modifica esplicita e revisionata, mai silenziosa.

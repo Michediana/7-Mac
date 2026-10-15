@@ -19,9 +19,9 @@ import SevenZipKit
 /// and an archive facade has no business being pinned to it — the work happens
 /// on a background queue and the callbacks arrive from there.
 public nonisolated enum SevenZip {
-    /// Upstream 7-Zip version, e.g. `26.03`.
+    /// Upstream 7-Zip version, e.g. `26.04`.
     public static var engineVersion: String { SZKEngine.upstreamVersion }
-    /// Upstream release date, e.g. `2026-09-03`.
+    /// Upstream release date, e.g. `2026-10-05`.
     public static var engineDate: String { SZKEngine.upstreamDate }
 
     /// Every format the engine reads.

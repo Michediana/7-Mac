@@ -1,10 +1,10 @@
 7-Zip source, vendored as the pinned release tarball (not a submodule:
 ip7z/7zip on GitHub mirrors releases, it is not the development repository).
 
-    version:  26.03  (2026-09-03)
-    file:     7z2603-src.tar.xz
-    origin:   https://7-zip.org/a/7z2603-src.tar.xz
-    sha256:   9cbde5099c6deb73691b0579063da5827522ccbbcba3f0020fd04e8c8c16c0d4
+    version:  26.04  (2026-10-05)
+    file:     7z2604-src.tar.xz
+    origin:   https://7-zip.org/a/7z2604-src.tar.xz
+    sha256:   9691944c0fe0d01bb49373a704fb983fd33bc98b1738695179dfbf99ac1734f6
 
 The hash is re-verified on every build by Scripts/build-7zip-engine.sh against
 the pin in Scripts/upstream-pin.sh. Bumping the upstream must be an explicit,

@@ -140,11 +140,13 @@ private struct DropArea: View {
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 Spacer(minLength: 0)
-                Button("Add…") { model.chooseArchivesToStage() }
-                Button("Clear") { model.clearStagedArchives() }
-                Button("Start Extraction") { model.extractStaged() }
-                    .buttonStyle(.borderedProminent)
+                Button("Add…", systemImage: "plus") { model.chooseArchivesToStage() }
+                Button("Clear", systemImage: "trash") { model.clearStagedArchives() }
+                Button("Start Extraction", systemImage: "arrow.down.document") { model.extractStaged() }
+                    .buttonStyle(.glassProminent)
             }
+            .labelStyle(.titleAndIcon)
+            .buttonStyle(.glass)
             .controlSize(.small)
             .padding(.vertical, 8)
         }
@@ -223,12 +225,14 @@ private struct StagingArea: View {
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 Spacer(minLength: 0)
-                Button("Add…") { model.chooseItemsToStage() }
-                Button("Clear") { model.clearStaged() }
-                Button("Create Archive…") { model.compressStaged() }
-                    .buttonStyle(.borderedProminent)
+                Button("Add…", systemImage: "plus") { model.chooseItemsToStage() }
+                Button("Clear", systemImage: "trash") { model.clearStaged() }
+                Button("Create Archive…", systemImage: "archivebox") { model.compressStaged() }
+                    .buttonStyle(.glassProminent)
                     .keyboardShortcut(.defaultAction)
             }
+            .labelStyle(.titleAndIcon)
+            .buttonStyle(.glass)
             .controlSize(.small)
             .padding(.vertical, 8)
         }

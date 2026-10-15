@@ -10,8 +10,8 @@ import SevenZipKit
 final class EngineTests: XCTestCase {
 
     func testEngineReportsItsUpstreamVersion() {
-        XCTAssertEqual(SevenZip.engineVersion, "26.03")
-        XCTAssertEqual(SevenZip.engineDate, "2026-09-03")
+        XCTAssertEqual(SevenZip.engineVersion, "26.04")
+        XCTAssertEqual(SevenZip.engineDate, "2026-10-05")
     }
 
     /// The count is the canary for the `-force_load` flag: link the engine

@@ -19,10 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// first use.
 @interface SZKEngine : NSObject
 
-/// Upstream 7-Zip version, e.g. `26.03`.
+/// Upstream 7-Zip version, e.g. `26.04`.
 @property (class, nonatomic, readonly) NSString *upstreamVersion;
 
-/// Upstream release date, e.g. `2026-09-03`.
+/// Upstream release date, e.g. `2026-10-05`.
 @property (class, nonatomic, readonly) NSString *upstreamDate;
 
 /// Every format handler the engine registers, in engine order.
