@@ -143,10 +143,10 @@ private struct DropArea: View {
                 Button("Add…", systemImage: "plus") { model.chooseArchivesToStage() }
                 Button("Clear", systemImage: "trash") { model.clearStagedArchives() }
                 Button("Start Extraction", systemImage: "arrow.down.document") { model.extractStaged() }
-                    .buttonStyle(.glassProminent)
+                    .stagingButtonStyle(prominent: true)
             }
             .labelStyle(.titleAndIcon)
-            .buttonStyle(.glass)
+            .stagingButtonStyle()
             .controlSize(.small)
             .padding(.vertical, 8)
         }
@@ -228,11 +228,11 @@ private struct StagingArea: View {
                 Button("Add…", systemImage: "plus") { model.chooseItemsToStage() }
                 Button("Clear", systemImage: "trash") { model.clearStaged() }
                 Button("Create Archive…", systemImage: "archivebox") { model.compressStaged() }
-                    .buttonStyle(.glassProminent)
+                    .stagingButtonStyle(prominent: true)
                     .keyboardShortcut(.defaultAction)
             }
             .labelStyle(.titleAndIcon)
-            .buttonStyle(.glass)
+            .stagingButtonStyle()
             .controlSize(.small)
             .padding(.vertical, 8)
         }
@@ -301,7 +301,7 @@ private struct ResizeHandle: View {
             .padding(.vertical, 3)
             .contentShape(Rectangle())
             .padding(.vertical, -3)
-            .pointerStyle(.rowResize)
+            .rowResizePointer()
             .gesture(
                 // Global space: the handle moves with the drag, so its own
                 // coordinates would shift under the pointer.
@@ -362,6 +362,31 @@ private struct QueueList: View {
                 }
             }
             .listStyle(.inset)
+        }
+    }
+}
+
+private extension View {
+    /// `pointerStyle` arrived in macOS 15; before it, AppKit's cursor stack.
+    @ViewBuilder
+    func rowResizePointer() -> some View {
+        if #available(macOS 15, *) {
+            pointerStyle(.rowResize)
+        } else {
+            onHover { inside in
+                if inside { NSCursor.resizeUpDown.push() } else { NSCursor.pop() }
+            }
+        }
+    }
+
+    /// Liquid Glass where there is any; before macOS 26, the bordered style
+    /// the same bar would have had there.
+    @ViewBuilder
+    func stagingButtonStyle(prominent: Bool = false) -> some View {
+        if #available(macOS 26, *) {
+            if prominent { buttonStyle(.glassProminent) } else { buttonStyle(.glass) }
+        } else {
+            if prominent { buttonStyle(.borderedProminent) } else { buttonStyle(.bordered) }
         }
     }
 }

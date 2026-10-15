@@ -13,6 +13,11 @@ import SwiftUI
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private let services = ServicesProvider()
 
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        // Before any window opens, even one for a file the launch came with.
+        makeWindowsUnrestorable()
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.servicesProvider = services
         AppModel.shared.preferences.applyAppearance()
@@ -25,6 +30,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // asked for no window of their own, this is an ordinary launch.
         if !AppModel.shared.hasRequestedWindow {
             AppModel.shared.show(.main)
+        }
+    }
+
+    /// No window comes back at the next launch. A restored browser would
+    /// point at a file this launch has no sandbox access to, and a restored
+    /// main window would come back behind it. `restorationBehavior` says
+    /// this per scene, but only from macOS 15, and a scene builder has no
+    /// `else` for older systems. SwiftUI does not ask the delegate's
+    /// `shouldRestoreSecureApplicationState` either, so it is done window by
+    /// window, as each one comes on screen -- behind the others, too, where
+    /// it never becomes key.
+    private func makeWindowsUnrestorable() {
+        NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification,
+                                               object: nil, queue: .main) { note in
+            MainActor.assumeIsolated {
+                (note.object as? NSWindow)?.isRestorable = false
+            }
         }
     }
 

@@ -8,7 +8,7 @@
 Open about 60 archive formats, create 7z and zip archives, and edit archives in place,
 using the real 7-Zip engine built into the app.
 
-![macOS 26.5+](https://img.shields.io/badge/macOS-26.5%2B-black?logo=apple)
+![macOS 14.4+](https://img.shields.io/badge/macOS-14.4%2B-black?logo=apple)
 ![Swift](https://img.shields.io/badge/Swift-SwiftUI-F05138?logo=swift&logoColor=white)
 ![7-Zip 26.04](https://img.shields.io/badge/7--Zip-26.04-blue)
 ![Universal](https://img.shields.io/badge/Apple%20Silicon%20%2B%20Intel-universal-lightgrey)

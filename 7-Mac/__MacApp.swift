@@ -15,14 +15,11 @@ struct __MacApp: App {
     var body: some Scene {
         // One main window, opened by hand: an archive opened from the
         // Finder to browse should bring up its browser and nothing else.
+        // No window is restored either -- see the app delegate.
         Window("7-Mac", id: WindowID.main) {
             ContentView()
                 .environment(model)
         }
-        .defaultLaunchBehavior(.suppressed)
-        // Restored, it would come back behind a browser too. An ordinary
-        // launch opens it anyway.
-        .restorationBehavior(.disabled)
         // Files from the Finder go to the app delegate, which decides.
         // Left to itself SwiftUI would open this window for each one.
         .handlesExternalEvents(matching: [])
@@ -35,9 +32,6 @@ struct __MacApp: App {
             }
         }
         .defaultSize(width: 920, height: 580)
-        // A restored window would point at a file this launch has no
-        // sandbox access to. Better to come back without it.
-        .restorationBehavior(.disabled)
         .handlesExternalEvents(matching: [])
 
         WindowGroup("Checksums", id: WindowID.checksums, for: ChecksumTarget.self) { $target in
@@ -46,14 +40,12 @@ struct __MacApp: App {
             }
         }
         .defaultSize(width: 820, height: 420)
-        .restorationBehavior(.disabled)
         .handlesExternalEvents(matching: [])
 
         Window("About 7-Mac", id: WindowID.about) {
             AboutView()
         }
         .windowResizability(.contentSize)
-        .restorationBehavior(.disabled)
         .handlesExternalEvents(matching: [])
 
         Window("7-Zip Engine", id: WindowID.engine) {
