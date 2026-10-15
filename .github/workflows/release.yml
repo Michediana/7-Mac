@@ -12,7 +12,9 @@ permissions:
 
 jobs:
   release:
-    runs-on: macos-latest
+    # The app icon is an Icon Composer file saved by Xcode 27; Xcode 26's
+    # actool crashes on it, and macos-latest only carries Xcode 26.
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,7 +23,7 @@ jobs:
 
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable
+          xcode-version: '27'
 
       - name: Install the signing certificate
         env:
